@@ -1,10 +1,10 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=61", "cython>=3.0", "numpy>=1.24"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "fast-flow"
-version = "0.1.0"
+version = "0.2.0"
 description = "Fast 2D incompressible flow solver for rapid design iteration"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -30,8 +30,8 @@ Repository = "https://github.com/lucaspettit-dev/fast-flow"
 [project.scripts]
 fast-flow = "fast_flow.cli:main"
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/fast_flow"]
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
