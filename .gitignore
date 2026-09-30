@@ -25,6 +25,10 @@ htmlcov/
 *.swp
 .DS_Store
 
+# Cython / compiled artifacts
+*.so
+_core.c
+
 # Local dev artifacts
 *.png
 *.mp4
