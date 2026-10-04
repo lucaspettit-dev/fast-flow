@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from ._core import CyFlowSolver
+from ._core import SolverCore
 
 
 class FlowSolver:
@@ -22,7 +22,7 @@ class FlowSolver:
                  lx: float = 2.0, ly: float = 1.0,
                  viscosity: float = 1.5e-5, vx0: float = 1.0,
                  dt: float = 0.02):
-        self._cy = CyFlowSolver(nx=nx, ny=ny, lx=lx, ly=ly,
+        self._cy = SolverCore(nx=nx, ny=ny, lx=lx, ly=ly,
                                 viscosity=viscosity, vx0=vx0, dt=dt)
         self.obstacles: list = []
 
