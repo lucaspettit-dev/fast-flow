@@ -1,9 +1,33 @@
 from fast_flow import FlowSolver
+import matplotlib.pyplot as plt
+import numpy as np
+from tqdm import tqdm
 
 if __name__ == '__main__':
-    solver = FlowSolver(nx=256, ny=128)
-    solver.add_obstacle([(0.5, 0.4), (0.6, 0.4), (0.6, 0.6), (0.5, 0.6)])
-    solver.add_density_source(0.3, 0.5, radius=0.05, color=(1.0, 0.0, 0.0))
-    solver.run(500)
-    speed = solver.speed            # read-only (128, 256) float64
-    dye = solver.render_density()   # read-only (128, 256, 3) uint8
+    nx, ny = 50, 50
+    solver = FlowSolver(nx=50, ny=50)
+
+    for i in tqdm(range(1000)):
+        solver.step()
+        solver.add_velocity(3.0)
+
+    u = solver.horizontal_velocity
+    v = solver.vertical_velocity
+    p = solver.pressure
+
+    x = np.linspace(0, 2, nx)
+    y = np.linspace(0, 2, ny)
+    X, Y = np.meshgrid(x, y)
+
+    # --- Visualization ---
+    fig = plt.figure(figsize=(11, 7), dpi=100)
+    # Plotting the pressure field as a contour
+    plt.contourf(X, Y, p, alpha=0.5, cmap=plt.cm.viridis)
+    plt.colorbar(label='Pressure')
+    # Plotting velocity streamlines
+    plt.streamplot(X, Y, u, v, color=u, cmap=plt.cm.jet)
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.title('Lid-Driven Cavity Flow (Navier-Stokes)')
+    plt.show()
+

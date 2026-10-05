@@ -19,11 +19,8 @@ class FlowSolver:
     """
 
     def __init__(self, nx: int = 256, ny: int = 128,
-                 lx: float = 2.0, ly: float = 1.0,
-                 viscosity: float = 1.5e-5, vx0: float = 1.0,
                  dt: float = 0.02):
-        self._cy = SolverCore(nx=nx, ny=ny, lx=lx, ly=ly,
-                                viscosity=viscosity, vx0=vx0, dt=dt)
+        self._cy = SolverCore(nx=nx, ny=ny, dt=dt)
         self.obstacles: list = []
 
     @property
@@ -33,19 +30,22 @@ class FlowSolver:
     def ny(self): return self._cy.ny
 
     @property
-    def lx(self): return self._cy.lx
-
-    @property
-    def ly(self): return self._cy.ly
-
-    @property
     def dt(self): return self._cy.dt
 
     @property
-    def t(self): return self._cy.t
+    def horizontal_velocity(self) -> np.ndarray:
+        return self._cy.horizontal_velocity
 
     @property
-    def step_count(self): return self._cy.step_count
+    def vertical_velocity(self) -> np.ndarray:
+        return self._cy.vertical_velocity
+
+    @property
+    def pressure(self) -> np.ndarray:
+        return self._cy.pressure
+
+    def add_velocity(self, value):
+        self._cy.add_velocity(value)
 
     def add_obstacle(self, polygon) -> None:
         """Add a solid obstacle as an iterable of (x, y) vertices (y up)."""
@@ -54,39 +54,7 @@ class FlowSolver:
         self._cy.add_obstacle(xs, ys)
         self.obstacles.append([(float(x), float(y)) for x, y in polygon])
 
-    def add_density_source(self, x: float, y: float, radius: float = 0.05,
-                           color=(1.0, 0.0, 0.0), rate: float = 10.0) -> int:
-        """Add a dye source; returns its id. Color is an (r, g, b) tuple."""
-        return self._cy.add_density_source(x, y, radius, tuple(color), rate)
-
     def step(self) -> None:
         """Advance the flow by exactly one timestep (runs natively)."""
         self._cy.step()
 
-    def run(self, steps: int, callback=None) -> None:
-        """Advance ``steps`` timesteps.
-
-        ``callback``, if given, is called as ``callback(step, self)``
-        after each step -- rendering stays lazy unless the callback
-        asks for it.
-        """
-        for step in range(1, steps + 1):
-            self.step()
-            if callback is not None:
-                callback(step, self)
-
-    @property
-    def speed(self):
-        """Speed magnitude as a read-only (ny, nx) float64 array."""
-        return self._cy.render_speed()
-
-    def render_density(self):
-        """Composite dye field as a read-only (ny, nx, 3) uint8 RGB image."""
-        return self._cy.render_density()
-
-    def render_direction(self):
-        """Flow-direction color wheel as a read-only (ny, nx, 3) uint8 RGB.
-
-        Red = up, cyan = down; brightness scales with speed.
-        """
-        return self._cy.render_direction()

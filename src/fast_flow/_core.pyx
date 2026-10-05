@@ -40,9 +40,16 @@ cdef class SolverCore:
     obstacle polygons.
     """
 
-    cdef readonly int nx, ny
-    cdef readonly double rho, nu, dt, sum_dt
-    cdef int nit, c
+    cdef readonly int nx
+    cdef readonly int ny
+    cdef readonly DTYPE_f rho
+    cdef readonly DTYPE_f nu
+    cdef readonly DTYPE_f dt
+    cdef readonly DTYPE_f sum_dt
+    cdef DTYPE_f dx
+    cdef DTYPE_f dy
+    cdef int nit
+    cdef int N
 
     cdef object _solid
     cdef DTYPE_f* b
@@ -57,7 +64,6 @@ cdef class SolverCore:
             self,
             int nx=256,
             int ny=128,
-            int c = 1,
             double rho = 1.0,
             double nu = 0.1,
             double dt=0.02):
@@ -68,7 +74,6 @@ cdef class SolverCore:
         self.nx = nx
         self.ny = ny
         self.N = nx * ny
-        self.c = c
         self.rho = rho
         self.nu = nu
         self.dt = dt
@@ -148,13 +153,20 @@ cdef class SolverCore:
     cdef to_numpy(self, DTYPE_f* a):
         cdef DTYPE_f[:] view = <DTYPE_f[:self.N]> a
         cdef cnp.ndarray arr = np.asarray(view)
+        arr = arr.reshape((self.ny, self.nx))
         arr.flags.writeable = False
         return arr
 
     cdef idx(self, y, x):
         return y * self.nx + x
 
-    cdef build_up_pressure_step(self, y, x, dy2, dx2, inv_dt):
+    cdef build_up_pressure_step(
+            self,
+            Py_ssize_t y,
+            Py_ssize_t x,
+            DTYPE_f dy2,
+            DTYPE_f dx2,
+            DTYPE_f inv_dt):
         cdef DTYPE_f* u = self.u[self.uvk]
         cdef DTYPE_f* v = self.v[self.uvk]
 
@@ -170,6 +182,237 @@ cdef class SolverCore:
         cdef DTYPE_f d = vert * vert
 
         self.b[self.idx(y+1, x+1)] = self.rho * (inv_dt * a - b - c - d)
+
+    cdef pressure_poisson_step(
+            self,
+            Py_ssize_t y,
+            Py_ssize_t x,
+            DTYPE_f* p,
+            DTYPE_f* p_,
+            DTYPE_f dy_squared,
+            DTYPE_f dx_squared):
+        cdef Py_ssize_t idx = self.idx(y+1, x+1)
+        cdef DTYPE_f hor = (p_[self.idx(y+1, x+2)] + p_[self.idx(y+1, x)]) * dy_squared
+        cdef DTYPE_f vert = (p_[self.idx(y+2, x+1)] + p_[self.idx(y, x+1)]) * dx_squared
+
+        cdef DTYPE_f d = 2 * (dx_squared + dy_squared)
+
+        p[idx] = (hor + vert) / d - (dx_squared * dy_squared / d) * self.b[idx]
+
+    cdef pressure_set_boundry_conditions(self):
+        cdef DTYPE_f* p = self.p[self.pk ^ 1]
+        cdef Py_ssize_t i
+        cdef Py_ssize_t n = self.nx
+        if self.ny > self.nx:
+            n = self.ny
+
+        for i in range(n):
+            # left and right boundaries, excluding corners
+            if 0 < i and i < self.ny - 1:
+                p[self.idx(i, 0)] = p[self.idx(i, 1)]
+                p[self.idx(i, self.nx-1)] = p[self.idx(i, self.nx-2)]
+
+            # bottom boundary, excluding corners
+            if 0 < i and i < self.nx - 1:
+                p[self.idx(0, i)] = p[self.idx(1, i)]
+
+            # top boundary (dirichlet condition)
+            if i < self.nx:
+                p[self.idx(self.ny-1, i)] = 0
+
+        # bottom-left corner
+        p[0] = p[self.idx(1, 1)]
+
+        # bottom-right corner
+        p[self.idx(0, self.nx-1)] = p[self.idx(1, self.nx-2)]
+
+    cdef pressure_poisson(self):
+        cdef DTYPE_f dy_squared = self.dy * self.dy
+        cdef DTYPE_f dx_squared = self.dx * self.dx
+        cdef DTYPE_f dy2 = 2 * self.dy
+        cdef DTYPE_f dx2 = 2 * self.dx
+        cdef DTYPE_f inv_dt = 1 / self.dt
+        cdef Py_ssize_t y
+        cdef Py_ssize_t x
+        cdef Py_ssize_t q
+
+        # determine which p is written to and which is read from.
+        cdef Py_ssize_t src = self.pk
+        cdef Py_ssize_t dest = src ^ 1
+
+        # do the first loop w/build-pressure step
+        for y in range(self.ny - 2):
+            for x in range(self.nx - 2):
+                self.build_up_pressure_step(y, x, dy2, dx2, inv_dt)
+                self.pressure_poisson_step(y, x, self.p[dest], self.p[src], dy_squared, dx_squared)
+        self.pressure_set_boundry_conditions()
+
+        self.pk ^= 1
+        src = self.pk
+        dest = src ^ 1
+
+        for q in range(self.nit - 1):
+            for y in range(self.ny - 2):
+                for x in range(self.nx - 2):
+                    self.pressure_poisson_step(y, x, self.p[dest], self.p[src], dy_squared, dx_squared)
+            self.pressure_set_boundry_conditions()
+
+            # rotate src/dest
+            self.pk ^= 1
+            src = self.pk
+            dest = src ^ 1
+
+    cdef update_momentum(self):
+        cdef Py_ssize_t src = self.uvk
+        cdef Py_ssize_t dest = src ^ 1
+
+        cdef DTYPE_f* u_src = self.u[src]
+        cdef DTYPE_f* v_src = self.v[src]
+        cdef DTYPE_f* u_dest = self.u[dest]
+        cdef DTYPE_f* v_dest = self.v[dest]
+        cdef DTYPE_f* p = self.p[self.pk]
+
+        cdef Py_ssize_t nx = self.nx
+        cdef Py_ssize_t ny = self.ny
+        cdef Py_ssize_t x, y, idx
+
+        cdef DTYPE_f dt = self.dt
+        cdef DTYPE_f dx = self.dx
+        cdef DTYPE_f dy = self.dy
+        cdef DTYPE_f rho = self.rho
+        cdef DTYPE_f nu = self.nu
+
+        for y in range(1, ny - 1):
+            idx = y * nx + 1
+
+            for x in range(1, nx - 1):
+
+                # Horizontal velocity u
+                u_dest[idx] = (
+                    u_src[idx]
+
+                    # x convection
+                    - u_src[idx] * dt / dx
+                    * (u_src[idx] - u_src[idx - 1])
+
+                    # y convection
+                    - v_src[idx] * dt / dy
+                    * (u_src[idx] - u_src[idx - nx])
+
+                    # x pressure gradient
+                    - dt / (2.0 * rho * dx)
+                    * (p[idx + 1] - p[idx - 1])
+
+                    # viscosity
+                    + nu * (
+                        dt / (dx * dx)
+                        * (
+                            u_src[idx + 1]
+                            - 2.0 * u_src[idx]
+                            + u_src[idx - 1]
+                        )
+                        +
+                        dt / (dy * dy)
+                        * (
+                            u_src[idx + nx]
+                            - 2.0 * u_src[idx]
+                            + u_src[idx - nx]
+                        )
+                    )
+                )
+
+                # Vertical velocity v
+                v_dest[idx] = (
+                    v_src[idx]
+
+                    # x convection
+                    - u_src[idx] * dt / dx
+                    * (v_src[idx] - v_src[idx - 1])
+
+                    # y convection
+                    - v_src[idx] * dt / dy
+                    * (v_src[idx] - v_src[idx - nx])
+
+                    # y pressure gradient
+                    - dt / (2.0 * rho * dy)
+                    * (p[idx + nx] - p[idx - nx])
+
+                    # viscosity
+                    + nu * (
+                        dt / (dx * dx)
+                        * (
+                            v_src[idx + 1]
+                            - 2.0 * v_src[idx]
+                            + v_src[idx - 1]
+                        )
+                        +
+                        dt / (dy * dy)
+                        * (
+                            v_src[idx + nx]
+                            - 2.0 * v_src[idx]
+                            + v_src[idx - nx]
+                        )
+                    )
+                )
+
+                idx += 1
+
+        # dest now contains the newest velocity field.
+        self.uvk = dest
+
+    cdef clamp_momentum_boundary(self):
+        cdef Py_ssize_t nx = self.nx
+        cdef Py_ssize_t ny = self.ny
+        cdef Py_ssize_t last_row = (ny - 1) * nx
+        cdef Py_ssize_t n = nx if nx > ny else ny
+
+        cdef Py_ssize_t i
+        cdef Py_ssize_t left
+        cdef Py_ssize_t right
+
+        cdef DTYPE_f* u = self.u[self.uvk]
+        cdef DTYPE_f* v = self.v[self.uvk]
+
+        for i in range(n):
+
+            # Bottom boundary.
+            if i < nx:
+                u[i] = 0.0
+                v[i] = 0.0
+
+                # Top boundary:
+                # Don't modify u here because that's the moving lid.
+                v[last_row + i] = 0.0
+
+            # Left/right boundaries, excluding lid corners.
+            if i < ny - 1:
+                left = i * nx
+                right = left + nx - 1
+
+                u[left] = 0.0
+                u[right] = 0.0
+
+                v[left] = 0.0
+                v[right] = 0.0
+
+
+    cpdef step(self):
+        self.pressure_poisson()
+        self.update_momentum()
+
+        # update_momentum() has already changed self.uvk to the
+        # newly calculated destination buffer.
+        self.clamp_momentum_boundary()
+
+
+    cpdef add_velocity(self, DTYPE_f velocity=1.0):
+        cdef Py_ssize_t x
+        cdef Py_ssize_t nx = self.nx
+        cdef Py_ssize_t last_row = (self.ny - 1) * nx
+
+        for x in range(nx):
+            self.u[0][last_row + x] = velocity
+            self.u[1][last_row + x] = velocity
 
 #    def add_obstacle(self, cnp.ndarray[double, ndim=1] xs,
 #                     cnp.ndarray[double, ndim=1] ys):
