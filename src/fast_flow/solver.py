@@ -18,7 +18,12 @@ class FlowSolver:
     no-slip on every obstacle polygon.
     """
 
-    def __init__(self, nx: int = 256, ny: int = 128,
+    def __init__(self,
+                 nx: int = 256,
+                 ny: int = 128,
+                 nit: int = 50,
+                 rho: float = 1.0,
+                 nu: float = 0.1,
                  dt: float = 0.02):
         self._cy = SolverCore(nx=nx, ny=ny, dt=dt)
         self.obstacles: list = []

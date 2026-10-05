@@ -64,9 +64,10 @@ cdef class SolverCore:
             self,
             int nx=256,
             int ny=128,
+            int nit = 50,
             double rho = 1.0,
             double nu = 0.1,
-            double dt=0.02):
+            double dt=0.001):
 
         if nx < 4 or ny < 4:
             raise ValueError("nx and ny must be >= 4")
@@ -77,6 +78,7 @@ cdef class SolverCore:
         self.rho = rho
         self.nu = nu
         self.dt = dt
+        self.nit = nit
 
         self.dx = 2.0 / (nx - 1)
         self.dy = 2.0 / (ny - 1)
@@ -150,16 +152,23 @@ cdef class SolverCore:
     def vertical_velocity(self) -> np.ndarray:
         return self.to_numpy(self.v[self.uvk])
 
-    cdef to_numpy(self, DTYPE_f* a):
+    cdef inline cnp.ndarray to_numpy(self, DTYPE_f* a):
         cdef DTYPE_f[:] view = <DTYPE_f[:self.N]> a
         cdef cnp.ndarray arr = np.asarray(view)
         arr = arr.reshape((self.ny, self.nx))
         arr.flags.writeable = False
         return arr
 
-    cdef idx(self, y, x):
+    cdef inline Py_ssize_t idx(
+            self,
+            Py_ssize_t y,
+            Py_ssize_t x
+    ) noexcept nogil:
         return y * self.nx + x
 
+    @cython.boundscheck(False)
+    @cython.wraparound(False)
+    @cython.cdivision(True)
     cdef build_up_pressure_step(
             self,
             Py_ssize_t y,
@@ -183,6 +192,9 @@ cdef class SolverCore:
 
         self.b[self.idx(y+1, x+1)] = self.rho * (inv_dt * a - b - c - d)
 
+    @cython.boundscheck(False)
+    @cython.wraparound(False)
+    @cython.cdivision(True)
     cdef pressure_poisson_step(
             self,
             Py_ssize_t y,
@@ -199,6 +211,9 @@ cdef class SolverCore:
 
         p[idx] = (hor + vert) / d - (dx_squared * dy_squared / d) * self.b[idx]
 
+    @cython.boundscheck(False)
+    @cython.wraparound(False)
+    @cython.cdivision(True)
     cdef pressure_set_boundry_conditions(self):
         cdef DTYPE_f* p = self.p[self.pk ^ 1]
         cdef Py_ssize_t i
@@ -226,6 +241,9 @@ cdef class SolverCore:
         # bottom-right corner
         p[self.idx(0, self.nx-1)] = p[self.idx(1, self.nx-2)]
 
+    @cython.boundscheck(False)
+    @cython.wraparound(False)
+    @cython.cdivision(True)
     cdef pressure_poisson(self):
         cdef DTYPE_f dy_squared = self.dy * self.dy
         cdef DTYPE_f dx_squared = self.dx * self.dx
@@ -262,6 +280,9 @@ cdef class SolverCore:
             src = self.pk
             dest = src ^ 1
 
+    @cython.boundscheck(False)
+    @cython.wraparound(False)
+    @cython.cdivision(True)
     cdef update_momentum(self):
         cdef Py_ssize_t src = self.uvk
         cdef Py_ssize_t dest = src ^ 1
@@ -360,6 +381,9 @@ cdef class SolverCore:
         # dest now contains the newest velocity field.
         self.uvk = dest
 
+    @cython.boundscheck(False)
+    @cython.wraparound(False)
+    @cython.cdivision(True)
     cdef clamp_momentum_boundary(self):
         cdef Py_ssize_t nx = self.nx
         cdef Py_ssize_t ny = self.ny
