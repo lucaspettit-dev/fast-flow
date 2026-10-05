@@ -15,10 +15,12 @@ from tqdm import tqdm
 from fast_flow import FlowSolver
 
 if __name__ == '__main__':
-    nx, ny = 256, 64
-    solver = FlowSolver(nx=nx, ny=ny, nit=50, nu=0.05, dt=0.001,
-                        boundary="throughflow", inflow_velocity=1.0,
-                        lx=4.0, ly=2.0)
+    lx, ly = 8.0, 2.0
+    ny = 128
+    nx = int(lx / ly) * ny
+    solver = FlowSolver(nx=nx, ny=ny, nit=50, nu=0.05, dt=0.0001,
+                        boundary="throughflow", inflow_velocity=5.0,
+                        lx=lx, ly=ly)
 
     # circular obstacle: centre (1.0, 1.0), radius 0.15, as a polygon
     theta = np.linspace(0, 2 * np.pi, 96, endpoint=False)
@@ -26,7 +28,7 @@ if __name__ == '__main__':
                float(1.0 + 0.15 * np.sin(t))) for t in theta]
     solver.add_obstacle(circle)
 
-    for _ in tqdm(range(1000)):
+    for _ in tqdm(range(10000)):
         solver.step()
 
     u = solver.horizontal_velocity
@@ -42,13 +44,16 @@ if __name__ == '__main__':
     cmap.set_bad('0.35')
     speed = np.ma.masked_where(solid, speed)
 
-    fig, ax = plt.subplots(figsize=(11, 4.5), dpi=100)
-    im = ax.imshow(speed, origin='lower', extent=[0, 4, 0, 2],
+    height = 4.5
+    width = (lx / ly) * height
+    fig, ax = plt.subplots(figsize=(width, height), dpi=100)
+    im = ax.imshow(speed, origin='lower', extent=[0, int(lx), 0, int(ly)],
                    cmap=cmap, aspect='equal')
     fig.colorbar(im, ax=ax, label='Speed')
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
     ax.set_title('Throughflow past a circular obstacle (1000 steps)')
+    plt.tight_layout()
 
     out = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                        'throughflow_circle.png')
