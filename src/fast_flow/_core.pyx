@@ -22,6 +22,7 @@ import numpy as np
 cimport numpy as cnp
 cimport cython
 from cython cimport view
+from libc.stdlib cimport malloc, free
 from libc.math cimport sqrt, atan2, fabs, floor
 
 ctypedef cnp.float64_t DTYPE_f
@@ -44,8 +45,12 @@ cdef class SolverCore:
     cdef int nit, c
 
     cdef object _solid
-    cdef DTYPE_f[:, ::1] u0, v0, u1, v1, p0, p1, b
-    cdef DTYPE_f* u, u_, v, v_, p, p_
+    cdef DTYPE_f* b
+    cdef DTYPE_f** u
+    cdef DTYPE_f** v
+    cdef DTYPE_f** p
+    cdef Py_ssize_t pk
+    cdef Py_ssize_t uvk
     cdef unsigned char[:, :] solid
 
     def __init__(
@@ -62,6 +67,7 @@ cdef class SolverCore:
 
         self.nx = nx
         self.ny = ny
+        self.N = nx * ny
         self.c = c
         self.rho = rho
         self.nu = nu
@@ -69,83 +75,101 @@ cdef class SolverCore:
 
         self.dx = 2.0 / (nx - 1)
         self.dy = 2.0 / (ny - 1)
-        self.u0 = view.array(
-            shape=(ny, nx),
-            itemsize=sizeof(DTYPE_f),
-            format="d",
-            mode="c",
-            allocate_buffer=True
-        )
-        self.u1 = view.array(
-            shape=(ny, nx),
-            itemsize=sizeof(DTYPE_f),
-            format="d",
-            mode="c",
-            allocate_buffer=True
-        )
-        self.v0 = view.array(
-            shape=(ny, nx),
-            itemsize=sizeof(DTYPE_f),
-            format="d",
-            mode="c",
-            allocate_buffer=True
-        )
-        self.v1 = view.array(
-            shape=(ny, nx),
-            itemsize=sizeof(DTYPE_f),
-            format="d",
-            mode="c",
-            allocate_buffer=True
-        )
-        self.p0 = view.array(
-            shape=(ny, nx),
-            itemsize=sizeof(DTYPE_f),
-            format="d",
-            mode="c",
-            allocate_buffer=True
-        )
-        self.p1 = view.array(
-            shape=(ny, nx),
-            itemsize=sizeof(DTYPE_f),
-            format="d",
-            mode="c",
-            allocate_buffer=True
-        )
-        self.d = view.array(
-            shape=(ny, nx),
-            itemsize=sizeof(DTYPE_f),
-            format="d",
-            mode="c",
-            allocate_buffer=True
-        )
+
+        # init data structures
+        self.u = <DTYPE_f**> malloc(2 * sizeof(DTYPE_f*))
+        self.u[0] = <DTYPE_f*> malloc(self.N * sizeof(DTYPE_f))
+        self.u[1] = <DTYPE_f*> malloc(self.N * sizeof(DTYPE_f))
+
+        self.v = <DTYPE_f**> malloc(2 * sizeof(DTYPE_f*))
+        self.v[0] = <DTYPE_f*> malloc(self.N * sizeof(DTYPE_f))
+        self.v[1] = <DTYPE_f*> malloc(self.N * sizeof(DTYPE_f))
+
+        self.p = <DTYPE_f**> malloc(2 * sizeof(DTYPE_f*))
+        self.p[0] = <DTYPE_f*> malloc(self.N * sizeof(DTYPE_f))
+        self.p[1] = <DTYPE_f*> malloc(self.N * sizeof(DTYPE_f))
+
+        self.b = <DTYPE_f*> malloc(self.N * sizeof(DTYPE_f))
+        self.pk = 0
+        self.uvk = 0
 
         self.init_arrays()
 
-    @cython.boundscheck(False)  # Deactivate bounds checking
-    @cython.wraparound(False)   # Deactivate negative indexing
+    def __dealloc__(self):
+        if self.b != NULL:
+            free(self.b)
+
+        if self.u != NULL:
+            if self.u[0] != NULL:
+                free(self.u[0])
+            if self.u[1] != NULL:
+                free(self.u[1])
+            free(self.u)
+            self.u = NULL
+
+        if self.v != NULL:
+            if self.v[0] != NULL:
+                free(self.v[0])
+            if self.v[1] != NULL:
+                free(self.v[1])
+            free(self.v)
+            self.v = NULL
+
+        if self.p != NULL:
+            if self.p[0] != NULL:
+                free(self.p[0])
+            if self.p[1] != NULL:
+                free(self.p[1])
+            free(self.p)
+            self.p = NULL
+
     cdef init_arrays(self):
-        cdef Py_ssize_t ny = self.ny
-        cdef Py_ssize_t nx = self.nx
-
         # Populate your data here
-        cdef Py_ssize_t x, y
-        for y in range(ny):
-            for x in range(nx):
-                self.u0[y, x] = 0.0
-                self.u1[y, x] = 0.0
-                self.v0[y, x] = 0.0
-                self.v1[y, x] = 0.0
-                self.p0[y, x] = 0.0
-                self.p1[y, x] = 0.0
-                self.d[y, x] = 0.0
+        cdef Py_ssize_t i, j
+        for i in range(self.N):
+            self.b[i] = 0.0
+            for j in range(2):
+                self.u[j][i] = 0.0
+                self.v[j][i] = 0.0
+                self.p[j][i] = 0.0
 
-        # 3. Convert to NumPy when returning (NumPy will now own the C pointer)
-        # This prevents memory leaks so you don't manually have to call free()
-        # return np.asarray(arr_view)
+    @property
+    def pressure(self) -> np.ndarray:
+        return self.to_numpy(self.p[self.pk])
+
+    @property
+    def horizontal_velocity(self) -> np.ndarray:
+        return self.to_numpy(self.u[self.uvk])
+
+    @property
+    def vertical_velocity(self) -> np.ndarray:
+        return self.to_numpy(self.v[self.uvk])
+
+    cdef to_numpy(self, DTYPE_f* a):
+        cdef DTYPE_f[:] view = <DTYPE_f[:self.N]> a
+        cdef cnp.ndarray arr = np.asarray(view)
+        arr.flags.writeable = False
+        return arr
 
     cdef idx(self, y, x):
         return y * self.nx + x
 
+    cdef build_up_pressure_step(self, y, x, dy2, dx2, inv_dt):
+        cdef DTYPE_f* u = self.u[self.uvk]
+        cdef DTYPE_f* v = self.v[self.uvk]
+
+        cdef DTYPE_f hor = (u[self.idx(y+1, x+2)] - u[self.idx(y+1, x)]) / dx2
+        cdef DTYPE_f vert = (v[self.idx(y+2, x+1)] - v[self.idx(y, x+1)]) / dy2
+
+        cdef DTYPE_f c = 2 * (
+            (u[self.idx(y+2, x+1)] - u[self.idx(y, x+1)]) / dy2
+            * (v[self.idx(y+1, x+2)] - v[self.idx(y+1, x)]) / dx2
+        )
+        cdef DTYPE_f a = hor + vert
+        cdef DTYPE_f b = hor * hor
+        cdef DTYPE_f d = vert * vert
+
+        self.b[self.idx(y+1, x+1)] = self.rho * (inv_dt * a - b - c - d)
 
 #    def add_obstacle(self, cnp.ndarray[double, ndim=1] xs,
 #                     cnp.ndarray[double, ndim=1] ys):
