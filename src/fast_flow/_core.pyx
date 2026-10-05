@@ -43,8 +43,10 @@ cdef class SolverCore:
                         (the ehd-flow "infinite flow" setup).
 
     Solid obstacles (either mode): add_obstacle() rasterizes
-    polygons into a cell mask; solid cells carry exactly zero
-    velocity and a zero-normal-gradient pressure condition.
+    polygons into a cell mask.  Solid cells carry exactly zero
+    velocity and zero pressure, and fluid stencils ignore solid
+    neighbours (they substitute the fluid cell's own pressure,
+    i.e. zero normal gradient at the wall).
     """
 
     cdef readonly int nx
@@ -234,8 +236,17 @@ cdef class SolverCore:
             DTYPE_f dy_squared,
             DTYPE_f dx_squared):
         cdef Py_ssize_t idx = self.idx(y+1, x+1)
-        cdef DTYPE_f hor = (p_[self.idx(y+1, x+2)] + p_[self.idx(y+1, x)]) * dy_squared
-        cdef DTYPE_f vert = (p_[self.idx(y+2, x+1)] + p_[self.idx(y, x+1)]) * dx_squared
+        cdef DTYPE_f pc = p_[idx]
+        cdef DTYPE_f pe = pc if self.solid[y + 1, x + 2] \
+            else p_[self.idx(y+1, x+2)]
+        cdef DTYPE_f pw = pc if self.solid[y + 1, x] \
+            else p_[self.idx(y+1, x)]
+        cdef DTYPE_f pn = pc if self.solid[y + 2, x + 1] \
+            else p_[self.idx(y+2, x+1)]
+        cdef DTYPE_f ps = pc if self.solid[y, x + 1] \
+            else p_[self.idx(y, x+1)]
+        cdef DTYPE_f hor = (pe + pw) * dy_squared
+        cdef DTYPE_f vert = (pn + ps) * dx_squared
 
         cdef DTYPE_f d = 2 * (dx_squared + dy_squared)
 
@@ -249,33 +260,15 @@ cdef class SolverCore:
         cdef DTYPE_f* p = self.p[self.pk ^ 1]
         cdef Py_ssize_t i
         cdef Py_ssize_t j
-        cdef DTYPE_f tot
-        cdef int cnt
         cdef Py_ssize_t n = self.nx
         if self.ny > self.nx:
             n = self.ny
 
-        # solid cells: pressure = mean of the fluid neighbours
-        # (zero-normal-gradient condition at solid surfaces)
+        # solid cells: pressure is clamped to zero, nothing diffuses in
         for j in range(self.ny):
             for i in range(self.nx):
                 if self.solid[j, i]:
-                    tot = 0.0
-                    cnt = 0
-                    if i > 0 and not self.solid[j, i - 1]:
-                        tot += p[self.idx(j, i - 1)]
-                        cnt += 1
-                    if i + 1 < self.nx and not self.solid[j, i + 1]:
-                        tot += p[self.idx(j, i + 1)]
-                        cnt += 1
-                    if j > 0 and not self.solid[j - 1, i]:
-                        tot += p[self.idx(j - 1, i)]
-                        cnt += 1
-                    if j + 1 < self.ny and not self.solid[j + 1, i]:
-                        tot += p[self.idx(j + 1, i)]
-                        cnt += 1
-                    if cnt > 0:
-                        p[self.idx(j, i)] = tot / cnt
+                    p[self.idx(j, i)] = 0.0
 
         if self.flow_mode == 1:
             # throughflow: zero-gradient pressure on every side
@@ -326,7 +319,8 @@ cdef class SolverCore:
         cdef Py_ssize_t q
         cdef DTYPE_f* pp
         cdef DTYPE_f pmean
-        cdef Py_ssize_t k
+        cdef Py_ssize_t jj, ii, base
+        cdef int nfluid
 
         # determine which p is written to and which is read from.
         cdef Py_ssize_t src = self.pk
@@ -356,14 +350,24 @@ cdef class SolverCore:
 
         if self.flow_mode == 1:
             # all-Neumann pressure is defined only up to a constant;
-            # pin the mean to zero so it cannot drift between steps
+            # pin the fluid mean to zero so it cannot drift between
+            # steps (solids are exactly zero and stay out of this)
             pp = self.p[self.pk]
             pmean = 0.0
-            for k in range(self.N):
-                pmean += pp[k]
-            pmean /= self.N
-            for k in range(self.N):
-                pp[k] -= pmean
+            nfluid = 0
+            for jj in range(self.ny):
+                base = jj * self.nx
+                for ii in range(self.nx):
+                    if not self.solid[jj, ii]:
+                        pmean += pp[base + ii]
+                        nfluid += 1
+            if nfluid > 0:
+                pmean /= nfluid
+            for jj in range(self.ny):
+                base = jj * self.nx
+                for ii in range(self.nx):
+                    if not self.solid[jj, ii]:
+                        pp[base + ii] -= pmean
 
     @cython.boundscheck(False)
     @cython.wraparound(False)
@@ -387,6 +391,7 @@ cdef class SolverCore:
         cdef DTYPE_f dy = self.dy
         cdef DTYPE_f rho = self.rho
         cdef DTYPE_f nu = self.nu
+        cdef DTYPE_f p_c, p_e, p_w, p_n, p_s
 
         for y in range(1, ny - 1):
             idx = y * nx + 1
@@ -398,6 +403,15 @@ cdef class SolverCore:
                     v_dest[idx] = 0.0
                     idx += 1
                     continue
+
+                # pressure at the centre and each neighbour; a
+                # neighbour inside a solid is ignored (own value
+                # used, i.e. zero normal gradient at the wall)
+                p_c = p[idx]
+                p_e = p_c if self.solid[y, x + 1] else p[idx + 1]
+                p_w = p_c if self.solid[y, x - 1] else p[idx - 1]
+                p_n = p_c if self.solid[y + 1, x] else p[idx + nx]
+                p_s = p_c if self.solid[y - 1, x] else p[idx - nx]
 
                 # Horizontal velocity u
                 u_dest[idx] = (
@@ -413,7 +427,7 @@ cdef class SolverCore:
 
                     # x pressure gradient
                     - dt / (2.0 * rho * dx)
-                    * (p[idx + 1] - p[idx - 1])
+                    * (p_e - p_w)
 
                     # viscosity
                     + nu * (
@@ -447,7 +461,7 @@ cdef class SolverCore:
 
                     # y pressure gradient
                     - dt / (2.0 * rho * dy)
-                    * (p[idx + nx] - p[idx - nx])
+                    * (p_n - p_s)
 
                     # viscosity
                     + nu * (
@@ -607,3 +621,5 @@ cdef class SolverCore:
                     self.u[1][idx + i] = 0.0
                     self.v[0][idx + i] = 0.0
                     self.v[1][idx + i] = 0.0
+                    self.p[0][idx + i] = 0.0
+                    self.p[1][idx + i] = 0.0
