@@ -5,7 +5,7 @@ from tqdm import tqdm
 
 if __name__ == '__main__':
     nx, ny = 50, 50
-    solver = FlowSolver(nx=50, ny=50, nit=50)
+    solver = FlowSolver(nx=50, ny=50, nit=50, dt=0.001)
 
     for i in tqdm(range(1000)):
         solver.step()

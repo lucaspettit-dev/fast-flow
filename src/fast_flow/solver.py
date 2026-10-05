@@ -25,7 +25,7 @@ class FlowSolver:
                  rho: float = 1.0,
                  nu: float = 0.1,
                  dt: float = 0.02):
-        self._cy = SolverCore(nx=nx, ny=ny, dt=dt)
+        self._cy = SolverCore(nx=nx, ny=ny, nit=nit, rho=rho, nu=nu, dt=dt)
         self.obstacles: list = []
 
     @property
