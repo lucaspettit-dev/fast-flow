@@ -35,9 +35,12 @@ cdef class SolverCore:
     projection to a divergence-free field, semi-Lagrangian advection of
     velocity, projection again, then per dye source inject/diffuse/advect.
 
-    Boundary conditions: uniform inflow (u=vx0) on the left, zero-gradient
-    outflow on the right, no-slip walls top/bottom, no-penetration on
-    obstacle polygons.
+    Boundary conditions depend on flow_mode:
+      0 (cavity)     -- moving lid on top (see add_velocity), no-slip
+                        walls elsewhere.
+      1 (throughflow)-- uniform inflow on the left, zero-gradient
+                        outflow on the right, no-slip top/bottom
+                        (the ehd-flow "infinite flow" setup).
     """
 
     cdef readonly int nx
@@ -50,6 +53,8 @@ cdef class SolverCore:
     cdef DTYPE_f dy
     cdef int nit
     cdef int N
+    cdef int flow_mode
+    cdef DTYPE_f inflow_u
 
     cdef object _solid
     cdef DTYPE_f* b
@@ -67,7 +72,9 @@ cdef class SolverCore:
             int nit = 50,
             double rho = 1.0,
             double nu = 0.1,
-            double dt=0.001):
+            double dt=0.001,
+            int flow_mode=0,
+            double inflow_u=1.0):
 
         if nx < 4 or ny < 4:
             raise ValueError("nx and ny must be >= 4")
@@ -79,6 +86,8 @@ cdef class SolverCore:
         self.nu = nu
         self.dt = dt
         self.nit = nit
+        self.flow_mode = flow_mode
+        self.inflow_u = inflow_u
 
         self.dx = 2.0 / (nx - 1)
         self.dy = 2.0 / (ny - 1)
@@ -221,6 +230,21 @@ cdef class SolverCore:
         if self.ny > self.nx:
             n = self.ny
 
+        if self.flow_mode == 1:
+            # throughflow: zero-gradient pressure on every side
+            for i in range(1, self.nx - 1):
+                p[self.idx(0, i)] = p[self.idx(1, i)]
+                p[self.idx(self.ny-1, i)] = p[self.idx(self.ny-2, i)]
+            for i in range(1, self.ny - 1):
+                p[self.idx(i, 0)] = p[self.idx(i, 1)]
+                p[self.idx(i, self.nx-1)] = p[self.idx(i, self.nx-2)]
+            p[0] = p[self.idx(1, 1)]
+            p[self.idx(0, self.nx-1)] = p[self.idx(1, self.nx-2)]
+            p[self.idx(self.ny-1, 0)] = p[self.idx(self.ny-2, 1)]
+            p[self.idx(self.ny-1, self.nx-1)] = \
+                p[self.idx(self.ny-2, self.nx-2)]
+            return
+
         for i in range(n):
             # left and right boundaries, excluding corners
             if 0 < i and i < self.ny - 1:
@@ -253,6 +277,9 @@ cdef class SolverCore:
         cdef Py_ssize_t y
         cdef Py_ssize_t x
         cdef Py_ssize_t q
+        cdef DTYPE_f* pp
+        cdef DTYPE_f pmean
+        cdef Py_ssize_t k
 
         # determine which p is written to and which is read from.
         cdef Py_ssize_t src = self.pk
@@ -279,6 +306,17 @@ cdef class SolverCore:
             self.pk ^= 1
             src = self.pk
             dest = src ^ 1
+
+        if self.flow_mode == 1:
+            # all-Neumann pressure is defined only up to a constant;
+            # pin the mean to zero so it cannot drift between steps
+            pp = self.p[self.pk]
+            pmean = 0.0
+            for k in range(self.N):
+                pmean += pp[k]
+            pmean /= self.N
+            for k in range(self.N):
+                pp[k] -= pmean
 
     @cython.boundscheck(False)
     @cython.wraparound(False)
@@ -397,6 +435,23 @@ cdef class SolverCore:
         cdef DTYPE_f* u = self.u[self.uvk]
         cdef DTYPE_f* v = self.v[self.uvk]
 
+        if self.flow_mode == 1:
+            # throughflow: prescribed uniform inflow on the left,
+            # zero-gradient outflow on the right, no-slip top/bottom
+            for i in range(ny):
+                left = i * nx
+                right = left + nx - 1
+                u[left] = self.inflow_u
+                v[left] = 0.0
+                u[right] = u[right - 1]
+                v[right] = v[right - 1]
+            for i in range(nx):
+                u[i] = 0.0
+                v[i] = 0.0
+                u[last_row + i] = 0.0
+                v[last_row + i] = 0.0
+            return
+
         for i in range(n):
 
             # Bottom boundary.
@@ -437,6 +492,10 @@ cdef class SolverCore:
         for x in range(nx):
             self.u[0][last_row + x] = velocity
             self.u[1][last_row + x] = velocity
+
+    cpdef set_inflow(self, DTYPE_f velocity):
+        """Set the uniform inflow speed (throughflow mode only)."""
+        self.inflow_u = velocity
 
 #    def add_obstacle(self, cnp.ndarray[double, ndim=1] xs,
 #                     cnp.ndarray[double, ndim=1] ys):

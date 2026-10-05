@@ -8,14 +8,18 @@ from ._core import SolverCore
 
 
 class FlowSolver:
-    """2D incompressible flow past polygonal obstacles.
+    """2D incompressible flow solver.
 
-    Numerics (Jos Stam, "Stable Fluids", 1999): per step, implicit
-    velocity diffusion, pressure projection, semi-Lagrangian
-    self-advection, projection again -- all in compiled Cython.
-    Boundary conditions: uniform inflow on the left edge,
-    zero-gradient outflow on the right, no-slip walls top/bottom,
-    no-slip on every obstacle polygon.
+    Numerics: explicit advection/diffusion with a Jacobi pressure
+    Poisson solve each step (Barba-style collocated formulation),
+    all in compiled Cython.
+
+    Boundary modes:
+      "cavity" (default) -- closed box; drive it with add_velocity()
+        (moving lid on the top edge), no-slip walls elsewhere.
+      "throughflow" -- the ehd-flow "infinite flow" setup: uniform
+        inflow of inflow_velocity on the left edge, zero-gradient
+        outflow on the right, no-slip top/bottom walls.
     """
 
     def __init__(self,
@@ -24,8 +28,18 @@ class FlowSolver:
                  nit: int = 50,
                  rho: float = 1.0,
                  nu: float = 0.1,
-                 dt: float = 0.02):
-        self._cy = SolverCore(nx=nx, ny=ny, nit=nit, rho=rho, nu=nu, dt=dt)
+                 dt: float = 0.02,
+                 boundary: str = "cavity",
+                 inflow_velocity: float = 1.0):
+        if boundary not in ("cavity", "throughflow"):
+            raise ValueError(
+                'boundary must be "cavity" or "throughflow"')
+        self._cy = SolverCore(
+            nx=nx, ny=ny, nit=nit, rho=rho, nu=nu, dt=dt,
+            flow_mode=1 if boundary == "throughflow" else 0,
+            inflow_u=inflow_velocity)
+        self.boundary = boundary
+        self.inflow_velocity = inflow_velocity
         self.obstacles: list = []
 
     @property
@@ -50,7 +64,13 @@ class FlowSolver:
         return self._cy.pressure
 
     def add_velocity(self, value):
+        """Cavity mode: set the moving-lid speed on the top edge."""
         self._cy.add_velocity(value)
+
+    def set_inflow_velocity(self, value):
+        """Throughflow mode: set the uniform inflow speed."""
+        self.inflow_velocity = value
+        self._cy.set_inflow(value)
 
     def add_obstacle(self, polygon) -> None:
         """Add a solid obstacle as an iterable of (x, y) vertices (y up)."""
