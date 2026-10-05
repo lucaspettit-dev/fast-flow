@@ -30,14 +30,16 @@ class FlowSolver:
                  nu: float = 0.1,
                  dt: float = 0.02,
                  boundary: str = "cavity",
-                 inflow_velocity: float = 1.0):
+                 inflow_velocity: float = 1.0,
+                 lx: float = 2.0,
+                 ly: float = 2.0):
         if boundary not in ("cavity", "throughflow"):
             raise ValueError(
                 'boundary must be "cavity" or "throughflow"')
         self._cy = SolverCore(
             nx=nx, ny=ny, nit=nit, rho=rho, nu=nu, dt=dt,
             flow_mode=1 if boundary == "throughflow" else 0,
-            inflow_u=inflow_velocity)
+            inflow_u=inflow_velocity, lx=lx, ly=ly)
         self.boundary = boundary
         self.inflow_velocity = inflow_velocity
         self.obstacles: list = []
@@ -62,6 +64,11 @@ class FlowSolver:
     @property
     def pressure(self) -> np.ndarray:
         return self._cy.pressure
+
+    @property
+    def solid(self) -> np.ndarray:
+        """Read-only (ny, nx) mask; 1 where a cell is solid obstacle."""
+        return self._cy.solid_mask
 
     def add_velocity(self, value):
         """Cavity mode: set the moving-lid speed on the top edge."""

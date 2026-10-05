@@ -41,6 +41,10 @@ cdef class SolverCore:
       1 (throughflow)-- uniform inflow on the left, zero-gradient
                         outflow on the right, no-slip top/bottom
                         (the ehd-flow "infinite flow" setup).
+
+    Solid obstacles (either mode): add_obstacle() rasterizes
+    polygons into a cell mask; solid cells carry exactly zero
+    velocity and a zero-normal-gradient pressure condition.
     """
 
     cdef readonly int nx
@@ -49,6 +53,8 @@ cdef class SolverCore:
     cdef readonly DTYPE_f nu
     cdef readonly DTYPE_f dt
     cdef readonly DTYPE_f sum_dt
+    cdef DTYPE_f lx
+    cdef DTYPE_f ly
     cdef DTYPE_f dx
     cdef DTYPE_f dy
     cdef int nit
@@ -74,7 +80,9 @@ cdef class SolverCore:
             double nu = 0.1,
             double dt=0.001,
             int flow_mode=0,
-            double inflow_u=1.0):
+            double inflow_u=1.0,
+            double lx=2.0,
+            double ly=2.0):
 
         if nx < 4 or ny < 4:
             raise ValueError("nx and ny must be >= 4")
@@ -88,9 +96,11 @@ cdef class SolverCore:
         self.nit = nit
         self.flow_mode = flow_mode
         self.inflow_u = inflow_u
+        self.lx = lx
+        self.ly = ly
 
-        self.dx = 2.0 / (nx - 1)
-        self.dy = 2.0 / (ny - 1)
+        self.dx = lx / (nx - 1)
+        self.dy = ly / (ny - 1)
 
         # init data structures
         self.u = <DTYPE_f**> malloc(2 * sizeof(DTYPE_f*))
@@ -108,6 +118,9 @@ cdef class SolverCore:
         self.b = <DTYPE_f*> malloc(self.N * sizeof(DTYPE_f))
         self.pk = 0
         self.uvk = 0
+
+        self._solid = np.zeros((ny, nx), dtype=np.uint8)
+        self.solid = self._solid
 
         self.init_arrays()
 
@@ -161,6 +174,13 @@ cdef class SolverCore:
     def vertical_velocity(self) -> np.ndarray:
         return self.to_numpy(self.v[self.uvk])
 
+    @property
+    def solid_mask(self) -> np.ndarray:
+        """Read-only (ny, nx) uint8 mask; 1 = solid obstacle cell."""
+        arr = np.array(self._solid, copy=True)
+        arr.flags.writeable = False
+        return arr
+
     cdef inline cnp.ndarray to_numpy(self, DTYPE_f* a):
         cdef DTYPE_f[:] view = <DTYPE_f[:self.N]> a
         cdef cnp.ndarray arr = np.asarray(view)
@@ -199,7 +219,8 @@ cdef class SolverCore:
         cdef DTYPE_f b = hor * hor
         cdef DTYPE_f d = vert * vert
 
-        self.b[self.idx(y+1, x+1)] = self.rho * (inv_dt * a - b - c - d)
+        if not self.solid[y + 1, x + 1]:
+            self.b[self.idx(y+1, x+1)] = self.rho * (inv_dt * a - b - c - d)
 
     @cython.boundscheck(False)
     @cython.wraparound(False)
@@ -218,7 +239,8 @@ cdef class SolverCore:
 
         cdef DTYPE_f d = 2 * (dx_squared + dy_squared)
 
-        p[idx] = (hor + vert) / d - (dx_squared * dy_squared / d) * self.b[idx]
+        if not self.solid[y + 1, x + 1]:
+            p[idx] = (hor + vert) / d - (dx_squared * dy_squared / d) * self.b[idx]
 
     @cython.boundscheck(False)
     @cython.wraparound(False)
@@ -226,9 +248,34 @@ cdef class SolverCore:
     cdef pressure_set_boundry_conditions(self):
         cdef DTYPE_f* p = self.p[self.pk ^ 1]
         cdef Py_ssize_t i
+        cdef Py_ssize_t j
+        cdef DTYPE_f tot
+        cdef int cnt
         cdef Py_ssize_t n = self.nx
         if self.ny > self.nx:
             n = self.ny
+
+        # solid cells: pressure = mean of the fluid neighbours
+        # (zero-normal-gradient condition at solid surfaces)
+        for j in range(self.ny):
+            for i in range(self.nx):
+                if self.solid[j, i]:
+                    tot = 0.0
+                    cnt = 0
+                    if i > 0 and not self.solid[j, i - 1]:
+                        tot += p[self.idx(j, i - 1)]
+                        cnt += 1
+                    if i + 1 < self.nx and not self.solid[j, i + 1]:
+                        tot += p[self.idx(j, i + 1)]
+                        cnt += 1
+                    if j > 0 and not self.solid[j - 1, i]:
+                        tot += p[self.idx(j - 1, i)]
+                        cnt += 1
+                    if j + 1 < self.ny and not self.solid[j + 1, i]:
+                        tot += p[self.idx(j + 1, i)]
+                        cnt += 1
+                    if cnt > 0:
+                        p[self.idx(j, i)] = tot / cnt
 
         if self.flow_mode == 1:
             # throughflow: zero-gradient pressure on every side
@@ -345,6 +392,12 @@ cdef class SolverCore:
             idx = y * nx + 1
 
             for x in range(1, nx - 1):
+
+                if self.solid[y, x]:
+                    u_dest[idx] = 0.0
+                    v_dest[idx] = 0.0
+                    idx += 1
+                    continue
 
                 # Horizontal velocity u
                 u_dest[idx] = (
@@ -475,6 +528,18 @@ cdef class SolverCore:
                 v[right] = 0.0
 
 
+    cdef enforce_solids(self):
+        """No-slip: velocity is exactly zero inside solid cells."""
+        cdef Py_ssize_t i, j, idx
+        cdef DTYPE_f* u = self.u[self.uvk]
+        cdef DTYPE_f* v = self.v[self.uvk]
+        for j in range(self.ny):
+            idx = j * self.nx
+            for i in range(self.nx):
+                if self.solid[j, i]:
+                    u[idx + i] = 0.0
+                    v[idx + i] = 0.0
+
     cpdef step(self):
         self.pressure_poisson()
         self.update_momentum()
@@ -482,6 +547,7 @@ cdef class SolverCore:
         # update_momentum() has already changed self.uvk to the
         # newly calculated destination buffer.
         self.clamp_momentum_boundary()
+        self.enforce_solids()
 
 
     cpdef add_velocity(self, DTYPE_f velocity=1.0):
@@ -497,27 +563,47 @@ cdef class SolverCore:
         """Set the uniform inflow speed (throughflow mode only)."""
         self.inflow_u = velocity
 
-#    def add_obstacle(self, cnp.ndarray[double, ndim=1] xs,
-#                     cnp.ndarray[double, ndim=1] ys):
-#        """Rasterize a polygon (physical coords, y up) into the solid mask."""
-#        cdef int n = xs.shape[0]
-#        if n != ys.shape[0] or n < 3:
-#            raise ValueError("need >= 3 vertices")
-#        cdef int i, j, k, crossings
-#        cdef double px, py, x1, y1, x2, y2, xinters
-#        for j in range(self.ny):
-#            py = (j + 0.5) * self.hy
-#            for i in range(self.nx):
-#                px = (i + 0.5) * self.hx
-#                crossings = 0
-#                for k in range(n):
-#                    x1 = xs[k]; y1 = ys[k]
-#                    x2 = xs[(k + 1) % n]; y2 = ys[(k + 1) % n]
-#                    if (y1 > py) != (y2 > py):
-#                        xinters = (x2 - x1) * (py - y1) / (y2 - y1) + x1
-#                        if px < xinters:
-#                            crossings += 1
-#                if crossings & 1:
-#                    self.solid[j, i] = 1
-#        self._enforce_bcs()
-#        self._cache.clear()
+    def add_obstacle(self, double[::1] xs, double[::1] ys):
+        """Rasterize a polygon into the solid mask (ehd-flow style).
+
+        Vertices are physical coordinates (y up) on the [0, lx] x
+        [0, ly] domain; a grid node is solid when it lies inside the
+        polygon (ray-casting test).  Calls accumulate.  Velocities
+        inside newly solid cells are zeroed immediately.
+        """
+        cdef Py_ssize_t n = xs.shape[0]
+        cdef Py_ssize_t i, j, k, idx
+        cdef int crossings
+        cdef double px, py, x1, y1, x2, y2, xinters
+
+        if n != ys.shape[0] or n < 3:
+            raise ValueError("need >= 3 vertices")
+
+        for j in range(self.ny):
+            py = j * self.dy
+            for i in range(self.nx):
+                if self.solid[j, i]:
+                    continue
+                px = i * self.dx
+                crossings = 0
+                for k in range(n):
+                    x1 = xs[k]
+                    y1 = ys[k]
+                    x2 = xs[(k + 1) % n]
+                    y2 = ys[(k + 1) % n]
+                    if (y1 > py) != (y2 > py):
+                        xinters = (x2 - x1) * (py - y1) / (y2 - y1) + x1
+                        if px < xinters:
+                            crossings += 1
+                if crossings & 1:
+                    self.solid[j, i] = 1
+
+        # kill any pre-existing flow inside the new solid
+        for j in range(self.ny):
+            idx = j * self.nx
+            for i in range(self.nx):
+                if self.solid[j, i]:
+                    self.u[0][idx + i] = 0.0
+                    self.u[1][idx + i] = 0.0
+                    self.v[0][idx + i] = 0.0
+                    self.v[1][idx + i] = 0.0
