@@ -3,55 +3,99 @@
 The fast-flow analogue of the ehd-flow "infinite flow" setup:
 uniform inflow on the left, zero-gradient outflow on the right,
 no-slip top/bottom walls, and a solid circular obstacle as a
-no-slip polygon.  Renders the speed field after 1000 steps.
+no-slip polygon.  Renders the speed field after a set amount of
+simulated time (dynamic dt -- see FlowSolver.run).
+
+The plot extent and figure shape are derived from the solver's
+lx/ly, so changing --lx/--ly (or nx/ny resolution) is actually
+reflected in the graph.  nx/ny are grid *resolution*; lx/ly are
+the physical domain size the axes show.
+
+Examples:
+    python demo/throughflow_circle.py
+    python demo/throughflow_circle.py --nx 1000 --inflow 3.0
 """
 
+import argparse
 import os
 
 import matplotlib.pyplot as plt
 import numpy as np
-from tqdm import tqdm
 
 from fast_flow import FlowSolver
 
-if __name__ == '__main__':
-    nx, ny = 256, 64
-    solver = FlowSolver(nx=nx, ny=ny, nit=50, nu=0.05, dt=0.001,
-                        boundary="throughflow", inflow_velocity=1.0,
-                        lx=4.0, ly=2.0)
 
-    # circular obstacle: centre (1.0, 1.0), radius 0.15, as a polygon
+def parse_args():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--nx", type=int, default=256)
+    p.add_argument("--ny", type=int, default=64)
+    p.add_argument("--lx", type=float, default=4.0)
+    p.add_argument("--ly", type=float, default=2.0)
+    p.add_argument("--inflow", type=float, default=1.0)
+    p.add_argument("--nu", type=float, default=0.05)
+    p.add_argument("--dt", type=float, default=0.001,
+                   help="nominal dt; actual steps scale it by "
+                        "powers of two to stay stable")
+    p.add_argument("--total-time", type=float, default=1.0,
+                   help="simulated seconds to advance "
+                        "(default 1.0 = the old 1000 steps x 0.001)")
+    p.add_argument("--out", default=None)
+    return p.parse_args()
+
+
+if __name__ == '__main__':
+    args = parse_args()
+    solver = FlowSolver(nx=args.nx, ny=args.ny, nit=50, nu=args.nu,
+                        dt=args.dt, boundary="throughflow",
+                        inflow_velocity=args.inflow,
+                        lx=args.lx, ly=args.ly)
+
+    # circular obstacle: centre (lx/4, ly/2), radius 0.15, as a polygon
     theta = np.linspace(0, 2 * np.pi, 96, endpoint=False)
-    circle = [(float(1.0 + 0.15 * np.cos(t)),
-               float(1.0 + 0.15 * np.sin(t))) for t in theta]
+    cx, cy, r = args.lx / 4.0, args.ly / 2.0, 0.15
+    circle = [(float(cx + r * np.cos(t)),
+               float(cy + r * np.sin(t))) for t in theta]
     solver.add_obstacle(circle)
 
-    for _ in tqdm(range(1000)):
-        solver.step()
+    steps = solver.run(args.total_time)
 
     u = solver.horizontal_velocity
     v = solver.vertical_velocity
     speed = np.hypot(u, v)
     solid = solver.solid.astype(bool)
+    print(f"nx={args.nx} ny={args.ny} lx={args.lx} ly={args.ly} "
+          f"inflow={args.inflow} total_time={args.total_time}")
+    print(f"steps taken: {steps}, simulated time: {solver.time:.6f}s, "
+          f"last dt: {solver.last_dt:.3g}, "
+          f"stable dt limit now: {solver.stable_dt():.3g}")
     print(f"finite: {np.isfinite(u).all() and np.isfinite(v).all()}, "
           f"max speed outside obstacle: "
-          f"{speed[~solid].max():.3f}")
+          f"{speed[~solid].max():.3f}, "
+          f"max speed inside obstacle: "
+          f"{speed[solid].max() if solid.any() else 0.0:.3g}")
 
-    # --- Visualization ---
+    # --- Visualization (extent follows lx/ly, not hardcoded) ---
     cmap = plt.cm.jet.copy()
     cmap.set_bad('0.35')
     speed = np.ma.masked_where(solid, speed)
 
-    fig, ax = plt.subplots(figsize=(11, 4.5), dpi=100)
-    im = ax.imshow(speed, origin='lower', extent=[0, 4, 0, 2],
+    fig_w = 11.0
+    fig_h = max(2.5, fig_w * args.ly / args.lx)
+    fig, ax = plt.subplots(figsize=(fig_w, fig_h), dpi=100)
+    im = ax.imshow(speed, origin='lower',
+                   extent=[0, args.lx, 0, args.ly],
                    cmap=cmap, aspect='equal')
+    ax.set_xlim(0, args.lx)
+    ax.set_ylim(0, args.ly)
     fig.colorbar(im, ax=ax, label='Speed')
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
-    ax.set_title('Throughflow past a circular obstacle (1000 steps)')
+    ax.set_title(f'Throughflow past a circular obstacle '
+                 f'({args.total_time:g}s, {steps} adaptive steps, '
+                 f'nx={args.nx}, inflow={args.inflow:g})')
 
-    out = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                       'throughflow_circle.png')
+    out = args.out or os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        'throughflow_circle.png')
     fig.savefig(out)
     print(f"saved {out}")
-    plt.show()

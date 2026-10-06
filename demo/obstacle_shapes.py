@@ -16,6 +16,9 @@ from tqdm import tqdm
 from fast_flow import FlowSolver
 
 CX, CY = 1.0, 1.0
+NX, NY = 256, 64
+LX, LY = 4.0, 2.0
+TOTAL_TIME = 1.0  # simulated seconds (= old 1000 steps x dt=0.001)
 
 
 def regular(n, r, rot=0.0):
@@ -54,12 +57,11 @@ SHAPES = {
 
 
 def run(poly):
-    solver = FlowSolver(nx=256, ny=64, nit=50, nu=0.05, dt=0.001,
+    solver = FlowSolver(nx=NX, ny=NY, nit=50, nu=0.05, dt=0.001,
                         boundary="throughflow", inflow_velocity=1.0,
-                        lx=4.0, ly=2.0)
+                        lx=LX, ly=LY)
     solver.add_obstacle(poly)
-    for _ in range(1000):
-        solver.step()
+    solver.run(TOTAL_TIME)
     u = solver.horizontal_velocity
     v = solver.vertical_velocity
     p = solver.pressure
@@ -91,7 +93,8 @@ if __name__ == '__main__':
         solid = solver.solid.astype(bool)
         speed = np.hypot(u, v)
         inside = float(np.abs(speed[solid]).max()) if solid.any() else 0.0
-        grad = pressure_gradient_magnitude(p, solid, 4.0 / 255, 2.0 / 63)
+        grad = pressure_gradient_magnitude(p, solid, LX / (NX - 1),
+                                           LY / (NY - 1))
         print(f"{name:9s} finite={ok} solid cells={int(solid.sum()):4d} "
               f"max|u| inside={inside:.3g} "
               f"max |grad p|={grad[~solid].max():.1f}")
@@ -104,14 +107,16 @@ if __name__ == '__main__':
     fig, axes = plt.subplots(2, 3, figsize=(13.5, 4.6), dpi=100)
     for ax, (name, grad, solid) in zip(axes.ravel(), panels):
         ax.imshow(np.ma.masked_where(solid, grad), origin='lower',
-                  extent=[0, 4, 0, 2], cmap=cmap, aspect='equal',
+                  extent=[0, LX, 0, LY], cmap=cmap, aspect='equal',
                   vmin=0.0, vmax=vmax)
+        ax.set_xlim(0, LX)
+        ax.set_ylim(0, LY)
         ax.set_title(name)
         ax.set_xticks([])
         ax.set_yticks([])
 
     fig.suptitle('Throughflow past polygonal obstacles: '
-                 '|pressure gradient| (1000 steps each)')
+                 f'|pressure gradient| ({TOTAL_TIME:g}s each)')
     fig.tight_layout()
 
     out = os.path.join(os.path.dirname(os.path.abspath(__file__)),

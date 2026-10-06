@@ -14,6 +14,14 @@ class FlowSolver:
     Poisson solve each step (Barba-style collocated formulation),
     all in compiled Cython.
 
+    Timesteps are dynamic: the nominal ``dt`` is only a base
+    value.  Every step takes the largest power-of-two scaling of
+    ``dt`` (``dt`` * 2**k for integer k, up or down) that respects
+    the explicit advection-diffusion stability limit for the
+    current grid and maximum speed.  Prefer ``run(total_time)``,
+    which advances a set amount of *simulated seconds*, over
+    counting fixed steps.
+
     Boundary modes:
       "cavity" (default) -- closed box; drive it with add_velocity()
         (moving lid on the top edge), no-slip walls elsewhere.
@@ -36,12 +44,16 @@ class FlowSolver:
         if boundary not in ("cavity", "throughflow"):
             raise ValueError(
                 'boundary must be "cavity" or "throughflow"')
+        if dt <= 0:
+            raise ValueError("dt must be > 0")
         self._cy = SolverCore(
             nx=nx, ny=ny, nit=nit, rho=rho, nu=nu, dt=dt,
             flow_mode=1 if boundary == "throughflow" else 0,
             inflow_u=inflow_velocity, lx=lx, ly=ly)
         self.boundary = boundary
         self.inflow_velocity = inflow_velocity
+        self.lx = float(lx)
+        self.ly = float(ly)
         self.obstacles: list = []
 
     @property
@@ -51,7 +63,30 @@ class FlowSolver:
     def ny(self): return self._cy.ny
 
     @property
-    def dt(self): return self._cy.dt
+    def dt(self):
+        """Nominal (base) dt.  Actual steps dynamically scale this
+        by powers of two; see ``last_dt`` for the most recent one."""
+        return self._cy.dt_base
+
+    @property
+    def last_dt(self):
+        """Dt actually used by the most recent step (0 before any)."""
+        return self._cy.last_dt
+
+    @property
+    def time(self):
+        """Total simulated seconds advanced so far."""
+        return self._cy.sum_dt
+
+    @property
+    def dx(self): return self.lx / (self.nx - 1)
+
+    @property
+    def dy(self): return self.ly / (self.ny - 1)
+
+    def stable_dt(self):
+        """Current stability limit on dt for this grid/flow."""
+        return self._cy.stable_dt()
 
     @property
     def horizontal_velocity(self) -> np.ndarray:
@@ -80,13 +115,32 @@ class FlowSolver:
         self._cy.set_inflow(value)
 
     def add_obstacle(self, polygon) -> None:
-        """Add a solid obstacle as an iterable of (x, y) vertices (y up)."""
+        """Add a solid obstacle as an iterable of (x, y) vertices (y up).
+
+        Coordinates are physical, on [0, lx] x [0, ly].
+        """
         xs = np.array([p[0] for p in polygon], dtype=np.float64)
         ys = np.array([p[1] for p in polygon], dtype=np.float64)
         self._cy.add_obstacle(xs, ys)
         self.obstacles.append([(float(x), float(y)) for x, y in polygon])
 
-    def step(self) -> None:
-        """Advance the flow by exactly one timestep (runs natively)."""
-        self._cy.step()
+    def step(self) -> float:
+        """Advance by one dynamically-chosen timestep.
 
+        Returns the dt actually used (a power-of-two scaling of
+        the nominal dt, the largest one currently stable).
+        """
+        self._cy.step()
+        return self._cy.last_dt
+
+    def run(self, total_time: float) -> int:
+        """Advance ``total_time`` seconds of simulated time.
+
+        Each step dynamically takes the largest stable dt (a
+        power-of-two scaling of the nominal dt); the final step
+        is trimmed to land exactly on ``total_time``.  Returns
+        the number of steps taken.
+        """
+        if total_time <= 0:
+            raise ValueError("total_time must be > 0")
+        return self._cy.run(float(total_time))

@@ -54,9 +54,11 @@ cdef class SolverCore:
     cdef readonly DTYPE_f rho
     cdef readonly DTYPE_f nu
     cdef readonly DTYPE_f dt
+    cdef readonly DTYPE_f dt_base
+    cdef readonly DTYPE_f last_dt
     cdef readonly DTYPE_f sum_dt
-    cdef DTYPE_f lx
-    cdef DTYPE_f ly
+    cdef readonly DTYPE_f lx
+    cdef readonly DTYPE_f ly
     cdef DTYPE_f dx
     cdef DTYPE_f dy
     cdef int nit
@@ -95,6 +97,8 @@ cdef class SolverCore:
         self.rho = rho
         self.nu = nu
         self.dt = dt
+        self.dt_base = dt
+        self.last_dt = 0.0
         self.nit = nit
         self.flow_mode = flow_mode
         self.inflow_u = inflow_u
@@ -120,6 +124,7 @@ cdef class SolverCore:
         self.b = <DTYPE_f*> malloc(self.N * sizeof(DTYPE_f))
         self.pk = 0
         self.uvk = 0
+        self.sum_dt = 0.0
 
         self._solid = np.zeros((ny, nx), dtype=np.uint8)
         self.solid = self._solid
@@ -554,7 +559,58 @@ cdef class SolverCore:
                     u[idx + i] = 0.0
                     v[idx + i] = 0.0
 
-    cpdef step(self):
+    cdef DTYPE_f _max_speed(self):
+        cdef DTYPE_f* u = self.u[self.uvk]
+        cdef DTYPE_f* v = self.v[self.uvk]
+        cdef DTYPE_f m = 0.0
+        cdef DTYPE_f a
+        cdef Py_ssize_t k
+        for k in range(self.N):
+            a = fabs(u[k])
+            if a > m:
+                m = a
+            a = fabs(v[k])
+            if a > m:
+                m = a
+        return m
+
+    cdef DTYPE_f _stable_dt_limit(self):
+        """Largest explicit step allowed by the combined
+        advection-diffusion stability limit for this grid and the
+        current maximum speed (the two limits combine -- their
+        reciprocals add), with a 0.9 safety factor."""
+        cdef DTYPE_f denom = 0.0
+        cdef DTYPE_f umax
+        if self.nu > 0.0:
+            denom += 2.0 * self.nu * (1.0 / (self.dx * self.dx)
+                                      + 1.0 / (self.dy * self.dy))
+        umax = self._max_speed()
+        if self.flow_mode == 1 and self.inflow_u > umax:
+            umax = self.inflow_u
+        if umax > 0.0:
+            denom += umax * (1.0 / self.dx + 1.0 / self.dy)
+        if denom <= 0.0:
+            return self.dt_base
+        return 0.9 / denom
+
+    cpdef DTYPE_f stable_dt(self):
+        """Public read of the current stability limit on dt."""
+        return self._stable_dt_limit()
+
+    cdef DTYPE_f _choose_dt(self, DTYPE_f limit):
+        """Largest power-of-two scaling of the nominal dt that is
+        still <= the stability limit: halve while too big, double
+        while the doubled value would still be stable."""
+        cdef DTYPE_f chosen = self.dt_base
+        if chosen <= 0.0:
+            return limit
+        while chosen > limit:
+            chosen *= 0.5
+        while chosen * 2.0 <= limit:
+            chosen *= 2.0
+        return chosen
+
+    cdef _step_once(self):
         self.pressure_poisson()
         self.update_momentum()
 
@@ -562,6 +618,51 @@ cdef class SolverCore:
         # newly calculated destination buffer.
         self.clamp_momentum_boundary()
         self.enforce_solids()
+
+    cpdef step(self):
+        """Advance by one dynamically-chosen timestep.
+
+        dt is not fixed: each step takes the largest power-of-two
+        scaling of the nominal dt that respects the explicit
+        advection-diffusion stability limit for the current flow.
+        Use run(total_time) to advance a set amount of simulated
+        time instead of a set number of steps.
+        """
+        cdef DTYPE_f chosen = self._choose_dt(self._stable_dt_limit())
+        self.dt = chosen
+        self._step_once()
+        self.last_dt = chosen
+        self.sum_dt += chosen
+        self.dt = self.dt_base
+
+    cpdef int run(self, DTYPE_f total_time):
+        """Advance total_time seconds of simulated time.
+
+        Every step dynamically takes the largest stable dt (a
+        power-of-two scaling of the nominal dt, recomputed from
+        the current maximum speed); the final step is trimmed so
+        the accumulated time lands exactly on total_time.
+        Returns the number of steps taken.
+        """
+        cdef DTYPE_f elapsed = 0.0
+        cdef DTYPE_f remaining
+        cdef DTYPE_f chosen
+        cdef int steps = 0
+        if total_time <= 0.0:
+            raise ValueError("total_time must be > 0")
+        while elapsed < total_time - 1e-15:
+            remaining = total_time - elapsed
+            chosen = self._choose_dt(self._stable_dt_limit())
+            if chosen > remaining:
+                chosen = remaining
+            self.dt = chosen
+            self._step_once()
+            self.last_dt = chosen
+            self.sum_dt += chosen
+            elapsed += chosen
+            steps += 1
+        self.dt = self.dt_base
+        return steps
 
 
     cpdef add_velocity(self, DTYPE_f velocity=1.0):

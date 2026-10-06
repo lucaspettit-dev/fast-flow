@@ -15,8 +15,8 @@ if __name__ == '__main__':
     v = solver.vertical_velocity
     p = solver.pressure
 
-    x = np.linspace(0, 2, nx)
-    y = np.linspace(0, 2, ny)
+    x = np.linspace(0, solver.lx, nx)
+    y = np.linspace(0, solver.ly, ny)
     X, Y = np.meshgrid(x, y)
 
     # --- Visualization ---
