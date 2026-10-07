@@ -46,8 +46,8 @@ class FlowSolver:
     counting fixed steps.
 
     Boundary modes:
-      "cavity" (default) -- closed box; drive it with add_velocity()
-        (moving lid on the top edge), no-slip walls elsewhere.
+      "cavity" (default) -- closed box; drive it with a force
+        handler (see add_force_handler()), no-slip walls elsewhere.
       "throughflow" -- the ehd-flow "infinite flow" setup: uniform
         inflow of inflow_velocity on the left edge, zero-gradient
         outflow on the right, no-slip top/bottom walls.
@@ -82,6 +82,7 @@ class FlowSolver:
         if force_handlers is not None:
             for handler in force_handlers:
                 handler._set_solver(self._cy)
+                self._cy.add_force_handler(handler._handler)
 
     @property
     def nx(self): return self._cy.nx
@@ -133,7 +134,9 @@ class FlowSolver:
         return self._cy.solid_mask
 
     def add_force_handler(self, handler: ForceHandler):
-        self._cy.add_force_handler(handler)
+        if getattr(handler, "_handler", None) is None:
+            handler._set_solver(self._cy)
+        self._cy.add_force_handler(handler._handler)
 
     def set_inflow_velocity(self, value):
         """Throughflow mode: set the uniform inflow speed."""

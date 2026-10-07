@@ -170,14 +170,14 @@ cdef class SolverCore:
             free(self.p)
             self.p = NULL
 
-    cdef void add_force_handler(self, ForceHandlerCore next) noexcept:
+    cpdef void add_force_handler(self, ForceHandlerCore next):
         cdef ForceHandlerCore handler = self.force
         if self.force is None:
             self.force = next
         else:
             while handler.next() is not None:
                 handler = handler.next()
-            handler.set_next(next)
+            handler.add_next(next)
 
     cdef init_arrays(self):
         # Populate your data here
@@ -557,8 +557,46 @@ cdef class SolverCore:
             DTYPE_f* u_dest,
             DTYPE_f* v_dest) noexcept nogil:
         if self.force is not None:
-            u_dest[idx] += self.force.get_u(y, x, idx)
-            v_dest[idx] += self.force.get_v(y, x, idx)
+            self.force.accumulate(y, x, idx, u_dest, v_dest)
+
+    cdef void apply_boundary_forces(self) noexcept:
+        """Apply the force handlers to the boundary cells only.
+
+        update_momentum() applies handlers to interior cells as
+        it goes, but its loop never visits the boundary rows and
+        columns -- exactly where a boundary-velocity handler
+        (ConstantVelocityForceHandlerCore) acts.  This pass runs
+        after clamp_momentum_boundary(), so a prescribed boundary
+        velocity is set fresh each step instead of being clamped
+        away or stacking on last step's value; enforce_solids()
+        still runs afterwards.  Every cell is visited exactly
+        once per step across the two passes, and with no handlers
+        registered this is a no-op.
+        """
+        cdef Py_ssize_t x, y
+        cdef DTYPE_f* u
+        cdef DTYPE_f* v
+        if self.force is None:
+            return
+        u = self.u[self.uvk]
+        v = self.v[self.uvk]
+        # The cavity clamp deliberately leaves the top (lid) row's
+        # u untouched -- it was the old add_velocity drive -- so a
+        # handler acting there would stack its increment on last
+        # step's value forever (in testing the top corners ran
+        # away to ~1500 while every clamped edge stayed exact).
+        # Zero that row's u first so handlers set it fresh, like
+        # every other boundary cell.
+        for x in range(self.nx):
+            u[(self.ny - 1) * self.nx + x] = 0.0
+        for x in range(self.nx):
+            self.apply_uv_force(0, x, x, u, v)
+            self.apply_uv_force(self.ny - 1, x,
+                                  (self.ny - 1) * self.nx + x, u, v)
+        for y in range(1, self.ny - 1):
+            self.apply_uv_force(y, 0, y * self.nx, u, v)
+            self.apply_uv_force(y, self.nx - 1,
+                                y * self.nx + self.nx - 1, u, v)
 
 
     @cython.boundscheck(False)
@@ -692,6 +730,7 @@ cdef class SolverCore:
         # update_momentum() has already changed self.uvk to the
         # newly calculated destination buffer.
         self.clamp_momentum_boundary()
+        self.apply_boundary_forces()
         self.enforce_solids()
 
     cpdef void step(self) noexcept:
@@ -829,6 +868,25 @@ cdef class ForceHandlerCore:
     ) noexcept:
         return 0.0
 
+    cdef void accumulate(
+        self,
+        Py_ssize_t y,
+        Py_ssize_t x,
+        Py_ssize_t idx,
+        DTYPE_f* u_dest,
+        DTYPE_f* v_dest
+    ) noexcept nogil:
+        """Add this handler's contribution at one cell, then the
+        next handler's.  The chain is walked by recursion through
+        the stored attribute rather than a local variable:
+        assigning a handler (a Python object) to a local would
+        need the GIL, and apply_uv_force runs nogil inside
+        update_momentum's parallel loop."""
+        u_dest[idx] += self.get_u(y, x, idx)
+        v_dest[idx] += self.get_v(y, x, idx)
+        if self.next_handler is not None:
+            self.next_handler.accumulate(y, x, idx, u_dest, v_dest)
+
 
 cdef class ConstantVelocityForceHandlerCore(ForceHandlerCore):
     cdef Py_ssize_t direction
@@ -841,24 +899,28 @@ cdef class ConstantVelocityForceHandlerCore(ForceHandlerCore):
 
     cdef DTYPE_f get_u(self, Py_ssize_t y, Py_ssize_t x, Py_ssize_t idx) noexcept nogil:
         if self.direction == 0:
+            # LEFT: flow moves in -x, entering at the right edge
             if x == self.solver.nx - 1:
-                return self.velocity
+                return -self.velocity
         elif self.direction == 1:
+            # RIGHT: flow moves in +x, entering at the left edge
             if x == 0:
                 return self.velocity
         return 0.0
 
     cdef DTYPE_f get_v(self, Py_ssize_t y, Py_ssize_t x, Py_ssize_t idx) noexcept nogil:
         if self.direction == 2:
+            # UP: flow moves in +y, entering at the bottom edge
             if y == 0:
                 return self.velocity
         elif self.direction == 3:
+            # DOWN: flow moves in -y, entering at the top edge
             if y == self.solver.ny - 1:
-                return self.velocity
+                return -self.velocity
         return 0.0
 
 
-cdef HydroelectricForceHandlerCore(ForceHandlerCore):
+cdef class HydroelectricForceHandlerCore(ForceHandlerCore):
 
     # Coulomb field values
     cdef DTYPE_f** cu
@@ -870,9 +932,9 @@ cdef HydroelectricForceHandlerCore(ForceHandlerCore):
     cdef Py_ssize_t dk
 
     def __init__(self, SolverCore solver):
-        self.super.__init__(solver)
+        ForceHandlerCore.__init__(self, solver)
 
     # TODO: look through solver's objects and identify positive/negative
     # then populate Coulumbs field force vector
-    def init_field():
+    cdef void init_field(self):
         pass
