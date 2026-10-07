@@ -287,7 +287,7 @@ cdef class SolverCore:
     @cython.boundscheck(False)
     @cython.wraparound(False)
     @cython.cdivision(True)
-    cdef pressure_set_boundry_conditions(self):
+    cdef void pressure_set_boundry_conditions(self) noexcept:
         cdef DTYPE_f* p = self.p[self.pk ^ 1]
         cdef Py_ssize_t i
         cdef Py_ssize_t j
@@ -338,7 +338,7 @@ cdef class SolverCore:
     @cython.boundscheck(False)
     @cython.wraparound(False)
     @cython.cdivision(True)
-    cdef pressure_poisson(self):
+    cdef void pressure_poisson(self) noexcept:
         cdef DTYPE_f dy_squared = self.dy * self.dy
         cdef DTYPE_f dx_squared = self.dx * self.dx
         cdef DTYPE_f dy2 = 2 * self.dy
@@ -413,7 +413,7 @@ cdef class SolverCore:
     @cython.boundscheck(False)
     @cython.wraparound(False)
     @cython.cdivision(True)
-    cdef update_momentum(self):
+    cdef void update_momentum(self) noexcept:
         cdef Py_ssize_t src = self.uvk
         cdef Py_ssize_t dest = src ^ 1
 
@@ -564,7 +564,7 @@ cdef class SolverCore:
     @cython.boundscheck(False)
     @cython.wraparound(False)
     @cython.cdivision(True)
-    cdef clamp_momentum_boundary(self):
+    cdef void clamp_momentum_boundary(self) noexcept:
         cdef Py_ssize_t nx = self.nx
         cdef Py_ssize_t ny = self.ny
         cdef Py_ssize_t last_row = (ny - 1) * nx
@@ -617,7 +617,7 @@ cdef class SolverCore:
                 v[right] = 0.0
 
 
-    cdef enforce_solids(self):
+    cdef void enforce_solids(self) noexcept:
         """No-slip: velocity is exactly zero inside solid cells."""
         cdef Py_ssize_t i
         cdef Py_ssize_t idx
@@ -628,7 +628,7 @@ cdef class SolverCore:
                 u[idx] = 0.0
                 v[idx] = 0.0
 
-    cdef DTYPE_f _max_speed(self):
+    cdef DTYPE_f _max_speed(self) noexcept:
         cdef DTYPE_f* u = self.u[self.uvk]
         cdef DTYPE_f* v = self.v[self.uvk]
         cdef DTYPE_f m = 0.0
@@ -643,7 +643,7 @@ cdef class SolverCore:
                 m = a
         return m
 
-    cdef DTYPE_f _stable_dt_limit(self):
+    cdef DTYPE_f _stable_dt_limit(self) noexcept:
         """Largest explicit step allowed by the combined
         advection-diffusion stability limit for this grid and the
         current maximum speed (the two limits combine -- their
@@ -668,11 +668,11 @@ cdef class SolverCore:
             return self.dt_base
         return 0.9 / denom
 
-    cpdef DTYPE_f stable_dt(self):
+    cpdef DTYPE_f stable_dt(self) noexcept:
         """Public read of the current stability limit on dt."""
         return self._stable_dt_limit()
 
-    cdef DTYPE_f _choose_dt(self, DTYPE_f limit):
+    cdef DTYPE_f _choose_dt(self, DTYPE_f limit) noexcept:
         """Largest power-of-two scaling of the nominal dt that is
         still <= the stability limit: halve while too big, double
         while the doubled value would still be stable."""
@@ -685,7 +685,7 @@ cdef class SolverCore:
             chosen *= 2.0
         return chosen
 
-    cdef _step_once(self):
+    cdef void _step_once(self) noexcept:
         self.pressure_poisson()
         self.update_momentum()
 
@@ -694,7 +694,7 @@ cdef class SolverCore:
         self.clamp_momentum_boundary()
         self.enforce_solids()
 
-    cpdef step(self):
+    cpdef void step(self) noexcept:
         """Advance by one dynamically-chosen timestep.
 
         dt is not fixed: each step takes the largest power-of-two
@@ -710,7 +710,7 @@ cdef class SolverCore:
         self.sum_dt += chosen
         self.dt = self.dt_base
 
-    cpdef int run(self, DTYPE_f total_time):
+    cpdef int run(self, DTYPE_f total_time) noexcept:
         """Advance total_time seconds of simulated time.
 
         Every step dynamically takes the largest stable dt (a
