@@ -287,7 +287,7 @@ cdef class SolverCore:
     @cython.boundscheck(False)
     @cython.wraparound(False)
     @cython.cdivision(True)
-    cdef void pressure_set_boundry_conditions(self) noexcept:
+    cdef void pressure_set_boundry_conditions(self) noexcept nogil:
         cdef DTYPE_f* p = self.p[self.pk ^ 1]
         cdef Py_ssize_t i
         cdef Py_ssize_t j
@@ -366,7 +366,7 @@ cdef class SolverCore:
         # parallel via OpenMP)
         p_dest = self.p[dest]
         p_src = self.p[src]
-        for y in prange(self.ny - 2, nogil=True):
+        for y in range(self.ny - 2):
             for x in range(self.nx - 2):
                 self.build_up_pressure_step(y, x, dy2, dx2, inv_dt)
                 self.pressure_poisson_step(y, x, p_dest, p_src, dy_squared, dx_squared)
@@ -376,10 +376,10 @@ cdef class SolverCore:
         src = self.pk
         dest = src ^ 1
 
-        for q in range(self.nit - 1):
+        for q in prange(self.nit - 1, nogil=True):
             p_dest = self.p[dest]
             p_src = self.p[src]
-            for y in prange(self.ny - 2, nogil=True):
+            for y in range(self.ny - 2):
                 for x in range(self.nx - 2):
                     self.pressure_poisson_step(y, x, p_dest, p_src, dy_squared, dx_squared)
             self.pressure_set_boundry_conditions()
@@ -404,7 +404,7 @@ cdef class SolverCore:
                         nfluid += 1
             if nfluid > 0:
                 pmean /= nfluid
-            for jj in prange(self.ny, nogil=True):
+            for jj in range(self.ny):
                 base = jj * self.nx
                 for ii in range(self.nx):
                     if not self.solid[self.idx(jj, ii)]:
@@ -625,8 +625,8 @@ cdef class SolverCore:
         cdef DTYPE_f* v = self.v[self.uvk]
         for i in range(self.N):
             if self.solid[i]:
-                u[idx] = 0.0
-                v[idx] = 0.0
+                u[i] = 0.0
+                v[i] = 0.0
 
     cdef DTYPE_f _max_speed(self) noexcept:
         cdef DTYPE_f* u = self.u[self.uvk]
@@ -802,7 +802,7 @@ cdef class ForceHandlerCore:
             raise ValueError("Next handler already assigned")
         self.next_handler = handler
 
-    cdef ForceHandlerCore next(self) noexcept:
+    cdef ForceHandlerCore next(self):
         return self.next_handler
 
     cdef DTYPE_f get_u(
