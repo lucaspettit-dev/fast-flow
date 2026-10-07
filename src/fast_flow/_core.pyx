@@ -28,6 +28,13 @@ from libc.math cimport sqrt, atan2, fabs, floor
 ctypedef cnp.float64_t DTYPE_f
 
 
+ctypedef enum Direction:
+    LEFT
+    RIGHT
+    UP
+    DOWN
+
+
 cdef class SolverCore:
     """Fast 2D incompressible Navier-Stokes solver (Stam 1999, MAC grid).
 
@@ -67,6 +74,7 @@ cdef class SolverCore:
     cdef DTYPE_f inflow_u
 
     cdef object _solid
+    cdef Py_ssize_t solid_count
     cdef DTYPE_f* b
     cdef DTYPE_f** u
     cdef DTYPE_f** v
@@ -126,8 +134,8 @@ cdef class SolverCore:
         self.uvk = 0
         self.sum_dt = 0.0
 
-        self._solid = np.zeros((ny, nx), dtype=np.uint8)
-        self.solid = self._solid
+        self.solid = np.zeros((ny, nx), dtype=np.uint8)
+        self.solid_count = 0
 
         self.init_arrays()
 
@@ -212,6 +220,9 @@ cdef class SolverCore:
             DTYPE_f dy2,
             DTYPE_f dx2,
             DTYPE_f inv_dt):
+        if self.solid[y + 1, x + 1]:
+            return
+
         cdef DTYPE_f* u = self.u[self.uvk]
         cdef DTYPE_f* v = self.v[self.uvk]
 
@@ -226,8 +237,7 @@ cdef class SolverCore:
         cdef DTYPE_f b = hor * hor
         cdef DTYPE_f d = vert * vert
 
-        if not self.solid[y + 1, x + 1]:
-            self.b[self.idx(y+1, x+1)] = self.rho * (inv_dt * a - b - c - d)
+        self.b[self.idx(y+1, x+1)] = self.rho * (inv_dt * a - b - c - d)
 
     @cython.boundscheck(False)
     @cython.wraparound(False)
@@ -664,16 +674,6 @@ cdef class SolverCore:
         self.dt = self.dt_base
         return steps
 
-
-    cpdef add_velocity(self, DTYPE_f velocity=1.0):
-        cdef Py_ssize_t x
-        cdef Py_ssize_t nx = self.nx
-        cdef Py_ssize_t last_row = (self.ny - 1) * nx
-
-        for x in range(nx):
-            self.u[0][last_row + x] = velocity
-            self.u[1][last_row + x] = velocity
-
     cpdef set_inflow(self, DTYPE_f velocity):
         """Set the uniform inflow speed (throughflow mode only)."""
         self.inflow_u = velocity
@@ -724,3 +724,78 @@ cdef class SolverCore:
                     self.v[1][idx + i] = 0.0
                     self.p[0][idx + i] = 0.0
                     self.p[1][idx + i] = 0.0
+
+
+cdef class ForceHandlerCore:
+    cdef readonly SolverCore solver
+    def __init__(self, SolverCore solver):
+        self.solver = solver
+
+    cdef DTYPE_f get_u(
+        self,
+        Py_ssize_t y,
+        Py_ssize_t x
+    ) noexcept:
+        return 0.0
+
+    cdef DTYPE_f get_v(
+        self,
+        Py_ssize_t y,
+        Py_ssize_t x
+    ) noexcept:
+        return 0.0
+
+    cdef DTYPE_f get_p(
+        self,
+        Py_ssize_t y,
+        Py_ssize_t x
+    ) noexcept:
+        return 0.0
+
+
+cdef class ConstantVelocityForceHandlerCore(ForceHandlerCore):
+    cdef Direction direction
+    cdef DTYPE_f velocity
+
+    def __init__(self, SolverCore solver, Direction direction, DTYPE_f velocity):
+        ForceHandlerCore.__init__(self, solver)
+        self.velocity = velocity
+        self.direction = direction
+
+    cdef DTYPE_f get_u(self, Py_ssize_t y, Py_ssize_t x) noexcept:
+        if self.direction == Direction.RIGHT:
+            if x == 0:
+                return self.velocity
+        elif self.direction == Direction.LEFT:
+            if x == self.solver.nx - 1:
+                return self.velocity
+        return 0.0
+
+    cdef DTYPE_f get_v(self, Py_ssize_t y, Py_ssize_t x) noexcept:
+        if self.direction == Direction.DOWN:
+            if y == 0:
+                return self.velocity
+        elif self.direction == Direction.UP:
+            if y == self.solver.ny - 1:
+                return self.velocity
+        return 0.0
+
+
+cdef HydroelectricForceHandlerCore(ForceHandlerCore):
+
+    # Coulomb field values
+    cdef DTYPE_f** cu
+    cdef DTYPE_f** cv
+    cdef Py_ssize_t ck
+
+    # Density of ion particles
+    cdef DTYPE_f** d
+    cdef Py_ssize_t dk
+
+    def __init__(self, SolverCore solver):
+        self.super.__init__(solver)
+
+    # TODO: look through solver's objects and identify positive/negative
+    # then populate Coulumbs field force vector
+    def init_field():
+        pass
