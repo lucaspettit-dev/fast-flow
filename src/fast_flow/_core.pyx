@@ -397,6 +397,7 @@ cdef class SolverCore:
         cdef DTYPE_f rho = self.rho
         cdef DTYPE_f nu = self.nu
         cdef DTYPE_f p_c, p_e, p_w, p_n, p_s
+        cdef DTYPE_f uc, vc, dudx, dudy, dvdx, dvdy
 
         for y in range(1, ny - 1):
             idx = y * nx + 1
@@ -418,17 +419,35 @@ cdef class SolverCore:
                 p_n = p_c if self.solid[y + 1, x] else p[idx + nx]
                 p_s = p_c if self.solid[y - 1, x] else p[idx - nx]
 
+                # Upwind convection: each derivative is differenced
+                # toward the side the flow comes from, chosen by the
+                # sign of the advecting velocity at this cell.  (The
+                # old code always used the backward difference, which
+                # is upwind only for positive velocities and downwind
+                # -- anti-dissipative -- wherever the flow reverses.)
+                # Neighbour values inside solids are the enforced 0,
+                # as before.  Diffusion and pressure stay centred.
+                uc = u_src[idx]
+                vc = v_src[idx]
+                if uc >= 0.0:
+                    dudx = (u_src[idx] - u_src[idx - 1]) / dx
+                    dvdx = (v_src[idx] - v_src[idx - 1]) / dx
+                else:
+                    dudx = (u_src[idx + 1] - u_src[idx]) / dx
+                    dvdx = (v_src[idx + 1] - v_src[idx]) / dx
+                if vc >= 0.0:
+                    dudy = (u_src[idx] - u_src[idx - nx]) / dy
+                    dvdy = (v_src[idx] - v_src[idx - nx]) / dy
+                else:
+                    dudy = (u_src[idx + nx] - u_src[idx]) / dy
+                    dvdy = (v_src[idx + nx] - v_src[idx]) / dy
+
                 # Horizontal velocity u
                 u_dest[idx] = (
                     u_src[idx]
 
-                    # x convection
-                    - u_src[idx] * dt / dx
-                    * (u_src[idx] - u_src[idx - 1])
-
-                    # y convection
-                    - v_src[idx] * dt / dy
-                    * (u_src[idx] - u_src[idx - nx])
+                    # convection (upwind)
+                    - dt * (uc * dudx + vc * dudy)
 
                     # x pressure gradient
                     - dt / (2.0 * rho * dx)
@@ -456,13 +475,8 @@ cdef class SolverCore:
                 v_dest[idx] = (
                     v_src[idx]
 
-                    # x convection
-                    - u_src[idx] * dt / dx
-                    * (v_src[idx] - v_src[idx - 1])
-
-                    # y convection
-                    - v_src[idx] * dt / dy
-                    * (v_src[idx] - v_src[idx - nx])
+                    # convection (upwind)
+                    - dt * (uc * dvdx + vc * dvdy)
 
                     # y pressure gradient
                     - dt / (2.0 * rho * dy)
@@ -589,6 +603,12 @@ cdef class SolverCore:
             umax = self.inflow_u
         if umax > 0.0:
             denom += umax * (1.0 / self.dx + 1.0 / self.dy)
+            if self.nu > 0.0:
+                # FTCS centred-advection condition C^2 <= 2r, i.e.
+                # dt <= 2*nu/umax^2 -- independent of grid spacing;
+                # without it, fast jets run away no matter how far
+                # dt shrinks in response.
+                denom += (umax * umax) / (2.0 * self.nu)
         if denom <= 0.0:
             return self.dt_base
         return 0.9 / denom
