@@ -68,14 +68,13 @@ cdef class SolverCore:
     cdef DTYPE_f inflow_u
 
     cdef object _solid
-    cdef Py_ssize_t solid_count
     cdef DTYPE_f* b
     cdef DTYPE_f** u
     cdef DTYPE_f** v
     cdef DTYPE_f** p
     cdef Py_ssize_t pk
     cdef Py_ssize_t uvk
-    cdef unsigned char[:, :] solid
+    cdef unsigned char* solid
 
     cdef ForceHandlerCore force
 
@@ -131,11 +130,19 @@ cdef class SolverCore:
         self.sum_dt = 0.0
 
         self._solid = np.zeros((ny, nx), dtype=np.uint8)
-        self.solid = self._solid
+        self.solid = <unsigned char*> malloc(self.N * sizeof(unsigned char))
+        for y in range(ny):
+            idx = self.idx(y, 0)
+            for x in range(nx):
+                self.solid[idx] = self._solid[y, x]
+                idx += 1
 
         self.init_arrays()
 
     def __dealloc__(self):
+        if self.solid != NULL:
+            free(self.solid)
+
         if self.b != NULL:
             free(self.b)
 
@@ -225,7 +232,8 @@ cdef class SolverCore:
             DTYPE_f dy2,
             DTYPE_f dx2,
             DTYPE_f inv_dt) noexcept nogil:
-        if self.solid[y + 1, x + 1]:
+        cdef Py_ssize_t idx = self.idx(y+1, x+1)
+        if self.solid[idx]:
             return
 
         cdef DTYPE_f* u = self.u[self.uvk]
@@ -242,7 +250,7 @@ cdef class SolverCore:
         cdef DTYPE_f b = hor * hor
         cdef DTYPE_f d = vert * vert
 
-        self.b[self.idx(y+1, x+1)] = self.rho * (inv_dt * a - b - c - d)
+        self.b[idx] = self.rho * (inv_dt * a - b - c - d)
 
     @cython.boundscheck(False)
     @cython.wraparound(False)
@@ -255,17 +263,19 @@ cdef class SolverCore:
             DTYPE_f* p_,
             DTYPE_f dy_squared,
             DTYPE_f dx_squared) noexcept nogil:
-        if self.solid[y + 1, x + 1]:
-            return
+
         cdef Py_ssize_t idx = self.idx(y+1, x+1)
+        if self.solid[idx]:
+            return
+
         cdef DTYPE_f pc = p_[idx]
-        cdef DTYPE_f pe = pc if self.solid[y + 1, x + 2] \
+        cdef DTYPE_f pe = pc if self.solid[self.idx(y + 1, x + 2)] \
             else p_[self.idx(y+1, x+2)]
-        cdef DTYPE_f pw = pc if self.solid[y + 1, x] \
+        cdef DTYPE_f pw = pc if self.solid[self.idx(y + 1, x)] \
             else p_[self.idx(y+1, x)]
-        cdef DTYPE_f pn = pc if self.solid[y + 2, x + 1] \
+        cdef DTYPE_f pn = pc if self.solid[self.idx(y + 2, x + 1)] \
             else p_[self.idx(y+2, x+1)]
-        cdef DTYPE_f ps = pc if self.solid[y, x + 1] \
+        cdef DTYPE_f ps = pc if self.solid[idx + 1] \
             else p_[self.idx(y, x+1)]
         cdef DTYPE_f hor = (pe + pw) * dy_squared
         cdef DTYPE_f vert = (pn + ps) * dx_squared
@@ -286,10 +296,9 @@ cdef class SolverCore:
             n = self.ny
 
         # solid cells: pressure is clamped to zero, nothing diffuses in
-        for j in prange(self.ny, nogil=True):
-            for i in range(self.nx):
-                if self.solid[j, i]:
-                    p[self.idx(j, i)] = 0.0
+        for i in range(self.N):
+            if self.solid[i]:
+                p[i] = 0.0
 
         if self.flow_mode == 1:
             # throughflow: zero-gradient pressure on every side
@@ -390,7 +399,7 @@ cdef class SolverCore:
             for jj in range(self.ny):
                 base = jj * self.nx
                 for ii in range(self.nx):
-                    if not self.solid[jj, ii]:
+                    if not self.solid[self.idx(jj, ii)]:
                         pmean += pp[base + ii]
                         nfluid += 1
             if nfluid > 0:
@@ -398,7 +407,7 @@ cdef class SolverCore:
             for jj in prange(self.ny, nogil=True):
                 base = jj * self.nx
                 for ii in range(self.nx):
-                    if not self.solid[jj, ii]:
+                    if not self.solid[self.idx(jj, ii)]:
                         pp[base + ii] -= pmean
 
     @cython.boundscheck(False)
@@ -416,7 +425,9 @@ cdef class SolverCore:
 
         cdef Py_ssize_t nx = self.nx
         cdef Py_ssize_t ny = self.ny
-        cdef Py_ssize_t x, y, idx
+        cdef Py_ssize_t x
+        cdef Py_ssize_t y
+        cdef Py_ssize_t idx
 
         cdef DTYPE_f dt = self.dt
         cdef DTYPE_f dx = self.dx
@@ -433,9 +444,9 @@ cdef class SolverCore:
         # prange and is rejected.
         for y in prange(1, ny - 1, nogil=True):
             for x in range(1, nx - 1):
-                idx = y * nx + x
+                idx = self.idx(y, x)
 
-                if self.solid[y, x]:
+                if self.solid[idx]:
                     u_dest[idx] = 0.0
                     v_dest[idx] = 0.0
                     continue
@@ -444,10 +455,10 @@ cdef class SolverCore:
                 # neighbour inside a solid is ignored (own value
                 # used, i.e. zero normal gradient at the wall)
                 p_c = p[idx]
-                p_e = p_c if self.solid[y, x + 1] else p[idx + 1]
-                p_w = p_c if self.solid[y, x - 1] else p[idx - 1]
-                p_n = p_c if self.solid[y + 1, x] else p[idx + nx]
-                p_s = p_c if self.solid[y - 1, x] else p[idx - nx]
+                p_e = p_c if self.solid[idx + 1] else p[idx + 1]
+                p_w = p_c if self.solid[idx - 1] else p[idx - 1]
+                p_n = p_c if self.solid[idx + nx] else p[idx + nx]
+                p_s = p_c if self.solid[idx - nx] else p[idx - nx]
 
                 # Upwind convection: each derivative is differenced
                 # toward the side the flow comes from, chosen by the
@@ -530,7 +541,7 @@ cdef class SolverCore:
                     )
                 )
 
-
+                self.apply_uv_force(y, x, idx, u_dest, v_dest)
 
         # dest now contains the newest velocity field.
         self.uvk = dest
@@ -538,18 +549,16 @@ cdef class SolverCore:
     @cython.boundscheck(False)
     @cython.wraparound(False)
     @cython.cdivision(True)
-    cdef apply_uv_force(self, Py_ssize_t y, Py_ssize_t x, Py_ssize_t idx, DTYPE_f* u_dest, DTYPE_f* v_dest):
-        cdef DTYPE_f u_ = 0.0
-        cdef DTYPE_f v_ = 0.0
-        cdef ForceHandlerCore f = self.force
-
-        while f is not None:
-            u_ += f.get_u(y, x, idx)
-            v_ += f.get_v(y, x, idx)
-            f = f.next()
-
-        u_dest[idx] += u_
-        v_dest[idx] += v_
+    cdef void apply_uv_force(
+            self,
+            Py_ssize_t y,
+            Py_ssize_t x,
+            Py_ssize_t idx,
+            DTYPE_f* u_dest,
+            DTYPE_f* v_dest) noexcept nogil:
+        if self.force is not None:
+            u_dest[idx] += self.force.get_u(y, x, idx)
+            v_dest[idx] += self.force.get_v(y, x, idx)
 
 
     @cython.boundscheck(False)
@@ -610,15 +619,14 @@ cdef class SolverCore:
 
     cdef enforce_solids(self):
         """No-slip: velocity is exactly zero inside solid cells."""
-        cdef Py_ssize_t i, j, idx
+        cdef Py_ssize_t i
+        cdef Py_ssize_t idx
         cdef DTYPE_f* u = self.u[self.uvk]
         cdef DTYPE_f* v = self.v[self.uvk]
-        for j in prange(self.ny, nogil=True):
-            idx = j * self.nx
-            for i in range(self.nx):
-                if self.solid[j, i]:
-                    u[idx + i] = 0.0
-                    v[idx + i] = 0.0
+        for i in range(self.N):
+            if self.solid[i]:
+                u[idx] = 0.0
+                v[idx] = 0.0
 
     cdef DTYPE_f _max_speed(self):
         cdef DTYPE_f* u = self.u[self.uvk]
@@ -754,7 +762,7 @@ cdef class SolverCore:
         for j in range(self.ny):
             py = j * self.dy
             for i in range(self.nx):
-                if self.solid[j, i]:
+                if self.solid[self.idx(j, i)]:
                     continue
                 px = i * self.dx
                 crossings = 0
@@ -768,19 +776,17 @@ cdef class SolverCore:
                         if px < xinters:
                             crossings += 1
                 if crossings & 1:
-                    self.solid[j, i] = 1
+                    self.solid[self.idx(j, i)] = 1
 
         # kill any pre-existing flow inside the new solid
-        for j in range(self.ny):
-            idx = j * self.nx
-            for i in range(self.nx):
-                if self.solid[j, i]:
-                    self.u[0][idx + i] = 0.0
-                    self.u[1][idx + i] = 0.0
-                    self.v[0][idx + i] = 0.0
-                    self.v[1][idx + i] = 0.0
-                    self.p[0][idx + i] = 0.0
-                    self.p[1][idx + i] = 0.0
+        for i in range(self.N):
+            if self.solid[i]:
+                self.u[0][i] = 0.0
+                self.u[1][i] = 0.0
+                self.v[0][i] = 0.0
+                self.v[1][i] = 0.0
+                self.p[0][i] = 0.0
+                self.p[1][i] = 0.0
 
 
 cdef class ForceHandlerCore:
@@ -804,7 +810,7 @@ cdef class ForceHandlerCore:
         Py_ssize_t y,
         Py_ssize_t x,
         Py_ssize_t idx
-    ) noexcept:
+    ) noexcept nogil:
         return 0.0
 
     cdef DTYPE_f get_v(
@@ -812,7 +818,7 @@ cdef class ForceHandlerCore:
         Py_ssize_t y,
         Py_ssize_t x,
         Py_ssize_t idx
-    ) noexcept:
+    ) noexcept nogil:
         return 0.0
 
     cdef DTYPE_f get_p(
@@ -833,7 +839,7 @@ cdef class ConstantVelocityForceHandlerCore(ForceHandlerCore):
         self.velocity = velocity
         self.direction = direction
 
-    cdef DTYPE_f get_u(self, Py_ssize_t y, Py_ssize_t x, Py_ssize_t idx) noexcept:
+    cdef DTYPE_f get_u(self, Py_ssize_t y, Py_ssize_t x, Py_ssize_t idx) noexcept nogil:
         if self.direction == 0:
             if x == self.solver.nx - 1:
                 return self.velocity
@@ -842,7 +848,7 @@ cdef class ConstantVelocityForceHandlerCore(ForceHandlerCore):
                 return self.velocity
         return 0.0
 
-    cdef DTYPE_f get_v(self, Py_ssize_t y, Py_ssize_t x, Py_ssize_t idx) noexcept:
+    cdef DTYPE_f get_v(self, Py_ssize_t y, Py_ssize_t x, Py_ssize_t idx) noexcept nogil:
         if self.direction == 2:
             if y == 0:
                 return self.velocity

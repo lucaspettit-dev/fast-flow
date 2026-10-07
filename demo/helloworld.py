@@ -5,8 +5,8 @@ from tqdm import tqdm
 
 if __name__ == '__main__':
     nx, ny = 50, 50
-    solver = FlowSolver(nx=50, ny=50, nit=50, dt=0.001)
-    handler = ConstantVelocityForceHandler(solver, Direction.DOWN, 3.0)
+    handler = ConstantVelocityForceHandler(Direction.RIGHT, 3.0)
+    solver = FlowSolver(nx=50, ny=50, nit=50, dt=0.001, force_handlers=[handler])
 
     for i in tqdm(range(1000)):
         solver.step()

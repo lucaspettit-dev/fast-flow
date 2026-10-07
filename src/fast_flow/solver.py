@@ -20,11 +20,14 @@ class ForceHandler:
 
 class ConstantVelocityForceHandler(ForceHandler):
     def __init__(self,
-                 solver: FlowSolver,
                  direction: Direction,
                  velocity: float):
+        self._direction = direction
+        self._velocity = velocity
+
+    def _set_solver(self, solver: FlowSolverCore):
         self._handler = ConstantVelocityForceHandlerCore(
-            solver._cy, direction.value, velocity)
+            solver, self._direction.value, self._velocity)
 
 
 class FlowSolver:
@@ -60,7 +63,8 @@ class FlowSolver:
                  boundary: str = "cavity",
                  inflow_velocity: float = 1.0,
                  lx: float = 2.0,
-                 ly: float = 2.0):
+                 ly: float = 2.0,
+                 force_handlers: [ForceHandler] = None):
         if boundary not in ("cavity", "throughflow"):
             raise ValueError(
                 'boundary must be "cavity" or "throughflow"')
@@ -75,6 +79,9 @@ class FlowSolver:
         self.lx = float(lx)
         self.ly = float(ly)
         self.obstacles: list = []
+        if force_handlers is not None:
+            for handler in force_handlers:
+                handler._set_solver(self._cy)
 
     @property
     def nx(self): return self._cy.nx
@@ -126,7 +133,7 @@ class FlowSolver:
         return self._cy.solid_mask
 
     def add_force_handler(self, handler: ForceHandler):
-        self._cy.add_velocity(handler)
+        self._cy.add_force_handler(handler)
 
     def set_inflow_velocity(self, value):
         """Throughflow mode: set the uniform inflow speed."""
