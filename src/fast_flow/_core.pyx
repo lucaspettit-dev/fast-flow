@@ -22,6 +22,7 @@ import numpy as np
 cimport numpy as cnp
 cimport cython
 from cython cimport view
+from cython.parallel cimport prange
 from libc.stdlib cimport malloc, free
 from libc.math cimport sqrt, atan2, fabs, floor
 
@@ -205,13 +206,13 @@ cdef class SolverCore:
     @cython.boundscheck(False)
     @cython.wraparound(False)
     @cython.cdivision(True)
-    cdef build_up_pressure_step(
+    cdef void build_up_pressure_step(
             self,
             Py_ssize_t y,
             Py_ssize_t x,
             DTYPE_f dy2,
             DTYPE_f dx2,
-            DTYPE_f inv_dt):
+            DTYPE_f inv_dt) noexcept nogil:
         cdef DTYPE_f* u = self.u[self.uvk]
         cdef DTYPE_f* v = self.v[self.uvk]
 
@@ -232,14 +233,14 @@ cdef class SolverCore:
     @cython.boundscheck(False)
     @cython.wraparound(False)
     @cython.cdivision(True)
-    cdef pressure_poisson_step(
+    cdef void pressure_poisson_step(
             self,
             Py_ssize_t y,
             Py_ssize_t x,
             DTYPE_f* p,
             DTYPE_f* p_,
             DTYPE_f dy_squared,
-            DTYPE_f dx_squared):
+            DTYPE_f dx_squared) noexcept nogil:
         cdef Py_ssize_t idx = self.idx(y+1, x+1)
         cdef DTYPE_f pc = p_[idx]
         cdef DTYPE_f pe = pc if self.solid[y + 1, x + 2] \
@@ -270,7 +271,7 @@ cdef class SolverCore:
             n = self.ny
 
         # solid cells: pressure is clamped to zero, nothing diffuses in
-        for j in range(self.ny):
+        for j in prange(self.ny, nogil=True):
             for i in range(self.nx):
                 if self.solid[j, i]:
                     p[self.idx(j, i)] = 0.0
@@ -323,6 +324,8 @@ cdef class SolverCore:
         cdef Py_ssize_t x
         cdef Py_ssize_t q
         cdef DTYPE_f* pp
+        cdef DTYPE_f* p_src
+        cdef DTYPE_f* p_dest
         cdef DTYPE_f pmean
         cdef Py_ssize_t jj, ii, base
         cdef int nfluid
@@ -331,11 +334,16 @@ cdef class SolverCore:
         cdef Py_ssize_t src = self.pk
         cdef Py_ssize_t dest = src ^ 1
 
-        # do the first loop w/build-pressure step
-        for y in range(self.ny - 2):
+        # do the first loop w/build-pressure step (rows are
+        # independent: each writes only its own p/b cells and reads
+        # the source pressure buffer, so this runs GIL-free in
+        # parallel via OpenMP)
+        p_dest = self.p[dest]
+        p_src = self.p[src]
+        for y in prange(self.ny - 2, nogil=True):
             for x in range(self.nx - 2):
                 self.build_up_pressure_step(y, x, dy2, dx2, inv_dt)
-                self.pressure_poisson_step(y, x, self.p[dest], self.p[src], dy_squared, dx_squared)
+                self.pressure_poisson_step(y, x, p_dest, p_src, dy_squared, dx_squared)
         self.pressure_set_boundry_conditions()
 
         self.pk ^= 1
@@ -343,9 +351,11 @@ cdef class SolverCore:
         dest = src ^ 1
 
         for q in range(self.nit - 1):
-            for y in range(self.ny - 2):
+            p_dest = self.p[dest]
+            p_src = self.p[src]
+            for y in prange(self.ny - 2, nogil=True):
                 for x in range(self.nx - 2):
-                    self.pressure_poisson_step(y, x, self.p[dest], self.p[src], dy_squared, dx_squared)
+                    self.pressure_poisson_step(y, x, p_dest, p_src, dy_squared, dx_squared)
             self.pressure_set_boundry_conditions()
 
             # rotate src/dest
@@ -368,7 +378,7 @@ cdef class SolverCore:
                         nfluid += 1
             if nfluid > 0:
                 pmean /= nfluid
-            for jj in range(self.ny):
+            for jj in prange(self.ny, nogil=True):
                 base = jj * self.nx
                 for ii in range(self.nx):
                     if not self.solid[jj, ii]:
@@ -399,15 +409,18 @@ cdef class SolverCore:
         cdef DTYPE_f p_c, p_e, p_w, p_n, p_s
         cdef DTYPE_f uc, vc, dudx, dudy, dvdx, dvdy
 
-        for y in range(1, ny - 1):
-            idx = y * nx + 1
-
+        # rows are independent (read src buffers, write own dest
+        # row), so this runs GIL-free in parallel via OpenMP.
+        # idx is recomputed per cell rather than carried with += :
+        # a carried counter looks like a reduction variable to
+        # prange and is rejected.
+        for y in prange(1, ny - 1, nogil=True):
             for x in range(1, nx - 1):
+                idx = y * nx + x
 
                 if self.solid[y, x]:
                     u_dest[idx] = 0.0
                     v_dest[idx] = 0.0
-                    idx += 1
                     continue
 
                 # pressure at the centre and each neighbour; a
@@ -500,8 +513,6 @@ cdef class SolverCore:
                     )
                 )
 
-                idx += 1
-
         # dest now contains the newest velocity field.
         self.uvk = dest
 
@@ -566,7 +577,7 @@ cdef class SolverCore:
         cdef Py_ssize_t i, j, idx
         cdef DTYPE_f* u = self.u[self.uvk]
         cdef DTYPE_f* v = self.v[self.uvk]
-        for j in range(self.ny):
+        for j in prange(self.ny, nogil=True):
             idx = j * self.nx
             for i in range(self.nx):
                 if self.solid[j, i]:
