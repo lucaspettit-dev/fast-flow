@@ -22,6 +22,7 @@ Examples:
 
 import argparse
 import os
+import time
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -65,20 +66,24 @@ if __name__ == '__main__':
                float(cy + r * np.sin(t))) for t in theta]
     solver.add_obstacle(circle)
 
+    start_time = time.time_ns()
     steps = solver.run(args.total_time)
+    end_time = time.time_ns()
 
+    fps = steps / ((end_time - start_time) / 100000000.0)
     u = solver.horizontal_velocity
     v = solver.vertical_velocity
     speed = np.hypot(u, v)
     solid = solver.solid.astype(bool)
-    print(f"nx={args.nx} ny={args.ny} lx={args.lx} ly={args.ly} "
-          f"inflow={args.inflow} total_time={args.total_time}")
-    print(f"steps taken: {steps}, simulated time: {solver.time:.6f}s, "
-          f"last dt: {solver.last_dt:.3g}, "
+    print('----------- RESULTS ------------')
+    print(f"Params Used:\n\t(nx, ny) = ({args.nx}, {args.ny})\n\t(lx, ly) = ({args.lx}, {args.ly})"
+          f"\n\tinflow = {args.inflow}\n\ttotal_time = {args.total_time}\n\tFPS = {fps:.2f}")
+    print(f"steps taken: {steps}\n\tsimulated time: {solver.time:.6f}s\n\t"
+          f"last dt: {solver.last_dt:.3g}\n\t"
           f"stable dt limit now: {solver.stable_dt():.3g}")
-    print(f"finite: {np.isfinite(u).all() and np.isfinite(v).all()}, "
+    print(f"finite: {np.isfinite(u).all() and np.isfinite(v).all()}\n\t"
           f"max speed outside obstacle: "
-          f"{speed[~solid].max():.3f}, "
+          f"{speed[~solid].max():.3f}\n\t"
           f"max speed inside obstacle: "
           f"{speed[solid].max() if solid.any() else 0.0:.3g}")
 

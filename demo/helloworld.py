@@ -1,4 +1,4 @@
-from fast_flow import FlowSolver
+from fast_flow import FlowSolver, Direction, ConstantVelocityForceHandler
 import matplotlib.pyplot as plt
 import numpy as np
 from tqdm import tqdm
@@ -6,10 +6,10 @@ from tqdm import tqdm
 if __name__ == '__main__':
     nx, ny = 50, 50
     solver = FlowSolver(nx=50, ny=50, nit=50, dt=0.001)
+    handler = ConstantVelocityForceHandler(solver, Direction.DOWN, 3.0)
 
     for i in tqdm(range(1000)):
         solver.step()
-        solver.add_velocity(3.0)
 
     u = solver.horizontal_velocity
     v = solver.vertical_velocity

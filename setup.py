@@ -24,9 +24,15 @@ extensions = [
     Extension(
         "fast_flow._core",
         sources=["src/fast_flow/_core.pyx"],
-        include_dirs=[np.get_include()],
+        include_dirs=[
+            np.get_include(),
+            "/opt/homebrew/opt/libomp/include"
+        ],
         extra_compile_args=compile_args,
         extra_link_args=link_args,
+        library_dirs=[
+            "/opt/homebrew/opt/libomp/lib"
+        ]
     )
 ]
 

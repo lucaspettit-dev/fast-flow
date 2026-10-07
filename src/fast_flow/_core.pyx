@@ -68,6 +68,7 @@ cdef class SolverCore:
     cdef DTYPE_f inflow_u
 
     cdef object _solid
+    cdef Py_ssize_t solid_count
     cdef DTYPE_f* b
     cdef DTYPE_f** u
     cdef DTYPE_f** v
@@ -75,6 +76,8 @@ cdef class SolverCore:
     cdef Py_ssize_t pk
     cdef Py_ssize_t uvk
     cdef unsigned char[:, :] solid
+
+    cdef ForceHandlerCore force
 
     def __init__(
             self,
@@ -160,6 +163,15 @@ cdef class SolverCore:
             free(self.p)
             self.p = NULL
 
+    cdef void add_force_handler(self, ForceHandlerCore next) noexcept:
+        cdef ForceHandlerCore handler = self.force
+        if self.force is None:
+            self.force = next
+        else:
+            while handler.next() is not None:
+                handler = handler.next()
+            handler.set_next(next)
+
     cdef init_arrays(self):
         # Populate your data here
         cdef Py_ssize_t i, j
@@ -213,7 +225,6 @@ cdef class SolverCore:
             DTYPE_f dy2,
             DTYPE_f dx2,
             DTYPE_f inv_dt) noexcept nogil:
-            DTYPE_f inv_dt):
         if self.solid[y + 1, x + 1]:
             return
 
@@ -244,6 +255,8 @@ cdef class SolverCore:
             DTYPE_f* p_,
             DTYPE_f dy_squared,
             DTYPE_f dx_squared) noexcept nogil:
+        if self.solid[y + 1, x + 1]:
+            return
         cdef Py_ssize_t idx = self.idx(y+1, x+1)
         cdef DTYPE_f pc = p_[idx]
         cdef DTYPE_f pe = pc if self.solid[y + 1, x + 2] \
@@ -259,8 +272,7 @@ cdef class SolverCore:
 
         cdef DTYPE_f d = 2 * (dx_squared + dy_squared)
 
-        if not self.solid[y + 1, x + 1]:
-            p[idx] = (hor + vert) / d - (dx_squared * dy_squared / d) * self.b[idx]
+        p[idx] = (hor + vert) / d - (dx_squared * dy_squared / d) * self.b[idx]
 
     @cython.boundscheck(False)
     @cython.wraparound(False)
@@ -330,7 +342,9 @@ cdef class SolverCore:
         cdef DTYPE_f* p_src
         cdef DTYPE_f* p_dest
         cdef DTYPE_f pmean
-        cdef Py_ssize_t jj, ii, base
+        cdef Py_ssize_t jj
+        cdef Py_ssize_t ii
+        cdef Py_ssize_t base
         cdef int nfluid
 
         # determine which p is written to and which is read from.
@@ -516,8 +530,27 @@ cdef class SolverCore:
                     )
                 )
 
+
+
         # dest now contains the newest velocity field.
         self.uvk = dest
+
+    @cython.boundscheck(False)
+    @cython.wraparound(False)
+    @cython.cdivision(True)
+    cdef apply_uv_force(self, Py_ssize_t y, Py_ssize_t x, Py_ssize_t idx, DTYPE_f* u_dest, DTYPE_f* v_dest):
+        cdef DTYPE_f u_ = 0.0
+        cdef DTYPE_f v_ = 0.0
+        cdef ForceHandlerCore f = self.force
+
+        while f is not None:
+            u_ += f.get_u(y, x, idx)
+            v_ += f.get_v(y, x, idx)
+            f = f.next()
+
+        u_dest[idx] += u_
+        v_dest[idx] += v_
+
 
     @cython.boundscheck(False)
     @cython.wraparound(False)
@@ -751,55 +784,69 @@ cdef class SolverCore:
 
 
 cdef class ForceHandlerCore:
-    cdef readonly SolverCore solver
+    cdef SolverCore solver
+    cdef ForceHandlerCore next_handler
+
     def __init__(self, SolverCore solver):
         self.solver = solver
+        self.next_handler = None
+
+    cdef add_next(self, ForceHandlerCore handler):
+        if self.next_handler is not None:
+            raise ValueError("Next handler already assigned")
+        self.next_handler = handler
+
+    cdef ForceHandlerCore next(self) noexcept:
+        return self.next_handler
 
     cdef DTYPE_f get_u(
         self,
         Py_ssize_t y,
-        Py_ssize_t x
+        Py_ssize_t x,
+        Py_ssize_t idx
     ) noexcept:
         return 0.0
 
     cdef DTYPE_f get_v(
         self,
         Py_ssize_t y,
-        Py_ssize_t x
+        Py_ssize_t x,
+        Py_ssize_t idx
     ) noexcept:
         return 0.0
 
     cdef DTYPE_f get_p(
         self,
         Py_ssize_t y,
-        Py_ssize_t x
+        Py_ssize_t x,
+        Py_ssize_t idx
     ) noexcept:
         return 0.0
 
 
 cdef class ConstantVelocityForceHandlerCore(ForceHandlerCore):
-    cdef Direction direction
+    cdef Py_ssize_t direction
     cdef DTYPE_f velocity
 
-    def __init__(self, SolverCore solver, Direction direction, DTYPE_f velocity):
+    def __init__(self, SolverCore solver, Py_ssize_t direction, DTYPE_f velocity):
         ForceHandlerCore.__init__(self, solver)
         self.velocity = velocity
         self.direction = direction
 
-    cdef DTYPE_f get_u(self, Py_ssize_t y, Py_ssize_t x) noexcept:
-        if self.direction == Direction.RIGHT:
-            if x == 0:
-                return self.velocity
-        elif self.direction == Direction.LEFT:
+    cdef DTYPE_f get_u(self, Py_ssize_t y, Py_ssize_t x, Py_ssize_t idx) noexcept:
+        if self.direction == 0:
             if x == self.solver.nx - 1:
+                return self.velocity
+        elif self.direction == 1:
+            if x == 0:
                 return self.velocity
         return 0.0
 
-    cdef DTYPE_f get_v(self, Py_ssize_t y, Py_ssize_t x) noexcept:
-        if self.direction == Direction.DOWN:
+    cdef DTYPE_f get_v(self, Py_ssize_t y, Py_ssize_t x, Py_ssize_t idx) noexcept:
+        if self.direction == 2:
             if y == 0:
                 return self.velocity
-        elif self.direction == Direction.UP:
+        elif self.direction == 3:
             if y == self.solver.ny - 1:
                 return self.velocity
         return 0.0

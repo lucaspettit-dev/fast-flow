@@ -3,8 +3,28 @@
 from __future__ import annotations
 
 import numpy as np
+from enum import Enum
+from ._core import SolverCore, ConstantVelocityForceHandlerCore
 
-from ._core import SolverCore
+
+class Direction(Enum):
+    LEFT = 0
+    RIGHT = 1
+    UP = 2
+    DOWN = 3
+
+
+class ForceHandler:
+    pass
+
+
+class ConstantVelocityForceHandler(ForceHandler):
+    def __init__(self,
+                 solver: FlowSolver,
+                 direction: Direction,
+                 velocity: float):
+        self._handler = ConstantVelocityForceHandlerCore(
+            solver._cy, direction.value, velocity)
 
 
 class FlowSolver:
@@ -105,9 +125,8 @@ class FlowSolver:
         """Read-only (ny, nx) mask; 1 where a cell is solid obstacle."""
         return self._cy.solid_mask
 
-    def add_velocity(self, value):
-        """Cavity mode: set the moving-lid speed on the top edge."""
-        self._cy.add_velocity(value)
+    def add_force_handler(self, handler: ForceHandler):
+        self._cy.add_velocity(handler)
 
     def set_inflow_velocity(self, value):
         """Throughflow mode: set the uniform inflow speed."""
