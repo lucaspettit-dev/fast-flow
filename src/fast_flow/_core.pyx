@@ -957,19 +957,115 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
     cdef Py_ssize_t n_shapes
     cdef Py_ssize_t shapes_cap
 
-    def __init__(self, SolverCore solver):
+    # Solids bitmask for the solver's grid, as a flat DTYPE_f*
+    # (idx(y, x) layout, 1 = solid) -- the same layout as
+    # SolverCore's mask, copied from it at construction and
+    # freed in __dealloc__.
+    cdef DTYPE_f* solids
+
+    def __init__(self, SolverCore solver, list shapes=None):
+        """Bind to `solver`, converting `shapes` to Shape structs.
+
+        `shapes` is a list of Python dicts, one per shape (e.g.
+        the electrodes found in an image):
+
+            {"vertices": [(x0, y0), (x1, y1), ...], "charge": V}
+
+        "vertices" is required (>= 3 points, physical coords, y
+        up); "charge" -- the shape's voltage, stored in the
+        struct's extradata -- defaults to 0.  The dicts are the
+        shapes' only source: SolverCore's solid bitmask is a
+        different thing (a rasterized grid) and is never turned
+        into vertices.  The mask itself is taken in separately:
+        the constructor copies it into this handler's own
+        DTYPE_f* buffer (same flat idx(y, x) layout, 1 = solid),
+        as a snapshot of the solver's solids at bind time.
+        """
+        cdef Py_ssize_t i
         ForceHandlerCore.__init__(self, solver)
+        self.solids = <DTYPE_f*> malloc(self.solver.N * sizeof(DTYPE_f))
+        if self.solids == NULL:
+            raise MemoryError("could not allocate solids bitmask")
+        for i in range(self.solver.N):
+            self.solids[i] = <DTYPE_f> self.solver.solid[i]
         self.shapes = NULL
         self.n_shapes = 0
         self.shapes_cap = 0
+        if shapes is not None:
+            for item in shapes:
+                self._append_shape_dict(item)
+
+    cdef Py_ssize_t _new_shape_slot(self, Py_ssize_t n,
+                                    DTYPE_f charge):
+        """Grow the shape array if full and allocate the next
+        slot's vertices buffer; returns the new shape's index.
+        The caller fills the buffer."""
+        cdef Shape* grown
+        cdef Py_ssize_t new_cap
+        cdef Py_ssize_t slot
+        if self.n_shapes == self.shapes_cap:
+            new_cap = 8 if self.shapes_cap == 0 else 2 * self.shapes_cap
+            grown = <Shape*> realloc(self.shapes,
+                                     new_cap * sizeof(Shape))
+            if grown == NULL:
+                raise MemoryError("could not grow shape array")
+            self.shapes = grown
+            self.shapes_cap = new_cap
+        slot = self.n_shapes
+        self.shapes[slot].vertices = \
+            <DTYPE_f*> malloc(2 * n * sizeof(DTYPE_f))
+        if self.shapes[slot].vertices == NULL:
+            raise MemoryError("could not allocate shape vertices")
+        self.shapes[slot].n_vertices = n
+        self.shapes[slot].extradata.charge = charge
+        self.n_shapes += 1
+        return slot
+
+    cdef _append_shape_dict(self, object item):
+        """Convert one shape dict (see __init__) into a Shape."""
+        cdef Py_ssize_t n, k, slot
+        if not isinstance(item, dict):
+            raise TypeError("each shape must be a dict like "
+                            "{'vertices': [(x, y), ...], 'charge': V}")
+        if "vertices" not in item:
+            raise ValueError("shape dict is missing 'vertices'")
+        verts = item["vertices"]
+        n = len(verts)
+        if n < 3:
+            raise ValueError("need >= 3 vertices")
+        slot = self._new_shape_slot(n, float(item.get("charge", 0.0)))
+        for k in range(n):
+            x, y = verts[k]
+            self.shapes[slot].vertices[2 * k] = float(x)
+            self.shapes[slot].vertices[2 * k + 1] = float(y)
 
     def __dealloc__(self):
+        if self.solids != NULL:
+            free(self.solids)
+            self.solids = NULL
         if self.shapes != NULL:
             for i in range(self.n_shapes):
                 if self.shapes[i].vertices != NULL:
                     free(self.shapes[i].vertices)
             free(self.shapes)
             self.shapes = NULL
+
+    @property
+    def solids_mask(self) -> np.ndarray:
+        """Read-only (ny, nx) copy of the solids bitmask this
+        handler was constructed with; 1.0 where a cell is solid."""
+        if self.solids == NULL:
+            arr = np.zeros((self.solver.ny, self.solver.nx))
+            arr.flags.writeable = False
+            return arr
+        return self.to_mask_numpy(self.solids)
+
+    cdef cnp.ndarray to_mask_numpy(self, DTYPE_f* a):
+        cdef DTYPE_f[:] view = <DTYPE_f[:self.solver.N]> a
+        cdef cnp.ndarray arr = np.array(view, copy=True)
+        arr = arr.reshape((self.solver.ny, self.solver.nx))
+        arr.flags.writeable = False
+        return arr
 
     cpdef add_shape(self, double[::1] xs, double[::1] ys,
                     double charge=0.0):
@@ -982,30 +1078,15 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         """
         cdef Py_ssize_t n = xs.shape[0]
         cdef Py_ssize_t k
-        cdef Shape* grown
-        cdef Py_ssize_t new_cap
+        cdef Py_ssize_t slot
 
         if n != ys.shape[0] or n < 3:
             raise ValueError("need >= 3 vertices")
 
-        if self.n_shapes == self.shapes_cap:
-            new_cap = 8 if self.shapes_cap == 0 else 2 * self.shapes_cap
-            grown = <Shape*> realloc(self.shapes,
-                                     new_cap * sizeof(Shape))
-            if grown == NULL:
-                raise MemoryError("could not grow shape array")
-            self.shapes = grown
-            self.shapes_cap = new_cap
-        self.shapes[self.n_shapes].vertices = \
-            <DTYPE_f*> malloc(2 * n * sizeof(DTYPE_f))
-        if self.shapes[self.n_shapes].vertices == NULL:
-            raise MemoryError("could not allocate shape vertices")
+        slot = self._new_shape_slot(n, charge)
         for k in range(n):
-            self.shapes[self.n_shapes].vertices[2 * k] = xs[k]
-            self.shapes[self.n_shapes].vertices[2 * k + 1] = ys[k]
-        self.shapes[self.n_shapes].n_vertices = n
-        self.shapes[self.n_shapes].extradata.charge = charge
-        self.n_shapes += 1
+            self.shapes[slot].vertices[2 * k] = xs[k]
+            self.shapes[slot].vertices[2 * k + 1] = ys[k]
 
     cpdef Py_ssize_t num_shapes(self):
         """Number of shapes recorded via add_shape()."""

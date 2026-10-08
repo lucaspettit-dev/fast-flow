@@ -34,20 +34,27 @@ class ConstantVelocityForceHandler(ForceHandler):
 class ElectrostaticForceHandler(ForceHandler):
     """Electrostatic forcing from charged shapes (electrodes).
 
-    Shapes are polygons plus a voltage, stored in the compiled
-    handler as Shape structs (interleaved vertices + an
-    extradata struct holding the charge).  Shapes may be added
-    before or after the handler is attached to a solver; ones
-    added before are pushed into the core when it binds.
+    Shapes are described as Python dicts --
+
+        {"vertices": [(x, y), ...], "charge": V}
+
+    -- and the compiled handler converts them to Shape structs
+    (interleaved vertices + an extradata struct holding the
+    charge) in its constructor.  Shapes may be given up front
+    and/or added before or after the handler is attached to a
+    solver; ones queued before binding go through the core
+    constructor when it binds.
     """
 
-    def __init__(self):
-        self._pending: list = []
+    def __init__(self, shapes: list = None):
+        self._pending: list = list(shapes) if shapes else []
 
     def _set_solver(self, solver: FlowSolverCore):
-        self._handler = ElectrostaticForceHandlerCore(solver)
-        for polygon, charge in self._pending:
-            self._push(polygon, charge)
+        # The core constructor converts the pending shape dicts
+        # to Shape structs and takes in the solver's solids
+        # bitmask itself (a DTYPE_f copy made inside the core).
+        self._handler = ElectrostaticForceHandlerCore(
+            solver, self._pending)
         self._pending = []
 
     def _push(self, polygon, charge: float) -> None:
@@ -59,7 +66,8 @@ class ElectrostaticForceHandler(ForceHandler):
         """Add a charged shape as an iterable of (x, y) vertices
         (y up), with `charge` the shape's voltage."""
         if getattr(self, "_handler", None) is None:
-            self._pending.append((polygon, float(charge)))
+            self._pending.append(
+                {"vertices": list(polygon), "charge": float(charge)})
         else:
             self._push(polygon, charge)
 
@@ -68,7 +76,7 @@ class ElectrostaticForceHandler(ForceHandler):
         """The handler's shapes' charges (voltages), in the order
         they were added."""
         if getattr(self, "_handler", None) is None:
-            return [charge for _, charge in self._pending]
+            return [float(d.get("charge", 0.0)) for d in self._pending]
         return [self._handler.shape_charge(i)
                 for i in range(self._handler.num_shapes())]
 
