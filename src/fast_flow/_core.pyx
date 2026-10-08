@@ -920,7 +920,7 @@ cdef class ConstantVelocityForceHandlerCore(ForceHandlerCore):
         return 0.0
 
 
-cdef class HydroelectricForceHandlerCore(ForceHandlerCore):
+cdef class ElectrostaticForceHandler(ForceHandlerCore):
 
     # Coulomb field values
     cdef DTYPE_f** cu
