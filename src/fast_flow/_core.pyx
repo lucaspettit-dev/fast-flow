@@ -963,23 +963,37 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
     # freed in __dealloc__.
     cdef DTYPE_f* solids
 
-    def __init__(self, SolverCore solver, list shapes=None):
+    def __init__(self, SolverCore solver, list shapes=None,
+                 dict layermap=None):
         """Bind to `solver`, converting `shapes` to Shape structs.
 
-        `shapes` is a list of Python dicts, one per shape (e.g.
-        the electrodes found in an image):
+        Two input forms:
 
-            {"vertices": [(x0, y0), (x1, y1), ...], "charge": V}
+        * Flat (layermap is None): `shapes` is a list of dicts,
+          one per shape (e.g. the electrodes found in an image):
 
-        "vertices" is required (>= 3 points, physical coords, y
-        up); "charge" -- the shape's voltage, stored in the
-        struct's extradata -- defaults to 0.  The dicts are the
-        shapes' only source: SolverCore's solid bitmask is a
-        different thing (a rasterized grid) and is never turned
-        into vertices.  The mask itself is taken in separately:
-        the constructor copies it into this handler's own
-        DTYPE_f* buffer (same flat idx(y, x) layout, 1 = solid),
-        as a snapshot of the solver's solids at bind time.
+              {"vertices": [(x0, y0), (x1, y1), ...], "charge": V}
+
+          "vertices" is required (>= 3 points, physical coords,
+          y up); "charge" -- the shape's voltage, stored in the
+          struct's extradata -- defaults to 0.
+
+        * Layered (layermap given): `shapes` is one list of
+          {"vertices": ...} dicts per image layer, as returned
+          by fast_flow.polygons.extract_layered_polygons, and
+          `layermap` maps layer index -> charge, e.g.
+          {0: 20000, 2: -20000} for an RGB image whose red
+          shapes are positive and blue shapes negative.  Layers
+          missing from the map are neutral (charge 0), and the
+          map overrides any "charge" key in the dicts.
+
+        The dicts are the shapes' only source: SolverCore's
+        solid bitmask is a different thing (a rasterized grid)
+        and is never turned into vertices.  The mask itself is
+        taken in separately: the constructor copies it into
+        this handler's own DTYPE_f* buffer (same flat idx(y, x)
+        layout, 1 = solid), as a snapshot of the solver's
+        solids at bind time.
         """
         cdef Py_ssize_t i
         ForceHandlerCore.__init__(self, solver)
@@ -992,8 +1006,14 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         self.n_shapes = 0
         self.shapes_cap = 0
         if shapes is not None:
-            for item in shapes:
-                self._append_shape_dict(item)
+            if layermap is None:
+                for item in shapes:
+                    self._append_shape_dict(item)
+            else:
+                for layer, layer_shapes in enumerate(shapes):
+                    charge = float(layermap.get(layer, 0.0))
+                    for item in layer_shapes:
+                        self._append_shape_dict(item, charge)
 
     cdef Py_ssize_t _new_shape_slot(self, Py_ssize_t n,
                                     DTYPE_f charge):
@@ -1021,8 +1041,13 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         self.n_shapes += 1
         return slot
 
-    cdef _append_shape_dict(self, object item):
-        """Convert one shape dict (see __init__) into a Shape."""
+    cdef _append_shape_dict(self, object item, object charge=None):
+        """Convert one shape dict (see __init__) into a Shape.
+
+        If `charge` is given it wins (layered/layermap input);
+        otherwise the dict's own "charge" entry is used,
+        defaulting to 0.
+        """
         cdef Py_ssize_t n, k, slot
         if not isinstance(item, dict):
             raise TypeError("each shape must be a dict like "
@@ -1033,7 +1058,9 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         n = len(verts)
         if n < 3:
             raise ValueError("need >= 3 vertices")
-        slot = self._new_shape_slot(n, float(item.get("charge", 0.0)))
+        if charge is None:
+            charge = float(item.get("charge", 0.0))
+        slot = self._new_shape_slot(n, float(charge))
         for k in range(n):
             x, y = verts[k]
             self.shapes[slot].vertices[2 * k] = float(x)

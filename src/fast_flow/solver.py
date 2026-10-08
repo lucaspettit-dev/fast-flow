@@ -40,22 +40,36 @@ class ElectrostaticForceHandler(ForceHandler):
 
     -- and the compiled handler converts them to Shape structs
     (interleaved vertices + an extradata struct holding the
-    charge) in its constructor.  Shapes may be given up front
-    and/or added before or after the handler is attached to a
-    solver; ones queued before binding go through the core
-    constructor when it binds.
+    charge) in its constructor.  Alternatively, pass the
+    per-layer output of
+    fast_flow.polygons.extract_layered_polygons together with
+    `layermap`, a dict mapping image layer index -> charge
+    (e.g. {0: 20000, 2: -20000}: red shapes positive, blue
+    negative, every other layer neutral); the handler then
+    generates the structs -- charges included -- from those
+    parameters.  Shapes may be given up front and/or added
+    before or after the handler is attached to a solver; ones
+    queued before binding go through the core constructor when
+    it binds.
     """
 
-    def __init__(self, shapes: list = None):
+    def __init__(self, shapes: list = None, layermap: dict = None):
         self._pending: list = list(shapes) if shapes else []
+        self._layermap = layermap
+        self._pending_flat: list = []
 
     def _set_solver(self, solver: FlowSolverCore):
-        # The core constructor converts the pending shape dicts
-        # to Shape structs and takes in the solver's solids
-        # bitmask itself (a DTYPE_f copy made inside the core).
+        # The core constructor converts the shape dicts to Shape
+        # structs (applying layermap in layered mode) and takes
+        # in the solver's solids bitmask itself (a DTYPE_f copy
+        # made inside the core).  Flat add_shape() shapes queued
+        # before binding are appended afterwards.
         self._handler = ElectrostaticForceHandlerCore(
-            solver, self._pending)
+            solver, self._pending, self._layermap)
         self._pending = []
+        for d in self._pending_flat:
+            self._push(d["vertices"], d["charge"])
+        self._pending_flat = []
 
     def _push(self, polygon, charge: float) -> None:
         xs = np.array([p[0] for p in polygon], dtype=np.float64)
@@ -66,7 +80,7 @@ class ElectrostaticForceHandler(ForceHandler):
         """Add a charged shape as an iterable of (x, y) vertices
         (y up), with `charge` the shape's voltage."""
         if getattr(self, "_handler", None) is None:
-            self._pending.append(
+            self._pending_flat.append(
                 {"vertices": list(polygon), "charge": float(charge)})
         else:
             self._push(polygon, charge)
@@ -76,7 +90,16 @@ class ElectrostaticForceHandler(ForceHandler):
         """The handler's shapes' charges (voltages), in the order
         they were added."""
         if getattr(self, "_handler", None) is None:
-            return [float(d.get("charge", 0.0)) for d in self._pending]
+            charges = []
+            if self._layermap is None:
+                charges += [float(d.get("charge", 0.0))
+                            for d in self._pending]
+            else:
+                for layer, layer_shapes in enumerate(self._pending):
+                    charges += [float(self._layermap.get(layer, 0.0))
+                                ] * len(layer_shapes)
+            charges += [d["charge"] for d in self._pending_flat]
+            return charges
         return [self._handler.shape_charge(i)
                 for i in range(self._handler.num_shapes())]
 
