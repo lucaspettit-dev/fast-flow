@@ -23,7 +23,7 @@ cimport numpy as cnp
 cimport cython
 from cython cimport view
 from cython.parallel cimport prange
-from libc.stdlib cimport malloc, free
+from libc.stdlib cimport malloc, free, realloc
 from libc.math cimport sqrt, atan2, fabs, floor
 
 ctypedef cnp.float64_t DTYPE_f
@@ -920,6 +920,26 @@ cdef class ConstantVelocityForceHandlerCore(ForceHandlerCore):
         return 0.0
 
 
+cdef struct ShapeExtraData:
+    # Metadata carried alongside a shape's geometry.  For now the
+    # only entry is `charge`: the electric potential (voltage) on
+    # the shape.
+    DTYPE_f charge
+
+
+cdef struct Shape:
+    # A polygonal electrode shape, owned by
+    # ElectrostaticForceHandler.  `vertices` is a flat buffer of
+    # interleaved physical coordinates (x0, y0, x1, y1, ..., y up,
+    # on [0, lx] x [0, ly]); `n_vertices` is the vertex count
+    # (buffer length 2*n).  This is separate from SolverCore's
+    # solid bitmask: obstacles still rasterize into the mask,
+    # which is what voids pressure/velocity inside solids.
+    DTYPE_f* vertices
+    Py_ssize_t n_vertices
+    ShapeExtraData extradata
+
+
 cdef class ElectrostaticForceHandler(ForceHandlerCore):
 
     # Coulomb field values
@@ -931,10 +951,83 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
     cdef DTYPE_f** d
     cdef Py_ssize_t dk
 
+    # Charged shapes (electrodes) this handler forces from: a
+    # growable C array of Shape structs, in insertion order.
+    cdef Shape* shapes
+    cdef Py_ssize_t n_shapes
+    cdef Py_ssize_t shapes_cap
+
     def __init__(self, SolverCore solver):
         ForceHandlerCore.__init__(self, solver)
+        self.shapes = NULL
+        self.n_shapes = 0
+        self.shapes_cap = 0
 
-    # TODO: look through solver's objects and identify positive/negative
-    # then populate Coulumbs field force vector
+    def __dealloc__(self):
+        if self.shapes != NULL:
+            for i in range(self.n_shapes):
+                if self.shapes[i].vertices != NULL:
+                    free(self.shapes[i].vertices)
+            free(self.shapes)
+            self.shapes = NULL
+
+    cpdef add_shape(self, double[::1] xs, double[::1] ys,
+                    double charge=0.0):
+        """Record a charged polygon (an electrode) as a Shape.
+
+        Vertices are physical coordinates (y up) on the solver's
+        [0, lx] x [0, ly] domain; they are copied into the
+        struct's flat interleaved DTYPE_f* buffer.  `charge` is
+        the shape's voltage, stored in the shape's extradata.
+        """
+        cdef Py_ssize_t n = xs.shape[0]
+        cdef Py_ssize_t k
+        cdef Shape* grown
+        cdef Py_ssize_t new_cap
+
+        if n != ys.shape[0] or n < 3:
+            raise ValueError("need >= 3 vertices")
+
+        if self.n_shapes == self.shapes_cap:
+            new_cap = 8 if self.shapes_cap == 0 else 2 * self.shapes_cap
+            grown = <Shape*> realloc(self.shapes,
+                                     new_cap * sizeof(Shape))
+            if grown == NULL:
+                raise MemoryError("could not grow shape array")
+            self.shapes = grown
+            self.shapes_cap = new_cap
+        self.shapes[self.n_shapes].vertices = \
+            <DTYPE_f*> malloc(2 * n * sizeof(DTYPE_f))
+        if self.shapes[self.n_shapes].vertices == NULL:
+            raise MemoryError("could not allocate shape vertices")
+        for k in range(n):
+            self.shapes[self.n_shapes].vertices[2 * k] = xs[k]
+            self.shapes[self.n_shapes].vertices[2 * k + 1] = ys[k]
+        self.shapes[self.n_shapes].n_vertices = n
+        self.shapes[self.n_shapes].extradata.charge = charge
+        self.n_shapes += 1
+
+    cpdef Py_ssize_t num_shapes(self):
+        """Number of shapes recorded via add_shape()."""
+        return self.n_shapes
+
+    cpdef DTYPE_f shape_charge(self, Py_ssize_t i):
+        """The `charge` (voltage) stored in shape i's extradata."""
+        if i < 0 or i >= self.n_shapes:
+            raise IndexError("shape index out of range")
+        return self.shapes[i].extradata.charge
+
+    cpdef list shape_vertices(self, Py_ssize_t i):
+        """Shape i's vertices as a list of (x, y) tuples, read
+        back from the struct's interleaved DTYPE_f* buffer."""
+        cdef Py_ssize_t k
+        if i < 0 or i >= self.n_shapes:
+            raise IndexError("shape index out of range")
+        return [(self.shapes[i].vertices[2 * k],
+                 self.shapes[i].vertices[2 * k + 1])
+                for k in range(self.shapes[i].n_vertices)]
+
+    # TODO: look through this handler's shapes and identify
+    # positive/negative, then populate Coulumbs field force vector
     cdef void init_field(self):
         pass

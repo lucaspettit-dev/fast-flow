@@ -5,6 +5,7 @@ from __future__ import annotations
 import numpy as np
 from enum import Enum
 from ._core import SolverCore, ConstantVelocityForceHandlerCore
+from ._core import ElectrostaticForceHandler as ElectrostaticForceHandlerCore
 
 
 class Direction(Enum):
@@ -28,6 +29,48 @@ class ConstantVelocityForceHandler(ForceHandler):
     def _set_solver(self, solver: FlowSolverCore):
         self._handler = ConstantVelocityForceHandlerCore(
             solver, self._direction.value, self._velocity)
+
+
+class ElectrostaticForceHandler(ForceHandler):
+    """Electrostatic forcing from charged shapes (electrodes).
+
+    Shapes are polygons plus a voltage, stored in the compiled
+    handler as Shape structs (interleaved vertices + an
+    extradata struct holding the charge).  Shapes may be added
+    before or after the handler is attached to a solver; ones
+    added before are pushed into the core when it binds.
+    """
+
+    def __init__(self):
+        self._pending: list = []
+
+    def _set_solver(self, solver: FlowSolverCore):
+        self._handler = ElectrostaticForceHandlerCore(solver)
+        for polygon, charge in self._pending:
+            self._push(polygon, charge)
+        self._pending = []
+
+    def _push(self, polygon, charge: float) -> None:
+        xs = np.array([p[0] for p in polygon], dtype=np.float64)
+        ys = np.array([p[1] for p in polygon], dtype=np.float64)
+        self._handler.add_shape(xs, ys, float(charge))
+
+    def add_shape(self, polygon, charge: float = 0.0) -> None:
+        """Add a charged shape as an iterable of (x, y) vertices
+        (y up), with `charge` the shape's voltage."""
+        if getattr(self, "_handler", None) is None:
+            self._pending.append((polygon, float(charge)))
+        else:
+            self._push(polygon, charge)
+
+    @property
+    def shape_charges(self) -> list:
+        """The handler's shapes' charges (voltages), in the order
+        they were added."""
+        if getattr(self, "_handler", None) is None:
+            return [charge for _, charge in self._pending]
+        return [self._handler.shape_charge(i)
+                for i in range(self._handler.num_shapes())]
 
 
 class FlowSolver:
