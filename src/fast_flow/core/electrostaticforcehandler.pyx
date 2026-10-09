@@ -13,7 +13,7 @@ import numpy as np
 cimport numpy as cnp
 from libc.stdlib cimport malloc, free, realloc
 
-from fast_flow.core.common cimport DTYPE_f
+from fast_flow.core.common cimport DTYPE_f, build_solids_mask
 from fast_flow.core.flow cimport FlowSolverCore
 from fast_flow.core.handlers.forcehandler cimport ForceHandlerCore
 
@@ -61,11 +61,15 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
     cdef Py_ssize_t n_shapes
     cdef Py_ssize_t shapes_cap
 
-    # Solids bitmask for the solver's grid, as a flat DTYPE_f*
-    # (idx(y, x) layout, 1 = solid) -- the same layout as
-    # FlowSolverCore's mask, copied from it at construction and
-    # freed in __dealloc__.
-    cdef DTYPE_f* solids
+    # Solids bitmask on the image grid, as a flat unsigned
+    # char* (idx(y, x) layout, 1 = solid, 0 = not) -- the same
+    # element type and layout as FlowSolverCore's mask.  It is
+    # generated from the image at construction by
+    # build_solids_mask (max across layers > 127) and freed in
+    # __dealloc__; solids_nx/solids_ny are its dimensions.
+    cdef unsigned char* solids
+    cdef Py_ssize_t solids_ny
+    cdef Py_ssize_t solids_nx
 
     def __init__(self, FlowSolverCore solver,
                  cnp.ndarray[DTYPE_f, ndim=3] image,
@@ -96,20 +100,17 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         `extradata.charge` (if a group spans layers with
         different charges, the lowest layer's charge is kept).
 
-        FlowSolverCore's own solid bitmask is a different thing (a
-        rasterized grid for the flow solve) and is never turned
-        into edges; it is taken in separately -- the constructor
-        copies it into this handler's own DTYPE_f* buffer (same
-        flat idx(y, x) layout, 1 = solid), as a snapshot of the
-        solver's solids at bind time.
+        The handler also keeps a solids bitmask of its own --
+        an unsigned char* on the image grid, the same element
+        type as FlowSolverCore's mask -- generated from the
+        image by common.build_solids_mask: a cell is solid
+        when the max across layers exceeds 127 (on the byte
+        scale the image is converted to internally).
         """
-        cdef Py_ssize_t i
         ForceHandlerCore.__init__(self, solver)
-        self.solids = <DTYPE_f*> malloc(self.solver.N * sizeof(DTYPE_f))
-        if self.solids == NULL:
-            raise MemoryError("could not allocate solids bitmask")
-        for i in range(self.solver.N):
-            self.solids[i] = <DTYPE_f> self.solver.solid[i]
+        self.solids = NULL
+        self.solids_ny = 0
+        self.solids_nx = 0
         self.shapes = NULL
         self.n_shapes = 0
         self.shapes_cap = 0
@@ -164,8 +165,23 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                 f"(got ny={ny}, nx={nx})")
 
         amax = np.max(image) if image.size else 0.0
+
+        # the handler's solids bitmask, generated from the
+        # image on its byte scale (max across layers > 127)
+        if amax > 0.0:
+            img_u8 = np.rint(255.0 * image / amax).astype(np.uint8)
+        else:
+            img_u8 = np.zeros((ny, nx, k), dtype=np.uint8)
+        self.solids = <unsigned char*> malloc(
+            ny * nx * sizeof(unsigned char))
+        if self.solids == NULL:
+            raise MemoryError("could not allocate solids bitmask")
+        self.solids_ny = ny
+        self.solids_nx = nx
+        build_solids_mask(img_u8, self.solids)
+
         if amax <= 0.0:
-            return  # no positive pixels anywhere -> no solids
+            return  # no positive pixels anywhere -> no edges
         thresh = 0.5 * amax
 
         # flatten into an unsigned char buffer, layer-major,
@@ -262,18 +278,21 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
 
     @property
     def solids_mask(self) -> np.ndarray:
-        """Read-only (ny, nx) copy of the solids bitmask this
-        handler was constructed with; 1.0 where a cell is solid."""
+        """Read-only (ny, nx) uint8 copy of the solids bitmask
+        generated from the image at construction; 1 where a
+        cell is solid."""
         if self.solids == NULL:
-            arr = np.zeros((self.solver.ny, self.solver.nx))
+            arr = np.zeros((self.solids_ny, self.solids_nx),
+                           dtype=np.uint8)
             arr.flags.writeable = False
             return arr
         return self.to_mask_numpy(self.solids)
 
-    cdef cnp.ndarray to_mask_numpy(self, DTYPE_f* a):
-        cdef DTYPE_f[:] view = <DTYPE_f[:self.solver.N]> a
+    cdef cnp.ndarray to_mask_numpy(self, unsigned char* a):
+        cdef unsigned char[:] view = \
+            <unsigned char[:self.solids_ny * self.solids_nx]> a
         cdef cnp.ndarray arr = np.array(view, copy=True)
-        arr = arr.reshape((self.solver.ny, self.solver.nx))
+        arr = arr.reshape((self.solids_ny, self.solids_nx))
         arr.flags.writeable = False
         return arr
 
