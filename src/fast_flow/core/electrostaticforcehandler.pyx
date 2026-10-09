@@ -232,8 +232,7 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                                 (y > 0 and channel[i-nx] == 0) or \
                                 (y + 1 < ny and channel[i+nx] == 0):
                             self.shapes[slot].edges[2 * e] = x * sx
-                            self.shapes[slot].edges[2 * e + 1] = \
-                                self.solver.ly - y * sy
+                            self.shapes[slot].edges[2 * e + 1] = y * sy
                             e += 1
                         i += 1
         finally:
