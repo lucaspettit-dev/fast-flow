@@ -35,18 +35,19 @@ class ConstantVelocityForceHandler(ForceHandler):
 class ElectrostaticForceHandler(ForceHandler):
     """Electrostatic forcing from the charged regions of an image.
 
-    Give the handler a (ny, nx, k) image array plus `layermap`,
-    a dict mapping layer index -> charge (e.g.
-    {0: 20000, 2: -20000}: red shapes positive, blue negative,
-    every other layer neutral).  When the handler binds to a
-    solver, the compiled core flattens the image and, per sign
-    group, saves the non-solid cells that border a solid
-    horizontally or vertically as that group's `edges` in a
-    Shape struct (positive group first), with the group's
-    charge in the struct's extradata.
+    Give the handler an image -- required, a numpy array of
+    float64 (DTYPE_f) with shape (ny, nx, k) and both spatial
+    dimensions at least 10, e.g. values 0.0/1.0 per layer --
+    plus `layermap`, a dict mapping layer index -> charge (e.g. {0: 20000, 2: -20000}: red shapes positive,
+    blue negative, every other layer neutral).  When the
+    handler binds to a solver, the compiled core flattens the
+    image and, per sign group, saves the non-solid cells that
+    border a solid horizontally or vertically as that group's
+    `edges` in a Shape struct (positive group first), with the
+    group's charge in the struct's extradata.
     """
 
-    def __init__(self, image=None, layermap: dict = None):
+    def __init__(self, image, layermap: dict = None):
         self._image = image
         self._layermap = layermap
 

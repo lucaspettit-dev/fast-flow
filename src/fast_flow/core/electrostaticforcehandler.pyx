@@ -67,18 +67,22 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
     # freed in __dealloc__.
     cdef DTYPE_f* solids
 
-    def __init__(self, FlowSolverCore solver, object image=None,
+    def __init__(self, FlowSolverCore solver,
+                 cnp.ndarray[DTYPE_f, ndim=3] image,
                  dict layermap=None):
         """Bind to `solver` and build edge structs from an image.
 
-        `image` is a (ny, nx, k) array (uint8 expected).  It is
-        flattened into an unsigned char buffer (layer-major
-        planes), and each layer is processed in turn: a pixel
-        above the midpoint of its range is a solid in that
-        layer.  `layermap` maps layer index -> charge, e.g.
-        {0: 20000, 2: -20000} for an RGB image whose red shapes
-        are positive and blue shapes negative; layers missing
-        from the map are neutral and ignored.
+        `image` is required: a numpy array of DTYPE_f (float64)
+        with shape (ny, nx, k), whose y (ny) and x (nx)
+        dimensions must both be at least 10.  It is flattened into an unsigned char
+        buffer (layer-major planes, one byte per pixel marking
+        solid or not), and each layer is processed in turn: a
+        pixel above half the array's maximum value is a solid
+        in that layer (so both 0.0/1.0 and 0.0/255.0 data
+        binarize the same way).  `layermap` maps layer index ->
+        charge, e.g. {0: 20000, 2: -20000} for an RGB image whose
+        red shapes are positive and blue shapes negative;
+        layers missing from the map are neutral and ignored.
 
         Per sign group (all layers whose charge is positive,
         and all whose charge is negative), the solids are
@@ -109,8 +113,7 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         self.shapes = NULL
         self.n_shapes = 0
         self.shapes_cap = 0
-        if image is not None:
-            self._build_edges(image, layermap)
+        self._build_edges(image, layermap)
 
     cdef Py_ssize_t _new_shape_slot(self, Py_ssize_t n,
                                     DTYPE_f charge):
@@ -138,43 +141,50 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         self.n_shapes += 1
         return slot
 
-    cdef _build_edges(self, object image, object layermap):
+    cdef _build_edges(self, cnp.ndarray[DTYPE_f, ndim=3] image,
+                      object layermap):
         """Flatten the image and extract per-sign-group edges
         (see __init__ for the semantics)."""
         cdef Py_ssize_t ny, nx, k, c, y, x, i
         cdef unsigned char* flat
         cdef unsigned char* group
-        cdef unsigned char thresh
+        cdef DTYPE_f amax, thresh
         cdef DTYPE_f charge, group_charge
         cdef Py_ssize_t count, slot, e
         cdef list layers
         cdef DTYPE_f sx, sy
 
-        arr = np.ascontiguousarray(image, dtype=np.uint8)
-        if arr.ndim == 2:
-            arr = arr[:, :, None]
-        if arr.ndim != 3:
-            raise ValueError("expected an image array of shape (ny, nx, k)")
-        ny = arr.shape[0]
-        nx = arr.shape[1]
-        k = arr.shape[2]
+        ny = image.shape[0]
+        nx = image.shape[1]
+        k = image.shape[2]
 
-        # flatten into an unsigned char buffer, layer-major:
-        # flat[(c * ny + y) * nx + x] = image[y, x, c]
+        if ny < 10 or nx < 10:
+            raise ValueError(
+                f"image y and x dimensions must both be >= 10 "
+                f"(got ny={ny}, nx={nx})")
+
+        amax = np.max(image) if image.size else 0.0
+        if amax <= 0.0:
+            return  # no positive pixels anywhere -> no solids
+        thresh = 0.5 * amax
+
+        # flatten into an unsigned char buffer, layer-major,
+        # binarizing as we go:
+        # flat[(c * ny + y) * nx + x] = 1 if image[y, x, c] is solid
         flat = <unsigned char*> malloc(ny * nx * k * sizeof(unsigned char))
         if flat == NULL:
             raise MemoryError("could not allocate flattened image")
-        planes = np.ascontiguousarray(arr.transpose(2, 0, 1)).reshape(-1)
-        cdef unsigned char[:] src = planes
-        for i in range(ny * nx * k):
-            flat[i] = src[i]
+        for c in range(k):
+            for y in range(ny):
+                for x in range(nx):
+                    flat[(c * ny + y) * nx + x] = \
+                        1 if image[y, x, c] > thresh else 0
 
         group = <unsigned char*> malloc(ny * nx * sizeof(unsigned char))
         if group == NULL:
             free(flat)
             raise MemoryError("could not allocate group mask")
 
-        thresh = 0 if arr.max() <= 1 else 127
         sx = self.solver.lx / (nx - 1) if nx > 1 else 0.0
         sy = self.solver.ly / (ny - 1) if ny > 1 else 0.0
 
@@ -204,7 +214,7 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                             f"image with {k} layer(s)")
                     for y in range(ny):
                         for x in range(nx):
-                            if flat[(c * ny + y) * nx + x] > thresh:
+                            if flat[(c * ny + y) * nx + x]:
                                 group[y * nx + x] = 1
 
                 # count, then fill: non-solid cells with a solid
