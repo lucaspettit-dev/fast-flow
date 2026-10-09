@@ -928,15 +928,18 @@ cdef struct ShapeExtraData:
 
 
 cdef struct Shape:
-    # A polygonal electrode shape, owned by
-    # ElectrostaticForceHandler.  `vertices` is a flat buffer of
-    # interleaved physical coordinates (x0, y0, x1, y1, ..., y up,
-    # on [0, lx] x [0, ly]); `n_vertices` is the vertex count
-    # (buffer length 2*n).  This is separate from SolverCore's
-    # solid bitmask: obstacles still rasterize into the mask,
-    # which is what voids pressure/velocity inside solids.
-    DTYPE_f* vertices
-    Py_ssize_t n_vertices
+    # The edge cells of one sign group's electrodes, owned by
+    # ElectrostaticForceHandler.  `edges` is a flat buffer of
+    # interleaved physical coordinates (x0, y0, x1, y1, ...,
+    # y up, on the solver's [0, lx] x [0, ly] domain) of the
+    # non-solid cells that border a solid cell horizontally or
+    # vertically (diagonals do not count); `n_edges` is the
+    # point count (buffer length 2*n).  This is separate from
+    # SolverCore's solid bitmask: obstacles still rasterize
+    # into the mask, which is what voids pressure/velocity
+    # inside solids.
+    DTYPE_f* edges
+    Py_ssize_t n_edges
     ShapeExtraData extradata
 
 
@@ -951,8 +954,9 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
     cdef DTYPE_f** d
     cdef Py_ssize_t dk
 
-    # Charged shapes (electrodes) this handler forces from: a
-    # growable C array of Shape structs, in insertion order.
+    # One Shape struct per sign group present in the image: the
+    # positive group's struct first, then the negative group's.
+    # Each holds the edge cells of that group's solids.
     cdef Shape* shapes
     cdef Py_ssize_t n_shapes
     cdef Py_ssize_t shapes_cap
@@ -963,37 +967,37 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
     # freed in __dealloc__.
     cdef DTYPE_f* solids
 
-    def __init__(self, SolverCore solver, list shapes=None,
+    def __init__(self, SolverCore solver, object image=None,
                  dict layermap=None):
-        """Bind to `solver`, converting `shapes` to Shape structs.
+        """Bind to `solver` and build edge structs from an image.
 
-        Two input forms:
+        `image` is a (ny, nx, k) array (uint8 expected).  It is
+        flattened into an unsigned char buffer (layer-major
+        planes), and each layer is processed in turn: a pixel
+        above the midpoint of its range is a solid in that
+        layer.  `layermap` maps layer index -> charge, e.g.
+        {0: 20000, 2: -20000} for an RGB image whose red shapes
+        are positive and blue shapes negative; layers missing
+        from the map are neutral and ignored.
 
-        * Flat (layermap is None): `shapes` is a list of dicts,
-          one per shape (e.g. the electrodes found in an image):
+        Per sign group (all layers whose charge is positive,
+        and all whose charge is negative), the solids are
+        unioned and every cell that is NOT solid but has a
+        solid horizontal or vertical neighbour -- diagonals do
+        not count -- is saved as an edge.  The result is at
+        most two Shape structs, positive first, each holding
+        its edge cells' physical coordinates (x = col mapped
+        onto [0, lx], y = row flipped onto [0, ly], y up) in
+        `edges` and the group's charge in
+        `extradata.charge` (if a group spans layers with
+        different charges, the lowest layer's charge is kept).
 
-              {"vertices": [(x0, y0), (x1, y1), ...], "charge": V}
-
-          "vertices" is required (>= 3 points, physical coords,
-          y up); "charge" -- the shape's voltage, stored in the
-          struct's extradata -- defaults to 0.
-
-        * Layered (layermap given): `shapes` is one list of
-          {"vertices": ...} dicts per image layer, as returned
-          by fast_flow.polygons.extract_layered_polygons, and
-          `layermap` maps layer index -> charge, e.g.
-          {0: 20000, 2: -20000} for an RGB image whose red
-          shapes are positive and blue shapes negative.  Layers
-          missing from the map are neutral (charge 0), and the
-          map overrides any "charge" key in the dicts.
-
-        The dicts are the shapes' only source: SolverCore's
-        solid bitmask is a different thing (a rasterized grid)
-        and is never turned into vertices.  The mask itself is
-        taken in separately: the constructor copies it into
-        this handler's own DTYPE_f* buffer (same flat idx(y, x)
-        layout, 1 = solid), as a snapshot of the solver's
-        solids at bind time.
+        SolverCore's own solid bitmask is a different thing (a
+        rasterized grid for the flow solve) and is never turned
+        into edges; it is taken in separately -- the constructor
+        copies it into this handler's own DTYPE_f* buffer (same
+        flat idx(y, x) layout, 1 = solid), as a snapshot of the
+        solver's solids at bind time.
         """
         cdef Py_ssize_t i
         ForceHandlerCore.__init__(self, solver)
@@ -1005,21 +1009,14 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         self.shapes = NULL
         self.n_shapes = 0
         self.shapes_cap = 0
-        if shapes is not None:
-            if layermap is None:
-                for item in shapes:
-                    self._append_shape_dict(item)
-            else:
-                for layer, layer_shapes in enumerate(shapes):
-                    charge = float(layermap.get(layer, 0.0))
-                    for item in layer_shapes:
-                        self._append_shape_dict(item, charge)
+        if image is not None:
+            self._build_edges(image, layermap)
 
     cdef Py_ssize_t _new_shape_slot(self, Py_ssize_t n,
                                     DTYPE_f charge):
         """Grow the shape array if full and allocate the next
-        slot's vertices buffer; returns the new shape's index.
-        The caller fills the buffer."""
+        slot's edges buffer for n points; returns the new
+        shape's index.  The caller fills the buffer."""
         cdef Shape* grown
         cdef Py_ssize_t new_cap
         cdef Py_ssize_t slot
@@ -1032,39 +1029,115 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
             self.shapes = grown
             self.shapes_cap = new_cap
         slot = self.n_shapes
-        self.shapes[slot].vertices = \
+        self.shapes[slot].edges = \
             <DTYPE_f*> malloc(2 * n * sizeof(DTYPE_f))
-        if self.shapes[slot].vertices == NULL:
-            raise MemoryError("could not allocate shape vertices")
-        self.shapes[slot].n_vertices = n
+        if self.shapes[slot].edges == NULL:
+            raise MemoryError("could not allocate shape edges")
+        self.shapes[slot].n_edges = n
         self.shapes[slot].extradata.charge = charge
         self.n_shapes += 1
         return slot
 
-    cdef _append_shape_dict(self, object item, object charge=None):
-        """Convert one shape dict (see __init__) into a Shape.
+    cdef _build_edges(self, object image, object layermap):
+        """Flatten the image and extract per-sign-group edges
+        (see __init__ for the semantics)."""
+        cdef Py_ssize_t ny, nx, k, c, y, x, i
+        cdef unsigned char* flat
+        cdef unsigned char* group
+        cdef unsigned char thresh
+        cdef DTYPE_f charge, group_charge
+        cdef Py_ssize_t count, slot, e
+        cdef list layers
+        cdef DTYPE_f sx, sy
 
-        If `charge` is given it wins (layered/layermap input);
-        otherwise the dict's own "charge" entry is used,
-        defaulting to 0.
-        """
-        cdef Py_ssize_t n, k, slot
-        if not isinstance(item, dict):
-            raise TypeError("each shape must be a dict like "
-                            "{'vertices': [(x, y), ...], 'charge': V}")
-        if "vertices" not in item:
-            raise ValueError("shape dict is missing 'vertices'")
-        verts = item["vertices"]
-        n = len(verts)
-        if n < 3:
-            raise ValueError("need >= 3 vertices")
-        if charge is None:
-            charge = float(item.get("charge", 0.0))
-        slot = self._new_shape_slot(n, float(charge))
-        for k in range(n):
-            x, y = verts[k]
-            self.shapes[slot].vertices[2 * k] = float(x)
-            self.shapes[slot].vertices[2 * k + 1] = float(y)
+        arr = np.ascontiguousarray(image, dtype=np.uint8)
+        if arr.ndim == 2:
+            arr = arr[:, :, None]
+        if arr.ndim != 3:
+            raise ValueError("expected an image array of shape (ny, nx, k)")
+        ny = arr.shape[0]
+        nx = arr.shape[1]
+        k = arr.shape[2]
+
+        # flatten into an unsigned char buffer, layer-major:
+        # flat[(c * ny + y) * nx + x] = image[y, x, c]
+        flat = <unsigned char*> malloc(ny * nx * k * sizeof(unsigned char))
+        if flat == NULL:
+            raise MemoryError("could not allocate flattened image")
+        planes = np.ascontiguousarray(arr.transpose(2, 0, 1)).reshape(-1)
+        cdef unsigned char[:] src = planes
+        for i in range(ny * nx * k):
+            flat[i] = src[i]
+
+        group = <unsigned char*> malloc(ny * nx * sizeof(unsigned char))
+        if group == NULL:
+            free(flat)
+            raise MemoryError("could not allocate group mask")
+
+        thresh = 0 if arr.max() <= 1 else 127
+        sx = self.solver.lx / (nx - 1) if nx > 1 else 0.0
+        sy = self.solver.ly / (ny - 1) if ny > 1 else 0.0
+
+        try:
+            if layermap is None:
+                return
+            for sign in (1, -1):
+                layers = []
+                group_charge = 0.0
+                for layer in sorted(layermap.keys()):
+                    charge = float(layermap[layer])
+                    if (sign > 0 and charge > 0.0) or \
+                            (sign < 0 and charge < 0.0):
+                        if not layers:
+                            group_charge = charge
+                        layers.append(int(layer))
+                if not layers:
+                    continue
+
+                # union this group's solids
+                for i in range(ny * nx):
+                    group[i] = 0
+                for c in layers:
+                    if c < 0 or c >= k:
+                        raise ValueError(
+                            f"layermap layer {c} out of range for "
+                            f"image with {k} layer(s)")
+                    for y in range(ny):
+                        for x in range(nx):
+                            if flat[(c * ny + y) * nx + x] > thresh:
+                                group[y * nx + x] = 1
+
+                # count, then fill: non-solid cells with a solid
+                # horizontal or vertical neighbour
+                count = 0
+                for y in range(ny):
+                    for x in range(nx):
+                        if group[y * nx + x]:
+                            continue
+                        if (x > 0 and group[y * nx + x - 1]) or \
+                                (x + 1 < nx and group[y * nx + x + 1]) or \
+                                (y > 0 and group[(y - 1) * nx + x]) or \
+                                (y + 1 < ny and group[(y + 1) * nx + x]):
+                            count += 1
+                if count == 0:
+                    continue
+                slot = self._new_shape_slot(count, group_charge)
+                e = 0
+                for y in range(ny):
+                    for x in range(nx):
+                        if group[y * nx + x]:
+                            continue
+                        if (x > 0 and group[y * nx + x - 1]) or \
+                                (x + 1 < nx and group[y * nx + x + 1]) or \
+                                (y > 0 and group[(y - 1) * nx + x]) or \
+                                (y + 1 < ny and group[(y + 1) * nx + x]):
+                            self.shapes[slot].edges[2 * e] = x * sx
+                            self.shapes[slot].edges[2 * e + 1] = \
+                                self.solver.ly - y * sy
+                            e += 1
+        finally:
+            free(flat)
+            free(group)
 
     def __dealloc__(self):
         if self.solids != NULL:
@@ -1072,8 +1145,8 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
             self.solids = NULL
         if self.shapes != NULL:
             for i in range(self.n_shapes):
-                if self.shapes[i].vertices != NULL:
-                    free(self.shapes[i].vertices)
+                if self.shapes[i].edges != NULL:
+                    free(self.shapes[i].edges)
             free(self.shapes)
             self.shapes = NULL
 
@@ -1094,48 +1167,28 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         arr.flags.writeable = False
         return arr
 
-    cpdef add_shape(self, double[::1] xs, double[::1] ys,
-                    double charge=0.0):
-        """Record a charged polygon (an electrode) as a Shape.
-
-        Vertices are physical coordinates (y up) on the solver's
-        [0, lx] x [0, ly] domain; they are copied into the
-        struct's flat interleaved DTYPE_f* buffer.  `charge` is
-        the shape's voltage, stored in the shape's extradata.
-        """
-        cdef Py_ssize_t n = xs.shape[0]
-        cdef Py_ssize_t k
-        cdef Py_ssize_t slot
-
-        if n != ys.shape[0] or n < 3:
-            raise ValueError("need >= 3 vertices")
-
-        slot = self._new_shape_slot(n, charge)
-        for k in range(n):
-            self.shapes[slot].vertices[2 * k] = xs[k]
-            self.shapes[slot].vertices[2 * k + 1] = ys[k]
-
     cpdef Py_ssize_t num_shapes(self):
-        """Number of shapes recorded via add_shape()."""
+        """Number of sign-group structs (0, 1, or 2)."""
         return self.n_shapes
 
     cpdef DTYPE_f shape_charge(self, Py_ssize_t i):
-        """The `charge` (voltage) stored in shape i's extradata."""
+        """The `charge` (voltage) stored in struct i's extradata."""
         if i < 0 or i >= self.n_shapes:
             raise IndexError("shape index out of range")
         return self.shapes[i].extradata.charge
 
-    cpdef list shape_vertices(self, Py_ssize_t i):
-        """Shape i's vertices as a list of (x, y) tuples, read
-        back from the struct's interleaved DTYPE_f* buffer."""
+    cpdef list shape_edges(self, Py_ssize_t i):
+        """Struct i's edge cells as a list of (x, y) physical
+        coordinates, read back from the struct's interleaved
+        DTYPE_f* buffer."""
         cdef Py_ssize_t k
         if i < 0 or i >= self.n_shapes:
             raise IndexError("shape index out of range")
-        return [(self.shapes[i].vertices[2 * k],
-                 self.shapes[i].vertices[2 * k + 1])
-                for k in range(self.shapes[i].n_vertices)]
+        return [(self.shapes[i].edges[2 * k],
+                 self.shapes[i].edges[2 * k + 1])
+                for k in range(self.shapes[i].n_edges)]
 
-    # TODO: look through this handler's shapes and identify
-    # positive/negative, then populate Coulumbs field force vector
+    # TODO: populate the Coulomb field from the positive and
+    # negative edge structs
     cdef void init_field(self):
         pass

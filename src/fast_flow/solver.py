@@ -32,76 +32,60 @@ class ConstantVelocityForceHandler(ForceHandler):
 
 
 class ElectrostaticForceHandler(ForceHandler):
-    """Electrostatic forcing from charged shapes (electrodes).
+    """Electrostatic forcing from the charged regions of an image.
 
-    Shapes are described as Python dicts --
-
-        {"vertices": [(x, y), ...], "charge": V}
-
-    -- and the compiled handler converts them to Shape structs
-    (interleaved vertices + an extradata struct holding the
-    charge) in its constructor.  Alternatively, pass the
-    per-layer output of
-    fast_flow.polygons.extract_layered_polygons together with
-    `layermap`, a dict mapping image layer index -> charge
-    (e.g. {0: 20000, 2: -20000}: red shapes positive, blue
-    negative, every other layer neutral); the handler then
-    generates the structs -- charges included -- from those
-    parameters.  Shapes may be given up front and/or added
-    before or after the handler is attached to a solver; ones
-    queued before binding go through the core constructor when
-    it binds.
+    Give the handler a (ny, nx, k) image array plus `layermap`,
+    a dict mapping layer index -> charge (e.g.
+    {0: 20000, 2: -20000}: red shapes positive, blue negative,
+    every other layer neutral).  When the handler binds to a
+    solver, the compiled core flattens the image and, per sign
+    group, saves the non-solid cells that border a solid
+    horizontally or vertically as that group's `edges` in a
+    Shape struct (positive group first), with the group's
+    charge in the struct's extradata.
     """
 
-    def __init__(self, shapes: list = None, layermap: dict = None):
-        self._pending: list = list(shapes) if shapes else []
+    def __init__(self, image=None, layermap: dict = None):
+        self._image = image
         self._layermap = layermap
-        self._pending_flat: list = []
 
     def _set_solver(self, solver: FlowSolverCore):
-        # The core constructor converts the shape dicts to Shape
-        # structs (applying layermap in layered mode) and takes
-        # in the solver's solids bitmask itself (a DTYPE_f copy
-        # made inside the core).  Flat add_shape() shapes queued
-        # before binding are appended afterwards.
+        # The core constructor flattens the image, builds the
+        # edge structs, and takes in the solver's solids bitmask
+        # itself (a DTYPE_f copy made inside the core).
         self._handler = ElectrostaticForceHandlerCore(
-            solver, self._pending, self._layermap)
-        self._pending = []
-        for d in self._pending_flat:
-            self._push(d["vertices"], d["charge"])
-        self._pending_flat = []
-
-    def _push(self, polygon, charge: float) -> None:
-        xs = np.array([p[0] for p in polygon], dtype=np.float64)
-        ys = np.array([p[1] for p in polygon], dtype=np.float64)
-        self._handler.add_shape(xs, ys, float(charge))
-
-    def add_shape(self, polygon, charge: float = 0.0) -> None:
-        """Add a charged shape as an iterable of (x, y) vertices
-        (y up), with `charge` the shape's voltage."""
-        if getattr(self, "_handler", None) is None:
-            self._pending_flat.append(
-                {"vertices": list(polygon), "charge": float(charge)})
-        else:
-            self._push(polygon, charge)
+            solver, self._image, self._layermap)
 
     @property
     def shape_charges(self) -> list:
-        """The handler's shapes' charges (voltages), in the order
-        they were added."""
+        """The structs' charges (voltages): positive group first,
+        then negative.  Before binding, derived from layermap."""
         if getattr(self, "_handler", None) is None:
+            if not self._layermap:
+                return []
             charges = []
-            if self._layermap is None:
-                charges += [float(d.get("charge", 0.0))
-                            for d in self._pending]
-            else:
-                for layer, layer_shapes in enumerate(self._pending):
-                    charges += [float(self._layermap.get(layer, 0.0))
-                                ] * len(layer_shapes)
-            charges += [d["charge"] for d in self._pending_flat]
+            pos = [float(v) for v in self._layermap.values() if v > 0]
+            neg = [float(v) for v in self._layermap.values() if v < 0]
+            if pos:
+                charges.append(pos[0])
+            if neg:
+                charges.append(neg[0])
             return charges
         return [self._handler.shape_charge(i)
                 for i in range(self._handler.num_shapes())]
+
+    @property
+    def num_shapes(self) -> int:
+        """Number of sign-group structs (0 before binding)."""
+        if getattr(self, "_handler", None) is None:
+            return 0
+        return self._handler.num_shapes()
+
+    def shape_edges(self, i: int) -> list:
+        """Struct i's edge cells as (x, y) physical coordinates."""
+        if getattr(self, "_handler", None) is None:
+            raise RuntimeError("handler is not bound to a solver yet")
+        return self._handler.shape_edges(i)
 
 
 class FlowSolver:
