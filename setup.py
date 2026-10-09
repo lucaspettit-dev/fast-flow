@@ -20,10 +20,10 @@ else:
     compile_args = ["-O3", "-march=native", "-fopenmp"]
     link_args = ["-fopenmp"]
 
-extensions = [
-    Extension(
-        "fast_flow._core",
-        sources=["src/fast_flow/_core.pyx"],
+def _extension(name, source):
+    return Extension(
+        name,
+        sources=[source],
         include_dirs=[
             np.get_include(),
             "/opt/homebrew/opt/libomp/include"
@@ -34,6 +34,15 @@ extensions = [
             "/opt/homebrew/opt/libomp/lib"
         ]
     )
+
+
+extensions = [
+    _extension("fast_flow.core.flow",
+               "src/fast_flow/core/flow.pyx"),
+    _extension("fast_flow.core.handlers.forcehandler",
+               "src/fast_flow/core/handlers/forcehandler.pyx"),
+    _extension("fast_flow.core.electrostaticforcehandler",
+               "src/fast_flow/core/electrostaticforcehandler.pyx"),
 ]
 
 setup(ext_modules=cythonize(extensions, language_level=3))

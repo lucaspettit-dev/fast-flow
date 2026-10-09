@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import numpy as np
 from enum import Enum
-from ._core import SolverCore, ConstantVelocityForceHandlerCore
-from ._core import ElectrostaticForceHandler as ElectrostaticForceHandlerCore
+from .core.flow import FlowSolverCore
+from .core.handlers.forcehandler import ConstantVelocityForceHandlerCore
+from .core.electrostaticforcehandler import ElectrostaticForceHandler as ElectrostaticForceHandlerCore
 
 
 class Direction(Enum):
@@ -128,7 +129,7 @@ class FlowSolver:
                 'boundary must be "cavity" or "throughflow"')
         if dt <= 0:
             raise ValueError("dt must be > 0")
-        self._cy = SolverCore(
+        self._cy = FlowSolverCore(
             nx=nx, ny=ny, nit=nit, rho=rho, nu=nu, dt=dt,
             flow_mode=1 if boundary == "throughflow" else 0,
             inflow_u=inflow_velocity, lx=lx, ly=ly)
