@@ -205,12 +205,14 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                         # we want to take the solid layer that's touching air
                         # we skip if channel[i] == 0 because that's air
                         if channel[i] == 0:
+                            i += 1
                             continue
                         if (x > 0 and channel[i-1] == 0) or \
                                 (x + 1 < nx and channel[i+1] == 0) or \
                                 (y > 0 and channel[i-nx] == 0) or \
                                 (y + 1 < ny and channel[i+nx] == 0):
                             count += 1
+                        i += 1
 
                 if count == 0:
                     continue
@@ -223,6 +225,7 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                         # we want to take the solid layer that's touching air
                         # we skip if channel[i] == 0 because that's air
                         if channel[i] == 0:
+                            i += 1
                             continue
                         if (x > 0 and channel[i-1] == 0) or \
                                 (x + 1 < nx and channel[i+1] == 0) or \

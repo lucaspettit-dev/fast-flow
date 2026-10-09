@@ -4,8 +4,6 @@ cimport numpy as cnp
 
 ctypedef cnp.float64_t DTYPE_f
 
-cdef const unsigned char SOLID_THRESH = 127
-
 import numpy as np
 cimport numpy as cnp
 cimport cython
