@@ -4,59 +4,54 @@ cimport numpy as cnp
 
 ctypedef cnp.float64_t DTYPE_f
 
+cdef const unsigned char SOLID_THRESH = 127
 
-cdef inline void build_solids_mask(object src,
-                                   unsigned char* dest) except *:
-    """Build a 2D solids bitmask from a 2D or 3D image array.
+import numpy as np
+cimport numpy as cnp
+cimport cython
 
-    `src` is a numpy array of unsigned char, either 2D (ny, nx)
-    or 3D (ny, nx, k); `dest` is a caller-owned unsigned char*
-    with room for ny*nx values, filled row-major with 1 where
-    a cell is solid and 0 elsewhere.  A cell is solid when its
-    value -- for 3D input, the maximum across layers -- is
-    greater than the threshold 127.
-
-    Raises ValueError if `dest` is NULL, if src is not 2D/3D,
-    or if either spatial dimension is below 10.  (src is an
-    object parameter rather than a fixed-ndim buffer because
-    Cython buffer types pin the dimension count; the typed
-    views below enforce unsigned char for both arities.)
-    """
-    cdef Py_ssize_t ny, nx, k, y, x, c
-    cdef unsigned char m
-    cdef cnp.ndarray[unsigned char, ndim=2] src2
-    cdef cnp.ndarray[unsigned char, ndim=3] src3
+@cython.boundscheck(False)
+@cython.wraparound(False)
+cdef inline void build_solids_mask(
+        object src,
+        unsigned char* dest) except *:
+    cdef Py_ssize_t ny, nx, nz
+    cdef Py_ssize_t y, x, z, idx
+    cdef unsigned char[:, :] src2
+    cdef unsigned char[:, :, :] src3
+    cdef unsigned char solid
+    cdef unsigned char thresh = 127
 
     if dest == NULL:
-        raise ValueError("build_solids_mask: dest is a NULL pointer")
+        raise ValueError("build_solids_mask: dest is NULL")
+    if not isinstance(src, np.ndarray):
+        raise TypeError("build_solids_mask: src must be a NumPy array")
+    if src.dtype != np.uint8:
+        raise TypeError("build_solids_mask: src must have dtype uint8")
+    if src.ndim != 2 and src.ndim != 3:
+        raise ValueError("build_solids_mask: src must be 2D or 3D")
+
+    ny = src.shape[0]
+    nx = src.shape[1]
+    if ny < 10 or nx < 10:
+        raise ValueError("build_solids_mask: src must be at least 10x10")
+
     if src.ndim == 2:
         src2 = src
-        ny = src2.shape[0]
-        nx = src2.shape[1]
-        if ny < 10 or nx < 10:
-            raise ValueError(
-                f"build_solids_mask: src must be at least 10x10 "
-                f"(got ny={ny}, nx={nx})")
         for y in range(ny):
             for x in range(nx):
-                dest[y * nx + x] = 1 if src2[y, x] > 127 else 0
-    elif src.ndim == 3:
-        src3 = src
-        ny = src3.shape[0]
-        nx = src3.shape[1]
-        k = src3.shape[2]
-        if ny < 10 or nx < 10:
-            raise ValueError(
-                f"build_solids_mask: src must be at least 10x10 "
-                f"(got ny={ny}, nx={nx})")
-        for y in range(ny):
-            for x in range(nx):
-                m = 0
-                for c in range(k):
-                    if src3[y, x, c] > m:
-                        m = src3[y, x, c]
-                dest[y * nx + x] = 1 if m > 127 else 0
+                idx = y * nx + x
+                dest[idx] = 1 if src2[y, x] > thresh else 0
+
     else:
-        raise ValueError(
-            f"build_solids_mask: src must be 2D or 3D "
-            f"(got {src.ndim}D)")
+        src3 = src
+        nz = src.shape[2]
+        for y in range(ny):
+            for x in range(nx):
+                idx = y * nx + x
+                solid = 0
+                for z in range(nz):
+                    if src3[y, x, z] > thresh:
+                        solid = 1
+                        break
+                dest[idx] = solid
