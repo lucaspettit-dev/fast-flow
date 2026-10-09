@@ -89,6 +89,15 @@ class ElectrostaticForceHandler(ForceHandler):
             raise RuntimeError("handler is not bound to a solver yet")
         return self._handler.shape_edges(i)
 
+    def coulomb_field(self):
+        """(u, v) Coulomb force components at the solver grid's
+        cell centres, as read-only (ny, nx) arrays.  Computed
+        once when the handler binds (static field, no ion
+        movement)."""
+        if getattr(self, "_handler", None) is None:
+            raise RuntimeError("handler is not bound to a solver yet")
+        return self._handler.coulomb_field()
+
 
 class FlowSolver:
     """2D incompressible flow solver.

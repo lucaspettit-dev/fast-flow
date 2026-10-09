@@ -12,6 +12,7 @@ extradata) and will populate the Coulomb field from them.
 import numpy as np
 cimport numpy as cnp
 from libc.stdlib cimport malloc, free, realloc
+from libc.math cimport sqrt
 
 from fast_flow.core.common cimport DTYPE_f, build_solids_mask
 from fast_flow.core.flow cimport FlowSolverCore
@@ -121,6 +122,22 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         self.n_shapes = 0
         self.shapes_cap = 0
         self._build_edges(image, layermap)
+
+        # Coulomb field buffers (double-buffered like the
+        # solver's fields), then the static field itself
+        self.cu = <DTYPE_f**> malloc(2 * sizeof(DTYPE_f*))
+        self.cv = <DTYPE_f**> malloc(2 * sizeof(DTYPE_f*))
+        if self.cu == NULL or self.cv == NULL:
+            raise MemoryError("could not allocate Coulomb field")
+        for i in range(2):
+            self.cu[i] = <DTYPE_f*> malloc(
+                self.solver.N * sizeof(DTYPE_f))
+            self.cv[i] = <DTYPE_f*> malloc(
+                self.solver.N * sizeof(DTYPE_f))
+            if self.cu[i] == NULL or self.cv[i] == NULL:
+                raise MemoryError("could not allocate Coulomb field")
+        self.ck = 0
+        self.init_field()
 
     cdef Py_ssize_t _new_shape_slot(self, Py_ssize_t n, DTYPE_f charge):
         """Grow the shape array if full and allocate the next
@@ -241,6 +258,18 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
             free(channels)
 
     def __dealloc__(self):
+        if self.cu != NULL:
+            for i in range(2):
+                if self.cu[i] != NULL:
+                    free(self.cu[i])
+            free(self.cu)
+            self.cu = NULL
+        if self.cv != NULL:
+            for i in range(2):
+                if self.cv[i] != NULL:
+                    free(self.cv[i])
+            free(self.cv)
+            self.cv = NULL
         if self.solids != NULL:
             free(self.solids)
             self.solids = NULL
@@ -292,10 +321,68 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                  self.shapes[i].edges[2 * k + 1])
                 for k in range(self.shapes[i].n_edges)]
 
-    # TODO: populate the Coulomb field from the positive and
-    # negative edge structs
     cdef void init_field(self):
-        pass
+        """Compute the Coulomb force at the centre of every
+        solver grid cell and store the components in cu/cv.
+
+        Each struct's charge is distributed evenly over its
+        edge points; an edge at e contributes to the force at
+        cell centre c:
+
+            F(c) += Q_edge * (c - e) / |c - e|^3
+
+        (Coulomb's law with the constant folded to 1, the same
+        convention as ehd-flow's coulomb.py: this is the force
+        per unit charge on a test ion sitting at the centre.)
+        Cell centres are at ((x + 0.5) * dx, (y + 0.5) * dy) in
+        the coordinate frame the edge coordinates are stored
+        in.  Static batch: no ions move and nothing is
+        time-stepped; contributions from an edge that coincides
+        with a centre (zero distance) are skipped.
+        """
+        cdef Py_ssize_t x, y, s, e, idx
+        cdef DTYPE_f xc, yc, rx, ry, r2, inv_r3, q
+        cdef DTYPE_f* cu = self.cu[self.ck]
+        cdef DTYPE_f* cv = self.cv[self.ck]
+        cdef Py_ssize_t nx = self.solver.nx
+        cdef Py_ssize_t ny = self.solver.ny
+
+        for idx in range(self.solver.N):
+            cu[idx] = 0.0
+            cv[idx] = 0.0
+
+        for s in range(self.n_shapes):
+            if self.shapes[s].n_edges == 0:
+                continue
+            q = self.shapes[s].extradata.charge / self.shapes[s].n_edges
+            for y in range(ny):
+                yc = (y + 0.5) * self.solver.dy
+                for x in range(nx):
+                    xc = (x + 0.5) * self.solver.dx
+                    idx = y * nx + x
+                    for e in range(self.shapes[s].n_edges):
+                        rx = xc - self.shapes[s].edges[2 * e]
+                        ry = yc - self.shapes[s].edges[2 * e + 1]
+                        r2 = rx * rx + ry * ry
+                        if r2 == 0.0:
+                            continue
+                        inv_r3 = 1.0 / (r2 * sqrt(r2))
+                        cu[idx] += q * rx * inv_r3
+                        cv[idx] += q * ry * inv_r3
+
+    cpdef tuple coulomb_field(self):
+        """The Coulomb force components at the solver grid's
+        cell centres, as (u, v) read-only (ny, nx) arrays, as
+        computed by init_field() at construction."""
+        return (self._field_numpy(self.cu[self.ck]),
+                self._field_numpy(self.cv[self.ck]))
+
+    cdef cnp.ndarray _field_numpy(self, DTYPE_f* a):
+        cdef DTYPE_f[:] view = <DTYPE_f[:self.solver.N]> a
+        cdef cnp.ndarray arr = np.array(view, copy=True)
+        arr = arr.reshape((self.solver.ny, self.solver.nx))
+        arr.flags.writeable = False
+        return arr
 
 cdef class CoulombField:
     cdef DTYPE_f cell_size_cm
