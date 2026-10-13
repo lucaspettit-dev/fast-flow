@@ -31,5 +31,6 @@ _core.c
 
 # Local dev artifacts
 *.png
+!demo/res/**/*.png
 *.mp4
 *.mov
