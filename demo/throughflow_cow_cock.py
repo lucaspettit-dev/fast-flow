@@ -15,7 +15,7 @@ def parse_args():
     p.add_argument("--ly", type=float, default=2.0)
     p.add_argument("--inflow", type=float, default=5.0)
     p.add_argument("--nu", type=float, default=0.05)
-    p.add_argument("--total-time", type=float, default=0.5,
+    p.add_argument("--total-time", type=float, default=0.1,
                    help="simulated seconds to advance "
                         "(default 1.0 = 10000 steps x 0.0001)")
     p.add_argument("--out", default=None)
@@ -71,13 +71,14 @@ if __name__ == '__main__':
     fig.colorbar(im, ax=ax, label='Speed')
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
-    ax.set_title(f'Throughflow past a circular obstacle '
+    ax.set_title(f'Throughflow past a cow and a large cock'
                  f'({args.total_time:g}s, {steps} adaptive steps, '
                  f'nx={img.shape[1]}, inflow={args.inflow:g})')
     plt.tight_layout()
 
     out = args.out or os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
-        'throughflow_cow_cock.png')
+        'out/throughflow_cow_cock.png')
+    plt.show()
     fig.savefig(out)
     print(f"saved {out}")

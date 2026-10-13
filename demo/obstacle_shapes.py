@@ -57,7 +57,8 @@ SHAPES = {
 
 
 def run(poly):
-    solver = FlowSolver(nx=NX, ny=NY, nit=50, nu=0.05, dt=0.001,
+    img = np.zeros((NX * NY), dtype=np.uint8).reshape((NY, NX))
+    solver = FlowSolver(img, nit=50, nu=0.05, dt=0.001,
                         boundary="throughflow", inflow_velocity=1.0,
                         lx=LX, ly=LY)
     solver.add_obstacle(poly)
@@ -123,7 +124,7 @@ if __name__ == '__main__':
     fig.tight_layout()
 
     out = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                       'obstacle_shapes.png')
+                       'out/obstacle_shapes.png')
     fig.savefig(out)
     print(f"saved {out}")
     plt.show()

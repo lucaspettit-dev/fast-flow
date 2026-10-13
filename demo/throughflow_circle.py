@@ -111,6 +111,6 @@ if __name__ == '__main__':
 
     out = args.out or os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
-        'throughflow_circle.png')
+        'out/throughflow_circle.png')
     fig.savefig(out)
     print(f"saved {out}")
