@@ -11,11 +11,11 @@ from fast_flow import FlowSolver
 
 def parse_args():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--lx", type=float, default=8.0)
-    p.add_argument("--ly", type=float, default=2.0)
+    p.add_argument("--lx", type=float, default=5.0)
+    p.add_argument("--ly", type=float, default=3.0)
     p.add_argument("--inflow", type=float, default=5.0)
     p.add_argument("--nu", type=float, default=0.05)
-    p.add_argument("--total-time", type=float, default=0.1,
+    p.add_argument("--total-time", type=float, default=1.0,
                    help="simulated seconds to advance "
                         "(default 1.0 = 10000 steps x 0.0001)")
     p.add_argument("--out", default=None)
@@ -60,18 +60,17 @@ if __name__ == '__main__':
     cmap.set_bad('0.35')
     speed = np.ma.masked_where(solid, speed)
 
-    height = img.shape[0]
-    width = img.shape[1]
-    fig, ax = plt.subplots(figsize=(width, height), dpi=100)
+    height = 4.5
+    width = (args.lx / args.ly) * height
+    fig, ax = plt.subplots(figsize=(width, height))
     im = ax.imshow(speed, origin='lower',
                    extent=[0, args.lx, 0, args.ly],
                    cmap=cmap, aspect='equal')
     ax.set_xlim(0, args.lx)
     ax.set_ylim(0, args.ly)
-    fig.colorbar(im, ax=ax, label='Speed')
-    ax.set_xlabel('X')
-    ax.set_ylabel('Y')
-    ax.set_title(f'Throughflow past a cow and a large cock'
+    ax.set_xticklabels([])
+    ax.set_yticklabels([])
+    ax.set_title(f'Throughflow past a cow and a large cock\n'
                  f'({args.total_time:g}s, {steps} adaptive steps, '
                  f'nx={img.shape[1]}, inflow={args.inflow:g})')
     plt.tight_layout()
@@ -79,6 +78,5 @@ if __name__ == '__main__':
     out = args.out or os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
         'out/throughflow_cow_cock.png')
-    plt.show()
     fig.savefig(out)
     print(f"saved {out}")
