@@ -62,7 +62,7 @@ if __name__ == '__main__':
 
     height = img.shape[0]
     width = img.shape[1]
-    fig, ax = plt.subplots(figsize=(width, height), dpi=100)
+    fig, ax = plt.subplots(figsize=(width / 100, height / 100), dpi=100)
     im = ax.imshow(speed, origin='lower',
                    extent=[0, args.lx, 0, args.ly],
                    cmap=cmap, aspect='equal')
