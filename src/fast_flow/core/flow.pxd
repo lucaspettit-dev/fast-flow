@@ -41,7 +41,6 @@ cdef class FlowSolverCore:
 
     cpdef void add_force_handler(self, ForceHandlerCore next)
     cdef init_arrays(self)
-    cdef inline cnp.ndarray to_numpy(self, DTYPE_f* a)
     cdef inline Py_ssize_t idx(self, Py_ssize_t y,
                                Py_ssize_t x) noexcept nogil
     cdef void build_up_pressure_step(self, Py_ssize_t y,

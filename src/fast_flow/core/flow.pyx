@@ -16,7 +16,7 @@ from cython.parallel cimport prange
 from libc.stdlib cimport malloc, free
 from libc.math cimport sqrt, atan2, fabs, floor
 
-from fast_flow.core.common cimport DTYPE_f, build_solids_mask, to_numpy_mask
+from fast_flow.core.common cimport DTYPE_f, build_solids_mask, to_numpy
 from fast_flow.core.handlers.forcehandler cimport ForceHandlerCore
 
 
@@ -59,7 +59,7 @@ cdef class FlowSolverCore:
         self.N = self.nx * self.ny
         self.solid = <unsigned char*> malloc(self.N * sizeof(unsigned char*))
         build_solids_mask(img, self.solid)
-        self._solid = to_numpy_mask(self.solid, self.ny, self.nx, False)
+        self._solid = to_numpy(self.solid, self.ny, self.nx, False)
 
         self.rho = rho
         self.nu = nu
@@ -147,27 +147,20 @@ cdef class FlowSolverCore:
 
     @property
     def pressure(self) -> np.ndarray:
-        return self.to_numpy(self.p[self.pk])
+        return to_numpy(self.p[self.pk], self.ny, self.nx, True)
 
     @property
     def horizontal_velocity(self) -> np.ndarray:
-        return self.to_numpy(self.u[self.uvk])
+        return to_numpy(self.u[self.uvk], self.ny, self.nx, True)
 
     @property
     def vertical_velocity(self) -> np.ndarray:
-        return self.to_numpy(self.v[self.uvk])
+        return to_numpy(self.v[self.uvk], self.ny, self.nx, True)
 
     @property
     def solid_mask(self) -> np.ndarray:
         """Read-only (ny, nx) uint8 mask; 1 = solid obstacle cell."""
         arr = np.array(self._solid, copy=True)
-        arr.flags.writeable = False
-        return arr
-
-    cdef inline cnp.ndarray to_numpy(self, DTYPE_f* a):
-        cdef DTYPE_f[:] view = <DTYPE_f[:self.N]> a
-        cdef cnp.ndarray arr = np.asarray(view)
-        arr = arr.reshape((self.ny, self.nx))
         arr.flags.writeable = False
         return arr
 

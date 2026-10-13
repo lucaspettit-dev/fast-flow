@@ -14,7 +14,7 @@ cimport numpy as cnp
 from libc.stdlib cimport malloc, free, realloc
 from libc.math cimport sqrt
 
-from fast_flow.core.common cimport DTYPE_f, build_solids_mask, to_numpy_mask
+from fast_flow.core.common cimport DTYPE_f, build_solids_mask, to_numpy
 from fast_flow.core.flow cimport FlowSolverCore
 from fast_flow.core.handlers.forcehandler cimport ForceHandlerCore
 
@@ -51,13 +51,27 @@ cdef struct Shape:
 
 cdef class ElectrostaticForceHandler(ForceHandlerCore):
     # Coulomb field values
+    # tracks the force at the center of each grid-cell
     cdef DTYPE_f** cu
     cdef DTYPE_f** cv
     cdef Py_ssize_t ck
 
-    # Density of ion particles
+    # Ion density (p) tracks the +ion density at each grid-cell
     cdef DTYPE_f** d
     cdef Py_ssize_t dk
+
+    # Ion's electrostatic pressure at each grid-cell
+    # I'm not sure if we'll need it, might be too small to really make a difference.
+    # idea here is that the +ions will repel each other, so if there's a lot in a neighbor cell
+    # then they should diffuse similar to regular air pressure, but under different laws
+    cdef DTYPE_f** p
+    cdef Py_ssize_t pk
+
+    # Ion velocity at each grid-cell
+    # I'm not sure how to handle if there's no Ions in a cell. Maybe np.nan or 0?
+    cdef DTYPE_f** u
+    cdef DTYPE_f** v
+    cdef Py_ssize_t uvk
 
     # One Shape struct per sign group present in the image: the
     # positive group's struct first, then the negative group's.
@@ -295,7 +309,7 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                            dtype=np.uint8)
             arr.flags.writeable = False
             return arr
-        return to_numpy_mask(self.solids, self.solids_ny, self.solids_nx, True)
+        return to_numpy(self.solids, self.solids_ny, self.solids_nx, True)
 
     cpdef Py_ssize_t num_shapes(self):
         """Number of sign-group structs (0, 1, or 2)."""
@@ -371,50 +385,5 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         """The Coulomb force components at the solver grid's
         cell centres, as (u, v) read-only (ny, nx) arrays, as
         computed by init_field() at construction."""
-        return (self._field_numpy(self.cu[self.ck]),
-                self._field_numpy(self.cv[self.ck]))
-
-    cdef cnp.ndarray _field_numpy(self, DTYPE_f* a):
-        cdef DTYPE_f[:] view = <DTYPE_f[:self.solver.N]> a
-        cdef cnp.ndarray arr = np.array(view, copy=True)
-        arr = arr.reshape((self.solver.ny, self.solver.nx))
-        arr.flags.writeable = False
-        return arr
-
-cdef class CoulombField:
-    cdef DTYPE_f cell_size_cm
-    cdef Py_ssize_t ny
-    cdef Py_ssize_t nx
-
-    # represented as array [y0, x0, y1, x1, ..., yn, xn]
-    cdef Py_ssize_t* positive_electrodes
-    cdef Py_ssize_t* negative_electrodes
-    cdef DTYPE_f positive_charge_per_electrode
-    cdef DTYPE_f negative_charge_per_electrode
-
-    def __init__(
-            self,
-            Py_ssize_t ny,
-            Py_ssize_t nx,
-            unsigned char[:, :] positive,
-            unsigned char[:, :] negative,
-            # cell_size_cm is the width/height distance each pixel/grid cell
-            # represents in the real-world. Measured in centimeters (cm)
-            DTYPE_f cell_size_cm):
-        self.ny = ny
-        self.nx = nx
-        self.cell_size_cm = cell_size_cm
-
-    def set_electrodes(self, unsigned char[:, :] mask):
-        cdef Py_ssize_t y = 0
-        cdef Py_ssize_t x = 0
-        cdef Py_ssize_t idx = 0
-        coordinates = []
-        for y in range(self.ny):
-            idx = y * self.ny
-            for x in range(self.nx):
-                if mask[y, x] != 0:
-                    if x != 0 and mask[y, x-1] == 0:
-                        coordinates.append(y)
-                        coordinates.append(x)
-                # todo finish
+        return (to_numpy(self.cu[self.ck], self.solver.ny, self.solver.nx, True),
+                to_numpy(self.cv[self.ck], self.solver.ny, self.solver.nx, True))
