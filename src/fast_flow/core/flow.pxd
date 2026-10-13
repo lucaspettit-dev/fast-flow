@@ -58,6 +58,7 @@ cdef class FlowSolverCore:
                              Py_ssize_t idx, DTYPE_f* u_dest,
                              DTYPE_f* v_dest) noexcept nogil
     cdef void apply_boundary_forces(self) noexcept
+    cdef void apply_pressure_forces(self) noexcept
     cdef void clamp_momentum_boundary(self) noexcept
     cdef void enforce_solids(self) noexcept
     cdef DTYPE_f _max_speed(self) noexcept

@@ -98,6 +98,22 @@ class ElectrostaticForceHandler(ForceHandler):
             raise RuntimeError("handler is not bound to a solver yet")
         return self._handler.coulomb_field()
 
+    def ion_density(self):
+        """Current +ion density at the solver grid's cells,
+        as a read-only (ny, nx) array.  Zeros until the
+        solver's first step advances the ions."""
+        if getattr(self, "_handler", None) is None:
+            raise RuntimeError("handler is not bound to a solver yet")
+        return self._handler.ion_density()
+
+    def ion_velocity(self):
+        """Current ion velocity (field drift + air velocity)
+        at the solver grid's cells, as (u, v) read-only
+        (ny, nx) arrays."""
+        if getattr(self, "_handler", None) is None:
+            raise RuntimeError("handler is not bound to a solver yet")
+        return self._handler.ion_velocity()
+
 
 class FlowSolver:
     """2D incompressible flow solver.

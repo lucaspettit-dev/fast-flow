@@ -547,6 +547,29 @@ cdef class FlowSolverCore:
             self.apply_uv_force(y, self.nx - 1,
                                 y * self.nx + self.nx - 1, u, v)
 
+    cdef void apply_pressure_forces(self) noexcept:
+        """Add the handlers' get_p contributions into the
+        pressure buffer, one call per cell.
+
+        Unlike the momentum pass this visits EVERY cell exactly
+        once per step, in a plain serial loop: a handler's
+        get_p may advance per-cell state (the electrostatic
+        handler advances its ion density on the first call of
+        the pass) and relies on the exactly-once contract.
+        Runs after the boundary forces, so it sees the step's
+        final velocities and the true chosen dt (self.dt still
+        holds it here), and before enforce_solids().  No-op
+        when no handlers are registered.
+        """
+        cdef Py_ssize_t x, y
+        cdef DTYPE_f* p
+        if self.force is None:
+            return
+        p = self.p[self.pk]
+        for y in range(self.ny):
+            for x in range(self.nx):
+                self.force.accumulate_p(y, x, y * self.nx + x, p)
+
 
     @cython.boundscheck(False)
     @cython.wraparound(False)
@@ -680,6 +703,7 @@ cdef class FlowSolverCore:
         # newly calculated destination buffer.
         self.clamp_momentum_boundary()
         self.apply_boundary_forces()
+        self.apply_pressure_forces()
         self.enforce_solids()
 
     cpdef void step(self) noexcept:

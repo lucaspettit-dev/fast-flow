@@ -51,7 +51,7 @@ cdef class ForceHandlerCore:
         Py_ssize_t y,
         Py_ssize_t x,
         Py_ssize_t idx
-    ) noexcept:
+    ) noexcept nogil:
         return 0.0
 
     cdef void accumulate(
@@ -72,6 +72,22 @@ cdef class ForceHandlerCore:
         v_dest[idx] += self.get_v(y, x, idx)
         if self.next_handler is not None:
             self.next_handler.accumulate(y, x, idx, u_dest, v_dest)
+
+    cdef void accumulate_p(
+        self,
+        Py_ssize_t y,
+        Py_ssize_t x,
+        Py_ssize_t idx,
+        DTYPE_f* p_dest
+    ) noexcept nogil:
+        """Add this handler's pressure contribution at one cell,
+        then the next handler's.  Walked by FlowSolverCore's
+        pressure-force pass, which visits every cell exactly
+        once per step (some handlers advance per-cell state in
+        get_p and rely on that contract)."""
+        p_dest[idx] += self.get_p(y, x, idx)
+        if self.next_handler is not None:
+            self.next_handler.accumulate_p(y, x, idx, p_dest)
 
 
 cdef class ConstantVelocityForceHandlerCore(ForceHandlerCore):
