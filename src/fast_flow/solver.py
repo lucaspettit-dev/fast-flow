@@ -123,8 +123,7 @@ class FlowSolver:
     """
 
     def __init__(self,
-                 nx: int = 256,
-                 ny: int = 128,
+                 img: np.ndarray,
                  nit: int = 50,
                  rho: float = 1.0,
                  nu: float = 0.1,
@@ -140,7 +139,7 @@ class FlowSolver:
         if dt <= 0:
             raise ValueError("dt must be > 0")
         self._cy = FlowSolverCore(
-            nx=nx, ny=ny, nit=nit, rho=rho, nu=nu, dt=dt,
+            img=img, nit=nit, rho=rho, nu=nu, dt=dt,
             flow_mode=1 if boundary == "throughflow" else 0,
             inflow_u=inflow_velocity, lx=lx, ly=ly)
         self.boundary = boundary

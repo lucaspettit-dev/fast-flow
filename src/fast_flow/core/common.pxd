@@ -53,3 +53,11 @@ cdef inline void build_solids_mask(
                         solid = 1
                         break
                 dest[idx] = solid
+
+
+cdef inline cnp.ndarray to_numpy_mask(unsigned char* a, Py_ssize_t nx, Py_ssize_t ny, bool readonly):
+    cdef unsigned char[:] view = <unsigned char[:ny * nx]> a
+    cdef cnp.ndarray arr = np.array(view, copy=True)
+    arr = arr.reshape((nx, ny))
+    arr.flags.writeable = not readonly
+    return arr

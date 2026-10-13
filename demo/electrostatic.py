@@ -84,7 +84,7 @@ if __name__ == '__main__':
     ax.set_ylabel('Y')
     ax.set_title(f'Throughflow past a circular obstacle '
                  f'({args.total_time:g}s, {steps} adaptive steps, '
-                 f'nx={args.nx}, inflow={args.inflow:g})')
+                 f'nx={nx}, inflow={args.inflow:g})')
     plt.tight_layout()
 
     out = args.out or os.path.join(

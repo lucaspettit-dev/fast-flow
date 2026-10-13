@@ -16,7 +16,7 @@ from cython.parallel cimport prange
 from libc.stdlib cimport malloc, free
 from libc.math cimport sqrt, atan2, fabs, floor
 
-from fast_flow.core.common cimport DTYPE_f
+from fast_flow.core.common cimport DTYPE_f, build_solids_mask, to_numpy_mask
 from fast_flow.core.handlers.forcehandler cimport ForceHandlerCore
 
 
@@ -44,8 +44,7 @@ cdef class FlowSolverCore:
 
     def __init__(
             self,
-            int nx=256,
-            int ny=128,
+            object img,
             int nit = 50,
             double rho = 1.0,
             double nu = 0.1,
@@ -55,12 +54,13 @@ cdef class FlowSolverCore:
             double lx=2.0,
             double ly=2.0):
 
-        if nx < 4 or ny < 4:
-            raise ValueError("nx and ny must be >= 4")
+        self.nx = img.shape[1]
+        self.ny = img.shape[0]
+        self.N = self.nx * self.ny
+        self.solid = <unsigned char*> malloc(self.N * sizeof(unsigned char*))
+        build_solids_mask(img, self.solid)
+        self._solid = to_numpy_mask(self.solid, self.ny, self.nx, False)
 
-        self.nx = nx
-        self.ny = ny
-        self.N = nx * ny
         self.rho = rho
         self.nu = nu
         self.dt = dt
@@ -72,8 +72,8 @@ cdef class FlowSolverCore:
         self.lx = lx
         self.ly = ly
 
-        self.dx = lx / (nx - 1)
-        self.dy = ly / (ny - 1)
+        self.dx = lx / (self.nx - 1)
+        self.dy = ly / (self.ny - 1)
 
         # init data structures
         self.u = <DTYPE_f**> malloc(2 * sizeof(DTYPE_f*))
@@ -92,14 +92,6 @@ cdef class FlowSolverCore:
         self.pk = 0
         self.uvk = 0
         self.sum_dt = 0.0
-
-        self._solid = np.zeros((ny, nx), dtype=np.uint8)
-        self.solid = <unsigned char*> malloc(self.N * sizeof(unsigned char))
-        for y in range(ny):
-            idx = self.idx(y, 0)
-            for x in range(nx):
-                self.solid[idx] = self._solid[y, x]
-                idx += 1
 
         self.init_arrays()
 

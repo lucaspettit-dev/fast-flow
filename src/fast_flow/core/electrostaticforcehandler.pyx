@@ -14,7 +14,7 @@ cimport numpy as cnp
 from libc.stdlib cimport malloc, free, realloc
 from libc.math cimport sqrt
 
-from fast_flow.core.common cimport DTYPE_f, build_solids_mask
+from fast_flow.core.common cimport DTYPE_f, build_solids_mask, to_numpy_mask
 from fast_flow.core.flow cimport FlowSolverCore
 from fast_flow.core.handlers.forcehandler cimport ForceHandlerCore
 
@@ -295,15 +295,7 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                            dtype=np.uint8)
             arr.flags.writeable = False
             return arr
-        return self.to_mask_numpy(self.solids)
-
-    cdef cnp.ndarray to_mask_numpy(self, unsigned char* a):
-        cdef unsigned char[:] view = \
-            <unsigned char[:self.solids_ny * self.solids_nx]> a
-        cdef cnp.ndarray arr = np.array(view, copy=True)
-        arr = arr.reshape((self.solids_ny, self.solids_nx))
-        arr.flags.writeable = False
-        return arr
+        return to_numpy_mask(self.solids, self.solids_ny, self.solids_nx, True)
 
     cpdef Py_ssize_t num_shapes(self):
         """Number of sign-group structs (0, 1, or 2)."""

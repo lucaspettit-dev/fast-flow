@@ -54,7 +54,8 @@ def parse_args():
 
 if __name__ == '__main__':
     args = parse_args()
-    solver = FlowSolver(nx=args.nx, ny=args.ny, nit=50, nu=args.nu,
+    img = np.zeros((args.nx * args.ny), dtype=np.uint8).reshape((args.ny, args.nx))
+    solver = FlowSolver(img, nit=50, nu=args.nu,
                         dt=args.dt, boundary="throughflow",
                         inflow_velocity=args.inflow,
                         lx=args.lx, ly=args.ly)
