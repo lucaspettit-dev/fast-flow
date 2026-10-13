@@ -60,9 +60,9 @@ if __name__ == '__main__':
     cmap.set_bad('0.35')
     speed = np.ma.masked_where(solid, speed)
 
-    height = 4.5
-    width = (args.lx / args.ly) * height
-    fig, ax = plt.subplots(figsize=(width, height))
+    height = img.shape[0]
+    width = img.shape[1]
+    fig, ax = plt.subplots(figsize=(width / 100, height / 100), dpi=100)
     im = ax.imshow(speed, origin='lower',
                    extent=[0, args.lx, 0, args.ly],
                    cmap=cmap, aspect='equal')
