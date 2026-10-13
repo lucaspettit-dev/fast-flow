@@ -32,8 +32,8 @@ from fast_flow import ElectrostaticForceHandler, FlowSolver
 def parse_args():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--img", default="./res/cow-cock.png")
-    p.add_argument("--lx", type=float, default=8.0)
-    p.add_argument("--ly", type=float, default=2.0)
+    p.add_argument("--lx", type=float, default=5.0)
+    p.add_argument("--ly", type=float, default=3.0)
     p.add_argument("--charge", type=float, default=20000.0,
                    help="cow gets +charge, rooster gets -charge")
     p.add_argument("--out", default=None)
@@ -103,6 +103,6 @@ if __name__ == '__main__':
 
     out = args.out or os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
-        'coulomb_field_cow_cock.png')
+        'out/coulomb_field_cow_cock.png')
     fig.savefig(out)
     print(f"saved {out}")
