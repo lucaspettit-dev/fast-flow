@@ -224,7 +224,7 @@ cdef class FlowSolverCore:
             else p_[self.idx(y+1, x)]
         cdef DTYPE_f pn = pc if self.solid[self.idx(y + 2, x + 1)] \
             else p_[self.idx(y+2, x+1)]
-        cdef DTYPE_f ps = pc if self.solid[idx + 1] \
+        cdef DTYPE_f ps = pc if self.solid[idx - self.nx] \
             else p_[self.idx(y, x+1)]
         cdef DTYPE_f hor = (pe + pw) * dy_squared
         cdef DTYPE_f vert = (pn + ps) * dx_squared
