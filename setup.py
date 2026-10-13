@@ -43,6 +43,8 @@ extensions = [
                "src/fast_flow/core/handlers/forcehandler.pyx"),
     _extension("fast_flow.core.electrostaticforcehandler",
                "src/fast_flow/core/electrostaticforcehandler.pyx"),
+    _extension("fast_flow.core.renderor",
+               "src/fast_flow/core/renderor.pyx"),
 ]
 
 setup(ext_modules=cythonize(extensions, language_level=3))
