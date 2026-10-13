@@ -13,7 +13,7 @@ def parse_args():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--lx", type=float, default=5.0)
     p.add_argument("--ly", type=float, default=3.0)
-    p.add_argument("--inflow", type=float, default=5.0)
+    p.add_argument("--inflow", type=float, default=2.0)
     p.add_argument("--nu", type=float, default=0.05)
     p.add_argument("--total-time", type=float, default=1.0,
                    help="simulated seconds to advance "
@@ -60,14 +60,12 @@ if __name__ == '__main__':
     cmap.set_bad('0.35')
     speed = np.ma.masked_where(solid, speed)
 
-    height = img.shape[0]
-    width = img.shape[1]
-    fig, ax = plt.subplots(figsize=(width / 100, height / 100), dpi=100)
+    height = (1.5 * img.shape[0]) // 100
+    width = (1.5 * img.shape[1]) // 100
+    fig, ax = plt.subplots(figsize=(width, height))
     im = ax.imshow(speed, origin='lower',
                    extent=[0, args.lx, 0, args.ly],
                    cmap=cmap, aspect='equal')
-    ax.set_xlim(0, args.lx)
-    ax.set_ylim(0, args.ly)
     ax.set_xticklabels([])
     ax.set_yticklabels([])
     ax.set_title(f'Throughflow past a cow and a large cock\n'
