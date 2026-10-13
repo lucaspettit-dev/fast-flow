@@ -93,12 +93,15 @@ if __name__ == '__main__':
         solid = solver.solid.astype(bool)
         speed = np.hypot(u, v)
         inside = float(np.abs(speed[solid]).max()) if solid.any() else 0.0
-        grad = pressure_gradient_magnitude(p, solid, LX / (NX - 1),
-                                           LY / (NY - 1))
+        u = solver.horizontal_velocity
+        v = solver.vertical_velocity
+        speed = np.hypot(u, v)
+        speed = np.ma.masked_where(solver.solid.astype(bool), speed)
+
         print(f"{name:9s} finite={ok} solid cells={int(solid.sum()):4d} "
               f"max|u| inside={inside:.3g} "
-              f"max |grad p|={grad[~solid].max():.1f}")
-        panels.append((name, grad, solid))
+              f"max |grad v|={speed[~solid].max():.1f}")
+        panels.append((name, speed, solid))
 
     # shared colour scale so the panels stay comparable
     allg = np.concatenate([g[~s].ravel() for _, g, s in panels])

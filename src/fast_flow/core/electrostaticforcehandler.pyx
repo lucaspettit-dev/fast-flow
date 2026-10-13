@@ -129,6 +129,8 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         self.cv = <DTYPE_f**> malloc(2 * sizeof(DTYPE_f*))
         if self.cu == NULL or self.cv == NULL:
             raise MemoryError("could not allocate Coulomb field")
+
+        cdef Py_ssize_t i, j
         for i in range(2):
             self.cu[i] = <DTYPE_f*> malloc(
                 self.solver.N * sizeof(DTYPE_f))
@@ -136,6 +138,9 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                 self.solver.N * sizeof(DTYPE_f))
             if self.cu[i] == NULL or self.cv[i] == NULL:
                 raise MemoryError("could not allocate Coulomb field")
+            for j in range(self.solver.N):
+                self.cu[i][j] = 0
+                self.cv[i][j] = 0
         self.ck = 0
         self.init_field()
 
