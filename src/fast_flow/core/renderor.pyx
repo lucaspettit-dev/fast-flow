@@ -18,11 +18,17 @@ a frame whose guid differs from the one last shown, so
 producing frames never waits on the display.  save()
 writes the last rendered frame to a file; close() stops
 the loop and destroys the window.
+
+cv2 is imported lazily, only when run() or save() is
+called -- never at module import.  The class declaration
+lives in renderor.pxd (no cv2 there either), and the
+solver cimports only that declaration, so importing the
+solver does not require cv2; cv2 is needed only when a
+window is actually opened or a frame saved.
 """
 
 import threading
 
-import cv2
 import numpy as np
 cimport numpy as cnp
 from libc.math cimport floor
@@ -42,6 +48,7 @@ cdef class Renderer:
         self.total_time = 0.0
         self.next_frame_time = 0.0
         self.frame_interval = 1.0 / self.fps
+        self._cv2 = None
         self._running = False
         self._thread = None
 
@@ -93,9 +100,12 @@ cdef class Renderer:
     cpdef void run(self):
         """Open the cv2 window named by the constructor's
         winname and start the asynchronous display loop on
-        a background thread.  No-op if already running."""
+        a background thread.  No-op if already running.
+        Imports cv2 here (lazily), on first use."""
         if self._running:
             return
+        import cv2
+        self._cv2 = cv2
         cv2.namedWindow(self.winname, cv2.WINDOW_NORMAL)
         self.window = self.winname
         self._running = True
@@ -120,6 +130,9 @@ cdef class Renderer:
             delay_ms = 1
         while self._running:
             with gil:
+                # cv2 was imported by run(); bind it locally
+                # for the calls and the error handler below.
+                cv2 = self._cv2
                 try:
                     if cv2.getWindowProperty(
                             self.winname,
@@ -137,10 +150,12 @@ cdef class Renderer:
 
     cpdef void save(self, str filepath):
         """Write the last rendered frame (self.buffer) to
-        filepath with cv2.imwrite."""
+        filepath with cv2.imwrite.  Imports cv2 here
+        (lazily), on first use."""
         if self.buffer is None:
             raise RuntimeError(
                 "no frame has been rendered yet (buffer is None)")
+        import cv2
         if not cv2.imwrite(filepath, self.buffer):
             raise IOError(f"cv2.imwrite failed for {filepath!r}")
 
@@ -153,7 +168,7 @@ cdef class Renderer:
             self._thread = None
         if self.window is not None:
             try:
-                cv2.destroyWindow(self.winname)
-            except cv2.error:
+                self._cv2.destroyWindow(self.winname)
+            except Exception:
                 pass
             self.window = None

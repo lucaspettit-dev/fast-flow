@@ -19,6 +19,7 @@ cdef class Renderer:
     cdef double total_time
     cdef double next_frame_time
     cdef double frame_interval
+    cdef object _cv2
     cdef bint _running
     cdef object _thread
 
