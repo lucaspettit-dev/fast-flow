@@ -7,6 +7,7 @@ from enum import Enum
 from .core.flow import FlowSolverCore
 from .core.handlers.forcehandler import ConstantVelocityForceHandlerCore
 from .core.electrostaticforcehandler import ElectrostaticForceHandler as ElectrostaticForceHandlerCore
+from .core.renderor import Renderer
 
 
 class Direction(Enum):
@@ -148,7 +149,8 @@ class FlowSolver:
                  inflow_velocity: float = 1.0,
                  lx: float = 2.0,
                  ly: float = 2.0,
-                 force_handlers: [ForceHandler] = None):
+                 force_handlers: [ForceHandler] = None,
+                 renderer: Renderer = None):
         if boundary not in ("cavity", "throughflow"):
             raise ValueError(
                 'boundary must be "cavity" or "throughflow"')
@@ -167,6 +169,9 @@ class FlowSolver:
             for handler in force_handlers:
                 handler._set_solver(self._cy)
                 self._cy.add_force_handler(handler._handler)
+        self._renderer = renderer
+        if renderer is not None:
+            self._cy.set_renderer(renderer)
 
     @property
     def nx(self): return self._cy.nx
@@ -221,6 +226,15 @@ class FlowSolver:
         if getattr(handler, "_handler", None) is None:
             handler._set_solver(self._cy)
         self._cy.add_force_handler(handler._handler)
+
+    def set_renderer(self, renderer: Renderer):
+        """Attach a Renderer (a fast_flow.core.renderor.Renderer,
+        or None to detach).  After every step the core calls
+        the renderer's render_frame(dt) with that step's dt;
+        the renderer tracks the total time and draws a frame
+        only when one is due at its fps."""
+        self._renderer = renderer
+        self._cy.set_renderer(renderer)
 
     def set_inflow_velocity(self, value):
         """Throughflow mode: set the uniform inflow speed."""

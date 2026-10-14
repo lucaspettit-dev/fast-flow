@@ -5,15 +5,19 @@
 """Renderer: abstract base for live cv2-window renderers.
 
 A Renderer owns a cv2 window and displays the frames a
-subclass draws.  The subclass implements render_frame():
-draw the new frame into self.buffer (a uint8 ndarray of
-shape (ny, nx, 3)) and call self._publish(), which stamps
-the frame with a fresh guid.  run() opens the window and
-starts a background display loop: the loop is nogil and
-only takes the GIL to hand cv2 a frame whose guid differs
-from the one last shown, so producing frames never waits
-on the display.  save() writes the last rendered frame to
-a file; close() stops the loop and destroys the window.
+subclass draws.  The solver calls render_frame(dt) after
+each step; render_frame accumulates the run's total_time
+and, only when that time crosses the next frame boundary
+(spaced 1/fps apart), calls the subclass's draw_frame()
+hook to draw the new frame into self.buffer (a uint8
+ndarray of shape (ny, nx, 3)) and publishes it with a
+fresh guid -- calls between boundaries are no-ops.
+run() opens the window and starts a background display
+loop: the loop is nogil and only takes the GIL to hand cv2
+a frame whose guid differs from the one last shown, so
+producing frames never waits on the display.  save()
+writes the last rendered frame to a file; close() stops
+the loop and destroys the window.
 """
 
 import threading
@@ -21,6 +25,7 @@ import threading
 import cv2
 import numpy as np
 cimport numpy as cnp
+from libc.math cimport floor
 
 
 cdef class Renderer:
@@ -34,17 +39,41 @@ cdef class Renderer:
         self.window = None
         self.current_guid = 0
         self.shown_guid = 0
+        self.total_time = 0.0
+        self.next_frame_time = 0.0
+        self.frame_interval = 1.0 / self.fps
         self._running = False
         self._thread = None
 
-    cdef void render_frame(self):
-        """Draw a new frame into self.buffer and publish
-        it (call self._publish() last, which gives the
-        frame a fresh guid).
+    cdef void render_frame(self, double dt) noexcept:
+        """Advance the run clock by dt and render a frame
+        if one is due.
+
+        Called after each solver step with that step's dt.
+        total_time accumulates every dt; when total_time
+        reaches the next frame boundary (boundaries are
+        frame_interval = 1/fps apart, the first at t=0) the
+        frame is drawn (draw_frame()) and published with a
+        fresh guid, and the boundary advances past
+        total_time.  Otherwise the call is a no-op, so the
+        solver can call it every step regardless of how
+        small dt is compared to the frame interval."""
+        self.total_time += dt
+        if self.total_time >= self.next_frame_time:
+            self.next_frame_time += (
+                floor((self.total_time - self.next_frame_time)
+                      / self.frame_interval) + 1.0) \
+                * self.frame_interval
+            self.draw_frame()
+            self._publish()
+
+    cdef void draw_frame(self) noexcept:
+        """Draw the current frame into self.buffer.
 
         Abstract: the base class draws nothing.  Subclasses
-        override this to render their state; the display
-        loop in run() picks the frame up by its guid."""
+        override this to render their state; render_frame()
+        calls it (and publishes the frame) when a frame is
+        due."""
         pass
 
     cdef void _publish(self):
@@ -54,9 +83,12 @@ cdef class Renderer:
         self.current_guid += 1
 
     cpdef void refresh(self):
-        """Produce a new frame now (calls render_frame()).
-        The display loop shows it on its next pass."""
-        self.render_frame()
+        """Render a frame if one is due at the current
+        total_time, without advancing the clock (calls
+        render_frame(0)).  Right after construction a frame
+        is always due (the first boundary is t=0), so this
+        draws the initial state."""
+        self.render_frame(0.0)
 
     cpdef void run(self):
         """Open the cv2 window named by the constructor's

@@ -16,10 +16,15 @@ cdef class Renderer:
     cdef cnp.ndarray buffer
     cdef Py_ssize_t current_guid
     cdef Py_ssize_t shown_guid
+    cdef double total_time
+    cdef double next_frame_time
+    cdef double frame_interval
     cdef bint _running
     cdef object _thread
 
-    cdef void render_frame(self)
+    cdef void render_frame(self, double dt) noexcept
+    cdef void draw_frame(self) noexcept
+    cdef void _publish(self)
     cdef void _publish(self)
     cdef void _loop(self) noexcept nogil
     cpdef void refresh(self)

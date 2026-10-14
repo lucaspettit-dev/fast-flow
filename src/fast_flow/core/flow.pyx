@@ -135,6 +135,13 @@ cdef class FlowSolverCore:
                 handler = handler.next()
             handler.add_next(next)
 
+    cpdef void set_renderer(self, Renderer renderer):
+        """Attach a Renderer (or None to detach).  After
+        every step, _step_once calls the renderer's
+        render_frame(self.dt); the renderer itself decides
+        whether a frame is due at its fps."""
+        self.renderer = renderer
+
     cdef init_arrays(self):
         # Populate your data here
         cdef Py_ssize_t i, j
@@ -705,6 +712,12 @@ cdef class FlowSolverCore:
         self.apply_boundary_forces()
         self.apply_pressure_forces()
         self.enforce_solids()
+
+        # Render hook: the renderer accumulates this step's
+        # dt and draws a frame only when one is due at its
+        # fps, so this costs a comparison on most steps.
+        if self.renderer is not None:
+            self.renderer.render_frame(self.dt)
 
     cpdef void step(self) noexcept:
         """Advance by one dynamically-chosen timestep.

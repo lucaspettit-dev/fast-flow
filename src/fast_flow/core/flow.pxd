@@ -8,6 +8,7 @@ cimport numpy as cnp
 
 from fast_flow.core.common cimport DTYPE_f
 from fast_flow.core.handlers.forcehandler cimport ForceHandlerCore
+from fast_flow.core.renderor cimport Renderer
 
 
 cdef class FlowSolverCore:
@@ -38,8 +39,10 @@ cdef class FlowSolverCore:
     cdef unsigned char* solid
 
     cdef ForceHandlerCore force
+    cdef Renderer renderer
 
     cpdef void add_force_handler(self, ForceHandlerCore next)
+    cpdef void set_renderer(self, Renderer renderer)
     cdef init_arrays(self)
     cdef inline Py_ssize_t idx(self, Py_ssize_t y,
                                Py_ssize_t x) noexcept nogil
