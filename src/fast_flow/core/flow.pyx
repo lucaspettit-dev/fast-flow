@@ -12,7 +12,6 @@ core/electrostaticforcehandler.pyx.
 import numpy as np
 cimport numpy as cnp
 cimport cython
-from cython.parallel cimport prange
 from libc.stdlib cimport malloc, free
 from libc.math cimport sqrt, atan2, fabs, floor
 
@@ -318,8 +317,7 @@ cdef class FlowSolverCore:
 
         # do the first loop w/build-pressure step (rows are
         # independent: each writes only its own p/b cells and reads
-        # the source pressure buffer, so this runs GIL-free in
-        # parallel via OpenMP)
+        # the source pressure buffer)
         p_dest = self.p[dest]
         p_src = self.p[src]
         for y in range(self.ny - 2):
@@ -332,7 +330,7 @@ cdef class FlowSolverCore:
         src = self.pk
         dest = src ^ 1
 
-        for q in prange(self.nit - 1, nogil=True):
+        for q in range(self.nit - 1):
             p_dest = self.p[dest]
             p_src = self.p[src]
             for y in range(self.ny - 2):
@@ -394,11 +392,10 @@ cdef class FlowSolverCore:
         cdef DTYPE_f uc, vc, dudx, dudy, dvdx, dvdy
 
         # rows are independent (read src buffers, write own dest
-        # row), so this runs GIL-free in parallel via OpenMP.
-        # idx is recomputed per cell rather than carried with += :
-        # a carried counter looks like a reduction variable to
-        # prange and is rejected.
-        for y in prange(1, ny - 1, nogil=True):
+        # row).  Serial: no OpenMP, no GIL juggling -- the
+        # parallel regions cost more in thread sync than the
+        # per-cell work saves.
+        for y in range(1, ny - 1):
             for x in range(1, nx - 1):
                 idx = self.idx(y, x)
 

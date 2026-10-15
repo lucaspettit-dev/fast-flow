@@ -12,12 +12,11 @@ and, only when that time crosses the next frame boundary
 hook to draw the new frame into self.buffer (a uint8
 ndarray of shape (ny, nx, 3)) and publishes it with a
 fresh guid -- calls between boundaries are no-ops.
-run() opens the window and starts a background display
-loop: the loop is nogil and only takes the GIL to hand cv2
-a frame whose guid differs from the one last shown, so
-producing frames never waits on the display.  save()
-writes the last rendered frame to a file; close() stops
-the loop and destroys the window.
+run() opens the window; render_frame() shows each due
+frame inline in the solver's thread -- no background
+thread, no GIL handoff per frame.  save() writes the
+last rendered frame to a file; close() destroys the
+window.
 
 The Renderer class tracks the max magnitude per frame using
 the `fast_hypot` approximation. Each frame needs to be
@@ -29,11 +28,8 @@ save the video. This'll let the user see the properly scaled
 render after the run.
 """
 
-import threading
-
 import numpy as np
 import cv2
-from time import sleep
 cimport numpy as cnp
 from libc.math cimport floor
 from libc.stdlib cimport malloc, free
@@ -66,7 +62,6 @@ cdef class Renderer:
         self.next_frame_time = 0.0
         self.frame_interval = 1.0 / self.fps
         self._running = 0
-        self._thread = None
         self.img = None
         # make buffer
         self.buffer = <unsigned char*>malloc(self.N * sizeof(unsigned char))
@@ -105,6 +100,26 @@ cdef class Renderer:
                 * self.frame_interval
             self.draw_frame(n, u, v)
             self._publish()
+            if self._running == 1:
+                # No display thread: show the frame inline in
+                # the solver's thread -- no GIL juggling, no
+                # second thread competing with the solver.
+                # Display is best-effort: if it fails, close
+                # the window and keep solving.
+                try:
+                    if cv2.getWindowProperty(
+                            self.winname,
+                            cv2.WND_PROP_VISIBLE) < 1:
+                        self.close()
+                    else:
+                        self.img = to_numpy_3d(
+                            self.buffer, self.ny, self.nx, 3, True)
+                        self.shown_frame_id = self.current_frame_id
+                        cv2.imshow(self.winname, self.img)
+                        if cv2.waitKey(1) == 27:
+                            self.close()
+                except Exception:
+                    self.close()
 
     cdef void draw_frame(self, Py_ssize_t n, DTYPE_f* u, DTYPE_f* v) noexcept:
         """Draw the current frame into self.buffer.
@@ -130,7 +145,7 @@ cdef class Renderer:
     cdef void _publish(self):
         """Stamp the frame just drawn into self.buffer as
         the current frame: it gets a new guid, so the
-        display loop knows to show it."""
+        display knows to show it."""
         self.current_frame_id += 1
 
     cpdef void refresh(self, const DTYPE_f[:, :] u, const DTYPE_f[:, :] v):
@@ -149,52 +164,12 @@ cdef class Renderer:
         cv2.namedWindow(self.winname, cv2.WINDOW_NORMAL)
         self.window = self.winname
         self._running = 1
-        self._thread = threading.Thread(
-            target=self._thread_main, daemon=True)
-        self._thread.start()
-
-    def _thread_main(self):
-        self._loop()
-
-    cdef void _loop(self) noexcept nogil:
-        """Display loop: whenever the current frame's guid
-        differs from the last shown frame's, update the
-        window image with self.buffer and mark the new
-        guid as shown.  Runs nogil; the GIL is taken only
-        for the cv2 calls themselves.  cv2.waitKey paces
-        the loop to fps and pumps the window's events;
-        the loop ends when close() clears _running, when
-        ESC is pressed, or when the window is closed."""
-        cdef Py_ssize_t delay_ms = 1000 // self.fps
-        if delay_ms < 1:
-            delay_ms = 1
-
-        while self._running == 1:
-            # todo: requesting GIL each loop is expensive.
-            # investigate if we can have the data-processing no-gil and have update_frame request GIL
-            # after rendering a new frame so it can update the img
-            with gil:
-                try:
-                    if cv2.getWindowProperty(
-                            self.winname,
-                            cv2.WND_PROP_VISIBLE) < 1:
-                        self._running = 0
-                        break
-                    if cv2.waitKey(delay_ms) == 27:
-                        self._running = 0
-                    if self.current_frame_id != self.shown_frame_id:
-                        self.img = to_numpy_3d(self.buffer, self.ny, self.nx, 3, True)
-                        self.shown_frame_id = self.current_frame_id
-                        cv2.imshow(self.winname, self.img)
-                except cv2.error:
-                    self._running = False
-
 
     cpdef void save(self, str filepath):
         """Write the last rendered frame to filepath with
         cv2.imwrite.  Converts the raw buffer to the image
-        here if the display loop has not already done so,
-        so save() also works without a running window
+        here if the display has not already done so, so
+        save() also works without a running window
         (headless runs, demos)."""
         if self.current_frame_id == 0:
             raise RuntimeError(
@@ -206,12 +181,8 @@ cdef class Renderer:
             raise IOError(f"cv2.imwrite failed for {filepath!r}")
 
     cpdef void close(self):
-        """Stop the display loop and destroy the window.
-        Safe to call when not running."""
+        """Destroy the window. Safe to call when not running."""
         self._running = False
-        if self._thread is not None:
-            self._thread.join(timeout=2.0)
-            self._thread = None
         if self.window is not None:
             try:
                 cv2.destroyWindow(self.winname)

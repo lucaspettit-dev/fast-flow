@@ -30,6 +30,7 @@ printed.
 """
 import argparse
 import os
+import time
 
 import cv2
 import numpy as np
@@ -74,7 +75,9 @@ if __name__ == '__main__':
                         force_handlers=[handler],
                         renderer=renderer)
 
+    t0 = time.perf_counter()
     steps = solver.run(args.total_time)
+    wall = time.perf_counter() - t0
 
     u = solver.horizontal_velocity
     v = solver.vertical_velocity
@@ -83,6 +86,8 @@ if __name__ == '__main__':
     density = handler.ion_density()
     print('----------- RESULTS ------------')
     print(f"steps taken: {steps}\n\tsimulated time: {solver.time:.6f}s")
+    print(f"wall-clock runtime: {wall:.2f}s\n\t"
+          f"iterations per second: {steps / wall:.1f}")
     print(f"finite: {np.isfinite(u).all() and np.isfinite(v).all()}\n\t"
           f"max speed outside obstacle: {speed[~solid].max():.3f}\n\t"
           f"max speed inside obstacle: {speed[solid].max():.3g}")

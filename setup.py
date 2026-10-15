@@ -7,18 +7,18 @@ from setuptools.extension import Extension
 from Cython.Build import cythonize
 import numpy as np
 
-# Optimization + OpenMP.  The core loops are written GIL-free
-# (Cython prange over raw buffers), so OpenMP threads them across
-# cores.  Apple clang does not bundle OpenMP: on macOS it needs
-# `brew install libomp` and the -Xpreprocessor spelling.
+# Optimization only.  The core loops are plain serial C
+# over raw buffers (no OpenMP, no GIL juggling): the
+# parallel regions cost more in thread sync than the
+# per-cell work saves.
 if platform.system() == "Darwin":
-    compile_args = ["-O3", "-Xpreprocessor", "-fopenmp"]
+    compile_args = ["-O3"]
     if platform.machine() == "arm64":
         compile_args.append("-mcpu=native")
-    link_args = ["-lomp"]
+    link_args = []
 else:
-    compile_args = ["-O3", "-march=native", "-fopenmp"]
-    link_args = ["-fopenmp"]
+    compile_args = ["-O3", "-march=native"]
+    link_args = []
 
 def _extension(name, source):
     return Extension(
