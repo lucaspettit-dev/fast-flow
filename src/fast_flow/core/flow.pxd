@@ -28,6 +28,7 @@ cdef class FlowSolverCore:
     cdef int N
     cdef int flow_mode
     cdef DTYPE_f inflow_u
+    cdef DTYPE_f cached_max_speed
 
     cdef object _solid
     cdef DTYPE_f* b
@@ -64,7 +65,6 @@ cdef class FlowSolverCore:
     cdef void apply_pressure_forces(self) noexcept
     cdef void clamp_momentum_boundary(self) noexcept
     cdef void enforce_solids(self) noexcept
-    cdef DTYPE_f _max_speed(self) noexcept
     cdef DTYPE_f _stable_dt_limit(self) noexcept
     cpdef DTYPE_f stable_dt(self) noexcept
     cdef DTYPE_f _choose_dt(self, DTYPE_f limit) noexcept

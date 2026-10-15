@@ -390,6 +390,8 @@ cdef class FlowSolverCore:
         cdef DTYPE_f nu = self.nu
         cdef DTYPE_f p_c, p_e, p_w, p_n, p_s
         cdef DTYPE_f uc, vc, dudx, dudy, dvdx, dvdy
+        cdef DTYPE_f a
+        cdef DTYPE_f max_mag = 0.0
 
         # rows are independent (read src buffers, write own dest
         # row).  Serial: no OpenMP, no GIL juggling -- the
@@ -496,8 +498,20 @@ cdef class FlowSolverCore:
 
                 self.apply_uv_force(y, x, idx, u_dest, v_dest)
 
+                # Track the max speed (component-wise, like
+                # _max_speed) AFTER the drag, for the next
+                # step's dt choice: the drag can accelerate a
+                # cell past its momentum value.
+                a = fabs(u_dest[idx])
+                if a > max_mag:
+                    max_mag = a
+                a = fabs(v_dest[idx])
+                if a > max_mag:
+                    max_mag = a
+
         # dest now contains the newest velocity field.
         self.uvk = dest
+        self.cached_max_speed = max_mag
 
     @cython.boundscheck(False)
     @cython.wraparound(False)
@@ -651,21 +665,6 @@ cdef class FlowSolverCore:
                 u[i] = 0.0
                 v[i] = 0.0
 
-    cdef DTYPE_f _max_speed(self) noexcept:
-        cdef DTYPE_f* u = self.u[self.uvk]
-        cdef DTYPE_f* v = self.v[self.uvk]
-        cdef DTYPE_f m = 0.0
-        cdef DTYPE_f a
-        cdef Py_ssize_t k
-        for k in range(self.N):
-            a = fabs(u[k])
-            if a > m:
-                m = a
-            a = fabs(v[k])
-            if a > m:
-                m = a
-        return m
-
     cdef DTYPE_f _stable_dt_limit(self) noexcept:
         """Largest explicit step allowed by the combined
         advection-diffusion stability limit for this grid and the
@@ -673,10 +672,47 @@ cdef class FlowSolverCore:
         reciprocals add), with a 0.9 safety factor."""
         cdef DTYPE_f denom = 0.0
         cdef DTYPE_f umax
+        cdef DTYPE_f* u = self.u[self.uvk]
+        cdef DTYPE_f* v = self.v[self.uvk]
+        cdef DTYPE_f a
+        cdef Py_ssize_t k
         if self.nu > 0.0:
             denom += 2.0 * self.nu * (1.0 / (self.dx * self.dx)
                                       + 1.0 / (self.dy * self.dy))
-        umax = self._max_speed()
+        # Max speed = cached interior max (tracked during the
+        # last update_momentum, after the drag) combined with
+        # a scan of the perimeter. Clamp, boundary forces, and
+        # enforce_solids only touch boundary/solid cells after
+        # momentum, so the interior cache is still exact and
+        # only the boundary needs re-scanning -- O(perimeter)
+        # instead of the old _max_speed's full-domain pass.
+        umax = self.cached_max_speed
+        for k in range(self.nx):
+            a = fabs(u[k])
+            if a > umax:
+                umax = a
+            a = fabs(v[k])
+            if a > umax:
+                umax = a
+            a = fabs(u[(self.ny - 1) * self.nx + k])
+            if a > umax:
+                umax = a
+            a = fabs(v[(self.ny - 1) * self.nx + k])
+            if a > umax:
+                umax = a
+        for k in range(1, self.ny - 1):
+            a = fabs(u[k * self.nx])
+            if a > umax:
+                umax = a
+            a = fabs(v[k * self.nx])
+            if a > umax:
+                umax = a
+            a = fabs(u[k * self.nx + self.nx - 1])
+            if a > umax:
+                umax = a
+            a = fabs(v[k * self.nx + self.nx - 1])
+            if a > umax:
+                umax = a
         if self.flow_mode == 1 and self.inflow_u > umax:
             umax = self.inflow_u
         if umax > 0.0:
