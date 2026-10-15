@@ -810,12 +810,21 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
             if self.ion_zone[idx] and sbuf[idx] < ION_ZONE_TARGET:
                 sbuf[idx] += (ION_ZONE_TARGET - sbuf[idx]) * gen
 
-        # 4. diffusion of the density into the other buffer
+        # 4+5. diffusion of the density into the other
+        # buffer, fused with the electrostatic pressure pass.
+        # Both read the density; the pressure at a cell needs
+        # only the DIFFUSED density at that same cell (no
+        # stencil), so it can use the just-computed value
+        # instead of a second pass re-reading it. Bitwise
+        # identical: the pressure input is the exact value
+        # diffusion wrote. (Also saves the pressure pass's
+        # own _solid_at per cell.)
         for y in range(ny):
             for x in range(nx):
                 idx = y * nx + x
                 if self._solid_at(idx):
                     dbuf[idx] = 0.0
+                    pp[idx] = 0.0
                     continue
                 val = sbuf[idx]
                 ce = val if x + 1 >= nx or self._solid_at(idx + 1) \
@@ -826,19 +835,14 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                     else sbuf[idx + nx]
                 cs = val if y == 0 or self._solid_at(idx - nx) \
                     else sbuf[idx - nx]
-                dbuf[idx] = val + ION_DIFFUSION * (
+                val = val + ION_DIFFUSION * (
                     ce + cw + cn + cs - 4.0 * val)
+                dbuf[idx] = val
+                e2 = cu[idx] * cu[idx] + cv[idx] * cv[idx]
+                if e2 > ION_SPEED_MAX * ION_SPEED_MAX:
+                    e2 = ION_SPEED_MAX * ION_SPEED_MAX
+                val = ION_PRESSURE_COUPLING * val * e2
+                pp[idx] = val if val < ION_PRESSURE_MAX \
+                    else ION_PRESSURE_MAX
         self.dk = 1 - cur
         sbuf = self.d[self.dk]
-
-        # 5. electrostatic pressure of the ion cloud
-        for idx in range(nx * ny):
-            if self._solid_at(idx):
-                pp[idx] = 0.0
-                continue
-            e2 = cu[idx] * cu[idx] + cv[idx] * cv[idx]
-            if e2 > ION_SPEED_MAX * ION_SPEED_MAX:
-                e2 = ION_SPEED_MAX * ION_SPEED_MAX
-            val = ION_PRESSURE_COUPLING * sbuf[idx] * e2
-            pp[idx] = val if val < ION_PRESSURE_MAX \
-                else ION_PRESSURE_MAX
