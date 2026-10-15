@@ -37,7 +37,7 @@ from time import sleep
 cimport numpy as cnp
 from libc.math cimport floor
 from libc.stdlib cimport malloc, free
-from fast_flow.core.common cimport vector_to_rgb, to_numpy_3d, fast_hypot
+from fast_flow.core.common cimport DTYPE_f, vector_to_rgb, to_numpy_3d, fast_hypot
 
 """
 Since I cannot do enums, this is the render-style mapping:
@@ -69,7 +69,7 @@ cdef class Renderer:
         self._thread = None
         self.img = None
         # make buffer
-        self.buffer = <unsigned char*>malloc(self.N * sizeof(unsigned char*))
+        self.buffer = <unsigned char*>malloc(self.N * sizeof(unsigned char))
         if self.buffer is NULL:
             raise MemoryError("could not allocate ion state")
         cdef Py_ssize_t i = 0
@@ -80,8 +80,8 @@ cdef class Renderer:
        if self.buffer is not NULL:
            free(self.buffer)
 
-    cdef inline Py_ssize_t idx(self, Py_ssize_t x, Py_ssize_t y, Py_ssize_t z):
-        return (y * nx + x) * 3 + z
+    cdef inline Py_ssize_t idx(self, Py_ssize_t x, Py_ssize_t y, Py_ssize_t z) noexcept nogil:
+        return (y * self.nx + x) * 3 + z
 
     cdef void render_frame(self, DTYPE_f dt, Py_ssize_t n, DTYPE_f* u, DTYPE_f* v) noexcept:
         """Advance the run clock by dt and render a frame
@@ -106,9 +106,6 @@ cdef class Renderer:
             self.draw_frame(n, u, v)
             self._publish()
 
-    @cython.boundscheck(False)
-    @cython.wraparound(False)
-    @cython.cdivision(True)
     cdef void draw_frame(self, Py_ssize_t n, DTYPE_f* u, DTYPE_f* v) noexcept:
         """Draw the current frame into self.buffer.
 
@@ -128,7 +125,7 @@ cdef class Renderer:
             self.max_magnitude = frame_max_mag
 
         for i in range(n):
-            vector_to_rgb(u[i], v[i], frame_max_mag, self.buffer[i * 3])
+            vector_to_rgb(u[i], v[i], frame_max_mag, self.buffer + i * 3)
 
     cdef void _publish(self):
         """Stamp the frame just drawn into self.buffer as
@@ -136,20 +133,22 @@ cdef class Renderer:
         display loop knows to show it."""
         self.current_frame_id += 1
 
-    cpdef void refresh(self):
+    cpdef void refresh(self, const DTYPE_f[:, :] u, const DTYPE_f[:, :] v):
         """Render a frame if one is due at the current
         total_time, without advancing the clock (calls
-        render_frame(0)).  Right after construction a frame
-        is always due (the first boundary is t=0), so this
-        draws the initial state."""
-        self.render_frame(0.0)
+        render_frame(0, ...)).  Right after construction a
+        frame is always due (the first boundary is t=0),
+        so this draws the initial state.  Takes the (u, v)
+        fields as (ny, nx) arrays, since render_frame now
+        needs the field data to draw."""
+        self.render_frame(0.0, u.shape[0] * u.shape[1], &u[0, 0], &v[0, 0])
 
     cpdef void run(self):
         if self._running == 1:
             return
         cv2.namedWindow(self.winname, cv2.WINDOW_NORMAL)
         self.window = self.winname
-        self._running = 0
+        self._running = 1
         self._thread = threading.Thread(
             target=self._thread_main, daemon=True)
         self._thread.start()
@@ -184,7 +183,7 @@ cdef class Renderer:
                     if cv2.waitKey(delay_ms) == 27:
                         self._running = 0
                     if self.current_frame_id != self.shown_frame_id:
-                        self.img = to_numpy_3d(self.buffer, self.nx, self.ny, 3, True)
+                        self.img = to_numpy_3d(self.buffer, self.ny, self.nx, 3, True)
                         self.shown_frame_id = self.current_frame_id
                         cv2.imshow(self.winname, self.img)
                 except cv2.error:
@@ -192,9 +191,17 @@ cdef class Renderer:
 
 
     cpdef void save(self, str filepath):
-        if self.img is None:
+        """Write the last rendered frame to filepath with
+        cv2.imwrite.  Converts the raw buffer to the image
+        here if the display loop has not already done so,
+        so save() also works without a running window
+        (headless runs, demos)."""
+        if self.current_frame_id == 0:
             raise RuntimeError(
-                "no frame has been rendered yet (buffer is None)")
+                "no frame has been rendered yet (buffer is empty)")
+        if self.img is None or \
+                self.current_frame_id != self.shown_frame_id:
+            self.img = to_numpy_3d(self.buffer, self.ny, self.nx, 3, True)
         if not cv2.imwrite(filepath, self.img):
             raise IOError(f"cv2.imwrite failed for {filepath!r}")
 
@@ -207,7 +214,7 @@ cdef class Renderer:
             self._thread = None
         if self.window is not None:
             try:
-                self._cv2.destroyWindow(self.winname)
-            except Exception:
+                cv2.destroyWindow(self.winname)
+            except cv2.error:
                 pass
             self.window = None

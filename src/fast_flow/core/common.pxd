@@ -6,11 +6,16 @@ ctypedef cnp.float64_t DTYPE_f
 
 import numpy as np
 cimport numpy as cnp
-from libc.math cimport fmod, floor
+from libc.math cimport fmod, floor, sqrt
 cimport cython
 
-cdef double PI = 3.14159265358979323846
-cdef double TWO_PI = 6.28318530717958647692
+# NOTE: do not declare module-level `cdef` variables here
+# (e.g. `cdef double PI = ...`).  Cython then generates a
+# runtime `import fast_flow.core.common` in every module
+# that cimports from this pxd to fetch them -- but common
+# is pxd-only (no compiled module), so that import fails.
+# Constants belong as locals inside the functions that use
+# them (see TWO_PI in vector_to_rgb).
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
@@ -149,17 +154,28 @@ cdef inline void vector_to_rgb(
     cdef DTYPE_f hue
     cdef DTYPE_f magnitude
     cdef DTYPE_f value
+    cdef DTYPE_f TWO_PI = 6.28318530717958647692
 
     # Direction determines hue [0, 1)
     hue = fast_atan2(y, x) / TWO_PI
     if hue < 0.0:
         hue += 1.0
 
-    # Magnitude determines brightness [0, 1]
+    # Magnitude determines brightness [0, 1].  The
+    # brightness is gamma-compressed (fourth root --
+    # gamma 0.25): EHD fields span orders of magnitude
+    # (median speed ~0.07% of max), and with a linear
+    # scale every cell below 1/255 of max truncates to
+    # pure black -- at t=0.05 only 65 of 150,000 cells
+    # survived.  A square root (gamma 0.5, the old demo's
+    # PowerNorm) still left 99% of the visible pixels at
+    # <= 2/255, i.e. the frame still read as black; the
+    # fourth root lifts the bulk recirculation into view
+    # while the jet stays brightest.
     magnitude = fast_hypot(x, y)
 
     if max_magnitude > 0.0:
-        value = clamp01(magnitude / max_magnitude)
+        value = clamp01(sqrt(sqrt(magnitude / max_magnitude)))
     else:
         value = 0.0
 
@@ -220,8 +236,11 @@ cdef inline void hsv_to_rgb(
         g = p
         b = q
 
-    # Matches int(c * 255) from the original Python code
-    o[0] = <unsigned char>(r * 255.0)
+    # Matches int(c * 255) from the original Python code.
+    # o is a cv2 BGR triplet (the buffer feeds
+    # cv2.imshow/imwrite, which expect BGR), so the blue
+    # channel goes first.
+    o[0] = <unsigned char>(b * 255.0)
     o[1] = <unsigned char>(g * 255.0)
-    o[2] = <unsigned char>(b * 255.0)
+    o[2] = <unsigned char>(r * 255.0)
 

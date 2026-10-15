@@ -43,7 +43,7 @@ extensions = [
                "src/fast_flow/core/handlers/forcehandler.pyx"),
     _extension("fast_flow.core.electrostaticforcehandler",
                "src/fast_flow/core/electrostaticforcehandler.pyx"),
-    _extension("fast_flow.core.renderor",
+    _extension("fast_flow.core.renderer",
                "src/fast_flow/core/renderer.pyx"),
 ]
 

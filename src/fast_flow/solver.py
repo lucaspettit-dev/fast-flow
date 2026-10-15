@@ -7,7 +7,7 @@ from enum import Enum
 from .core.flow import FlowSolverCore
 from .core.handlers.forcehandler import ConstantVelocityForceHandlerCore
 from .core.electrostaticforcehandler import ElectrostaticForceHandler as ElectrostaticForceHandlerCore
-from .core.renderor import Renderer
+from .core.renderer import Renderer
 
 
 class Direction(Enum):

@@ -12,21 +12,30 @@ air with them -- the ion wind.  The domain starts at
 rest and inflow is 0, so every bit of velocity in the
 result was imparted by the ions.
 
+The air velocity is rendered live by the new Renderer
+(fast_flow.core.renderer): after every solver step the
+core hands the renderer the (u, v) fields, and the
+renderer draws a frame -- direction as hue on a colour
+wheel, magnitude as brightness, scaled by that frame's
+max magnitude -- whenever the run time crosses the next
+1/fps boundary.  At the end of the run the demo saves
+the renderer's last frame (out/ehd_cow_cock_velocity.png),
+flipped back to the input image's orientation.  The
+figure is the same shape as the input image (500x300).
+
 Prints the usual results block plus the ion density
-totals, and writes two renders next to the other demo
-outputs (out/): the air velocity (streamlines coloured
-by speed over the two electrodes) and the +ion density.
-Both figures are the same shape as the input image, with
-no ticks, labels or colour bars.
+totals.  The +ion density is no longer plotted (the
+renderer draws one vector field); its totals are still
+printed.
 """
 import argparse
 import os
 
 import cv2
-import matplotlib.pyplot as plt
 import numpy as np
 
 from fast_flow import ElectrostaticForceHandler, FlowSolver
+from fast_flow.core.renderer import Renderer
 
 
 def parse_args():
@@ -40,6 +49,8 @@ def parse_args():
                    help="simulated seconds to advance")
     p.add_argument("--charge", type=float, default=20000.0,
                    help="cow gets +charge, rooster gets -charge")
+    p.add_argument("--fps", type=int, default=30,
+                   help="renderer frames per simulated second")
     p.add_argument("--out-dir", default=None)
     return p.parse_args()
 
@@ -55,11 +66,13 @@ if __name__ == '__main__':
     # rooster -> -charge
     handler = ElectrostaticForceHandler(
         img, layermap={2: args.charge, 0: -args.charge})
+    renderer = Renderer("ehd_cow_cock", args.fps, ny, nx)
     solver = FlowSolver(img=img, nit=50, rho=1.0, nu=args.nu,
                         boundary="throughflow",
                         inflow_velocity=args.inflow,
                         lx=args.lx, ly=args.ly,
-                        force_handlers=[handler])
+                        force_handlers=[handler],
+                        renderer=renderer)
 
     steps = solver.run(args.total_time)
 
@@ -79,43 +92,13 @@ if __name__ == '__main__':
     out_dir = args.out_dir or os.path.join(
         os.path.dirname(os.path.abspath(__file__)), 'out')
     os.makedirs(out_dir, exist_ok=True)
-    dpi = 100
-
-    # --- Air velocity: streamlines over the electrodes ---
-    fig, ax = plt.subplots(figsize=(nx / dpi, ny / dpi), dpi=dpi)
-    overlay = np.zeros((ny, nx, 4))
-    overlay[img[:, :, 2] > 127] = (0.85, 0.25, 0.20, 1.0)   # cow, red
-    overlay[img[:, :, 0] > 127] = (0.20, 0.35, 0.90, 1.0)   # rooster, blue
-    ax.imshow(overlay, origin='lower',
-              extent=[0, args.lx, 0, args.ly], aspect='auto', zorder=1)
-    xs = np.linspace(0.0, args.lx, nx)
-    ys = np.linspace(0.0, args.ly, ny)
-    ax.streamplot(xs, ys, u, v, color=speed, cmap='jet',
-                  norm=plt.matplotlib.colors.PowerNorm(
-                      gamma=0.5, vmin=0.0, vmax=max(speed.max(), 1e-12)),
-                  density=1.6, linewidth=0.7, arrowsize=0.7, zorder=2)
-    ax.set_xlim(0, args.lx)
-    ax.set_ylim(0, args.ly)
-    ax.set_xticks([])
-    ax.set_yticks([])
-    ax.set_position([0, 0, 1, 1])
     out = os.path.join(out_dir, 'ehd_cow_cock_velocity.png')
-    fig.savefig(out)
-    print(f"saved {out}")
 
-    # --- +ion density ---
-    cmap = plt.cm.Blues.copy()
-    cmap.set_bad('0.35')
-    density_m = np.ma.masked_where(solid, density)
-    fig, ax = plt.subplots(figsize=(nx / dpi, ny / dpi), dpi=dpi)
-    ax.imshow(density_m, origin='lower',
-              extent=[0, args.lx, 0, args.ly], cmap=cmap,
-              aspect='auto', vmin=0.0, vmax=1.0)
-    ax.set_xlim(0, args.lx)
-    ax.set_ylim(0, args.ly)
-    ax.set_xticks([])
-    ax.set_yticks([])
-    ax.set_position([0, 0, 1, 1])
-    out = os.path.join(out_dir, 'ehd_cow_cock_density.png')
-    fig.savefig(out)
+    # The renderer's buffer is in solver order (row 0 = the
+    # domain's bottom, y-up), while cv2 writes row 0 at the
+    # top of the image -- so flip the saved frame back to
+    # the input image's orientation, mirroring the
+    # cv2.flip applied to the input above.
+    renderer.save(out)
+    cv2.imwrite(out, cv2.flip(cv2.imread(out), 0))
     print(f"saved {out}")

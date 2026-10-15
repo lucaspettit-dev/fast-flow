@@ -1,6 +1,6 @@
 # Declarations for the renderer classes (implementation
-# in renderor.pyx).  Declared here so subclasses in other
-# modules can cimport Renderer and override render_frame;
+# in renderer.pyx).  Declared here so subclasses in other
+# modules can cimport Renderer and override draw_frame;
 # see flow.pxd for the same pattern.
 
 cimport numpy as cnp
@@ -24,17 +24,16 @@ cdef class Renderer:
     cdef DTYPE_f total_time
     cdef DTYPE_f next_frame_time
     cdef DTYPE_f frame_interval
-    cdef DTYPE_f mas_magnitude
+    cdef DTYPE_f max_magnitude
     cdef bint _running
     cdef object _thread
 
     cdef void render_frame(self, DTYPE_f dt, Py_ssize_t n, DTYPE_f* u, DTYPE_f* v) noexcept
-    cdef void draw_frame(self) noexcept
-    cdef void _publish(self)
+    cdef void draw_frame(self, Py_ssize_t n, DTYPE_f* u, DTYPE_f* v) noexcept
     cdef void _publish(self)
     cdef void _loop(self) noexcept nogil
     cdef Py_ssize_t idx(self, Py_ssize_t x, Py_ssize_t y, Py_ssize_t z) noexcept nogil
-    cpdef void refresh(self)
+    cpdef void refresh(self, const DTYPE_f[:, :] u, const DTYPE_f[:, :] v)
     cpdef void run(self)
     cpdef void save(self, str filepath)
     cpdef void close(self)
