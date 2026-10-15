@@ -193,13 +193,16 @@ cdef class FlowSolverCore:
 
         cdef DTYPE_f* u = self.u[self.uvk]
         cdef DTYPE_f* v = self.v[self.uvk]
+        cdef Py_ssize_t nx = self.nx
 
-        cdef DTYPE_f hor = (u[self.idx(y+1, x+2)] - u[self.idx(y+1, x)]) / dx2
-        cdef DTYPE_f vert = (v[self.idx(y+2, x+1)] - v[self.idx(y, x+1)]) / dy2
+        # Neighbour indices by offset from idx (one multiply
+        # for idx), not a fresh idx() multiply per neighbour.
+        cdef DTYPE_f hor = (u[idx + 1] - u[idx - 1]) / dx2
+        cdef DTYPE_f vert = (v[idx + nx] - v[idx - nx]) / dy2
 
         cdef DTYPE_f c = 2 * (
-            (u[self.idx(y+2, x+1)] - u[self.idx(y, x+1)]) / dy2
-            * (v[self.idx(y+1, x+2)] - v[self.idx(y+1, x)]) / dx2
+            (u[idx + nx] - u[idx - nx]) / dy2
+            * (v[idx + 1] - v[idx - 1]) / dx2
         )
         cdef DTYPE_f a = hor + vert
         cdef DTYPE_f b = hor * hor
@@ -224,14 +227,17 @@ cdef class FlowSolverCore:
             return
 
         cdef DTYPE_f pc = p_[idx]
-        cdef DTYPE_f pe = pc if self.solid[self.idx(y + 1, x + 2)] \
-            else p_[self.idx(y+1, x+2)]
-        cdef DTYPE_f pw = pc if self.solid[self.idx(y + 1, x)] \
-            else p_[self.idx(y+1, x)]
-        cdef DTYPE_f pn = pc if self.solid[self.idx(y + 2, x + 1)] \
-            else p_[self.idx(y+2, x+1)]
-        cdef DTYPE_f ps = pc if self.solid[idx - self.nx] \
-            else p_[self.idx(y, x+1)]
+        cdef Py_ssize_t nx = self.nx
+        # Neighbour indices by offset from idx (one multiply
+        # for idx), not a fresh idx() multiply per neighbour.
+        cdef DTYPE_f pe = pc if self.solid[idx + 1] \
+            else p_[idx + 1]
+        cdef DTYPE_f pw = pc if self.solid[idx - 1] \
+            else p_[idx - 1]
+        cdef DTYPE_f pn = pc if self.solid[idx + nx] \
+            else p_[idx + nx]
+        cdef DTYPE_f ps = pc if self.solid[idx - nx] \
+            else p_[idx - nx]
         cdef DTYPE_f hor = (pe + pw) * dy_squared
         cdef DTYPE_f vert = (pn + ps) * dx_squared
 
@@ -353,7 +359,7 @@ cdef class FlowSolverCore:
             for jj in range(self.ny):
                 base = jj * self.nx
                 for ii in range(self.nx):
-                    if not self.solid[self.idx(jj, ii)]:
+                    if not self.solid[base + ii]:
                         pmean += pp[base + ii]
                         nfluid += 1
             if nfluid > 0:
@@ -361,7 +367,7 @@ cdef class FlowSolverCore:
             for jj in range(self.ny):
                 base = jj * self.nx
                 for ii in range(self.nx):
-                    if not self.solid[self.idx(jj, ii)]:
+                    if not self.solid[base + ii]:
                         pp[base + ii] -= pmean
 
     @cython.boundscheck(False)
