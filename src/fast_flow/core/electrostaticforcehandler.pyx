@@ -558,16 +558,13 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
             return self.solids[idx] != 0
         return False
 
-    cdef DTYPE_f _drag(self, Py_ssize_t idx, DTYPE_f ion_v,
-                       DTYPE_f air_v) noexcept nogil:
-        """The change in air velocity the ions in this cell
-        cause (the get_u/get_v contract): the ions drag the
-        air toward the ion velocity.  The drag rate grows
-        with the ion density and with a resistance read
-        from the cell's solver pressure; the increment is
-        the relaxation fraction frac * (ion_v - air_v) with
-        frac capped at 1, so a step never overshoots the
-        ion velocity."""
+    cdef DTYPE_f _drag_frac(self, Py_ssize_t idx) noexcept nogil:
+        """The relaxation fraction for the drag in this cell:
+        how far the air is pulled toward the ion velocity in
+        one step. Shared by get_u/get_v (via _drag) and by
+        accumulate_uv, which applies it to both components
+        from a single computation. 0 when the cell holds no
+        ions."""
         cdef DTYPE_f density = self.d[self.dk][idx]
         cdef DTYPE_f resistance, frac, dt
         if density <= 0.0:
@@ -586,7 +583,50 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
             self.solver.rho
         if frac > 1.0:
             frac = 1.0
-        return frac * (ion_v - air_v)
+        return frac
+
+    cdef DTYPE_f _drag(self, Py_ssize_t idx, DTYPE_f ion_v,
+                       DTYPE_f air_v) noexcept nogil:
+        """The change in air velocity the ions in this cell
+        cause (the get_u/get_v contract): the ions drag the
+        air toward the ion velocity.  The drag rate grows
+        with the ion density and with a resistance read
+        from the cell's solver pressure; the increment is
+        the relaxation fraction frac * (ion_v - air_v) with
+        frac capped at 1, so a step never overshoots the
+        ion velocity."""
+        return self._drag_frac(idx) * (ion_v - air_v)
+
+    cdef void accumulate_uv(
+        self,
+        Py_ssize_t y,
+        Py_ssize_t x,
+        Py_ssize_t idx,
+        DTYPE_f* u_dest,
+        DTYPE_f* v_dest
+    ) noexcept nogil:
+        """Single-call drag: the fraction is identical for
+        both components, so compute it once and apply it to
+        u and v, instead of _drag recomputing it per
+        component (density load, solver-pressure read,
+        resistance clamp, fraction). Bitwise identical to
+        get_u + get_v."""
+        cdef DTYPE_f frac
+        if self._solid_at(idx):
+            if self.next_handler is not None:
+                self.next_handler.accumulate_uv(
+                    y, x, idx, u_dest, v_dest)
+            return
+        frac = self._drag_frac(idx)
+        u_dest[idx] += frac * (
+            self.u[self.uvk][idx] -
+            self.solver.u[self.solver.uvk][idx])
+        v_dest[idx] += frac * (
+            self.v[self.uvk][idx] -
+            self.solver.v[self.solver.uvk][idx])
+        if self.next_handler is not None:
+            self.next_handler.accumulate_uv(
+                y, x, idx, u_dest, v_dest)
 
     cdef DTYPE_f get_u(self, Py_ssize_t y, Py_ssize_t x,
                        Py_ssize_t idx) noexcept nogil:

@@ -510,7 +510,7 @@ cdef class FlowSolverCore:
             DTYPE_f* u_dest,
             DTYPE_f* v_dest) noexcept nogil:
         if self.force is not None:
-            self.force.accumulate(y, x, idx, u_dest, v_dest)
+            self.force.accumulate_uv(y, x, idx, u_dest, v_dest)
 
     @cython.boundscheck(False)
     @cython.wraparound(False)

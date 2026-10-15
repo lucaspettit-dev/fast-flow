@@ -73,6 +73,27 @@ cdef class ForceHandlerCore:
         if self.next_handler is not None:
             self.next_handler.accumulate(y, x, idx, u_dest, v_dest)
 
+    cdef void accumulate_uv(
+        self,
+        Py_ssize_t y,
+        Py_ssize_t x,
+        Py_ssize_t idx,
+        DTYPE_f* u_dest,
+        DTYPE_f* v_dest
+    ) noexcept nogil:
+        """Single-call version of accumulate(): one call adds
+        both components, then the next handler's.  The solver
+        calls this (not accumulate) so a handler can fuse the
+        work shared by its u and v contributions -- the
+        electrostatic handler's drag fraction, computed once
+        instead of once per component.  The default
+        implementation is get_u + get_v, so subclasses that
+        only override get_u/get_v keep working unchanged."""
+        u_dest[idx] += self.get_u(y, x, idx)
+        v_dest[idx] += self.get_v(y, x, idx)
+        if self.next_handler is not None:
+            self.next_handler.accumulate_uv(y, x, idx, u_dest, v_dest)
+
     cdef void accumulate_p(
         self,
         Py_ssize_t y,
@@ -118,5 +139,34 @@ cdef class ConstantVelocityForceHandlerCore(ForceHandlerCore):
             if y == self.solver.ny - 1:
                 return -self.velocity
         return 0.0
+
+    cdef void accumulate_uv(
+        self,
+        Py_ssize_t y,
+        Py_ssize_t x,
+        Py_ssize_t idx,
+        DTYPE_f* u_dest,
+        DTYPE_f* v_dest
+    ) noexcept nogil:
+        # Fused get_u + get_v: exactly one of the four
+        # direction branches can fire (u for 0/1, v for 2/3).
+        if self.direction == 0:
+            # LEFT: flow moves in -x, entering at the right edge
+            if x == self.solver.nx - 1:
+                u_dest[idx] += -self.velocity
+        elif self.direction == 1:
+            # RIGHT: flow moves in +x, entering at the left edge
+            if x == 0:
+                u_dest[idx] += self.velocity
+        elif self.direction == 2:
+            # UP: flow moves in +y, entering at the bottom edge
+            if y == 0:
+                v_dest[idx] += self.velocity
+        elif self.direction == 3:
+            # DOWN: flow moves in -y, entering at the top edge
+            if y == self.solver.ny - 1:
+                v_dest[idx] += -self.velocity
+        if self.next_handler is not None:
+            self.next_handler.accumulate_uv(y, x, idx, u_dest, v_dest)
 
 

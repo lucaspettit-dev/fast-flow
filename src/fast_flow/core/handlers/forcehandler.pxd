@@ -22,6 +22,9 @@ cdef class ForceHandlerCore:
     cdef void accumulate(self, Py_ssize_t y, Py_ssize_t x,
                          Py_ssize_t idx, DTYPE_f* u_dest,
                          DTYPE_f* v_dest) noexcept nogil
+    cdef void accumulate_uv(self, Py_ssize_t y, Py_ssize_t x,
+                            Py_ssize_t idx, DTYPE_f* u_dest,
+                            DTYPE_f* v_dest) noexcept nogil
     cdef void accumulate_p(self, Py_ssize_t y, Py_ssize_t x,
                            Py_ssize_t idx,
                            DTYPE_f* p_dest) noexcept nogil
@@ -35,3 +38,6 @@ cdef class ConstantVelocityForceHandlerCore(ForceHandlerCore):
                        Py_ssize_t idx) noexcept nogil
     cdef DTYPE_f get_v(self, Py_ssize_t y, Py_ssize_t x,
                        Py_ssize_t idx) noexcept nogil
+    cdef void accumulate_uv(self, Py_ssize_t y, Py_ssize_t x,
+                            Py_ssize_t idx, DTYPE_f* u_dest,
+                            DTYPE_f* v_dest) noexcept nogil
