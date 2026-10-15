@@ -45,6 +45,12 @@ cdef const DTYPE_f ION_AMBIENT_PRESSURE = 1.0
 cdef const DTYPE_f ION_RESISTANCE_MAX = 250.0
 cdef const DTYPE_f ION_SPEED_MAX = 1000.0
 
+# Sparse-transport block size (Idea 13): the domain is
+# tiled into SPARSE_BX x SPARSE_BY blocks; transport
+# processes only active blocks plus a 1-cell halo.
+cdef const Py_ssize_t SPARSE_BX = 16
+cdef const Py_ssize_t SPARSE_BY = 16
+
 cdef struct ShapeExtraData:
     # Metadata carried alongside a shape's geometry.  For now the
     # only entry is `charge`: the electric potential (voltage) on
@@ -97,6 +103,29 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
     # Air cells next to a positive electrode: the
     # ionization zone, where new +ions are generated.
     cdef unsigned char* ion_zone
+
+    # Sparse-transport bookkeeping (Idea 13): the domain
+    # is tiled into SPARSE_BX x SPARSE_BY blocks
+    # (sparse_nbx x sparse_nby of them). A block is active
+    # when any of its cells holds ions (or is in the
+    # ionization zone). Transport processes active blocks
+    # plus a 1-cell halo -- CFL <= 0.8 moves density at
+    # most one cell per subcycle, so the halo captures all
+    # inflow exactly and mass is conserved. cell_block
+    # maps each cell to its block; zone_blocks marks
+    # blocks containing zone cells; active is rebuilt per
+    # advance and grown per subcycle (halo cells that gain
+    # density activate their block); seen stamps cells
+    # processed in the current subcycle (halos overlap, so
+    # a cell is done at most once); stamp is the current
+    # subcycle's unique stamp (monotonic across advances).
+    cdef Py_ssize_t sparse_nbx
+    cdef Py_ssize_t sparse_nby
+    cdef Py_ssize_t* cell_block
+    cdef unsigned char* zone_blocks
+    cdef unsigned char* active
+    cdef Py_ssize_t* seen
+    cdef Py_ssize_t stamp
 
     # get_p calls seen so far in the solver's current
     # pressure pass; the ion state advances on the first
@@ -224,6 +253,44 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         self.uvk = 0
         self.p_calls = 0
         self._build_ion_zone(image, layermap)
+
+        # Sparse-transport bookkeeping (Idea 13): block
+        # index per cell, zone blocks, active flags, and
+        # the per-subcycle seen stamps.
+        self.sparse_nbx = (self.solver.nx + SPARSE_BX - 1) // SPARSE_BX
+        self.sparse_nby = (self.solver.ny + SPARSE_BY - 1) // SPARSE_BY
+        self.cell_block = <Py_ssize_t*> malloc(
+            self.solver.N * sizeof(Py_ssize_t))
+        self.zone_blocks = <unsigned char*> malloc(
+            self.sparse_nbx * self.sparse_nby * sizeof(unsigned char))
+        self.active = <unsigned char*> malloc(
+            self.sparse_nbx * self.sparse_nby * sizeof(unsigned char))
+        self.seen = <Py_ssize_t*> malloc(
+            self.solver.N * sizeof(Py_ssize_t))
+        if self.cell_block == NULL or self.zone_blocks == NULL or \
+                self.active == NULL or self.seen == NULL:
+            raise MemoryError("could not allocate sparse transport")
+        cdef Py_ssize_t by, bx, yy, xx, bidx
+        for by in range(self.sparse_nby):
+            for bx in range(self.sparse_nbx):
+                for yy in range(by * SPARSE_BY,
+                                 by * SPARSE_BY + SPARSE_BY):
+                    if yy >= self.solver.ny:
+                        break
+                    for xx in range(bx * SPARSE_BX,
+                                     bx * SPARSE_BX + SPARSE_BX):
+                        if xx >= self.solver.nx:
+                            break
+                        self.cell_block[yy * self.solver.nx + xx] = \
+                            by * self.sparse_nbx + bx
+        for bidx in range(self.sparse_nbx * self.sparse_nby):
+            self.zone_blocks[bidx] = 0
+            self.active[bidx] = 0
+        for i in range(self.solver.N):
+            self.seen[i] = -1
+            if self.ion_zone[i]:
+                self.zone_blocks[self.cell_block[i]] = 1
+        self.stamp = 0
 
         self.init_field()
 
@@ -422,6 +489,18 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         if self.ion_zone != NULL:
             free(self.ion_zone)
             self.ion_zone = NULL
+        if self.cell_block != NULL:
+            free(self.cell_block)
+            self.cell_block = NULL
+        if self.zone_blocks != NULL:
+            free(self.zone_blocks)
+            self.zone_blocks = NULL
+        if self.active != NULL:
+            free(self.active)
+            self.active = NULL
+        if self.seen != NULL:
+            free(self.seen)
+            self.seen = NULL
         if self.cu != NULL:
             for i in range(2):
                 if self.cu[i] != NULL:
@@ -628,6 +707,97 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
             return 0.0
         return val
 
+    cdef inline void _transport_cell(
+            self,
+            Py_ssize_t idx,
+            Py_ssize_t x,
+            Py_ssize_t y,
+            DTYPE_f* sbuf,
+            DTYPE_f* dbuf,
+            DTYPE_f* iu,
+            DTYPE_f* iv,
+            DTYPE_f tau,
+            DTYPE_f dx,
+            DTYPE_f dy) noexcept nogil:
+        """One cell's donor-cell flux-transport update
+        (sbuf -> dbuf), verbatim the dense loop's body.
+        Extracted so the sparse block loop can call it per
+        cell; the compiler inlines it (single call site)."""
+        cdef Py_ssize_t nx = self.solver.nx
+        cdef Py_ssize_t ny = self.solver.ny
+        cdef DTYPE_f ue, uw, vn, vs, fx_e, fx_w, fy_n, fy_s
+        cdef DTYPE_f src_e, src_w, src_n, src_s, val, shield
+        if self._solid_at(idx):
+            dbuf[idx] = 0.0
+            return
+        # east face
+        if x + 1 < nx and not self._solid_at(idx + 1):
+            ue = 0.5 * (iu[idx] + iu[idx + 1])
+            src_e = sbuf[idx + 1]
+        else:
+            ue = iu[idx]
+            src_e = 0.0
+        fx_e = ue * (sbuf[idx] if ue > 0.0 else src_e)
+        # west face
+        if x > 0 and not self._solid_at(idx - 1):
+            uw = 0.5 * (iu[idx] + iu[idx - 1])
+            src_w = sbuf[idx - 1]
+        else:
+            uw = iu[idx]
+            src_w = 0.0
+        fx_w = uw * (src_w if uw > 0.0 else sbuf[idx])
+        # north face
+        if y + 1 < ny and not self._solid_at(idx + nx):
+            vn = 0.5 * (iv[idx] + iv[idx + nx])
+            src_n = sbuf[idx + nx]
+        else:
+            vn = iv[idx]
+            src_n = 0.0
+        fy_n = vn * (sbuf[idx] if vn > 0.0 else src_n)
+        # south face
+        if y > 0 and not self._solid_at(idx - nx):
+            vs = 0.5 * (iv[idx] + iv[idx - nx])
+            src_s = sbuf[idx - nx]
+        else:
+            vs = iv[idx]
+            src_s = 0.0
+        fy_s = vs * (src_s if vs > 0.0 else sbuf[idx])
+        # Space-charge choking: a flux into a cell fades as
+        # that cell's density approaches the shielding
+        # density -- the accumulated charge cancels the
+        # field that drives more ions in, so sinks cannot
+        # accumulate without limit.  Collection into solids
+        # and outflow from the domain are unimpeded.
+        if ue > 0.0:
+            if x + 1 < nx and not self._solid_at(idx + 1):
+                shield = 1.0 - sbuf[idx + 1] / ION_SHIELD_DENSITY
+                fx_e *= shield if shield > 0.0 else 0.0
+        else:
+            shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
+            fx_e *= shield if shield > 0.0 else 0.0
+        if uw > 0.0:
+            shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
+            fx_w *= shield if shield > 0.0 else 0.0
+        elif x > 0 and not self._solid_at(idx - 1):
+            shield = 1.0 - sbuf[idx - 1] / ION_SHIELD_DENSITY
+            fx_w *= shield if shield > 0.0 else 0.0
+        if vn > 0.0:
+            if y + 1 < ny and not self._solid_at(idx + nx):
+                shield = 1.0 - sbuf[idx + nx] / ION_SHIELD_DENSITY
+                fy_n *= shield if shield > 0.0 else 0.0
+        else:
+            shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
+            fy_n *= shield if shield > 0.0 else 0.0
+        if vs > 0.0:
+            shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
+            fy_s *= shield if shield > 0.0 else 0.0
+        elif y > 0 and not self._solid_at(idx - nx):
+            shield = 1.0 - sbuf[idx - nx] / ION_SHIELD_DENSITY
+            fy_s *= shield if shield > 0.0 else 0.0
+        val = sbuf[idx] - tau * (
+            (fx_e - fx_w) / dx + (fy_n - fy_s) / dy)
+        dbuf[idx] = val if val > 0.0 else 0.0
+
     cdef void _advance_ion_state(self) noexcept nogil:
         """Advance the ion density, velocity and pressure
         by the solver's current dt.
@@ -672,6 +842,8 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         cdef DTYPE_f* dbuf
         cdef DTYPE_f* tbuf
         cdef Py_ssize_t x, y, idx, k, cur
+        cdef Py_ssize_t bidx, bx, by
+        cdef Py_ssize_t x0, y0, x1, y1, hx0, hy0, hx1, hy1
         cdef Py_ssize_t nsub
         cdef DTYPE_f vx, vy, sp2, scale, rate, cell_rate, tau
         cdef DTYPE_f ue, uw, vn, vs, fx_e, fx_w, fy_n, fy_s
@@ -681,11 +853,18 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         if dt <= 0.0:
             dt = self.solver.dt_base
 
-        # 1. ion velocity, and the transport rate it implies
+        # 1. ion velocity, and the transport rate it implies.
+        # Also (re)builds the sparse-transport active set:
+        # start from the zone blocks, then OR in every block
+        # holding density.
+        for bidx in range(self.sparse_nbx * self.sparse_nby):
+            self.active[bidx] = self.zone_blocks[bidx]
         rate = 0.0
         for y in range(ny):
             for x in range(nx):
                 idx = y * nx + x
+                if dd[idx] > 0.0:
+                    self.active[self.cell_block[idx]] = 1
                 if self._solid_at(idx):
                     iu[idx] = 0.0
                     iv[idx] = 0.0
@@ -717,86 +896,62 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         cur = self.dk
         sbuf = self.d[cur]
         dbuf = self.d[1 - cur]
+        # 2. conservative flux transport, subcycled, sparse:
+        # only active blocks plus a 1-cell halo are processed.
+        # CFL <= 0.8 moves density at most one cell per
+        # subcycle, so the halo captures all inflow exactly:
+        # a halo cell's update accounts for the density it
+        # receives, and if it gains density its block
+        # activates for the next subcycle. Cells outside all
+        # active blocks and halos hold exactly 0 in both
+        # buffers (they never held ions), so skipping them
+        # leaves their density at 0, as the dense loop would
+        # compute. Halos overlap, so `seen` (stamped per
+        # subcycle) ensures each cell is done at most once.
         for k in range(nsub):
-            for y in range(ny):
-                for x in range(nx):
-                    idx = y * nx + x
-                    if self._solid_at(idx):
-                        dbuf[idx] = 0.0
+            self.stamp += 1
+            for by in range(self.sparse_nby):
+                for bx in range(self.sparse_nbx):
+                    if not self.active[by * self.sparse_nbx + bx]:
                         continue
-                    # east face
-                    if x + 1 < nx and not self._solid_at(idx + 1):
-                        ue = 0.5 * (iu[idx] + iu[idx + 1])
-                        src_e = sbuf[idx + 1]
-                    else:
-                        ue = iu[idx]
-                        src_e = 0.0
-                    fx_e = ue * (sbuf[idx] if ue > 0.0 else src_e)
-                    # west face
-                    if x > 0 and not self._solid_at(idx - 1):
-                        uw = 0.5 * (iu[idx] + iu[idx - 1])
-                        src_w = sbuf[idx - 1]
-                    else:
-                        uw = iu[idx]
-                        src_w = 0.0
-                    fx_w = uw * (src_w if uw > 0.0 else sbuf[idx])
-                    # north face
-                    if y + 1 < ny and not self._solid_at(idx + nx):
-                        vn = 0.5 * (iv[idx] + iv[idx + nx])
-                        src_n = sbuf[idx + nx]
-                    else:
-                        vn = iv[idx]
-                        src_n = 0.0
-                    fy_n = vn * (sbuf[idx] if vn > 0.0 else src_n)
-                    # south face
-                    if y > 0 and not self._solid_at(idx - nx):
-                        vs = 0.5 * (iv[idx] + iv[idx - nx])
-                        src_s = sbuf[idx - nx]
-                    else:
-                        vs = iv[idx]
-                        src_s = 0.0
-                    fy_s = vs * (src_s if vs > 0.0 else sbuf[idx])
-                    # Space-charge choking: a flux into a
-                    # cell fades as that cell's density
-                    # approaches the shielding density --
-                    # the accumulated charge cancels the
-                    # field that drives more ions in, so
-                    # sinks cannot accumulate without
-                    # limit.  Collection into solids and
-                    # outflow from the domain are unimpeded.
-                    if ue > 0.0:
-                        if x + 1 < nx and not self._solid_at(idx + 1):
-                            shield = 1.0 - sbuf[idx + 1] / \
-                                ION_SHIELD_DENSITY
-                            fx_e *= shield if shield > 0.0 else 0.0
-                    else:
-                        shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
-                        fx_e *= shield if shield > 0.0 else 0.0
-                    if uw > 0.0:
-                        shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
-                        fx_w *= shield if shield > 0.0 else 0.0
-                    elif x > 0 and not self._solid_at(idx - 1):
-                        shield = 1.0 - sbuf[idx - 1] / \
-                            ION_SHIELD_DENSITY
-                        fx_w *= shield if shield > 0.0 else 0.0
-                    if vn > 0.0:
-                        if y + 1 < ny and not self._solid_at(idx + nx):
-                            shield = 1.0 - sbuf[idx + nx] / \
-                                ION_SHIELD_DENSITY
-                            fy_n *= shield if shield > 0.0 else 0.0
-                    else:
-                        shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
-                        fy_n *= shield if shield > 0.0 else 0.0
-                    if vs > 0.0:
-                        shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
-                        fy_s *= shield if shield > 0.0 else 0.0
-                    elif y > 0 and not self._solid_at(idx - nx):
-                        shield = 1.0 - sbuf[idx - nx] / \
-                            ION_SHIELD_DENSITY
-                        fy_s *= shield if shield > 0.0 else 0.0
-                    val = sbuf[idx] - tau * (
-                        (fx_e - fx_w) / dx + (fy_n - fy_s) / dy)
-                    dbuf[idx] = val if val > 0.0 else 0.0
+                    x0 = bx * SPARSE_BX
+                    y0 = by * SPARSE_BY
+                    x1 = x0 + SPARSE_BX
+                    if x1 > nx:
+                        x1 = nx
+                    y1 = y0 + SPARSE_BY
+                    if y1 > ny:
+                        y1 = ny
+                    hx0 = x0 - 1
+                    if hx0 < 0:
+                        hx0 = 0
+                    hy0 = y0 - 1
+                    if hy0 < 0:
+                        hy0 = 0
+                    hx1 = x1 + 1
+                    if hx1 > nx:
+                        hx1 = nx
+                    hy1 = y1 + 1
+                    if hy1 > ny:
+                        hy1 = ny
+                    for y in range(hy0, hy1):
+                        for x in range(hx0, hx1):
+                            idx = y * nx + x
+                            if self.seen[idx] == self.stamp:
+                                continue
+                            self.seen[idx] = self.stamp
+                            self._transport_cell(
+                                idx, x, y, sbuf, dbuf,
+                                iu, iv, tau, dx, dy)
+                            # Halo growth: a halo cell (outside
+                            # this block) that gained density
+                            # activates its block for the next
+                            # subcycle.
+                            if (x < x0 or x >= x1 or
+                                    y < y0 or y >= y1) and \
+                                    dbuf[idx] > 0.0:
+                                self.active[
+                                    self.cell_block[idx]] = 1
             tbuf = sbuf
             sbuf = dbuf
             dbuf = tbuf
