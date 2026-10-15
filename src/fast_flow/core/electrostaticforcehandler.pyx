@@ -11,6 +11,7 @@ extradata) and will populate the Coulomb field from them.
 
 import numpy as np
 cimport numpy as cnp
+from cython.parallel cimport prange
 from libc.stdlib cimport malloc, free, realloc
 from libc.math cimport sqrt, fabs
 
@@ -723,8 +724,14 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         cur = self.dk
         sbuf = self.d[cur]
         dbuf = self.d[1 - cur]
+        # 2. conservative flux transport, subcycled.
+        # Row-parallel: each row's update reads the shared
+        # source buffer and writes only its own dest row
+        # (Jacobi), so rows are independent.  Per-cell
+        # temporaries are auto-privatized by Cython (assigned
+        # with = inside the loop).
         for k in range(nsub):
-            for y in range(ny):
+            for y in prange(ny, nogil=True):
                 for x in range(nx):
                     idx = y * nx + x
                     if self._solid_at(idx):
@@ -798,32 +805,32 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                         if se:
                             shield = 1.0 - sbuf[idx + 1] / \
                                 ION_SHIELD_DENSITY
-                            fx_e *= shield if shield > 0.0 else 0.0
+                            fx_e = fx_e * (shield if shield > 0.0 else 0.0)
                     else:
                         shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
-                        fx_e *= shield if shield > 0.0 else 0.0
+                        fx_e = fx_e * (shield if shield > 0.0 else 0.0)
                     if uw > 0.0:
                         shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
-                        fx_w *= shield if shield > 0.0 else 0.0
+                        fx_w = fx_w * (shield if shield > 0.0 else 0.0)
                     elif sw:
                         shield = 1.0 - sbuf[idx - 1] / \
                             ION_SHIELD_DENSITY
-                        fx_w *= shield if shield > 0.0 else 0.0
+                        fx_w = fx_w * (shield if shield > 0.0 else 0.0)
                     if vn > 0.0:
                         if sn:
                             shield = 1.0 - sbuf[idx + nx] / \
                                 ION_SHIELD_DENSITY
-                            fy_n *= shield if shield > 0.0 else 0.0
+                            fy_n = fy_n * (shield if shield > 0.0 else 0.0)
                     else:
                         shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
-                        fy_n *= shield if shield > 0.0 else 0.0
+                        fy_n = fy_n * (shield if shield > 0.0 else 0.0)
                     if vs > 0.0:
                         shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
-                        fy_s *= shield if shield > 0.0 else 0.0
+                        fy_s = fy_s * (shield if shield > 0.0 else 0.0)
                     elif ss:
                         shield = 1.0 - sbuf[idx - nx] / \
                             ION_SHIELD_DENSITY
-                        fy_s *= shield if shield > 0.0 else 0.0
+                        fy_s = fy_s * (shield if shield > 0.0 else 0.0)
                     # tau/dx and tau/dy hoisted above the subcycle
                     # loop: the old code divided twice per cell
                     # per subcycle (rounding differs in the last
@@ -840,12 +847,15 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         gen = dt / ION_PRODUCTION_TAU
         if gen > 1.0:
             gen = 1.0
-        for idx in range(nx * ny):
+        # 3. ionization-zone generation (per-cell in-place;
+        # rows independent)
+        for idx in prange(nx * ny, nogil=True):
             if self.ion_zone[idx] and sbuf[idx] < ION_ZONE_TARGET:
                 sbuf[idx] += (ION_ZONE_TARGET - sbuf[idx]) * gen
 
         # 4. diffusion of the density into the other buffer
-        for y in range(ny):
+        # (Jacobi: reads sbuf, writes own dbuf row)
+        for y in prange(ny, nogil=True):
             for x in range(nx):
                 idx = y * nx + x
                 if self._solid_at(idx):
@@ -866,7 +876,8 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         sbuf = self.d[self.dk]
 
         # 5. electrostatic pressure of the ion cloud
-        for idx in range(nx * ny):
+        # (per-cell: reads sbuf, writes own pp cell)
+        for idx in prange(nx * ny, nogil=True):
             if self._solid_at(idx):
                 pp[idx] = 0.0
                 continue

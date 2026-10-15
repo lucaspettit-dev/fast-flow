@@ -7,18 +7,20 @@ from setuptools.extension import Extension
 from Cython.Build import cythonize
 import numpy as np
 
-# Optimization only.  The core loops are plain serial C
-# over raw buffers (no OpenMP, no GIL juggling): the
-# parallel regions cost more in thread sync than the
-# per-cell work saves.
+# Optimization + OpenMP (Idea 3): the hot loops are
+# row-parallel (Jacobi / per-cell, rows independent) and
+# run under prange.  The earlier prange was removed in
+# 826e795 because it parallelized over the sweep index
+# (a race: threads flipped the shared buffer index);
+# row-parallelism has no shared writes.
 if platform.system() == "Darwin":
-    compile_args = ["-O3"]
+    compile_args = ["-O3", "-Xpreprocessor", "-fopenmp"]
     if platform.machine() == "arm64":
         compile_args.append("-mcpu=native")
-    link_args = []
+    link_args = ["-lomp"]
 else:
-    compile_args = ["-O3", "-march=native"]
-    link_args = []
+    compile_args = ["-O3", "-march=native", "-fopenmp"]
+    link_args = ["-fopenmp"]
 
 def _extension(name, source):
     return Extension(
