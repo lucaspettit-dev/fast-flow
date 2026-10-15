@@ -56,7 +56,13 @@ cdef class FlowSolverCore:
                                     DTYPE_f dx_squared) noexcept nogil
     cdef void pressure_set_boundry_conditions(self) noexcept nogil
     cdef void pressure_poisson(self) noexcept
-    cdef void update_momentum(self) noexcept
+    cdef void momentum_step(self, Py_ssize_t y, Py_ssize_t x,
+                            DTYPE_f* p, DTYPE_f* u_src, DTYPE_f* v_src,
+                            DTYPE_f* u_dest, DTYPE_f* v_dest) noexcept nogil
+    cdef void apply_drag_forces(self) noexcept
+    cdef void _pressure_bc_row(self, Py_ssize_t y) noexcept nogil
+    cdef void pressure_poisson_fused_last(
+        self, DTYPE_f dy_squared, DTYPE_f dx_squared) noexcept
     cdef void apply_uv_force(self, Py_ssize_t y, Py_ssize_t x,
                              Py_ssize_t idx, DTYPE_f* u_dest,
                              DTYPE_f* v_dest) noexcept nogil

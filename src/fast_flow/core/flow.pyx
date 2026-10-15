@@ -331,17 +331,25 @@ cdef class FlowSolverCore:
         dest = src ^ 1
 
         for q in range(self.nit - 1):
-            p_dest = self.p[dest]
-            p_src = self.p[src]
-            for y in range(self.ny - 2):
-                for x in range(self.nx - 2):
-                    self.pressure_poisson_step(y, x, p_dest, p_src, dy_squared, dx_squared)
-            self.pressure_set_boundry_conditions()
+            if q == self.nit - 2:
+                # Last sweep: momentum fused in, lagged one
+                # row + one column (see
+                # pressure_poisson_fused_last). It flips pk
+                # and uvk itself.
+                self.pressure_poisson_fused_last(
+                    dy_squared, dx_squared)
+            else:
+                p_dest = self.p[dest]
+                p_src = self.p[src]
+                for y in range(self.ny - 2):
+                    for x in range(self.nx - 2):
+                        self.pressure_poisson_step(y, x, p_dest, p_src, dy_squared, dx_squared)
+                self.pressure_set_boundry_conditions()
 
-            # rotate src/dest
-            self.pk ^= 1
-            src = self.pk
-            dest = src ^ 1
+                # rotate src/dest
+                self.pk ^= 1
+                src = self.pk
+                dest = src ^ 1
 
         if self.flow_mode == 1:
             # all-Neumann pressure is defined only up to a constant;
@@ -367,21 +375,25 @@ cdef class FlowSolverCore:
     @cython.boundscheck(False)
     @cython.wraparound(False)
     @cython.cdivision(True)
-    cdef void update_momentum(self) noexcept:
-        cdef Py_ssize_t src = self.uvk
-        cdef Py_ssize_t dest = src ^ 1
-
-        cdef DTYPE_f* u_src = self.u[src]
-        cdef DTYPE_f* v_src = self.v[src]
-        cdef DTYPE_f* u_dest = self.u[dest]
-        cdef DTYPE_f* v_dest = self.v[dest]
-        cdef DTYPE_f* p = self.p[self.pk]
-
+    cdef void momentum_step(
+            self,
+            Py_ssize_t y,
+            Py_ssize_t x,
+            DTYPE_f* p,
+            DTYPE_f* u_src,
+            DTYPE_f* v_src,
+            DTYPE_f* u_dest,
+            DTYPE_f* v_dest) noexcept nogil:
+        """One cell's momentum update (pressure gradient +
+        upwind convection + viscosity), without the handler
+        drag.  Extracted from the old update_momentum() so
+        the fused last pressure sweep can call it per cell,
+        lagged one row + one column behind the sweep front.
+        p is the pressure buffer the sweep is writing (the
+        new field); u_src/v_src are the previous step's
+        velocities, u_dest/v_dest the new ones."""
         cdef Py_ssize_t nx = self.nx
-        cdef Py_ssize_t ny = self.ny
-        cdef Py_ssize_t x
-        cdef Py_ssize_t y
-        cdef Py_ssize_t idx
+        cdef Py_ssize_t idx = self.idx(y, x)
 
         cdef DTYPE_f dt = self.dt
         cdef DTYPE_f dx = self.dx
@@ -391,113 +403,195 @@ cdef class FlowSolverCore:
         cdef DTYPE_f p_c, p_e, p_w, p_n, p_s
         cdef DTYPE_f uc, vc, dudx, dudy, dvdx, dvdy
 
-        # rows are independent (read src buffers, write own dest
-        # row).  Serial: no OpenMP, no GIL juggling -- the
-        # parallel regions cost more in thread sync than the
-        # per-cell work saves.
-        for y in range(1, ny - 1):
-            for x in range(1, nx - 1):
-                idx = self.idx(y, x)
+        if self.solid[idx]:
+            u_dest[idx] = 0.0
+            v_dest[idx] = 0.0
+            return
 
+        # pressure at the centre and each neighbour; a
+        # neighbour inside a solid is ignored (own value
+        # used, i.e. zero normal gradient at the wall)
+        p_c = p[idx]
+        p_e = p_c if self.solid[idx + 1] else p[idx + 1]
+        p_w = p_c if self.solid[idx - 1] else p[idx - 1]
+        p_n = p_c if self.solid[idx + nx] else p[idx + nx]
+        p_s = p_c if self.solid[idx - nx] else p[idx - nx]
+
+        # Upwind convection: each derivative is differenced
+        # toward the side the flow comes from, chosen by the
+        # sign of the advecting velocity at this cell.  (The
+        # old code always used the backward difference, which
+        # is upwind only for positive velocities and downwind
+        # -- anti-dissipative -- wherever the flow reverses.)
+        # Neighbour values inside solids are the enforced 0,
+        # as before.  Diffusion and pressure stay centred.
+        uc = u_src[idx]
+        vc = v_src[idx]
+        if uc >= 0.0:
+            dudx = (u_src[idx] - u_src[idx - 1]) / dx
+            dvdx = (v_src[idx] - v_src[idx - 1]) / dx
+        else:
+            dudx = (u_src[idx + 1] - u_src[idx]) / dx
+            dvdx = (v_src[idx + 1] - v_src[idx]) / dx
+        if vc >= 0.0:
+            dudy = (u_src[idx] - u_src[idx - nx]) / dy
+            dvdy = (v_src[idx] - v_src[idx - nx]) / dy
+        else:
+            dudy = (u_src[idx + nx] - u_src[idx]) / dy
+            dvdy = (v_src[idx + nx] - v_src[idx]) / dy
+
+        # Horizontal velocity u
+        u_dest[idx] = (
+            u_src[idx]
+
+            # convection (upwind)
+            - dt * (uc * dudx + vc * dudy)
+
+            # x pressure gradient
+            - dt / (2.0 * rho * dx)
+            * (p_e - p_w)
+
+            # viscosity
+            + nu * (
+                dt / (dx * dx)
+                * (
+                    u_src[idx + 1]
+                    - 2.0 * u_src[idx]
+                    + u_src[idx - 1]
+                )
+                +
+                dt / (dy * dy)
+                * (
+                    u_src[idx + nx]
+                    - 2.0 * u_src[idx]
+                    + u_src[idx - nx]
+                )
+            )
+        )
+
+        # Vertical velocity v
+        v_dest[idx] = (
+            v_src[idx]
+
+            # convection (upwind)
+            - dt * (uc * dvdx + vc * dvdy)
+
+            # y pressure gradient
+            - dt / (2.0 * rho * dy)
+            * (p_n - p_s)
+
+            # viscosity
+            + nu * (
+                dt / (dx * dx)
+                * (
+                    v_src[idx + 1]
+                    - 2.0 * v_src[idx]
+                    + v_src[idx - 1]
+                )
+                +
+                dt / (dy * dy)
+                * (
+                    v_src[idx + nx]
+                    - 2.0 * v_src[idx]
+                    + v_src[idx - nx]
+                )
+            )
+        )
+
+    @cython.boundscheck(False)
+    @cython.wraparound(False)
+    @cython.cdivision(True)
+    cdef void apply_drag_forces(self) noexcept:
+        """Handler drag pass: the apply_uv_force part of the
+        old update_momentum(), split out so the fused
+        momentum sweep stays exact. Drag reads solver
+        pressure for resistance, which must be post-pinning
+        -- the fused sweep runs before pinning, so drag
+        cannot live in it. Runs after pressure_poisson(),
+        before clamp, exactly where the old update_momentum()
+        applied it."""
+        cdef Py_ssize_t x, y, idx
+        cdef DTYPE_f* u_dest
+        cdef DTYPE_f* v_dest
+        if self.force is None:
+            return
+        u_dest = self.u[self.uvk]
+        v_dest = self.v[self.uvk]
+        for y in range(1, self.ny - 1):
+            for x in range(1, self.nx - 1):
+                idx = y * self.nx + x
                 if self.solid[idx]:
-                    u_dest[idx] = 0.0
-                    v_dest[idx] = 0.0
                     continue
-
-                # pressure at the centre and each neighbour; a
-                # neighbour inside a solid is ignored (own value
-                # used, i.e. zero normal gradient at the wall)
-                p_c = p[idx]
-                p_e = p_c if self.solid[idx + 1] else p[idx + 1]
-                p_w = p_c if self.solid[idx - 1] else p[idx - 1]
-                p_n = p_c if self.solid[idx + nx] else p[idx + nx]
-                p_s = p_c if self.solid[idx - nx] else p[idx - nx]
-
-                # Upwind convection: each derivative is differenced
-                # toward the side the flow comes from, chosen by the
-                # sign of the advecting velocity at this cell.  (The
-                # old code always used the backward difference, which
-                # is upwind only for positive velocities and downwind
-                # -- anti-dissipative -- wherever the flow reverses.)
-                # Neighbour values inside solids are the enforced 0,
-                # as before.  Diffusion and pressure stay centred.
-                uc = u_src[idx]
-                vc = v_src[idx]
-                if uc >= 0.0:
-                    dudx = (u_src[idx] - u_src[idx - 1]) / dx
-                    dvdx = (v_src[idx] - v_src[idx - 1]) / dx
-                else:
-                    dudx = (u_src[idx + 1] - u_src[idx]) / dx
-                    dvdx = (v_src[idx + 1] - v_src[idx]) / dx
-                if vc >= 0.0:
-                    dudy = (u_src[idx] - u_src[idx - nx]) / dy
-                    dvdy = (v_src[idx] - v_src[idx - nx]) / dy
-                else:
-                    dudy = (u_src[idx + nx] - u_src[idx]) / dy
-                    dvdy = (v_src[idx + nx] - v_src[idx]) / dy
-
-                # Horizontal velocity u
-                u_dest[idx] = (
-                    u_src[idx]
-
-                    # convection (upwind)
-                    - dt * (uc * dudx + vc * dudy)
-
-                    # x pressure gradient
-                    - dt / (2.0 * rho * dx)
-                    * (p_e - p_w)
-
-                    # viscosity
-                    + nu * (
-                        dt / (dx * dx)
-                        * (
-                            u_src[idx + 1]
-                            - 2.0 * u_src[idx]
-                            + u_src[idx - 1]
-                        )
-                        +
-                        dt / (dy * dy)
-                        * (
-                            u_src[idx + nx]
-                            - 2.0 * u_src[idx]
-                            + u_src[idx - nx]
-                        )
-                    )
-                )
-
-                # Vertical velocity v
-                v_dest[idx] = (
-                    v_src[idx]
-
-                    # convection (upwind)
-                    - dt * (uc * dvdx + vc * dvdy)
-
-                    # y pressure gradient
-                    - dt / (2.0 * rho * dy)
-                    * (p_n - p_s)
-
-                    # viscosity
-                    + nu * (
-                        dt / (dx * dx)
-                        * (
-                            v_src[idx + 1]
-                            - 2.0 * v_src[idx]
-                            + v_src[idx - 1]
-                        )
-                        +
-                        dt / (dy * dy)
-                        * (
-                            v_src[idx + nx]
-                            - 2.0 * v_src[idx]
-                            + v_src[idx - nx]
-                        )
-                    )
-                )
-
                 self.apply_uv_force(y, x, idx, u_dest, v_dest)
 
-        # dest now contains the newest velocity field.
-        self.uvk = dest
+    @cython.boundscheck(False)
+    @cython.wraparound(False)
+    @cython.cdivision(True)
+    cdef void _pressure_bc_row(self, Py_ssize_t y) noexcept nogil:
+        """Boundary copies for one row, for the fused sweep.
+        Mode-independent: both modes copy left/right from the
+        row's interior, and the south row (row 0) from row 1.
+        (The north row differs by mode -- throughflow copies,
+        cavity pins to 0 -- and is handled by the full BC pass
+        in the drain.) p is the dest buffer (pk not yet
+        flipped)."""
+        cdef DTYPE_f* p = self.p[self.pk ^ 1]
+        cdef Py_ssize_t nx = self.nx
+        cdef Py_ssize_t i
+        p[y * nx] = p[y * nx + 1]
+        p[y * nx + nx - 1] = p[y * nx + nx - 2]
+        if y == 1:
+            for i in range(1, nx - 1):
+                p[i] = p[nx + i]
+
+    @cython.boundscheck(False)
+    @cython.wraparound(False)
+    @cython.cdivision(True)
+    cdef void pressure_poisson_fused_last(
+            self,
+            DTYPE_f dy_squared,
+            DTYPE_f dx_squared) noexcept:
+        """Last Jacobi sweep with the momentum update fused
+        in, lagged by one row and one column.
+
+        After the sweep finishes row y+1, momentum for row y
+        runs: every pressure it reads (rows y-1, y, y+1) is
+        already this sweep's final value -- the lag guarantees
+        it. Per-row BC copies run just before each momentum
+        row so boundary-adjacent cells read post-BC values;
+        the full BC pass + a drain for the last interior row
+        (whose north neighbours only get BCs after the sweep)
+        finish the job. Then pk and uvk flip. The handler
+        drag is NOT in here (see apply_drag_forces): it reads
+        solver pressure for resistance, which must be
+        post-pinning, and pinning runs after this sweep."""
+        cdef Py_ssize_t src = self.pk
+        cdef Py_ssize_t dest = src ^ 1
+        cdef DTYPE_f* p_dest = self.p[dest]
+        cdef DTYPE_f* p_src = self.p[src]
+        cdef DTYPE_f* u_src = self.u[self.uvk]
+        cdef DTYPE_f* v_src = self.v[self.uvk]
+        cdef DTYPE_f* u_dest = self.u[self.uvk ^ 1]
+        cdef DTYPE_f* v_dest = self.v[self.uvk ^ 1]
+        cdef Py_ssize_t y, x
+        cdef Py_ssize_t nx = self.nx
+        cdef Py_ssize_t ny = self.ny
+
+        for y in range(ny - 2):
+            for x in range(nx - 2):
+                self.pressure_poisson_step(
+                    y, x, p_dest, p_src, dy_squared, dx_squared)
+            if y >= 1:
+                self._pressure_bc_row(y)
+                for x in range(1, nx - 1):
+                    self.momentum_step(
+                        y, x, p_dest, u_src, v_src, u_dest, v_dest)
+        self.pressure_set_boundry_conditions()
+        for x in range(1, nx - 1):
+            self.momentum_step(
+                ny - 2, x, p_dest, u_src, v_src, u_dest, v_dest)
+        self.pk ^= 1
+        self.uvk ^= 1
 
     @cython.boundscheck(False)
     @cython.wraparound(False)
@@ -710,10 +804,11 @@ cdef class FlowSolverCore:
 
     cdef void _step_once(self) noexcept:
         self.pressure_poisson()
-        self.update_momentum()
+        self.apply_drag_forces()
 
-        # update_momentum() has already changed self.uvk to the
-        # newly calculated destination buffer.
+        # pressure_poisson()'s fused last sweep has already
+        # changed self.uvk to the newly calculated destination
+        # buffer.
         self.clamp_momentum_boundary()
         self.apply_boundary_forces()
         self.apply_pressure_forces()
