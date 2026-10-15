@@ -707,10 +707,16 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                 if cell_rate > rate:
                     rate = cell_rate
 
-        # 2. conservative flux transport, subcycled
+        # 2. conservative flux transport, subcycled.
+        # CFL limit 1.0 (was 0.8): donor-cell upwind is
+        # stable up to CFL = 1, so 1.0 cuts ~20% of the
+        # subcycles. The time-splitting error changes, so
+        # results differ from the 0.8 run at discretization
+        # level (see docs/perf/cfl-1.0.md) -- this is a
+        # numerical change, not a pure optimization.
         nsub = 1
         if rate > 0.0:
-            nsub = <Py_ssize_t>(dt * rate / 0.8) + 1
+            nsub = <Py_ssize_t>(dt * rate / 1.0) + 1
             if nsub > 8192:
                 nsub = 8192
         tau = dt / nsub
