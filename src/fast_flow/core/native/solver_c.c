@@ -95,7 +95,7 @@ static void *pool_worker_indexed(void *arg) {
 
         pool_chunk(pool, n, id, &start, &end);
         if (func && end > start)
-            func(ctx, start, end);
+            func(ctx, start, end, id);
 
         pthread_mutex_lock(&pool->mutex);
         if (gen == pool->generation) {
@@ -192,8 +192,11 @@ ff_pool_t *ff_pool_create(int nthreads) {
     return pool;
 }
 
-void ff_pool_destroy(ff_pool_t *pool) {
-    int i;
+int ff_pool_nthreads(const ff_pool_t *pool) {
+    return pool ? pool->nthreads : 1;
+}
+
+void ff_pool_destroy(ff_pool_t *pool) {    int i;
     if (!pool)
         return;
     if (pool->nworkers > 0) {
@@ -218,7 +221,7 @@ void ff_pool_for(ff_pool_t *pool, long n, ff_task_fn func, void *ctx) {
         return;
     if (pool->nworkers == 0) {
         /* single-threaded: run the whole range inline */
-        func(ctx, 0, n);
+        func(ctx, 0, n, 0);
         return;
     }
     pthread_mutex_lock(&pool->mutex);
@@ -233,7 +236,7 @@ void ff_pool_for(ff_pool_t *pool, long n, ff_task_fn func, void *ctx) {
     /* main thread runs chunk 0 */
     pool_chunk(pool, n, 0, &start, &end);
     if (end > start)
-        func(ctx, start, end);
+        func(ctx, start, end, 0);
 
     /* barrier: wait for all workers */
     pthread_mutex_lock(&pool->mutex);
@@ -345,6 +348,10 @@ long solver_c_uvk(const solver_c_t *s) {
     return s ? s->uvk : 0;
 }
 
+ff_pool_t *solver_c_pool(solver_c_t *s) {
+    return s ? s->pool : NULL;
+}
+
 /* ------------------------------------------------------------------ */
 /* Per-cell kernels (faithful port of the .pyx methods)               */
 /* ------------------------------------------------------------------ */
@@ -396,8 +403,9 @@ typedef struct {
     double *p_dest;
 } bc_ctx_t;
 
-static void bc_zero_solids(void *vctx, long y0, long y1) {
+static void bc_zero_solids(void *vctx, long y0, long y1, int id) {
     bc_ctx_t *ctx = (bc_ctx_t *)vctx;
+    (void)id;
     solver_c_t *s = ctx->s;
     double *p = ctx->p_dest;
     long y, x, idx;
@@ -464,8 +472,9 @@ typedef struct {
     int with_build_up;
 } poisson_ctx_t;
 
-static void poisson_rows(void *vctx, long y0, long y1) {
+static void poisson_rows(void *vctx, long y0, long y1, int id) {
     poisson_ctx_t *ctx = (poisson_ctx_t *)vctx;
+    (void)id;
     solver_c_t *s = ctx->s;
     long y, x;
     /* y here is the sweep row (0..ny-3); the kernels add +1. */
@@ -554,8 +563,9 @@ typedef struct {
     double pmean;
 } pin_sub_ctx_t;
 
-static void pin_sub_rows(void *vctx, long y0, long y1) {
+static void pin_sub_rows(void *vctx, long y0, long y1, int id) {
     pin_sub_ctx_t *ctx = (pin_sub_ctx_t *)vctx;
+    (void)id;
     solver_c_t *s = ctx->s;
     long y, x, idx;
     for (y = y0; y < y1; y++) {
@@ -586,8 +596,9 @@ typedef struct {
     long y_off;                /* row offset: task range maps to y+off */
 } momentum_ctx_t;
 
-static void momentum_rows(void *vctx, long y0, long y1) {
+static void momentum_rows(void *vctx, long y0, long y1, int id) {
     momentum_ctx_t *ctx = (momentum_ctx_t *)vctx;
+    (void)id;
     solver_c_t *s = ctx->s;
     double *u_src = ctx->u_src, *v_src = ctx->v_src;
     double *u_dest = ctx->u_dest, *v_dest = ctx->v_dest;
@@ -738,8 +749,9 @@ typedef struct {
     double *u, *v;
 } enforce_ctx_t;
 
-static void enforce_rows(void *vctx, long y0, long y1) {
+static void enforce_rows(void *vctx, long y0, long y1, int id) {
     enforce_ctx_t *ctx = (enforce_ctx_t *)vctx;
+    (void)id;
     solver_c_t *s = ctx->s;
     long y, x, idx;
     for (y = y0; y < y1; y++) {

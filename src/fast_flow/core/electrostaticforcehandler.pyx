@@ -18,6 +18,36 @@ from fast_flow.core.common cimport DTYPE_f, build_solids_mask, to_numpy
 from fast_flow.core.flow cimport FlowSolverCore
 from fast_flow.core.handlers.forcehandler cimport ForceHandlerCore
 
+# Native-C handler (native/handler_c.c) + the solver's pool
+# (native/solver_c.c). The C advance references the
+# Cython-owned buffers (same memory the accessors view)
+# and re-uses the solver's thread pool.
+cdef extern from "solver_c.h":
+    ctypedef void solver_c_t
+    ctypedef void ff_pool_t
+    ff_pool_t* solver_c_pool(solver_c_t* s) noexcept nogil
+cdef extern from "native/handler_c.h":
+    ctypedef void handler_c_t
+    handler_c_t* handler_c_create(long nx, long ny,
+                                  double dx, double dy,
+                                  double* d0, double* d1,
+                                  double* p0, double* p1,
+                                  double* u0, double* u1,
+                                  double* v0, double* v1,
+                                  double* cu0, double* cu1,
+                                  double* cv0, double* cv1,
+                                  unsigned char* ion_zone,
+                                  unsigned char* solids,
+                                  long solids_nx, long solids_ny,
+                                  ff_pool_t* pool) noexcept nogil
+    void handler_c_destroy(handler_c_t* h) noexcept nogil
+    long handler_c_dk(const handler_c_t* h) noexcept nogil
+    void handler_c_set_pk(handler_c_t* h, long pk) noexcept nogil
+    void handler_c_advance(handler_c_t* h,
+                           const double* au, const double* av,
+                           const unsigned char* solid,
+                           double dt, double dt_base) noexcept nogil
+
 cdef const DTYPE_f ION_MASS_GMOL = 28.97
 cdef const DTYPE_f AVOGADRO = 6.02214076e23
 cdef const DTYPE_f ELEMENTARY_CHARGE = 1.602176634e-19
@@ -119,6 +149,11 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
     cdef unsigned char* solids
     cdef Py_ssize_t solids_ny
     cdef Py_ssize_t solids_nx
+
+    # Opaque native-C handler state (handler_c_t*). The C
+    # struct references the buffers above (it does not own
+    # them) and re-uses the solver's thread pool.
+    cdef void* c_handler
 
     def __init__(self, FlowSolverCore solver,
                  cnp.ndarray[unsigned char, ndim=3] image,
@@ -226,6 +261,27 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         self._build_ion_zone(image, layermap)
 
         self.init_field()
+
+        # Native-C handler: references the buffers above
+        # (same memory the accessors view); re-uses the
+        # solver's thread pool within the solver step.
+        cdef ff_pool_t* pool = NULL
+        if self.solver.c_solver != NULL:
+            pool = solver_c_pool(<solver_c_t*>self.solver.c_solver)
+        self.c_handler = <void*>handler_c_create(
+            self.solver.nx, self.solver.ny,
+            self.solver.dx, self.solver.dy,
+            self.d[0], self.d[1],
+            self.p[0], self.p[1],
+            self.u[0], self.u[1],
+            self.v[0], self.v[1],
+            self.cu[0], self.cu[1],
+            self.cv[0], self.cv[1],
+            self.ion_zone, self.solids,
+            self.solids_nx, self.solids_ny,
+            pool)
+        if self.c_handler == NULL:
+            raise MemoryError("could not allocate native-C handler")
 
     cdef Py_ssize_t _new_shape_slot(self, Py_ssize_t n, DTYPE_f charge):
         """Grow the shape array if full and allocate the next
@@ -395,6 +451,9 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
             free(channel)
 
     def __dealloc__(self):
+        if self.c_handler != NULL:
+            handler_c_destroy(<handler_c_t*>self.c_handler)
+            self.c_handler = NULL
         if self.d != NULL:
             for i in range(2):
                 if self.d[i] != NULL:
@@ -618,227 +677,20 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         transport, diffusion, pressure) for the step."""
         cdef DTYPE_f val
         if self.p_calls == 0:
-            self._advance_ion_state()
+            # Native-C advance on the solver's thread pool
+            # (re-used within the solver step).
+            handler_c_advance(<handler_c_t*>self.c_handler,
+                              self.solver.u[self.solver.uvk],
+                              self.solver.v[self.solver.uvk],
+                              self.solver.solid,
+                              self.solver.dt, self.solver.dt_base)
+            self.dk = handler_c_dk(<handler_c_t*>self.c_handler)
         self.p_calls += 1
         val = self.p[1 - self.pk][idx] - self.p[self.pk][idx]
         if self.p_calls >= self.solver.N:
             self.p_calls = 0
             self.pk = 1 - self.pk
+            handler_c_set_pk(<handler_c_t*>self.c_handler, self.pk)
         if self._solid_at(idx):
             return 0.0
         return val
-
-    cdef void _advance_ion_state(self) noexcept nogil:
-        """Advance the ion density, velocity and pressure
-        by the solver's current dt.
-
-        Ion velocity: v_ion = u_air + E * shield, where
-        the drift (mobility folded to 1) is scaled by the
-        space-charge shielding factor (1 - d/ION_SHIELD_
-        DENSITY, floored at 0) and the total is magnitude
-        capped -- the folded field is singular at the
-        electrode surface and real mobility saturates at
-        high field.  Transport: conservative donor-cell
-        (upwind) fluxes of the density at the ion velocity
-        through the cell faces, subcycled for CFL <= 0.8;
-        faces touching a solid take the air side's velocity
-        one-sided, and density that fluxes into a solid is
-        collected (removed).  Generation: the ionization
-        zone refills toward ION_ZONE_TARGET with time
-        constant ION_PRODUCTION_TAU.  Then one diffusion
-        step: ions repel each other, so the cloud spreads
-        down its own density gradient -- the pressure-like
-        behaviour noted on the p buffer, under its own
-        law (a plain rate, not the air's pressure solve).
-        Finally the electrostatic pressure: density x
-        |E|^2 (Maxwell-stress form) with |E| saturated at
-        ION_SPEED_MAX like the transport velocity, and the
-        result capped.
-        """
-        cdef Py_ssize_t nx = self.solver.nx
-        cdef Py_ssize_t ny = self.solver.ny
-        cdef DTYPE_f dx = self.solver.dx
-        cdef DTYPE_f dy = self.solver.dy
-        cdef DTYPE_f dt = self.solver.dt
-        cdef DTYPE_f* au = self.solver.u[self.solver.uvk]
-        cdef DTYPE_f* av = self.solver.v[self.solver.uvk]
-        cdef DTYPE_f* cu = self.cu[self.ck]
-        cdef DTYPE_f* cv = self.cv[self.ck]
-        cdef DTYPE_f* iu = self.u[self.uvk]
-        cdef DTYPE_f* iv = self.v[self.uvk]
-        cdef DTYPE_f* dd = self.d[self.dk]
-        cdef DTYPE_f* pp = self.p[1 - self.pk]
-        cdef DTYPE_f* sbuf
-        cdef DTYPE_f* dbuf
-        cdef DTYPE_f* tbuf
-        cdef Py_ssize_t x, y, idx, k, cur
-        cdef Py_ssize_t nsub
-        cdef DTYPE_f vx, vy, sp2, scale, rate, cell_rate, tau
-        cdef DTYPE_f ue, uw, vn, vs, fx_e, fx_w, fy_n, fy_s
-        cdef DTYPE_f src_e, src_w, src_n, src_s, val, gen
-        cdef DTYPE_f ce, cw, cn, cs, e2, shield
-
-        if dt <= 0.0:
-            dt = self.solver.dt_base
-
-        # 1. ion velocity, and the transport rate it implies
-        rate = 0.0
-        for y in range(ny):
-            for x in range(nx):
-                idx = y * nx + x
-                if self._solid_at(idx):
-                    iu[idx] = 0.0
-                    iv[idx] = 0.0
-                    continue
-                vx = au[idx]
-                vy = av[idx]
-                shield = 1.0 - dd[idx] / ION_SHIELD_DENSITY
-                if shield > 0.0:
-                    vx += cu[idx] * shield
-                    vy += cv[idx] * shield
-                sp2 = vx * vx + vy * vy
-                if sp2 > ION_SPEED_MAX * ION_SPEED_MAX:
-                    scale = ION_SPEED_MAX / sqrt(sp2)
-                    vx *= scale
-                    vy *= scale
-                iu[idx] = vx
-                iv[idx] = vy
-                cell_rate = fabs(vx) / dx + fabs(vy) / dy
-                if cell_rate > rate:
-                    rate = cell_rate
-
-        # 2. conservative flux transport, subcycled
-        nsub = 1
-        if rate > 0.0:
-            nsub = <Py_ssize_t>(dt * rate / 0.8) + 1
-            if nsub > 8192:
-                nsub = 8192
-        tau = dt / nsub
-        cur = self.dk
-        sbuf = self.d[cur]
-        dbuf = self.d[1 - cur]
-        for k in range(nsub):
-            for y in range(ny):
-                for x in range(nx):
-                    idx = y * nx + x
-                    if self._solid_at(idx):
-                        dbuf[idx] = 0.0
-                        continue
-                    # east face
-                    if x + 1 < nx and not self._solid_at(idx + 1):
-                        ue = 0.5 * (iu[idx] + iu[idx + 1])
-                        src_e = sbuf[idx + 1]
-                    else:
-                        ue = iu[idx]
-                        src_e = 0.0
-                    fx_e = ue * (sbuf[idx] if ue > 0.0 else src_e)
-                    # west face
-                    if x > 0 and not self._solid_at(idx - 1):
-                        uw = 0.5 * (iu[idx] + iu[idx - 1])
-                        src_w = sbuf[idx - 1]
-                    else:
-                        uw = iu[idx]
-                        src_w = 0.0
-                    fx_w = uw * (src_w if uw > 0.0 else sbuf[idx])
-                    # north face
-                    if y + 1 < ny and not self._solid_at(idx + nx):
-                        vn = 0.5 * (iv[idx] + iv[idx + nx])
-                        src_n = sbuf[idx + nx]
-                    else:
-                        vn = iv[idx]
-                        src_n = 0.0
-                    fy_n = vn * (sbuf[idx] if vn > 0.0 else src_n)
-                    # south face
-                    if y > 0 and not self._solid_at(idx - nx):
-                        vs = 0.5 * (iv[idx] + iv[idx - nx])
-                        src_s = sbuf[idx - nx]
-                    else:
-                        vs = iv[idx]
-                        src_s = 0.0
-                    fy_s = vs * (src_s if vs > 0.0 else sbuf[idx])
-                    # Space-charge choking: a flux into a
-                    # cell fades as that cell's density
-                    # approaches the shielding density --
-                    # the accumulated charge cancels the
-                    # field that drives more ions in, so
-                    # sinks cannot accumulate without
-                    # limit.  Collection into solids and
-                    # outflow from the domain are unimpeded.
-                    if ue > 0.0:
-                        if x + 1 < nx and not self._solid_at(idx + 1):
-                            shield = 1.0 - sbuf[idx + 1] / \
-                                ION_SHIELD_DENSITY
-                            fx_e *= shield if shield > 0.0 else 0.0
-                    else:
-                        shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
-                        fx_e *= shield if shield > 0.0 else 0.0
-                    if uw > 0.0:
-                        shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
-                        fx_w *= shield if shield > 0.0 else 0.0
-                    elif x > 0 and not self._solid_at(idx - 1):
-                        shield = 1.0 - sbuf[idx - 1] / \
-                            ION_SHIELD_DENSITY
-                        fx_w *= shield if shield > 0.0 else 0.0
-                    if vn > 0.0:
-                        if y + 1 < ny and not self._solid_at(idx + nx):
-                            shield = 1.0 - sbuf[idx + nx] / \
-                                ION_SHIELD_DENSITY
-                            fy_n *= shield if shield > 0.0 else 0.0
-                    else:
-                        shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
-                        fy_n *= shield if shield > 0.0 else 0.0
-                    if vs > 0.0:
-                        shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
-                        fy_s *= shield if shield > 0.0 else 0.0
-                    elif y > 0 and not self._solid_at(idx - nx):
-                        shield = 1.0 - sbuf[idx - nx] / \
-                            ION_SHIELD_DENSITY
-                        fy_s *= shield if shield > 0.0 else 0.0
-                    val = sbuf[idx] - tau * (
-                        (fx_e - fx_w) / dx + (fy_n - fy_s) / dy)
-                    dbuf[idx] = val if val > 0.0 else 0.0
-            tbuf = sbuf
-            sbuf = dbuf
-            dbuf = tbuf
-            cur = 1 - cur
-
-        # 3. ionization-zone generation
-        gen = dt / ION_PRODUCTION_TAU
-        if gen > 1.0:
-            gen = 1.0
-        for idx in range(nx * ny):
-            if self.ion_zone[idx] and sbuf[idx] < ION_ZONE_TARGET:
-                sbuf[idx] += (ION_ZONE_TARGET - sbuf[idx]) * gen
-
-        # 4. diffusion of the density into the other buffer
-        for y in range(ny):
-            for x in range(nx):
-                idx = y * nx + x
-                if self._solid_at(idx):
-                    dbuf[idx] = 0.0
-                    continue
-                val = sbuf[idx]
-                ce = val if x + 1 >= nx or self._solid_at(idx + 1) \
-                    else sbuf[idx + 1]
-                cw = val if x == 0 or self._solid_at(idx - 1) \
-                    else sbuf[idx - 1]
-                cn = val if y + 1 >= ny or self._solid_at(idx + nx) \
-                    else sbuf[idx + nx]
-                cs = val if y == 0 or self._solid_at(idx - nx) \
-                    else sbuf[idx - nx]
-                dbuf[idx] = val + ION_DIFFUSION * (
-                    ce + cw + cn + cs - 4.0 * val)
-        self.dk = 1 - cur
-        sbuf = self.d[self.dk]
-
-        # 5. electrostatic pressure of the ion cloud
-        for idx in range(nx * ny):
-            if self._solid_at(idx):
-                pp[idx] = 0.0
-                continue
-            e2 = cu[idx] * cu[idx] + cv[idx] * cv[idx]
-            if e2 > ION_SPEED_MAX * ION_SPEED_MAX:
-                e2 = ION_SPEED_MAX * ION_SPEED_MAX
-            val = ION_PRESSURE_COUPLING * sbuf[idx] * e2
-            pp[idx] = val if val < ION_PRESSURE_MAX \
-                else ION_PRESSURE_MAX

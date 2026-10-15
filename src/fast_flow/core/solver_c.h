@@ -26,8 +26,12 @@
 extern "C" {
 #endif
 
-/* A parallel-for task: func(ctx, start, end) over a row range. */
-typedef void (*ff_task_fn)(void *ctx, long start, long end);
+/* A parallel-for task: func(ctx, start, end, id) over a row
+ * range. id is the participant's chunk id (0 = the calling
+ * thread, 1..nworkers = workers); tasks that need a
+ * per-participant reduction (e.g. a max) use it to index a
+ * per-participant slot. */
+typedef void (*ff_task_fn)(void *ctx, long start, long end, int id);
 
 /* ------------------------------------------------------------------ */
 /* Thread pool                                                         */
@@ -43,6 +47,9 @@ int ff_pool_max_threads(void);
  * is one of them). nthreads <= 0 means ff_pool_max_threads(). */
 ff_pool_t *ff_pool_create(int nthreads);
 void ff_pool_destroy(ff_pool_t *pool);
+/* Number of participants in the pool (for per-participant
+ * reduction slots). */
+int ff_pool_nthreads(const ff_pool_t *pool);
 
 /* Run func(ctx, start, end) over [0, n), split across the pool.
  * The calling thread participates. Blocks until all chunks are
@@ -80,6 +87,10 @@ void solver_c_set_pk(solver_c_t *s, long pk);
 /* Buffer indices (the Cython side syncs its pk/uvk from these). */
 long solver_c_pk(const solver_c_t *s);
 long solver_c_uvk(const solver_c_t *s);
+/* The thread pool (borrowed; the solver owns it). The
+ * handler's C advance re-uses this pool within the solver
+ * step. */
+ff_pool_t *solver_c_pool(solver_c_t *s);
 
 /* Sub-steps (dt must be set via solver_c_set_dt before the
  * Poisson). The Cython wrapper calls them in _step_once

@@ -45,7 +45,9 @@ extensions = [
     _extension("fast_flow.core.handlers.forcehandler",
                "src/fast_flow/core/handlers/forcehandler.pyx"),
     _extension("fast_flow.core.electrostaticforcehandler",
-               "src/fast_flow/core/electrostaticforcehandler.pyx"),
+               "src/fast_flow/core/electrostaticforcehandler.pyx",
+               extra_sources=["src/fast_flow/core/native/solver_c.c",
+                              "src/fast_flow/core/native/handler_c.c"]),
     _extension("fast_flow.core.renderer",
                "src/fast_flow/core/renderer.pyx"),
 ]
