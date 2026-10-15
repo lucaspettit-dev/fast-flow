@@ -7,25 +7,27 @@ from setuptools.extension import Extension
 from Cython.Build import cythonize
 import numpy as np
 
-# Optimization only.  The core loops are plain serial C
-# over raw buffers (no OpenMP, no GIL juggling): the
-# parallel regions cost more in thread sync than the
-# per-cell work saves.
+# Optimization + pthreads (perf/native-c-threadpool): the
+# solver's computation is native C (solver_c.c) on a
+# persistent pthread pool sized to the online CPUs.
+# -pthread for the pool (both gcc and clang accept it).
 if platform.system() == "Darwin":
-    compile_args = ["-O3"]
+    compile_args = ["-O3", "-pthread"]
     if platform.machine() == "arm64":
         compile_args.append("-mcpu=native")
-    link_args = []
+    link_args = ["-pthread"]
 else:
-    compile_args = ["-O3", "-march=native"]
-    link_args = []
+    compile_args = ["-O3", "-march=native", "-pthread"]
+    link_args = ["-pthread"]
 
-def _extension(name, source):
+def _extension(name, source, extra_sources=None):
     return Extension(
         name,
-        sources=[source],
+        sources=[source] + (extra_sources or []),
         include_dirs=[
             np.get_include(),
+            "src/fast_flow/core",
+            "src/fast_flow/core/handlers",
             "/opt/homebrew/opt/libomp/include"
         ],
         extra_compile_args=compile_args,
@@ -38,7 +40,8 @@ def _extension(name, source):
 
 extensions = [
     _extension("fast_flow.core.flow",
-               "src/fast_flow/core/flow.pyx"),
+               "src/fast_flow/core/flow.pyx",
+               extra_sources=["src/fast_flow/core/native/solver_c.c"]),
     _extension("fast_flow.core.handlers.forcehandler",
                "src/fast_flow/core/handlers/forcehandler.pyx"),
     _extension("fast_flow.core.electrostaticforcehandler",

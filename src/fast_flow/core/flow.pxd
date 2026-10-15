@@ -3,6 +3,13 @@
 # cimport the class; note the deliberate circularity with
 # handlers/forcehandler.pxd (FlowSolverCore holds a
 # ForceHandlerCore, handlers hold a FlowSolverCore).
+#
+# perf/native-c-threadpool: the solver's computation
+# (Poisson, momentum, BCs, enforce) lives in native C
+# (solver_c.c) behind the opaque c_solver pointer; the
+# Cython side owns the buffers (same memory the Python
+# accessors view) and the dt selection. The old Cython
+# compute methods are gone (replaced by the C step).
 
 cimport numpy as cnp
 
@@ -38,6 +45,11 @@ cdef class FlowSolverCore:
     cdef Py_ssize_t uvk
     cdef unsigned char* solid
 
+    # Opaque native-C solver state (solver_c_t*). The C struct
+    # references the buffers above (it does not own them);
+    # it owns the thread pool.
+    cdef void* c_solver
+
     cdef ForceHandlerCore force
     cdef Renderer renderer
 
@@ -46,29 +58,13 @@ cdef class FlowSolverCore:
     cdef init_arrays(self)
     cdef inline Py_ssize_t idx(self, Py_ssize_t y,
                                Py_ssize_t x) noexcept nogil
-    cdef void build_up_pressure_step(self, Py_ssize_t y,
-                                     Py_ssize_t x, DTYPE_f dy2,
-                                     DTYPE_f dx2,
-                                     DTYPE_f inv_dt) noexcept nogil
-    cdef void pressure_poisson_step(self, Py_ssize_t y,
-                                    Py_ssize_t x, DTYPE_f* p,
-                                    DTYPE_f* p_, DTYPE_f dy_squared,
-                                    DTYPE_f dx_squared) noexcept nogil
-    cdef void pressure_set_boundry_conditions(self) noexcept nogil
-    cdef void pressure_poisson(self) noexcept
-    cdef void update_momentum(self) noexcept
-    cdef void apply_uv_force(self, Py_ssize_t y, Py_ssize_t x,
-                             Py_ssize_t idx, DTYPE_f* u_dest,
-                             DTYPE_f* v_dest) noexcept nogil
-    cdef void apply_boundary_forces(self) noexcept
-    cdef void apply_pressure_forces(self) noexcept
-    cdef void clamp_momentum_boundary(self) noexcept
-    cdef void enforce_solids(self) noexcept
-    cdef DTYPE_f _max_speed(self) noexcept
-    cdef DTYPE_f _stable_dt_limit(self) noexcept
+    cdef DTYPE_f _max_speed(self) noexcept nogil
+    cdef DTYPE_f _stable_dt_limit(self) noexcept nogil
     cpdef DTYPE_f stable_dt(self) noexcept
-    cdef DTYPE_f _choose_dt(self, DTYPE_f limit) noexcept
+    cdef DTYPE_f _choose_dt(self, DTYPE_f limit) noexcept nogil
     cdef void _step_once(self) noexcept
+    cdef void _full_step(self) noexcept nogil
+    cdef void _step_nogil(self) noexcept nogil
     cpdef void step(self) noexcept
     cpdef int run(self, DTYPE_f total_time) noexcept
     cpdef set_inflow(self, DTYPE_f velocity)

@@ -2,6 +2,14 @@
 # in forcehandler.pyx).  Declared here so FlowSolverCore
 # (core/flow.pxd) and the other handler modules can cimport
 # them; see flow.pxd for the note on circularity.
+#
+# perf/native-c-threadpool: ff_handler_accumulate /
+# ff_handler_accumulate_p are `cdef api` functions (C API
+# header forcehandler_api.h) so the native-C solver can
+# call the handler chain per cell, nogil, without a
+# void* -> Python-object cast (which would need the GIL
+# for the refcount). The handler pointer is borrowed; the
+# solver holds the owning reference.
 
 from fast_flow.core.common cimport DTYPE_f
 from fast_flow.core.flow cimport FlowSolverCore

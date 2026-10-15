@@ -18,6 +18,37 @@ from libc.math cimport sqrt, atan2, fabs, floor
 from fast_flow.core.common cimport DTYPE_f, build_solids_mask, to_numpy
 from fast_flow.core.handlers.forcehandler cimport ForceHandlerCore
 
+# Native-C solver (solver_c.c). The C struct is opaque here
+# (void* c_solver on the class); these are its constructors /
+# accessors. The C code references the Cython-owned buffers
+# (same memory the Python accessors view) and owns the
+# thread pool.
+cdef extern from "solver_c.h":
+    ctypedef void solver_c_t
+    solver_c_t* solver_c_create(long nx, long ny,
+                                double dx, double dy,
+                                double lx, double ly,
+                                double rho, double nu,
+                                double dt_base, long nit, long flow_mode,
+                                double inflow_u,
+                                double* u0, double* u1,
+                                double* v0, double* v1,
+                                double* p0, double* p1,
+                                double* b, unsigned char* solid) noexcept nogil
+    void solver_c_destroy(solver_c_t* s) noexcept nogil
+    void solver_c_set_inflow(solver_c_t* s, double inflow_u) noexcept nogil
+    void solver_c_set_dt(solver_c_t* s, double dt) noexcept nogil
+    void solver_c_set_uvk(solver_c_t* s, long uvk) noexcept nogil
+    void solver_c_set_pk(solver_c_t* s, long pk) noexcept nogil
+    long solver_c_pk(const solver_c_t* s) noexcept nogil
+    long solver_c_uvk(const solver_c_t* s) noexcept nogil
+    # Sub-steps (the wrapper orchestrates them with the
+    # handler passes interleaved, all nogil).
+    void solver_c_poisson(solver_c_t* s) noexcept nogil
+    void solver_c_momentum(solver_c_t* s) noexcept nogil
+    void solver_c_clamp(solver_c_t* s) noexcept nogil
+    void solver_c_enforce(solver_c_t* s) noexcept nogil
+
 
 cdef class FlowSolverCore:
     """Fast 2D incompressible Navier-Stokes solver (Stam 1999, MAC grid).
@@ -94,7 +125,27 @@ cdef class FlowSolverCore:
 
         self.init_arrays()
 
+        # Native-C solver: references the buffers above (same
+        # memory the Python accessors view); owns the thread
+        # pool. Created after the buffers (it stores their
+        # addresses, it does not copy them).
+        self.c_solver = <void*>solver_c_create(
+            self.nx, self.ny, self.dx, self.dy,
+            self.lx, self.ly, self.rho, self.nu,
+            self.dt_base, self.nit, self.flow_mode,
+            self.inflow_u,
+            self.u[0], self.u[1],
+            self.v[0], self.v[1],
+            self.p[0], self.p[1],
+            self.b, self.solid)
+        if self.c_solver == NULL:
+            raise MemoryError("could not allocate native-C solver")
+
     def __dealloc__(self):
+        if self.c_solver != NULL:
+            solver_c_destroy(<solver_c_t*>self.c_solver)
+            self.c_solver = NULL
+
         if self.solid != NULL:
             free(self.solid)
 
@@ -177,481 +228,7 @@ cdef class FlowSolverCore:
     ) noexcept nogil:
         return y * self.nx + x
 
-    @cython.boundscheck(False)
-    @cython.wraparound(False)
-    @cython.cdivision(True)
-    cdef void build_up_pressure_step(
-            self,
-            Py_ssize_t y,
-            Py_ssize_t x,
-            DTYPE_f dy2,
-            DTYPE_f dx2,
-            DTYPE_f inv_dt) noexcept nogil:
-        cdef Py_ssize_t idx = self.idx(y+1, x+1)
-        if self.solid[idx]:
-            return
-
-        cdef DTYPE_f* u = self.u[self.uvk]
-        cdef DTYPE_f* v = self.v[self.uvk]
-
-        cdef DTYPE_f hor = (u[self.idx(y+1, x+2)] - u[self.idx(y+1, x)]) / dx2
-        cdef DTYPE_f vert = (v[self.idx(y+2, x+1)] - v[self.idx(y, x+1)]) / dy2
-
-        cdef DTYPE_f c = 2 * (
-            (u[self.idx(y+2, x+1)] - u[self.idx(y, x+1)]) / dy2
-            * (v[self.idx(y+1, x+2)] - v[self.idx(y+1, x)]) / dx2
-        )
-        cdef DTYPE_f a = hor + vert
-        cdef DTYPE_f b = hor * hor
-        cdef DTYPE_f d = vert * vert
-
-        self.b[idx] = self.rho * (inv_dt * a - b - c - d)
-
-    @cython.boundscheck(False)
-    @cython.wraparound(False)
-    @cython.cdivision(True)
-    cdef void pressure_poisson_step(
-            self,
-            Py_ssize_t y,
-            Py_ssize_t x,
-            DTYPE_f* p,
-            DTYPE_f* p_,
-            DTYPE_f dy_squared,
-            DTYPE_f dx_squared) noexcept nogil:
-
-        cdef Py_ssize_t idx = self.idx(y+1, x+1)
-        if self.solid[idx]:
-            return
-
-        cdef DTYPE_f pc = p_[idx]
-        cdef DTYPE_f pe = pc if self.solid[self.idx(y + 1, x + 2)] \
-            else p_[self.idx(y+1, x+2)]
-        cdef DTYPE_f pw = pc if self.solid[self.idx(y + 1, x)] \
-            else p_[self.idx(y+1, x)]
-        cdef DTYPE_f pn = pc if self.solid[self.idx(y + 2, x + 1)] \
-            else p_[self.idx(y+2, x+1)]
-        cdef DTYPE_f ps = pc if self.solid[idx - self.nx] \
-            else p_[self.idx(y, x+1)]
-        cdef DTYPE_f hor = (pe + pw) * dy_squared
-        cdef DTYPE_f vert = (pn + ps) * dx_squared
-
-        cdef DTYPE_f d = 2 * (dx_squared + dy_squared)
-
-        p[idx] = (hor + vert) / d - (dx_squared * dy_squared / d) * self.b[idx]
-
-    @cython.boundscheck(False)
-    @cython.wraparound(False)
-    @cython.cdivision(True)
-    cdef void pressure_set_boundry_conditions(self) noexcept nogil:
-        cdef DTYPE_f* p = self.p[self.pk ^ 1]
-        cdef Py_ssize_t i
-        cdef Py_ssize_t j
-        cdef Py_ssize_t n = self.nx
-        if self.ny > self.nx:
-            n = self.ny
-
-        # solid cells: pressure is clamped to zero, nothing diffuses in
-        for i in range(self.N):
-            if self.solid[i]:
-                p[i] = 0.0
-
-        if self.flow_mode == 1:
-            # throughflow: zero-gradient pressure on every side
-            for i in range(1, self.nx - 1):
-                p[self.idx(0, i)] = p[self.idx(1, i)]
-                p[self.idx(self.ny-1, i)] = p[self.idx(self.ny-2, i)]
-            for i in range(1, self.ny - 1):
-                p[self.idx(i, 0)] = p[self.idx(i, 1)]
-                p[self.idx(i, self.nx-1)] = p[self.idx(i, self.nx-2)]
-            p[0] = p[self.idx(1, 1)]
-            p[self.idx(0, self.nx-1)] = p[self.idx(1, self.nx-2)]
-            p[self.idx(self.ny-1, 0)] = p[self.idx(self.ny-2, 1)]
-            p[self.idx(self.ny-1, self.nx-1)] = \
-                p[self.idx(self.ny-2, self.nx-2)]
-            return
-
-        for i in range(n):
-            # left and right boundaries, excluding corners
-            if 0 < i and i < self.ny - 1:
-                p[self.idx(i, 0)] = p[self.idx(i, 1)]
-                p[self.idx(i, self.nx-1)] = p[self.idx(i, self.nx-2)]
-
-            # bottom boundary, excluding corners
-            if 0 < i and i < self.nx - 1:
-                p[self.idx(0, i)] = p[self.idx(1, i)]
-
-            # top boundary (dirichlet condition)
-            if i < self.nx:
-                p[self.idx(self.ny-1, i)] = 0
-
-        # bottom-left corner
-        p[0] = p[self.idx(1, 1)]
-
-        # bottom-right corner
-        p[self.idx(0, self.nx-1)] = p[self.idx(1, self.nx-2)]
-
-    @cython.boundscheck(False)
-    @cython.wraparound(False)
-    @cython.cdivision(True)
-    cdef void pressure_poisson(self) noexcept:
-        cdef DTYPE_f dy_squared = self.dy * self.dy
-        cdef DTYPE_f dx_squared = self.dx * self.dx
-        cdef DTYPE_f dy2 = 2 * self.dy
-        cdef DTYPE_f dx2 = 2 * self.dx
-        cdef DTYPE_f inv_dt = 1 / self.dt
-        cdef Py_ssize_t y
-        cdef Py_ssize_t x
-        cdef Py_ssize_t q
-        cdef DTYPE_f* pp
-        cdef DTYPE_f* p_src
-        cdef DTYPE_f* p_dest
-        cdef DTYPE_f pmean
-        cdef Py_ssize_t jj
-        cdef Py_ssize_t ii
-        cdef Py_ssize_t base
-        cdef int nfluid
-
-        # determine which p is written to and which is read from.
-        cdef Py_ssize_t src = self.pk
-        cdef Py_ssize_t dest = src ^ 1
-
-        # do the first loop w/build-pressure step (rows are
-        # independent: each writes only its own p/b cells and reads
-        # the source pressure buffer)
-        p_dest = self.p[dest]
-        p_src = self.p[src]
-        for y in range(self.ny - 2):
-            for x in range(self.nx - 2):
-                self.build_up_pressure_step(y, x, dy2, dx2, inv_dt)
-                self.pressure_poisson_step(y, x, p_dest, p_src, dy_squared, dx_squared)
-        self.pressure_set_boundry_conditions()
-
-        self.pk ^= 1
-        src = self.pk
-        dest = src ^ 1
-
-        for q in range(self.nit - 1):
-            p_dest = self.p[dest]
-            p_src = self.p[src]
-            for y in range(self.ny - 2):
-                for x in range(self.nx - 2):
-                    self.pressure_poisson_step(y, x, p_dest, p_src, dy_squared, dx_squared)
-            self.pressure_set_boundry_conditions()
-
-            # rotate src/dest
-            self.pk ^= 1
-            src = self.pk
-            dest = src ^ 1
-
-        if self.flow_mode == 1:
-            # all-Neumann pressure is defined only up to a constant;
-            # pin the fluid mean to zero so it cannot drift between
-            # steps (solids are exactly zero and stay out of this)
-            pp = self.p[self.pk]
-            pmean = 0.0
-            nfluid = 0
-            for jj in range(self.ny):
-                base = jj * self.nx
-                for ii in range(self.nx):
-                    if not self.solid[self.idx(jj, ii)]:
-                        pmean += pp[base + ii]
-                        nfluid += 1
-            if nfluid > 0:
-                pmean /= nfluid
-            for jj in range(self.ny):
-                base = jj * self.nx
-                for ii in range(self.nx):
-                    if not self.solid[self.idx(jj, ii)]:
-                        pp[base + ii] -= pmean
-
-    @cython.boundscheck(False)
-    @cython.wraparound(False)
-    @cython.cdivision(True)
-    cdef void update_momentum(self) noexcept:
-        cdef Py_ssize_t src = self.uvk
-        cdef Py_ssize_t dest = src ^ 1
-
-        cdef DTYPE_f* u_src = self.u[src]
-        cdef DTYPE_f* v_src = self.v[src]
-        cdef DTYPE_f* u_dest = self.u[dest]
-        cdef DTYPE_f* v_dest = self.v[dest]
-        cdef DTYPE_f* p = self.p[self.pk]
-
-        cdef Py_ssize_t nx = self.nx
-        cdef Py_ssize_t ny = self.ny
-        cdef Py_ssize_t x
-        cdef Py_ssize_t y
-        cdef Py_ssize_t idx
-
-        cdef DTYPE_f dt = self.dt
-        cdef DTYPE_f dx = self.dx
-        cdef DTYPE_f dy = self.dy
-        cdef DTYPE_f rho = self.rho
-        cdef DTYPE_f nu = self.nu
-        cdef DTYPE_f p_c, p_e, p_w, p_n, p_s
-        cdef DTYPE_f uc, vc, dudx, dudy, dvdx, dvdy
-
-        # rows are independent (read src buffers, write own dest
-        # row).  Serial: no OpenMP, no GIL juggling -- the
-        # parallel regions cost more in thread sync than the
-        # per-cell work saves.
-        for y in range(1, ny - 1):
-            for x in range(1, nx - 1):
-                idx = self.idx(y, x)
-
-                if self.solid[idx]:
-                    u_dest[idx] = 0.0
-                    v_dest[idx] = 0.0
-                    continue
-
-                # pressure at the centre and each neighbour; a
-                # neighbour inside a solid is ignored (own value
-                # used, i.e. zero normal gradient at the wall)
-                p_c = p[idx]
-                p_e = p_c if self.solid[idx + 1] else p[idx + 1]
-                p_w = p_c if self.solid[idx - 1] else p[idx - 1]
-                p_n = p_c if self.solid[idx + nx] else p[idx + nx]
-                p_s = p_c if self.solid[idx - nx] else p[idx - nx]
-
-                # Upwind convection: each derivative is differenced
-                # toward the side the flow comes from, chosen by the
-                # sign of the advecting velocity at this cell.  (The
-                # old code always used the backward difference, which
-                # is upwind only for positive velocities and downwind
-                # -- anti-dissipative -- wherever the flow reverses.)
-                # Neighbour values inside solids are the enforced 0,
-                # as before.  Diffusion and pressure stay centred.
-                uc = u_src[idx]
-                vc = v_src[idx]
-                if uc >= 0.0:
-                    dudx = (u_src[idx] - u_src[idx - 1]) / dx
-                    dvdx = (v_src[idx] - v_src[idx - 1]) / dx
-                else:
-                    dudx = (u_src[idx + 1] - u_src[idx]) / dx
-                    dvdx = (v_src[idx + 1] - v_src[idx]) / dx
-                if vc >= 0.0:
-                    dudy = (u_src[idx] - u_src[idx - nx]) / dy
-                    dvdy = (v_src[idx] - v_src[idx - nx]) / dy
-                else:
-                    dudy = (u_src[idx + nx] - u_src[idx]) / dy
-                    dvdy = (v_src[idx + nx] - v_src[idx]) / dy
-
-                # Horizontal velocity u
-                u_dest[idx] = (
-                    u_src[idx]
-
-                    # convection (upwind)
-                    - dt * (uc * dudx + vc * dudy)
-
-                    # x pressure gradient
-                    - dt / (2.0 * rho * dx)
-                    * (p_e - p_w)
-
-                    # viscosity
-                    + nu * (
-                        dt / (dx * dx)
-                        * (
-                            u_src[idx + 1]
-                            - 2.0 * u_src[idx]
-                            + u_src[idx - 1]
-                        )
-                        +
-                        dt / (dy * dy)
-                        * (
-                            u_src[idx + nx]
-                            - 2.0 * u_src[idx]
-                            + u_src[idx - nx]
-                        )
-                    )
-                )
-
-                # Vertical velocity v
-                v_dest[idx] = (
-                    v_src[idx]
-
-                    # convection (upwind)
-                    - dt * (uc * dvdx + vc * dvdy)
-
-                    # y pressure gradient
-                    - dt / (2.0 * rho * dy)
-                    * (p_n - p_s)
-
-                    # viscosity
-                    + nu * (
-                        dt / (dx * dx)
-                        * (
-                            v_src[idx + 1]
-                            - 2.0 * v_src[idx]
-                            + v_src[idx - 1]
-                        )
-                        +
-                        dt / (dy * dy)
-                        * (
-                            v_src[idx + nx]
-                            - 2.0 * v_src[idx]
-                            + v_src[idx - nx]
-                        )
-                    )
-                )
-
-                self.apply_uv_force(y, x, idx, u_dest, v_dest)
-
-        # dest now contains the newest velocity field.
-        self.uvk = dest
-
-    @cython.boundscheck(False)
-    @cython.wraparound(False)
-    @cython.cdivision(True)
-    cdef void apply_uv_force(
-            self,
-            Py_ssize_t y,
-            Py_ssize_t x,
-            Py_ssize_t idx,
-            DTYPE_f* u_dest,
-            DTYPE_f* v_dest) noexcept nogil:
-        if self.force is not None:
-            self.force.accumulate(y, x, idx, u_dest, v_dest)
-
-    @cython.boundscheck(False)
-    @cython.wraparound(False)
-    @cython.cdivision(True)
-    cdef void apply_boundary_forces(self) noexcept:
-        """Apply the force handlers to the boundary cells only.
-
-        update_momentum() applies handlers to interior cells as
-        it goes, but its loop never visits the boundary rows and
-        columns -- exactly where a boundary-velocity handler
-        (ConstantVelocityForceHandlerCore) acts.  This pass runs
-        after clamp_momentum_boundary(), so a prescribed boundary
-        velocity is set fresh each step instead of being clamped
-        away or stacking on last step's value; enforce_solids()
-        still runs afterwards.  Every cell is visited exactly
-        once per step across the two passes, and with no handlers
-        registered this is a no-op.
-        """
-        cdef Py_ssize_t x, y
-        cdef DTYPE_f* u
-        cdef DTYPE_f* v
-        if self.force is None:
-            return
-        u = self.u[self.uvk]
-        v = self.v[self.uvk]
-        # The cavity clamp deliberately leaves the top (lid) row's
-        # u untouched -- it was the old add_velocity drive -- so a
-        # handler acting there would stack its increment on last
-        # step's value forever (in testing the top corners ran
-        # away to ~1500 while every clamped edge stayed exact).
-        # Zero that row's u first so handlers set it fresh, like
-        # every other boundary cell.
-        for x in range(self.nx):
-            u[(self.ny - 1) * self.nx + x] = 0.0
-        for x in range(self.nx):
-            self.apply_uv_force(0, x, x, u, v)
-            self.apply_uv_force(self.ny - 1, x,
-                                  (self.ny - 1) * self.nx + x, u, v)
-        for y in range(1, self.ny - 1):
-            self.apply_uv_force(y, 0, y * self.nx, u, v)
-            self.apply_uv_force(y, self.nx - 1,
-                                y * self.nx + self.nx - 1, u, v)
-
-    @cython.boundscheck(False)
-    @cython.wraparound(False)
-    @cython.cdivision(True)
-    cdef void apply_pressure_forces(self) noexcept:
-        """Add the handlers' get_p contributions into the
-        pressure buffer, one call per cell.
-
-        Unlike the momentum pass this visits EVERY cell exactly
-        once per step, in a plain serial loop: a handler's
-        get_p may advance per-cell state (the electrostatic
-        handler advances its ion density on the first call of
-        the pass) and relies on the exactly-once contract.
-        Runs after the boundary forces, so it sees the step's
-        final velocities and the true chosen dt (self.dt still
-        holds it here), and before enforce_solids().  No-op
-        when no handlers are registered.
-        """
-        cdef Py_ssize_t x, y
-        cdef DTYPE_f* p
-        if self.force is None:
-            return
-        p = self.p[self.pk]
-        for y in range(self.ny):
-            for x in range(self.nx):
-                self.force.accumulate_p(y, x, y * self.nx + x, p)
-
-
-    @cython.boundscheck(False)
-    @cython.wraparound(False)
-    @cython.cdivision(True)
-    cdef void clamp_momentum_boundary(self) noexcept:
-        cdef Py_ssize_t nx = self.nx
-        cdef Py_ssize_t ny = self.ny
-        cdef Py_ssize_t last_row = (ny - 1) * nx
-        cdef Py_ssize_t n = nx if nx > ny else ny
-
-        cdef Py_ssize_t i
-        cdef Py_ssize_t left
-        cdef Py_ssize_t right
-
-        cdef DTYPE_f* u = self.u[self.uvk]
-        cdef DTYPE_f* v = self.v[self.uvk]
-
-        if self.flow_mode == 1:
-            # throughflow: prescribed uniform inflow on the left,
-            # zero-gradient outflow on the right, no-slip top/bottom
-            for i in range(ny):
-                left = i * nx
-                right = left + nx - 1
-                u[left] = self.inflow_u
-                v[left] = 0.0
-                u[right] = u[right - 1]
-                v[right] = v[right - 1]
-            for i in range(nx):
-                u[i] = 0.0
-                v[i] = 0.0
-                u[last_row + i] = 0.0
-                v[last_row + i] = 0.0
-            return
-
-        for i in range(n):
-
-            # Bottom boundary.
-            if i < nx:
-                u[i] = 0.0
-                v[i] = 0.0
-
-                # Top boundary:
-                # Don't modify u here because that's the moving lid.
-                v[last_row + i] = 0.0
-
-            # Left/right boundaries, excluding lid corners.
-            if i < ny - 1:
-                left = i * nx
-                right = left + nx - 1
-
-                u[left] = 0.0
-                u[right] = 0.0
-
-                v[left] = 0.0
-                v[right] = 0.0
-
-
-    @cython.boundscheck(False)
-    @cython.wraparound(False)
-    @cython.cdivision(True)
-    cdef void enforce_solids(self) noexcept:
-        """No-slip: velocity is exactly zero inside solid cells."""
-        cdef Py_ssize_t i
-        cdef Py_ssize_t idx
-        cdef DTYPE_f* u = self.u[self.uvk]
-        cdef DTYPE_f* v = self.v[self.uvk]
-        for i in range(self.N):
-            if self.solid[i]:
-                u[i] = 0.0
-                v[i] = 0.0
-
-    cdef DTYPE_f _max_speed(self) noexcept:
+    cdef DTYPE_f _max_speed(self) noexcept nogil:
         cdef DTYPE_f* u = self.u[self.uvk]
         cdef DTYPE_f* v = self.v[self.uvk]
         cdef DTYPE_f m = 0.0
@@ -666,7 +243,7 @@ cdef class FlowSolverCore:
                 m = a
         return m
 
-    cdef DTYPE_f _stable_dt_limit(self) noexcept:
+    cdef DTYPE_f _stable_dt_limit(self) noexcept nogil:
         """Largest explicit step allowed by the combined
         advection-diffusion stability limit for this grid and the
         current maximum speed (the two limits combine -- their
@@ -695,7 +272,7 @@ cdef class FlowSolverCore:
         """Public read of the current stability limit on dt."""
         return self._stable_dt_limit()
 
-    cdef DTYPE_f _choose_dt(self, DTYPE_f limit) noexcept:
+    cdef DTYPE_f _choose_dt(self, DTYPE_f limit) noexcept nogil:
         """Largest power-of-two scaling of the nominal dt that is
         still <= the stability limit: halve while too big, double
         while the doubled value would still be stable."""
@@ -708,16 +285,93 @@ cdef class FlowSolverCore:
             chosen *= 2.0
         return chosen
 
-    cdef void _step_once(self) noexcept:
-        self.pressure_poisson()
-        self.update_momentum()
+    cdef void _full_step(self) noexcept nogil:
+        """One full step at self.dt (already set on the C
+        solver by the caller): C sub-steps + the handler
+        passes, all nogil. Order mirrors the old _step_once:
+        Poisson -> momentum -> handler interior -> flip uvk
+        -> clamp -> handler boundary -> handler pressure
+        (serial, exactly-once) -> enforce.
 
-        # update_momentum() has already changed self.uvk to the
-        # newly calculated destination buffer.
-        self.clamp_momentum_boundary()
-        self.apply_boundary_forces()
-        self.apply_pressure_forces()
-        self.enforce_solids()
+        The handler passes live here in Cython (they call
+        typed handler methods); the C code is pure-fluid.
+        The momentum does not flip uvk -- this function
+        flips it after the handler interior pass, so the
+        handler still reads the source buffer."""
+        cdef solver_c_t* cs = <solver_c_t*>self.c_solver
+        cdef Py_ssize_t x, y, idx, dest
+        cdef DTYPE_f* u_dest
+        cdef DTYPE_f* v_dest
+        cdef DTYPE_f* u
+        cdef DTYPE_f* v
+        cdef DTYPE_f* p
+
+        solver_c_poisson(cs)
+        self.pk = solver_c_pk(cs)
+        solver_c_momentum(cs)
+
+        # Handler interior pass (what update_momentum used to
+        # call per cell): non-solid interior cells only.
+        if self.force is not None:
+            dest = self.uvk ^ 1
+            u_dest = self.u[dest]
+            v_dest = self.v[dest]
+            for y in range(1, self.ny - 1):
+                for x in range(1, self.nx - 1):
+                    idx = y * self.nx + x
+                    if not self.solid[idx]:
+                        self.force.accumulate(y, x, idx, u_dest, v_dest)
+
+        # Flip uvk (both sides: Cython + C struct).
+        self.uvk ^= 1
+        solver_c_set_uvk(cs, self.uvk)
+
+        solver_c_clamp(cs)
+
+        # Handler boundary pass (what apply_boundary_forces
+        # did): every boundary cell exactly once. The top
+        # (lid) row's u is zeroed first so handlers set it
+        # fresh (see the old .pyx comment).
+        if self.force is not None:
+            u = self.u[self.uvk]
+            v = self.v[self.uvk]
+            for x in range(self.nx):
+                u[(self.ny - 1) * self.nx + x] = 0.0
+            for x in range(self.nx):
+                self.force.accumulate(0, x, x, u, v)
+                self.force.accumulate(self.ny - 1, x,
+                                      (self.ny - 1) * self.nx + x, u, v)
+            for y in range(1, self.ny - 1):
+                self.force.accumulate(y, 0, y * self.nx, u, v)
+                self.force.accumulate(y, self.nx - 1,
+                                      y * self.nx + self.nx - 1, u, v)
+
+        # Handler pressure pass (serial, exactly-once: a
+        # handler's get_p may advance per-cell state).
+        if self.force is not None:
+            p = self.p[self.pk]
+            for y in range(self.ny):
+                for x in range(self.nx):
+                    self.force.accumulate_p(y, x, y * self.nx + x, p)
+
+        solver_c_enforce(cs)
+
+    cdef void _step_once(self) noexcept:
+        """One full step at self.dt (already chosen by the
+        caller). The computation runs nogil (C sub-steps +
+        handler passes on the thread pool); the GIL is
+        reacquired only afterwards for the renderer hook
+        (which needs Python) and the read-buffer sync."""
+        cdef solver_c_t* cs = <solver_c_t*>self.c_solver
+        solver_c_set_dt(cs, self.dt)
+        with nogil:
+            self._full_step()
+        # Read-buffer sync: the Cython-side indices (which
+        # the accessors and handlers read) follow the C
+        # struct's (uvk was flipped in _full_step; pk by
+        # the C Poisson).
+        self.pk = solver_c_pk(cs)
+        self.uvk = solver_c_uvk(cs)
 
         # Render hook: the renderer accumulates this step's
         # dt and draws a frame only when one is due at its
@@ -725,8 +379,30 @@ cdef class FlowSolverCore:
         if self.renderer is not None:
             self.renderer.render_frame(self.dt, self.N, self.u[self.uvk], self.v[self.uvk])
 
+    cdef void _step_nogil(self) noexcept nogil:
+        # Nogil core of step(): dt selection + the full step
+        # + read-buffer sync. No renderer hook here (it needs
+        # the GIL).
+        cdef DTYPE_f chosen = self._choose_dt(self._stable_dt_limit())
+        self.dt = chosen
+        solver_c_set_dt(<solver_c_t*>self.c_solver, chosen)
+        self._full_step()
+        self.last_dt = chosen
+        self.sum_dt += chosen
+        self.dt = self.dt_base
+
     cpdef void step(self) noexcept:
         """Advance by one dynamically-chosen timestep.
+
+        The computation runs entirely nogil (dt selection +
+        the native-C step on the thread pool); the GIL is
+        held only to enter/exit. No renderer hook here (it
+        needs the GIL) -- use run(total_time) for the
+        rendered path; run() calls _step_once, which does
+        the hook after reacquiring the GIL. The read buffer
+        (the numpy views over the C buffers) is live: the
+        C step writes the buffers directly, and the GIL
+        reacquire in the caller is the synchronization point.
 
         dt is not fixed: each step takes the largest power-of-two
         scaling of the nominal dt that respects the explicit
@@ -734,12 +410,8 @@ cdef class FlowSolverCore:
         Use run(total_time) to advance a set amount of simulated
         time instead of a set number of steps.
         """
-        cdef DTYPE_f chosen = self._choose_dt(self._stable_dt_limit())
-        self.dt = chosen
-        self._step_once()
-        self.last_dt = chosen
-        self.sum_dt += chosen
-        self.dt = self.dt_base
+        with nogil:
+            self._step_nogil()
 
     cpdef int run(self, DTYPE_f total_time) noexcept:
         """Advance total_time seconds of simulated time.
@@ -773,6 +445,8 @@ cdef class FlowSolverCore:
     cpdef set_inflow(self, DTYPE_f velocity):
         """Set the uniform inflow speed (throughflow mode only)."""
         self.inflow_u = velocity
+        if self.c_solver != NULL:
+            solver_c_set_inflow(<solver_c_t*>self.c_solver, velocity)
 
     def add_obstacle(self, double[::1] xs, double[::1] ys):
         """Rasterize a polygon into the solid mask (ehd-flow style).
