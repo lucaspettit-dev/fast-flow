@@ -48,9 +48,9 @@ def parse_args():
     p.add_argument("--nu", type=float, default=0.05)
     p.add_argument("--total-time", type=float, default=1.0,
                    help="simulated seconds to advance")
-    p.add_argument("--charge", type=float, default=20000.0,
+    p.add_argument("--charge", type=float, default=40000.0,
                    help="cow gets +charge, rooster gets -charge")
-    p.add_argument("--fps", type=int, default=30,
+    p.add_argument("--fps", type=int, default=120,
                    help="renderer frames per simulated second")
     p.add_argument("--out-dir", default=None)
     return p.parse_args()
@@ -75,6 +75,7 @@ if __name__ == '__main__':
                         force_handlers=[handler],
                         renderer=renderer)
 
+    renderer.run()
     t0 = time.perf_counter()
     steps = solver.run(args.total_time)
     wall = time.perf_counter() - t0
@@ -99,11 +100,11 @@ if __name__ == '__main__':
     os.makedirs(out_dir, exist_ok=True)
     out = os.path.join(out_dir, 'ehd_cow_cock_velocity.png')
 
+
     # The renderer's buffer is in solver order (row 0 = the
     # domain's bottom, y-up), while cv2 writes row 0 at the
     # top of the image -- so flip the saved frame back to
     # the input image's orientation, mirroring the
     # cv2.flip applied to the input above.
     renderer.save(out)
-    cv2.imwrite(out, cv2.flip(cv2.imread(out), 0))
     print(f"saved {out}")

@@ -115,7 +115,7 @@ cdef class Renderer:
                         self.img = to_numpy_3d(
                             self.buffer, self.ny, self.nx, 3, True)
                         self.shown_frame_id = self.current_frame_id
-                        cv2.imshow(self.winname, self.img)
+                        cv2.imshow(self.winname, cv2.cvtColor(cv2.flip(self.img, 0),cv2.COLOR_BGR2RGB))
                         if cv2.waitKey(1) == 27:
                             self.close()
                 except Exception:
@@ -177,7 +177,7 @@ cdef class Renderer:
         if self.img is None or \
                 self.current_frame_id != self.shown_frame_id:
             self.img = to_numpy_3d(self.buffer, self.ny, self.nx, 3, True)
-        if not cv2.imwrite(filepath, self.img):
+        if not cv2.imwrite(filepath, cv2.cvtColor(cv2.flip(self.img, 0),cv2.COLOR_BGR2RGB)):
             raise IOError(f"cv2.imwrite failed for {filepath!r}")
 
     cpdef void close(self):

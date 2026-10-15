@@ -7,6 +7,7 @@ import numpy as np
 import cv2
 
 from fast_flow import FlowSolver
+from fast_flow.core.renderer import Renderer
 
 
 def parse_args():
@@ -15,6 +16,8 @@ def parse_args():
     p.add_argument("--ly", type=float, default=3.0)
     p.add_argument("--inflow", type=float, default=2.0)
     p.add_argument("--nu", type=float, default=0.05)
+    p.add_argument("--fps", type=int, default=120,
+                   help="renderer frames per simulated second")
     p.add_argument("--total-time", type=float, default=1.0,
                    help="simulated seconds to advance "
                         "(default 1.0 = 10000 steps x 0.0001)")
@@ -29,11 +32,14 @@ if __name__ == '__main__':
     img = cv2.flip(img, 0)
 
     print(f'Loaded image: dims=({img.shape[0]}, {img.shape[1]})')
+    renderer = Renderer("ehd_cow_cock", args.fps, img.shape[0], img.shape[1])
     solver = FlowSolver(img=img, nit=50, nu=args.nu,
                         boundary="throughflow",
                         inflow_velocity=args.inflow,
-                        lx=args.lx, ly=args.ly)
+                        lx=args.lx, ly=args.ly,
+                        renderer = renderer)
 
+    renderer.run()
     start_time = time.time_ns()
     steps = solver.run(args.total_time)
     end_time = time.time_ns()

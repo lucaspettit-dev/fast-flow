@@ -28,6 +28,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from fast_flow import FlowSolver
+from fast_flow.core.renderer import Renderer
 
 
 def parse_args():
@@ -37,12 +38,14 @@ def parse_args():
     p.add_argument("--ny", type=int, default=128)
     p.add_argument("--lx", type=float, default=8.0)
     p.add_argument("--ly", type=float, default=2.0)
-    p.add_argument("--inflow", type=float, default=5.0)
+    p.add_argument("--inflow", type=float, default=0.5)
     p.add_argument("--nu", type=float, default=0.05)
     p.add_argument("--dt", type=float, default=0.0001,
                    help="nominal dt; actual steps scale it by "
                         "powers of two to stay stable")
-    p.add_argument("--total-time", type=float, default=1.0,
+    p.add_argument("--fps", type=int, default=120,
+                   help="render frames per simulated second")
+    p.add_argument("--total-time", type=float, default=10.0,
                    help="simulated seconds to advance "
                         "(default 1.0 = 10000 steps x 0.0001)")
     p.add_argument("--out", default=None)
@@ -55,10 +58,15 @@ def parse_args():
 if __name__ == '__main__':
     args = parse_args()
     img = np.zeros((args.nx * args.ny), dtype=np.uint8).reshape((args.ny, args.nx))
+    renderer = Renderer("ehd_cow_cock", args.fps, args.ny, args.nx)
     solver = FlowSolver(img, nit=50, nu=args.nu,
                         dt=args.dt, boundary="throughflow",
                         inflow_velocity=args.inflow,
-                        lx=args.lx, ly=args.ly)
+                        lx=args.lx, ly=args.ly,
+                        renderer=renderer)
+    renderer.run()
+
+
 
     # circular obstacle: centre (1.0, 1.0), radius 0.15, as a polygon
     theta = np.linspace(0, 2 * np.pi, 96, endpoint=False)
