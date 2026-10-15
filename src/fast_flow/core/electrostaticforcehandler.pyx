@@ -724,6 +724,22 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                     if self._solid_at(idx):
                         dbuf[idx] = 0.0
                         continue
+                    # Exact early-out: if this cell and all four
+                    # neighbours hold exactly zero density, every
+                    # face flux is velocity x 0 = 0 and the update
+                    # is 0, so skip the face + choking work. The
+                    # large empty part of the domain takes this
+                    # path. Conservative: any nonzero neighbour
+                    # takes the full path. (NaN, if it ever
+                    # appeared, fails the == 0.0 tests and also
+                    # takes the full path.)
+                    if sbuf[idx] == 0.0 and \
+                            (x == 0 or sbuf[idx - 1] == 0.0) and \
+                            (x + 1 >= nx or sbuf[idx + 1] == 0.0) and \
+                            (y == 0 or sbuf[idx - nx] == 0.0) and \
+                            (y + 1 >= ny or sbuf[idx + nx] == 0.0):
+                        dbuf[idx] = 0.0
+                        continue
                     # east face
                     if x + 1 < nx and not self._solid_at(idx + 1):
                         ue = 0.5 * (iu[idx] + iu[idx + 1])
