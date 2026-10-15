@@ -12,6 +12,7 @@ core/electrostaticforcehandler.pyx.
 import numpy as np
 cimport numpy as cnp
 cimport cython
+from cython.parallel cimport prange
 from libc.stdlib cimport malloc, free
 from libc.math cimport sqrt, atan2, fabs, floor
 
@@ -320,7 +321,7 @@ cdef class FlowSolverCore:
         # the source pressure buffer)
         p_dest = self.p[dest]
         p_src = self.p[src]
-        for y in range(self.ny - 2):
+        for y in prange(self.ny - 2, nogil=True):
             for x in range(self.nx - 2):
                 self.build_up_pressure_step(y, x, dy2, dx2, inv_dt)
                 self.pressure_poisson_step(y, x, p_dest, p_src, dy_squared, dx_squared)
@@ -333,7 +334,7 @@ cdef class FlowSolverCore:
         for q in range(self.nit - 1):
             p_dest = self.p[dest]
             p_src = self.p[src]
-            for y in range(self.ny - 2):
+            for y in prange(self.ny - 2, nogil=True):
                 for x in range(self.nx - 2):
                     self.pressure_poisson_step(y, x, p_dest, p_src, dy_squared, dx_squared)
             self.pressure_set_boundry_conditions()
@@ -392,10 +393,12 @@ cdef class FlowSolverCore:
         cdef DTYPE_f uc, vc, dudx, dudy, dvdx, dvdy
 
         # rows are independent (read src buffers, write own dest
-        # row).  Serial: no OpenMP, no GIL juggling -- the
-        # parallel regions cost more in thread sync than the
-        # per-cell work saves.
-        for y in range(1, ny - 1):
+        # row).  Row-parallel: each thread owns disjoint rows,
+        # so no shared writes (unlike the old sweep-index prange,
+        # which raced on the shared buffer index).  Per-cell
+        # temporaries are auto-privatized by Cython (assigned
+        # with = inside the loop).
+        for y in prange(1, ny - 1, nogil=True):
             for x in range(1, nx - 1):
                 idx = self.idx(y, x)
 
