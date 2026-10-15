@@ -250,11 +250,16 @@ cdef class FlowSolverCore:
         if self.ny > self.nx:
             n = self.ny
 
-        # solid cells: pressure is clamped to zero, nothing diffuses in
-        for i in range(self.N):
-            if self.solid[i]:
-                p[i] = 0.0
-
+        # No per-sweep solid zeroing here: the Poisson sweep
+        # never writes solid centers (it returns early), the
+        # stencil substitutes the fluid cell's own pressure
+        # for solid neighbours, and no reader ever uses
+        # pressure at a solid cell -- so solid pressure
+        # values are never observed mid-step. The old code
+        # zeroed all 150k cells on every one of the 50
+        # sweeps, doubling the pressure cost. enforce_solids()
+        # zeroes solid pressure once per step instead, which
+        # is what keeps the final field exactly zero there.
         if self.flow_mode == 1:
             # throughflow: zero-gradient pressure on every side
             for i in range(1, self.nx - 1):
@@ -641,15 +646,21 @@ cdef class FlowSolverCore:
     @cython.wraparound(False)
     @cython.cdivision(True)
     cdef void enforce_solids(self) noexcept:
-        """No-slip: velocity is exactly zero inside solid cells."""
+        """No-slip: velocity is exactly zero inside solid
+        cells, and so is pressure (the pressure BCs no longer
+        zero solids per sweep -- nothing reads solid pressure
+        mid-step -- so this once-per-step pass is what keeps
+        the invariant)."""
         cdef Py_ssize_t i
         cdef Py_ssize_t idx
         cdef DTYPE_f* u = self.u[self.uvk]
         cdef DTYPE_f* v = self.v[self.uvk]
+        cdef DTYPE_f* p = self.p[self.pk]
         for i in range(self.N):
             if self.solid[i]:
                 u[i] = 0.0
                 v[i] = 0.0
+                p[i] = 0.0
 
     cdef DTYPE_f _max_speed(self) noexcept:
         cdef DTYPE_f* u = self.u[self.uvk]
