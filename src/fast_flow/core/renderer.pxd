@@ -4,6 +4,7 @@
 # see flow.pxd for the same pattern.
 
 cimport numpy as cnp
+from fast_flow.core.common cimport DTYPE_f
 
 
 cdef class Renderer:
@@ -13,21 +14,26 @@ cdef class Renderer:
     # The last frame rendered: a cnp.ndarray[unsigned char,
     # ndim=3] (buffer types cannot be declared on class
     # attributes, so the dtype/shape are by contract).
-    cdef cnp.ndarray buffer
-    cdef Py_ssize_t current_guid
-    cdef Py_ssize_t shown_guid
-    cdef double total_time
-    cdef double next_frame_time
-    cdef double frame_interval
-    cdef object _cv2
+    cdef cnp.ndarray img
+    cdef unsigned char* buffer
+    cdef Py_ssize_t ny
+    cdef Py_ssize_t nx
+    cdef Py_ssize_t N
+    cdef Py_ssize_t current_frame_id
+    cdef Py_ssize_t shown_frame_id
+    cdef DTYPE_f total_time
+    cdef DTYPE_f next_frame_time
+    cdef DTYPE_f frame_interval
+    cdef DTYPE_f mas_magnitude
     cdef bint _running
     cdef object _thread
 
-    cdef void render_frame(self, double dt) noexcept
+    cdef void render_frame(self, DTYPE_f dt, Py_ssize_t n, DTYPE_f* u, DTYPE_f* v) noexcept
     cdef void draw_frame(self) noexcept
     cdef void _publish(self)
     cdef void _publish(self)
     cdef void _loop(self) noexcept nogil
+    cdef Py_ssize_t idx(self, Py_ssize_t x, Py_ssize_t y, Py_ssize_t z) noexcept nogil
     cpdef void refresh(self)
     cpdef void run(self)
     cpdef void save(self, str filepath)

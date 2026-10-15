@@ -8,7 +8,7 @@ cimport numpy as cnp
 
 from fast_flow.core.common cimport DTYPE_f
 from fast_flow.core.handlers.forcehandler cimport ForceHandlerCore
-from fast_flow.core.renderor cimport Renderer
+from fast_flow.core.renderer cimport Renderer
 
 
 cdef class FlowSolverCore:

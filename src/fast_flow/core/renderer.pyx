@@ -19,40 +19,71 @@ producing frames never waits on the display.  save()
 writes the last rendered frame to a file; close() stops
 the loop and destroys the window.
 
-cv2 is imported lazily, only when run() or save() is
-called -- never at module import.  The class declaration
-lives in renderor.pxd (no cv2 there either), and the
-solver cimports only that declaration, so importing the
-solver does not require cv2; cv2 is needed only when a
-window is actually opened or a frame saved.
+The Renderer class tracks the max magnitude per frame using
+the `fast_hypot` approximation. Each frame needs to be
+scaled between 0-255. For the live run, each frame's max
+magnitude scale will be unique. But in later iterations, we'll
+keep a buffer of all rendered frames, then re-calculate the
+scale according to the overall max magnitude of the run, then
+save the video. This'll let the user see the properly scaled
+render after the run.
 """
 
 import threading
 
 import numpy as np
+import cv2
+from time import sleep
 cimport numpy as cnp
 from libc.math cimport floor
+from libc.stdlib cimport malloc, free
+from fast_flow.core.common cimport vector_to_rgb, to_numpy_3d, fast_hypot
 
+"""
+Since I cannot do enums, this is the render-style mapping:
+
+MAGNITUDE = 0 // works for p,b, and (u,v)
+RAINBOW = 1 // directional color wheel
+HEATMAP = 2 // cool blue to hot red for higher values
+"""
 
 cdef class Renderer:
     # The window is identified by its name in cv2; `window`
     # holds that name once run() has created the window,
     # and is None before and after close().
 
-    def __init__(self, str winname, Py_ssize_t fps):
+    def __init__(self, str winname, Py_ssize_t fps, Py_ssize_t ny, Py_ssize_t nx):
         self.winname = winname
         self.fps = fps if fps > 0 else 30
+        self.ny = ny
+        self.nx = nx
+        self.N = ny * nx * 3
         self.window = None
-        self.current_guid = 0
-        self.shown_guid = 0
+        self.current_frame_id = 0
+        self.shown_frame_id = -1
+        self.max_magnitude = 0
         self.total_time = 0.0
         self.next_frame_time = 0.0
         self.frame_interval = 1.0 / self.fps
-        self._cv2 = None
-        self._running = False
+        self._running = 0
         self._thread = None
+        self.img = None
+        # make buffer
+        self.buffer = <unsigned char*>malloc(self.N * sizeof(unsigned char*))
+        if self.buffer is NULL:
+            raise MemoryError("could not allocate ion state")
+        cdef Py_ssize_t i = 0
+        for i in range(self.N):
+            self.buffer[i] = 0
 
-    cdef void render_frame(self, double dt) noexcept:
+    def __dealloc__(self):
+       if self.buffer is not NULL:
+           free(self.buffer)
+
+    cdef inline Py_ssize_t idx(self, Py_ssize_t x, Py_ssize_t y, Py_ssize_t z):
+        return (y * nx + x) * 3 + z
+
+    cdef void render_frame(self, DTYPE_f dt, Py_ssize_t n, DTYPE_f* u, DTYPE_f* v) noexcept:
         """Advance the run clock by dt and render a frame
         if one is due.
 
@@ -65,29 +96,45 @@ cdef class Renderer:
         total_time.  Otherwise the call is a no-op, so the
         solver can call it every step regardless of how
         small dt is compared to the frame interval."""
+
         self.total_time += dt
         if self.total_time >= self.next_frame_time:
             self.next_frame_time += (
                 floor((self.total_time - self.next_frame_time)
                       / self.frame_interval) + 1.0) \
                 * self.frame_interval
-            self.draw_frame()
+            self.draw_frame(n, u, v)
             self._publish()
 
-    cdef void draw_frame(self) noexcept:
+    @cython.boundscheck(False)
+    @cython.wraparound(False)
+    @cython.cdivision(True)
+    cdef void draw_frame(self, Py_ssize_t n, DTYPE_f* u, DTYPE_f* v) noexcept:
         """Draw the current frame into self.buffer.
 
         Abstract: the base class draws nothing.  Subclasses
         override this to render their state; render_frame()
         calls it (and publishes the frame) when a frame is
         due."""
-        pass
+        cdef DTYPE_f frame_max_mag = 0
+        cdef DTYPE_f m = 0
+        cdef Py_ssize_t i = 0
+        for i in range(n):
+            m = fast_hypot(u[i], v[i])
+            if m > frame_max_mag:
+                frame_max_mag = m
+
+        if frame_max_mag > self.max_magnitude:
+            self.max_magnitude = frame_max_mag
+
+        for i in range(n):
+            vector_to_rgb(u[i], v[i], frame_max_mag, self.buffer[i * 3])
 
     cdef void _publish(self):
         """Stamp the frame just drawn into self.buffer as
         the current frame: it gets a new guid, so the
         display loop knows to show it."""
-        self.current_guid += 1
+        self.current_frame_id += 1
 
     cpdef void refresh(self):
         """Render a frame if one is due at the current
@@ -98,17 +145,11 @@ cdef class Renderer:
         self.render_frame(0.0)
 
     cpdef void run(self):
-        """Open the cv2 window named by the constructor's
-        winname and start the asynchronous display loop on
-        a background thread.  No-op if already running.
-        Imports cv2 here (lazily), on first use."""
-        if self._running:
+        if self._running == 1:
             return
-        import cv2
-        self._cv2 = cv2
         cv2.namedWindow(self.winname, cv2.WINDOW_NORMAL)
         self.window = self.winname
-        self._running = True
+        self._running = 0
         self._thread = threading.Thread(
             target=self._thread_main, daemon=True)
         self._thread.start()
@@ -128,35 +169,33 @@ cdef class Renderer:
         cdef Py_ssize_t delay_ms = 1000 // self.fps
         if delay_ms < 1:
             delay_ms = 1
-        while self._running:
+
+        while self._running == 1:
+            # todo: requesting GIL each loop is expensive.
+            # investigate if we can have the data-processing no-gil and have update_frame request GIL
+            # after rendering a new frame so it can update the img
             with gil:
-                # cv2 was imported by run(); bind it locally
-                # for the calls and the error handler below.
-                cv2 = self._cv2
                 try:
                     if cv2.getWindowProperty(
                             self.winname,
                             cv2.WND_PROP_VISIBLE) < 1:
-                        self._running = False
+                        self._running = 0
                         break
-                    if self.buffer is not None and \
-                            self.current_guid != self.shown_guid:
-                        cv2.imshow(self.winname, self.buffer)
-                        self.shown_guid = self.current_guid
                     if cv2.waitKey(delay_ms) == 27:
-                        self._running = False
+                        self._running = 0
+                    if self.current_frame_id != self.shown_frame_id:
+                        self.img = to_numpy_3d(self.buffer, self.nx, self.ny, 3, True)
+                        self.shown_frame_id = self.current_frame_id
+                        cv2.imshow(self.winname, self.img)
                 except cv2.error:
                     self._running = False
 
+
     cpdef void save(self, str filepath):
-        """Write the last rendered frame (self.buffer) to
-        filepath with cv2.imwrite.  Imports cv2 here
-        (lazily), on first use."""
-        if self.buffer is None:
+        if self.img is None:
             raise RuntimeError(
                 "no frame has been rendered yet (buffer is None)")
-        import cv2
-        if not cv2.imwrite(filepath, self.buffer):
+        if not cv2.imwrite(filepath, self.img):
             raise IOError(f"cv2.imwrite failed for {filepath!r}")
 
     cpdef void close(self):

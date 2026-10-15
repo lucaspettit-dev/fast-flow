@@ -6,7 +6,11 @@ ctypedef cnp.float64_t DTYPE_f
 
 import numpy as np
 cimport numpy as cnp
+from libc.math cimport fmod, floor
 cimport cython
+
+cdef double PI = 3.14159265358979323846
+cdef double TWO_PI = 6.28318530717958647692
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
@@ -71,3 +75,153 @@ cdef inline cnp.ndarray to_numpy(
     arr.flags.writeable = not readonly
 
     return arr
+
+cdef inline cnp.ndarray to_numpy_3d(
+    ArrayType* a,
+    Py_ssize_t ny,
+    Py_ssize_t nx,
+    Py_ssize_t nz,
+    bint readonly
+):
+    cdef ArrayType[:] view = <ArrayType[:nx * ny * nz]> a
+
+    cdef cnp.ndarray arr = np.array(view, copy=True)
+    arr = arr.reshape((ny, nx, nz))
+    arr.flags.writeable = not readonly
+
+    return arr
+
+cdef inline double fast_hypot(
+    DTYPE_f x,
+    DTYPE_f y
+) noexcept nogil:
+    cdef DTYPE_f ax = -x if x < 0 else x
+    cdef DTYPE_f ay = -y if y < 0 else y
+
+    if ax > ay:
+        return 0.9604 * ax + 0.3978 * ay
+    else:
+        return 0.9604 * ay + 0.3978 * ax
+
+from libc.math cimport fabs
+
+cdef inline DTYPE_f fast_atan2(
+    DTYPE_f y,
+    DTYPE_f x
+) noexcept nogil:
+    cdef DTYPE_f ax = -x if x < 0 else x
+    cdef DTYPE_f ay = -y if y < 0 else y
+    cdef DTYPE_f z
+    cdef DTYPE_f angle
+
+    if ax == 0.0 and ay == 0.0:
+        return 0.0
+
+    if ax >= ay:
+        z = ay / ax
+        angle = z * (0.7853981633974483 + 0.273 * (1.0 - z))
+    else:
+        z = ax / ay
+        angle = 1.5707963267948966 - \
+                z * (0.7853981633974483 + 0.273 * (1.0 - z))
+
+    if x < 0.0:
+        angle = 3.141592653589793 - angle
+
+    if y < 0.0:
+        angle = -angle
+
+    return angle
+
+cdef inline double clamp01(double x) noexcept nogil:
+    if x < 0.0:
+        return 0.0
+    if x > 1.0:
+        return 1.0
+    return x
+
+cdef inline void vector_to_rgb(
+    DTYPE_f x,
+    DTYPE_f y,
+    DTYPE_f max_magnitude,
+    unsigned char* o,
+) noexcept nogil:
+    cdef DTYPE_f hue
+    cdef DTYPE_f magnitude
+    cdef DTYPE_f value
+
+    # Direction determines hue [0, 1)
+    hue = fast_atan2(y, x) / TWO_PI
+    if hue < 0.0:
+        hue += 1.0
+
+    # Magnitude determines brightness [0, 1]
+    magnitude = fast_hypot(x, y)
+
+    if max_magnitude > 0.0:
+        value = clamp01(magnitude / max_magnitude)
+    else:
+        value = 0.0
+
+    hsv_to_rgb(
+        hue,
+        1.0,  # Full saturation
+        value,
+        o
+    )
+
+cdef inline void hsv_to_rgb(
+    DTYPE_f h,
+    DTYPE_f s,
+    DTYPE_f v,
+    unsigned char* o
+) noexcept nogil:
+    cdef DTYPE_f r
+    cdef DTYPE_f g
+    cdef DTYPE_f b
+    cdef DTYPE_f i
+    cdef DTYPE_f f
+    cdef DTYPE_f p
+    cdef DTYPE_f q
+    cdef DTYPE_f t
+    cdef int sector
+
+    # h is normalized to [0, 1)
+    i = floor(h * 6.0)
+    sector = <int>i
+    f = h * 6.0 - i
+
+    p = v * (1.0 - s)
+    q = v * (1.0 - s * f)
+    t = v * (1.0 - s * (1.0 - f))
+
+    if sector == 0:
+        r = v
+        g = t
+        b = p
+    elif sector == 1:
+        r = q
+        g = v
+        b = p
+    elif sector == 2:
+        r = p
+        g = v
+        b = t
+    elif sector == 3:
+        r = p
+        g = q
+        b = v
+    elif sector == 4:
+        r = t
+        g = p
+        b = v
+    else:
+        r = v
+        g = p
+        b = q
+
+    # Matches int(c * 255) from the original Python code
+    o[0] = <unsigned char>(r * 255.0)
+    o[1] = <unsigned char>(g * 255.0)
+    o[2] = <unsigned char>(b * 255.0)
+

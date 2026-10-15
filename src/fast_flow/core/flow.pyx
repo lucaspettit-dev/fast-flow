@@ -515,6 +515,9 @@ cdef class FlowSolverCore:
         if self.force is not None:
             self.force.accumulate(y, x, idx, u_dest, v_dest)
 
+    @cython.boundscheck(False)
+    @cython.wraparound(False)
+    @cython.cdivision(True)
     cdef void apply_boundary_forces(self) noexcept:
         """Apply the force handlers to the boundary cells only.
 
@@ -554,6 +557,9 @@ cdef class FlowSolverCore:
             self.apply_uv_force(y, self.nx - 1,
                                 y * self.nx + self.nx - 1, u, v)
 
+    @cython.boundscheck(False)
+    @cython.wraparound(False)
+    @cython.cdivision(True)
     cdef void apply_pressure_forces(self) noexcept:
         """Add the handlers' get_p contributions into the
         pressure buffer, one call per cell.
@@ -634,6 +640,9 @@ cdef class FlowSolverCore:
                 v[right] = 0.0
 
 
+    @cython.boundscheck(False)
+    @cython.wraparound(False)
+    @cython.cdivision(True)
     cdef void enforce_solids(self) noexcept:
         """No-slip: velocity is exactly zero inside solid cells."""
         cdef Py_ssize_t i
@@ -717,7 +726,7 @@ cdef class FlowSolverCore:
         # dt and draws a frame only when one is due at its
         # fps, so this costs a comparison on most steps.
         if self.renderer is not None:
-            self.renderer.render_frame(self.dt)
+            self.renderer.render_frame(self.dt, self.N, self.u[self.uvk], self.v[self.uvk])
 
     cpdef void step(self) noexcept:
         """Advance by one dynamically-chosen timestep.
