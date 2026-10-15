@@ -309,6 +309,8 @@ cdef class FlowSolverCore:
         cdef Py_ssize_t jj
         cdef Py_ssize_t ii
         cdef Py_ssize_t base
+        cdef Py_ssize_t idx
+        cdef Py_ssize_t row_base
         cdef int nfluid
 
         # determine which p is written to and which is read from.
@@ -333,9 +335,27 @@ cdef class FlowSolverCore:
         for q in range(self.nit - 1):
             p_dest = self.p[dest]
             p_src = self.p[src]
-            for y in range(self.ny - 2):
-                for x in range(self.nx - 2):
-                    self.pressure_poisson_step(y, x, p_dest, p_src, dy_squared, dx_squared)
+            if q == self.nit - 2 and self.flow_mode == 1:
+                # Last sweep (throughflow only, where pinning
+                # runs): fuse the pinning SUM into the sweep.
+                # Interior cells are final at sweep time
+                # (BCs only write boundary cells), so their
+                # sum can accumulate here; the perimeter is
+                # summed after the BC pass below.
+                pmean = 0.0
+                nfluid = 0
+                for y in range(self.ny - 2):
+                    row_base = (y + 1) * self.nx
+                    for x in range(self.nx - 2):
+                        self.pressure_poisson_step(y, x, p_dest, p_src, dy_squared, dx_squared)
+                        idx = row_base + x + 1
+                        if not self.solid[idx]:
+                            pmean += p_dest[idx]
+                            nfluid += 1
+            else:
+                for y in range(self.ny - 2):
+                    for x in range(self.nx - 2):
+                        self.pressure_poisson_step(y, x, p_dest, p_src, dy_squared, dx_squared)
             self.pressure_set_boundry_conditions()
 
             # rotate src/dest
@@ -348,13 +368,33 @@ cdef class FlowSolverCore:
             # pin the fluid mean to zero so it cannot drift between
             # steps (solids are exactly zero and stay out of this)
             pp = self.p[self.pk]
-            pmean = 0.0
-            nfluid = 0
-            for jj in range(self.ny):
-                base = jj * self.nx
+            if self.nit <= 1:
+                # No q-loop ran, so no fused sum exists:
+                # fall back to the full sum pass.
+                pmean = 0.0
+                nfluid = 0
+                for jj in range(self.ny):
+                    base = jj * self.nx
+                    for ii in range(self.nx):
+                        if not self.solid[self.idx(jj, ii)]:
+                            pmean += pp[base + ii]
+                            nfluid += 1
+            else:
+                # Perimeter (post-BC values), in row-major
+                # order: top row, bottom row, then the sides.
                 for ii in range(self.nx):
-                    if not self.solid[self.idx(jj, ii)]:
-                        pmean += pp[base + ii]
+                    if not self.solid[ii]:
+                        pmean += pp[ii]
+                        nfluid += 1
+                    if not self.solid[(self.ny - 1) * self.nx + ii]:
+                        pmean += pp[(self.ny - 1) * self.nx + ii]
+                        nfluid += 1
+                for jj in range(1, self.ny - 1):
+                    if not self.solid[jj * self.nx]:
+                        pmean += pp[jj * self.nx]
+                        nfluid += 1
+                    if not self.solid[jj * self.nx + self.nx - 1]:
+                        pmean += pp[jj * self.nx + self.nx - 1]
                         nfluid += 1
             if nfluid > 0:
                 pmean /= nfluid
