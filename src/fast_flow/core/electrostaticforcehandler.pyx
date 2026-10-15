@@ -547,7 +547,9 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         return (to_numpy(self.u[self.uvk], self.solver.ny, self.solver.nx, True),
                 to_numpy(self.v[self.uvk], self.solver.ny, self.solver.nx, True))
 
-    cdef bint _solid_at(self, Py_ssize_t idx) noexcept nogil:
+    cdef inline bint _solid_at(self, Py_ssize_t idx) noexcept nogil:
+        # inline: the transport loop calls this ~8x per cell per
+        # subcycle, and a real call per check dominated that loop.
         """Solid for the ion physics: a solver solid, or --
         when the image and solver grids match -- one of
         the handler's own electrode cells."""
@@ -677,6 +679,8 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         cdef DTYPE_f ue, uw, vn, vs, fx_e, fx_w, fy_n, fy_s
         cdef DTYPE_f src_e, src_w, src_n, src_s, val, gen
         cdef DTYPE_f ce, cw, cn, cs, e2, shield
+        cdef DTYPE_f tau_dx, tau_dy
+        cdef bint se, sw, sn, ss
 
         if dt <= 0.0:
             dt = self.solver.dt_base
@@ -714,6 +718,8 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
             if nsub > 8192:
                 nsub = 8192
         tau = dt / nsub
+        tau_dx = tau / dx
+        tau_dy = tau / dy
         cur = self.dk
         sbuf = self.d[cur]
         dbuf = self.d[1 - cur]
@@ -724,8 +730,16 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                     if self._solid_at(idx):
                         dbuf[idx] = 0.0
                         continue
+                    # Face-solid flags, computed once and reused
+                    # by the face fluxes and the choking below
+                    # (the old code re-checked each neighbour in
+                    # the choking block, doubling the checks).
+                    se = x + 1 < nx and not self._solid_at(idx + 1)
+                    sw = x > 0 and not self._solid_at(idx - 1)
+                    sn = y + 1 < ny and not self._solid_at(idx + nx)
+                    ss = y > 0 and not self._solid_at(idx - nx)
                     # east face
-                    if x + 1 < nx and not self._solid_at(idx + 1):
+                    if se:
                         ue = 0.5 * (iu[idx] + iu[idx + 1])
                         src_e = sbuf[idx + 1]
                     else:
@@ -733,7 +747,7 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                         src_e = 0.0
                     fx_e = ue * (sbuf[idx] if ue > 0.0 else src_e)
                     # west face
-                    if x > 0 and not self._solid_at(idx - 1):
+                    if sw:
                         uw = 0.5 * (iu[idx] + iu[idx - 1])
                         src_w = sbuf[idx - 1]
                     else:
@@ -741,7 +755,7 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                         src_w = 0.0
                     fx_w = uw * (src_w if uw > 0.0 else sbuf[idx])
                     # north face
-                    if y + 1 < ny and not self._solid_at(idx + nx):
+                    if sn:
                         vn = 0.5 * (iv[idx] + iv[idx + nx])
                         src_n = sbuf[idx + nx]
                     else:
@@ -749,7 +763,7 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                         src_n = 0.0
                     fy_n = vn * (sbuf[idx] if vn > 0.0 else src_n)
                     # south face
-                    if y > 0 and not self._solid_at(idx - nx):
+                    if ss:
                         vs = 0.5 * (iv[idx] + iv[idx - nx])
                         src_s = sbuf[idx - nx]
                     else:
@@ -765,7 +779,7 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                     # limit.  Collection into solids and
                     # outflow from the domain are unimpeded.
                     if ue > 0.0:
-                        if x + 1 < nx and not self._solid_at(idx + 1):
+                        if se:
                             shield = 1.0 - sbuf[idx + 1] / \
                                 ION_SHIELD_DENSITY
                             fx_e *= shield if shield > 0.0 else 0.0
@@ -775,12 +789,12 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                     if uw > 0.0:
                         shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
                         fx_w *= shield if shield > 0.0 else 0.0
-                    elif x > 0 and not self._solid_at(idx - 1):
+                    elif sw:
                         shield = 1.0 - sbuf[idx - 1] / \
                             ION_SHIELD_DENSITY
                         fx_w *= shield if shield > 0.0 else 0.0
                     if vn > 0.0:
-                        if y + 1 < ny and not self._solid_at(idx + nx):
+                        if sn:
                             shield = 1.0 - sbuf[idx + nx] / \
                                 ION_SHIELD_DENSITY
                             fy_n *= shield if shield > 0.0 else 0.0
@@ -790,12 +804,16 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                     if vs > 0.0:
                         shield = 1.0 - sbuf[idx] / ION_SHIELD_DENSITY
                         fy_s *= shield if shield > 0.0 else 0.0
-                    elif y > 0 and not self._solid_at(idx - nx):
+                    elif ss:
                         shield = 1.0 - sbuf[idx - nx] / \
                             ION_SHIELD_DENSITY
                         fy_s *= shield if shield > 0.0 else 0.0
-                    val = sbuf[idx] - tau * (
-                        (fx_e - fx_w) / dx + (fy_n - fy_s) / dy)
+                    # tau/dx and tau/dy hoisted above the subcycle
+                    # loop: the old code divided twice per cell
+                    # per subcycle (rounding differs in the last
+                    # bit; the math is identical).
+                    val = sbuf[idx] - (fx_e - fx_w) * tau_dx \
+                        - (fy_n - fy_s) * tau_dy
                     dbuf[idx] = val if val > 0.0 else 0.0
             tbuf = sbuf
             sbuf = dbuf
