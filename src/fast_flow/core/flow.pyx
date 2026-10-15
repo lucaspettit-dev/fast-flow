@@ -15,7 +15,7 @@ cimport cython
 from libc.stdlib cimport malloc, free
 from libc.math cimport sqrt, atan2, fabs, floor
 
-from fast_flow.core.common cimport DTYPE_f, build_solids_mask, to_numpy
+from fast_flow.core.common cimport DTYPE_f, build_solids_mask, to_numpy, fast_hypot
 from fast_flow.core.handlers.forcehandler cimport ForceHandlerCore
 
 
@@ -390,6 +390,8 @@ cdef class FlowSolverCore:
         cdef DTYPE_f nu = self.nu
         cdef DTYPE_f p_c, p_e, p_w, p_n, p_s
         cdef DTYPE_f uc, vc, dudx, dudy, dvdx, dvdy
+        cdef DTYPE_f m
+        cdef DTYPE_f max_mag = 0.0
 
         # rows are independent (read src buffers, write own dest
         # row).  Serial: no OpenMP, no GIL juggling -- the
@@ -496,8 +498,16 @@ cdef class FlowSolverCore:
 
                 self.apply_uv_force(y, x, idx, u_dest, v_dest)
 
+                # Track the frame's max velocity magnitude
+                # while the velocities are in hand, so the
+                # renderer need not re-scan the field for it.
+                m = fast_hypot(u_dest[idx], v_dest[idx])
+                if m > max_mag:
+                    max_mag = m
+
         # dest now contains the newest velocity field.
         self.uvk = dest
+        self.max_velocity_mag = max_mag
 
     @cython.boundscheck(False)
     @cython.wraparound(False)
@@ -612,6 +622,7 @@ cdef class FlowSolverCore:
                 v[i] = 0.0
                 u[last_row + i] = 0.0
                 v[last_row + i] = 0.0
+            self._track_boundary_max()
             return
 
         for i in range(n):
@@ -635,6 +646,44 @@ cdef class FlowSolverCore:
 
                 v[left] = 0.0
                 v[right] = 0.0
+        self._track_boundary_max()
+
+    @cython.boundscheck(False)
+    @cython.wraparound(False)
+    @cython.cdivision(True)
+    cdef void _track_boundary_max(self) noexcept:
+        """Fold the boundary cells' velocity magnitudes into
+        max_velocity_mag. update_momentum() covers the
+        interior; this covers the perimeter (inflow, copies,
+        lid) so the renderer gets the true field max.
+        Handler-driven boundary velocities
+        (apply_boundary_forces, which runs after clamp) are
+        NOT tracked -- a documented gap: if a handler ever
+        drove a boundary cell past the interior max, the
+        renderer's scale would clip there. In the EHD demo
+        the boundary drag is ~0, so the tracked max is exact."""
+        cdef Py_ssize_t i
+        cdef Py_ssize_t last_row = (self.ny - 1) * self.nx
+        cdef DTYPE_f* u = self.u[self.uvk]
+        cdef DTYPE_f* v = self.v[self.uvk]
+        cdef DTYPE_f m
+        cdef DTYPE_f best = self.max_velocity_mag
+        for i in range(self.nx):
+            m = fast_hypot(u[i], v[i])
+            if m > best:
+                best = m
+            m = fast_hypot(u[last_row + i], v[last_row + i])
+            if m > best:
+                best = m
+        for i in range(1, self.ny - 1):
+            m = fast_hypot(u[i * self.nx], v[i * self.nx])
+            if m > best:
+                best = m
+            m = fast_hypot(u[i * self.nx + self.nx - 1],
+                           v[i * self.nx + self.nx - 1])
+            if m > best:
+                best = m
+        self.max_velocity_mag = best
 
 
     @cython.boundscheck(False)
@@ -723,7 +772,10 @@ cdef class FlowSolverCore:
         # dt and draws a frame only when one is due at its
         # fps, so this costs a comparison on most steps.
         if self.renderer is not None:
-            self.renderer.render_frame(self.dt, self.N, self.u[self.uvk], self.v[self.uvk])
+            self.renderer.render_frame(self.dt, self.N,
+                                       self.u[self.uvk],
+                                       self.v[self.uvk],
+                                       self.max_velocity_mag)
 
     cpdef void step(self) noexcept:
         """Advance by one dynamically-chosen timestep.

@@ -78,7 +78,7 @@ cdef class Renderer:
     cdef inline Py_ssize_t idx(self, Py_ssize_t x, Py_ssize_t y, Py_ssize_t z) noexcept nogil:
         return (y * self.nx + x) * 3 + z
 
-    cdef void render_frame(self, DTYPE_f dt, Py_ssize_t n, DTYPE_f* u, DTYPE_f* v) noexcept:
+    cdef void render_frame(self, DTYPE_f dt, Py_ssize_t n, DTYPE_f* u, DTYPE_f* v, DTYPE_f max_mag) noexcept:
         """Advance the run clock by dt and render a frame
         if one is due.
 
@@ -90,7 +90,14 @@ cdef class Renderer:
         fresh guid, and the boundary advances past
         total_time.  Otherwise the call is a no-op, so the
         solver can call it every step regardless of how
-        small dt is compared to the frame interval."""
+        small dt is compared to the frame interval.
+
+        max_mag is the solver's tracked max velocity
+        magnitude for this step's field (see
+        FlowSolverCore.max_velocity_mag); draw_frame() uses
+        it as the frame's scale instead of re-scanning the
+        field. Pass 0.0 when no tracked max is available
+        and draw_frame() scans the field itself."""
 
         self.total_time += dt
         if self.total_time >= self.next_frame_time:
@@ -98,7 +105,7 @@ cdef class Renderer:
                 floor((self.total_time - self.next_frame_time)
                       / self.frame_interval) + 1.0) \
                 * self.frame_interval
-            self.draw_frame(n, u, v)
+            self.draw_frame(n, u, v, max_mag)
             self._publish()
             if self._running == 1:
                 # No display thread: show the frame inline in
@@ -121,20 +128,23 @@ cdef class Renderer:
                 except Exception:
                     self.close()
 
-    cdef void draw_frame(self, Py_ssize_t n, DTYPE_f* u, DTYPE_f* v) noexcept:
+    cdef void draw_frame(self, Py_ssize_t n, DTYPE_f* u, DTYPE_f* v, DTYPE_f max_mag) noexcept:
         """Draw the current frame into self.buffer.
 
         Abstract: the base class draws nothing.  Subclasses
         override this to render their state; render_frame()
         calls it (and publishes the frame) when a frame is
-        due."""
-        cdef DTYPE_f frame_max_mag = 0
+        due. max_mag is the frame's max velocity magnitude
+        when the caller tracked it (the solver does, in its
+        velocity loop); when 0.0 the max is scanned here."""
+        cdef DTYPE_f frame_max_mag = max_mag
         cdef DTYPE_f m = 0
         cdef Py_ssize_t i = 0
-        for i in range(n):
-            m = fast_hypot(u[i], v[i])
-            if m > frame_max_mag:
-                frame_max_mag = m
+        if frame_max_mag <= 0.0:
+            for i in range(n):
+                m = fast_hypot(u[i], v[i])
+                if m > frame_max_mag:
+                    frame_max_mag = m
 
         if frame_max_mag > self.max_magnitude:
             self.max_magnitude = frame_max_mag
@@ -156,7 +166,7 @@ cdef class Renderer:
         so this draws the initial state.  Takes the (u, v)
         fields as (ny, nx) arrays, since render_frame now
         needs the field data to draw."""
-        self.render_frame(0.0, u.shape[0] * u.shape[1], &u[0, 0], &v[0, 0])
+        self.render_frame(0.0, u.shape[0] * u.shape[1], &u[0, 0], &v[0, 0], 0.0)
 
     cpdef void run(self):
         if self._running == 1:
