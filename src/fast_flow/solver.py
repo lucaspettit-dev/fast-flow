@@ -121,6 +121,46 @@ class ElectrostaticForceHandler(ForceHandler):
             raise RuntimeError("handler is not bound to a solver yet")
         return self._handler.ion_velocity()
 
+    def o2_density(self):
+        """Current O2- (negative corona) density at the
+        solver grid's cells, as a read-only (ny, nx)
+        array.  Zeros until the solver's first step
+        advances the ions, and zeros if no negative
+        electrode is in corona (see neg_corona_active)."""
+        if getattr(self, "_handler", None) is None:
+            raise RuntimeError("handler is not bound to a solver yet")
+        return self._handler.o2_density()
+
+    def o2_velocity(self):
+        """Current O2- velocity (field drift opposite to
+        the +ions, + air velocity) at the solver grid's
+        cells, as (u, v) read-only (ny, nx) arrays."""
+        if getattr(self, "_handler", None) is None:
+            raise RuntimeError("handler is not bound to a solver yet")
+        return self._handler.o2_velocity()
+
+    @property
+    def neg_corona_active(self):
+        """True if any negative electrode is in corona
+        (its surface field exceeds breakdown), i.e. O2-
+        is being generated."""
+        if getattr(self, "_handler", None) is None:
+            return False
+        return self._handler.neg_corona_active
+
+    def solid_forces(self):
+        """Electrostatic force on the solids from the
+        ion cloud (the thrust), split by electrode.
+        All solids assumed connected -- one rigid body.
+        Returns a dict with 'positive' / 'negative' /
+        'neutral' / 'net' as (Fx, Fy) tuples in code
+        units, plus 'electrode_electrode' (the internal
+        mutual attraction, on the positive electrode).
+        The net is the thrust on the assembly."""
+        if getattr(self, "_handler", None) is None:
+            raise RuntimeError("handler is not bound to a solver yet")
+        return self._handler.solid_forces()
+
 
 class FlowSolver:
     """2D incompressible flow solver.

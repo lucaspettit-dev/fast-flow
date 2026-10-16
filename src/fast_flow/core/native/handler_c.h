@@ -35,7 +35,11 @@ typedef struct handler_c handler_c_t;
  * double-buffered ion velocity (uvk selects the current);
  * cu0/cu1, cv0/cv1 the Coulomb field (ck selects the
  * current); ion_zone is the generation mask; solids is
- * the handler's own electrode mask (may be NULL). */
+ * the handler's own electrode mask (may be NULL).
+ * dn0/dn1 are the double-buffered O2- (negative-corona)
+ * density, un0/un1, vn0/vn1 its velocity (same uvk),
+ * ion_zone_neg its generation mask (air cells bordering
+ * a negative electrode that is in corona). */
 handler_c_t *handler_c_create(long nx, long ny,
                               double dx, double dy,
                               double *d0, double *d1,
@@ -47,12 +51,18 @@ handler_c_t *handler_c_create(long nx, long ny,
                               unsigned char *ion_zone,
                               unsigned char *solids,
                               long solids_nx, long solids_ny,
+                              double *dn0, double *dn1,
+                              double *un0, double *un1,
+                              double *vn0, double *vn1,
+                              unsigned char *ion_zone_neg,
                               ff_pool_t *pool);
 void handler_c_destroy(handler_c_t *h);
 
 /* The density buffer index after the last advance (the
  * Cython side syncs its dk from this). */
 long handler_c_dk(const handler_c_t *h);
+/* The O2- density buffer index after the last advance. */
+long handler_c_dnk(const handler_c_t *h);
 /* Keep the C struct's pk in sync with the Cython side's
  * (get_p flips pk when the pass wraps; the advance reads
  * it to find the pressure back slot). */

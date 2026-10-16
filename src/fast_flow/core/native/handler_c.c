@@ -44,6 +44,17 @@ struct handler_c {
     unsigned char *solids;
     long solids_nx, solids_ny;
     long dk, pk, uvk, ck;
+    /* O2- (negative corona): density, velocity, buffer
+     * index, and generation mask -- the mirror of the
+     * +ion state.  O2- drifts opposite to the field
+     * (toward the positive electrode) and is collected
+     * (neutralized) there, like +ions at the negative
+     * electrode.  It carries no pressure and does not
+     * drag the air (tracked only). */
+    double *dn[2];
+    double *un[2], *vn[2];
+    unsigned char *ion_zone_neg;
+    long dnk;
     ff_pool_t *pool;
     int owns_pool;
 };
@@ -68,6 +79,10 @@ handler_c_t *handler_c_create(long nx, long ny,
                               unsigned char *ion_zone,
                               unsigned char *solids,
                               long solids_nx, long solids_ny,
+                              double *dn0, double *dn1,
+                              double *un0, double *un1,
+                              double *vn0, double *vn1,
+                              unsigned char *ion_zone_neg,
                               ff_pool_t *pool) {
     handler_c_t *h = (handler_c_t *)calloc(1, sizeof(handler_c_t));
     if (!h)
@@ -93,7 +108,15 @@ handler_c_t *handler_c_create(long nx, long ny,
     h->solids = solids;
     h->solids_nx = solids_nx;
     h->solids_ny = solids_ny;
+    h->dn[0] = dn0;
+    h->dn[1] = dn1;
+    h->un[0] = un0;
+    h->un[1] = un1;
+    h->vn[0] = vn0;
+    h->vn[1] = vn1;
+    h->ion_zone_neg = ion_zone_neg;
     h->dk = 0;
+    h->dnk = 0;
     h->pk = 0;
     h->uvk = 0;
     h->ck = 0;
@@ -123,6 +146,10 @@ long handler_c_dk(const handler_c_t *h) {
     return h ? h->dk : 0;
 }
 
+long handler_c_dnk(const handler_c_t *h) {
+    return h ? h->dnk : 0;
+}
+
 void handler_c_set_pk(handler_c_t *h, long pk) {
     if (h)
         h->pk = pk;
@@ -147,14 +174,18 @@ static void velocity_rows(void *vctx, long y0, long y1, int id) {
     const unsigned char *solid = ctx->solid;
     double *iu = h->u[h->uvk];
     double *iv = h->v[h->uvk];
+    double *inu = h->un[h->uvk];
+    double *inv = h->vn[h->uvk];
     double *cu = h->cu[h->ck];
     double *cv = h->cv[h->ck];
     double *dd = h->d[h->dk];
+    double *dn = h->dn[h->dnk];
     long nx = h->nx;
     double dx = h->dx, dy = h->dy;
     double local_rate = 0.0;
     long y, x, idx;
     double vx, vy, sp2, scale, shield, cell_rate;
+    double wnx, wny, spn2, scalen, cell_raten;
 
     for (y = y0; y < y1; y++) {
         for (x = 0; x < nx; x++) {
@@ -162,14 +193,30 @@ static void velocity_rows(void *vctx, long y0, long y1, int id) {
             if (h_solid_at(h, solid, idx)) {
                 iu[idx] = 0.0;
                 iv[idx] = 0.0;
+                inu[idx] = 0.0;
+                inv[idx] = 0.0;
                 continue;
             }
+            /* Space-charge shielding from the TOTAL ion
+             * density (+ions + O2-): the cloud's own
+             * charge cancels the applied field for both
+             * species.  When there is no negative corona
+             * (dn == 0) this is exactly the old +ion-only
+             * shielding. */
+            shield = 1.0 - (dd[idx] + dn[idx]) / ION_SHIELD_DENSITY;
             vx = au[idx];
             vy = av[idx];
-            shield = 1.0 - dd[idx] / ION_SHIELD_DENSITY;
+            wnx = au[idx];
+            wny = av[idx];
             if (shield > 0.0) {
+                /* +ions drift along the field ... */
                 vx += cu[idx] * shield;
                 vy += cv[idx] * shield;
+                /* ... O2- drifts opposite to the field
+                 * (negative charge), toward the positive
+                 * electrode. */
+                wnx -= cu[idx] * shield;
+                wny -= cv[idx] * shield;
             }
             sp2 = vx * vx + vy * vy;
             if (sp2 > ION_SPEED_MAX * ION_SPEED_MAX) {
@@ -182,16 +229,31 @@ static void velocity_rows(void *vctx, long y0, long y1, int id) {
             cell_rate = fabs(vx) / dx + fabs(vy) / dy;
             if (cell_rate > local_rate)
                 local_rate = cell_rate;
+            spn2 = wnx * wnx + wny * wny;
+            if (spn2 > ION_SPEED_MAX * ION_SPEED_MAX) {
+                scalen = ION_SPEED_MAX / sqrt(spn2);
+                wnx *= scalen;
+                wny *= scalen;
+            }
+            inu[idx] = wnx;
+            inv[idx] = wny;
+            cell_raten = fabs(wnx) / dx + fabs(wny) / dy;
+            if (cell_raten > local_rate)
+                local_rate = cell_raten;
         }
     }
     ctx->partial_max[id] = local_rate;
 }
 
-/* Transport subcycle ctx. */
+/* Transport subcycle ctx.  iu/iv are the velocity
+ * buffers for the species being transported (+ion
+ * velocity for d, O2- velocity for dn) -- the same
+ * donor-cell routine serves both species. */
 typedef struct {
     handler_c_t *h;
     const unsigned char *solid;
     double *sbuf, *dbuf;
+    const double *iu, *iv;
     double tau;
 } transport_ctx_t;
 
@@ -201,8 +263,8 @@ static void transport_rows(void *vctx, long y0, long y1, int id) {
     const unsigned char *solid = ctx->solid;
     double *sbuf = ctx->sbuf, *dbuf = ctx->dbuf;
     double tau = ctx->tau;
-    double *iu = h->u[h->uvk];
-    double *iv = h->v[h->uvk];
+    const double *iu = ctx->iu;
+    const double *iv = ctx->iv;
     long nx = h->nx, ny = h->ny;
     double dx = h->dx, dy = h->dy;
     long y, x, idx;
@@ -293,9 +355,12 @@ static void transport_rows(void *vctx, long y0, long y1, int id) {
     }
 }
 
-/* Generation ctx (flat index range). */
+/* Generation ctx (flat index range).  zone is the
+ * generation mask for the species being generated
+ * (ion_zone for +ions, ion_zone_neg for O2-). */
 typedef struct {
     handler_c_t *h;
+    const unsigned char *zone;
     double *sbuf;
     double gen;
 } generation_ctx_t;
@@ -303,12 +368,14 @@ typedef struct {
 static void generation_range(void *vctx, long i0, long i1, int id) {
     generation_ctx_t *ctx = (generation_ctx_t *)vctx;
     handler_c_t *h = ctx->h;
+    const unsigned char *zone = ctx->zone;
     double *sbuf = ctx->sbuf;
     double gen = ctx->gen;
     long idx;
     (void)id;
+    (void)h;
     for (idx = i0; idx < i1; idx++) {
-        if (h->ion_zone[idx] && sbuf[idx] < ION_ZONE_TARGET) {
+        if (zone && zone[idx] && sbuf[idx] < ION_ZONE_TARGET) {
             sbuf[idx] += (ION_ZONE_TARGET - sbuf[idx]) * gen;
         }
     }
@@ -394,8 +461,9 @@ void handler_c_advance(handler_c_t *h,
     long ny = h->ny;
     double rate = 0.0;
     double tau, gen;
-    long nsub, k, cur, i;
+    long nsub, k, cur, cur_n, i;
     double *sbuf, *dbuf, *tbuf, *sbuf_final;
+    double *sbuf_n, *dbuf_n, *tbuf_n, *sbuf_final_n;
     velocity_ctx_t vctx;
     transport_ctx_t tctx;
     generation_ctx_t gctx;
@@ -407,7 +475,10 @@ void handler_c_advance(handler_c_t *h,
     if (dt <= 0.0)
         dt = dt_base;
 
-    /* 1. ion velocity + transport rate (parallel max) */
+    /* 1. ion velocity + transport rate (parallel max).
+     * The rate is the max over BOTH species (the faster
+     * one sets the subcycle count, so neither violates
+     * the CFL). */
     nthreads = ff_pool_nthreads(h->pool);
     partial_max = (double *)calloc((size_t)nthreads, sizeof(double));
     if (!partial_max)
@@ -424,7 +495,10 @@ void handler_c_advance(handler_c_t *h,
     }
     free(partial_max);
 
-    /* 2. conservative flux transport, subcycled */
+    /* 2. conservative flux transport, subcycled.  Both
+     * species ride the same subcycles (same tau): each
+     * subcycle transports +ions (u/v) then O2- (un/vn),
+     * so the two density fields stay in step. */
     nsub = 1;
     if (rate > 0.0) {
         nsub = (long)(dt * rate / 0.8) + 1;
@@ -433,31 +507,53 @@ void handler_c_advance(handler_c_t *h,
     }
     tau = dt / nsub;
     cur = h->dk;
+    cur_n = h->dnk;
     sbuf = h->d[cur];
     dbuf = h->d[1 - cur];
+    sbuf_n = h->dn[cur_n];
+    dbuf_n = h->dn[1 - cur_n];
     tctx.h = h;
     tctx.solid = solid;
     tctx.tau = tau;
     for (k = 0; k < nsub; k++) {
         tctx.sbuf = sbuf;
         tctx.dbuf = dbuf;
+        tctx.iu = h->u[h->uvk];
+        tctx.iv = h->v[h->uvk];
         ff_pool_for(h->pool, ny, transport_rows, &tctx);
         tbuf = sbuf;
         sbuf = dbuf;
         dbuf = tbuf;
         cur = 1 - cur;
+        tctx.sbuf = sbuf_n;
+        tctx.dbuf = dbuf_n;
+        tctx.iu = h->un[h->uvk];
+        tctx.iv = h->vn[h->uvk];
+        ff_pool_for(h->pool, ny, transport_rows, &tctx);
+        tbuf_n = sbuf_n;
+        sbuf_n = dbuf_n;
+        dbuf_n = tbuf_n;
+        cur_n = 1 - cur_n;
     }
 
-    /* 3. ionization-zone generation */
+    /* 3. ionization-zone generation: +ions in ion_zone,
+     * O2- in ion_zone_neg (only where a negative
+     * electrode is in corona -- the Cython side builds
+     * that mask from the onset check). */
     gen = dt / ION_PRODUCTION_TAU;
     if (gen > 1.0)
         gen = 1.0;
     gctx.h = h;
     gctx.sbuf = sbuf;
+    gctx.zone = h->ion_zone;
+    gctx.gen = gen;
+    ff_pool_for(h->pool, h->N, generation_range, &gctx);
+    gctx.sbuf = sbuf_n;
+    gctx.zone = h->ion_zone_neg;
     gctx.gen = gen;
     ff_pool_for(h->pool, h->N, generation_range, &gctx);
 
-    /* 4. diffusion of the density into the other buffer */
+    /* 4. diffusion of each density into the other buffer. */
     dctx.h = h;
     dctx.solid = solid;
     dctx.sbuf = sbuf;
@@ -465,6 +561,12 @@ void handler_c_advance(handler_c_t *h,
     ff_pool_for(h->pool, ny, diffusion_rows, &dctx);
     h->dk = 1 - cur;
     sbuf_final = h->d[h->dk];
+    dctx.sbuf = sbuf_n;
+    dctx.dbuf = dbuf_n;
+    ff_pool_for(h->pool, ny, diffusion_rows, &dctx);
+    h->dnk = 1 - cur_n;
+    sbuf_final_n = h->dn[h->dnk];
+    (void)sbuf_final_n;
 
     /* 5. electrostatic pressure of the ion cloud.
      * pp = p[1 - pk]; pk is passed by the caller via the
