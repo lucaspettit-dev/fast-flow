@@ -462,6 +462,33 @@ static void c_pressure_bcs(solver_c_t *s, double *p_dest) {
     p_dest[c_idx(s, 0, s->nx - 1)] = p_dest[c_idx(s, 1, s->nx - 2)];
 }
 
+/* flow_mode == 2 (NONE): no boundary. Zero the solid pressures
+ * (as c_pressure_bcs does) and copy the adjacent interior
+ * pressure out to every edge (zero-gradient), so the edges
+ * evolve with the field instead of staying pinned at 0 --
+ * pinned edges are a wall, which is exactly what NONE must
+ * not be. Corners pick up the side values. */
+static void c_extrapolate_pressure_edges(solver_c_t *s, double *p_dest) {
+    bc_ctx_t ctx;
+    long i;
+    long nx = s->nx, ny = s->ny;
+    ctx.s = s;
+    ctx.p_dest = p_dest;
+    ff_pool_for(s->pool, s->ny, bc_zero_solids, &ctx);
+    for (i = 1; i < ny - 1; i++) {
+        if (!s->solid[c_idx(s, i, 0)])
+            p_dest[c_idx(s, i, 0)] = p_dest[c_idx(s, i, 1)];
+        if (!s->solid[c_idx(s, i, nx - 1)])
+            p_dest[c_idx(s, i, nx - 1)] = p_dest[c_idx(s, i, nx - 2)];
+    }
+    for (i = 0; i < nx; i++) {
+        if (!s->solid[c_idx(s, 0, i)])
+            p_dest[c_idx(s, 0, i)] = p_dest[c_idx(s, 1, i)];
+        if (!s->solid[c_idx(s, ny - 1, i)])
+            p_dest[c_idx(s, ny - 1, i)] = p_dest[c_idx(s, ny - 2, i)];
+    }
+}
+
 /* Poisson sweep task contexts (parallel-for over row range). */
 typedef struct {
     solver_c_t *s;
@@ -516,7 +543,9 @@ static void c_pressure_poisson(solver_c_t *s) {
     ctx.inv_dt = inv_dt;
     ctx.with_build_up = 1;
     ff_pool_for(s->pool, s->ny - 2, poisson_rows, &ctx);
-    if (!s->flow_mode == 2)
+    if (s->flow_mode == 2)
+        c_extrapolate_pressure_edges(s, p_dest);
+    else
         c_pressure_bcs(s, p_dest);
 
     s->pk ^= 1;
@@ -530,7 +559,9 @@ static void c_pressure_poisson(solver_c_t *s) {
         ctx.p_src = p_src;
         ctx.with_build_up = 0;
         ff_pool_for(s->pool, s->ny - 2, poisson_rows, &ctx);
-        if (!s->flow_mode == 2)
+        if (s->flow_mode == 2)
+            c_extrapolate_pressure_edges(s, p_dest);
+        else
             c_pressure_bcs(s, p_dest);
         s->pk ^= 1;
         src = s->pk;
@@ -709,11 +740,38 @@ static void c_clamp_momentum_boundary(solver_c_t *s) {
     double *v = s->v[s->uvk];
 
     /* flow_mode == 2: the domain edges are not forced to
-     * any condition (they evolve via the Poisson stencil
-     * and the handler forces). Solids are still enforced
+     * any condition. The interior stencils never write the
+     * edge cells, so without this the edges would stay pinned
+     * at their initial 0 -- a wall, which is exactly what NONE
+     * must not be. Copy the adjacent interior velocity out to
+     * the edges (zero-gradient) so the edges evolve with the
+     * field and flow can pass through. Solids are still enforced
      * (in c_enforce_solids, separately). */
-    if (s->flow_mode == 2)
+    if (s->flow_mode == 2) {
+        for (i = 1; i < ny - 1; i++) {
+            left = i * nx;
+            right = left + nx - 1;
+            if (!s->solid[left]) {
+                u[left] = u[left + 1];
+                v[left] = v[left + 1];
+            }
+            if (!s->solid[right]) {
+                u[right] = u[right - 1];
+                v[right] = v[right - 1];
+            }
+        }
+        for (i = 0; i < nx; i++) {
+            if (!s->solid[i]) {
+                u[i] = u[i + nx];
+                v[i] = v[i + nx];
+            }
+            if (!s->solid[last_row + i]) {
+                u[last_row + i] = u[last_row - nx + i];
+                v[last_row + i] = v[last_row - nx + i];
+            }
+        }
         return;
+    }
 
     if (s->flow_mode == 1) {
         for (i = 0; i < ny; i++) {

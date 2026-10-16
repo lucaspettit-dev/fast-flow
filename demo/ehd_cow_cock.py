@@ -42,7 +42,7 @@ import time
 import cv2
 import numpy as np
 
-from fast_flow import ElectrostaticForceHandler, FlowSolver
+from fast_flow import ElectrostaticForceHandler, FlowSolver, Boundry
 from fast_flow.core.renderer import Renderer
 
 
@@ -54,9 +54,11 @@ def parse_args():
     p.add_argument("--inflow", type=float, default=0.0,
                    help="throughflow inflow only; ignored for cavity")
     p.add_argument("--boundary", default="cavity",
-                   choices=["cavity", "throughflow"],
+                   choices=["cavity", "throughflow", "none"],
                    help="cavity = bounded box (all walls no-slip); "
-                        "throughflow = open right-edge outflow")
+                        "throughflow = open right-edge outflow; "
+                        "none = no domain boundary (edges evolve "
+                        "freely, zero-gradient)")
     p.add_argument("--nu", type=float, default=0.05)
     p.add_argument("--total-time", type=float, default=1.0,
                    help="simulated seconds to advance")
@@ -65,9 +67,6 @@ def parse_args():
     p.add_argument("--fps", type=int, default=120,
                    help="renderer frames per simulated second")
     p.add_argument("--out-dir", default=None)
-    p.add_argument("--no-boundaries", action="store_true",
-                   help="do not enforce domain boundaries "
-                        "(velocity clamp + pressure BCs skipped)")
     return p.parse_args()
 
 
@@ -89,14 +88,17 @@ if __name__ == '__main__':
     # made a 2x-faster flow pixel-identical).
     renderer = Renderer("ehd_cow_cock", args.fps, ny, nx, scale_max=1.0)
     solver = FlowSolver(img=img, nit=50, rho=1.0, nu=args.nu,
-                        boundary=args.boundary,
+                        boundary=Boundry[args.boundary.upper()],
                         inflow_velocity=args.inflow,
                         lx=args.lx, ly=args.ly,
                         force_handlers=[handler],
-                        renderer=renderer,
-                        no_boundaries=args.no_boundaries)
+                        renderer=renderer)
 
-    renderer.run()
+    # No renderer.run() here: it opens a cv2 window
+    # (namedWindow), which is not implemented in headless
+    # opencv and is unnecessary -- the demo only saves the
+    # final frame. render_frame() still draws into the
+    # buffer each step; save() writes it headless.
     t0 = time.perf_counter()
     steps = solver.run(args.total_time)
     wall = time.perf_counter() - t0
