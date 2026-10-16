@@ -40,7 +40,7 @@ cdef extern from "solver_c.h":
     void solver_c_set_dt(solver_c_t* s, double dt) noexcept nogil
     void solver_c_set_uvk(solver_c_t* s, long uvk) noexcept nogil
     void solver_c_set_pk(solver_c_t* s, long pk) noexcept nogil
-    void solver_c_set_no_boundaries(solver_c_t* s, int no_boundaries) noexcept nogil
+    # void solver_c_set_no_boundaries(solver_c_t* s, int no_boundaries) noexcept nogil
     long solver_c_pk(const solver_c_t* s) noexcept nogil
     long solver_c_uvk(const solver_c_t* s) noexcept nogil
     # Sub-steps (the wrapper orchestrates them with the
@@ -83,8 +83,7 @@ cdef class FlowSolverCore:
             int flow_mode=0,
             double inflow_u=1.0,
             double lx=2.0,
-            double ly=2.0,
-            bint no_boundaries=False):
+            double ly=2.0):
 
         self.nx = img.shape[1]
         self.ny = img.shape[0]
@@ -103,7 +102,6 @@ cdef class FlowSolverCore:
         self.inflow_u = inflow_u
         self.lx = lx
         self.ly = ly
-        self.no_boundaries = no_boundaries
 
         self.dx = lx / (self.nx - 1)
         self.dy = ly / (self.ny - 1)
@@ -143,8 +141,8 @@ cdef class FlowSolverCore:
             self.b, self.solid)
         if self.c_solver == NULL:
             raise MemoryError("could not allocate native-C solver")
-        solver_c_set_no_boundaries(
-            <solver_c_t*>self.c_solver, 1 if no_boundaries else 0)
+        # solver_c_set_no_boundaries(
+        #    <solver_c_t*>self.c_solver, 1 if no_boundaries else 0)
 
     def __dealloc__(self):
         if self.c_solver != NULL:

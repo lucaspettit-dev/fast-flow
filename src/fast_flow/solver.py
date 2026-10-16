@@ -17,6 +17,12 @@ class Direction(Enum):
     DOWN = 3
 
 
+class Boundry(Enum):
+    CAVITY = 0
+    THROUGHFLOW = 1
+    NONE = 2
+
+
 class ForceHandler:
     pass
 
@@ -145,25 +151,19 @@ class FlowSolver:
                  rho: float = 1.0,
                  nu: float = 0.1,
                  dt: float = 0.02,
-                 boundary: str = "cavity",
+                 boundary: Boundry = Boundry.CAVITY,
                  inflow_velocity: float = 1.0,
                  lx: float = 2.0,
                  ly: float = 2.0,
                  force_handlers: [ForceHandler] = None,
-                 renderer: Renderer = None,
-                 no_boundaries: bool = False):
-        if boundary not in ("cavity", "throughflow"):
-            raise ValueError(
-                'boundary must be "cavity" or "throughflow"')
+                 renderer: Renderer = None):
         if dt <= 0:
             raise ValueError("dt must be > 0")
         self._cy = FlowSolverCore(
             img=img, nit=nit, rho=rho, nu=nu, dt=dt,
-            flow_mode=1 if boundary == "throughflow" else 0,
-            inflow_u=inflow_velocity, lx=lx, ly=ly,
-            no_boundaries=no_boundaries)
+            flow_mode=boundary.value,
+            inflow_u=inflow_velocity, lx=lx, ly=ly)
         self.boundary = boundary
-        self.no_boundaries = no_boundaries
         self.inflow_velocity = inflow_velocity
         self.lx = float(lx)
         self.ly = float(ly)

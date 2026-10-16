@@ -259,7 +259,6 @@ struct solver_c {
     unsigned char *solid;
     long pk, uvk;
     double sum_dt, last_dt;
-    int no_boundaries;
     ff_pool_t *pool;
 };
 
@@ -306,7 +305,6 @@ solver_c_t *solver_c_create(long nx, long ny,
     s->uvk = 0;
     s->sum_dt = 0.0;
     s->last_dt = 0.0;
-    s->no_boundaries = 0;
     s->pool = ff_pool_create(0);   /* max available threads */
     if (!s->pool) {
         free(s);
@@ -340,11 +338,6 @@ void solver_c_set_uvk(solver_c_t *s, long uvk) {
 void solver_c_set_pk(solver_c_t *s, long pk) {
     if (s)
         s->pk = pk;
-}
-
-void solver_c_set_no_boundaries(solver_c_t *s, int no_boundaries) {
-    if (s)
-        s->no_boundaries = no_boundaries;
 }
 
 long solver_c_pk(const solver_c_t *s) {
@@ -523,7 +516,7 @@ static void c_pressure_poisson(solver_c_t *s) {
     ctx.inv_dt = inv_dt;
     ctx.with_build_up = 1;
     ff_pool_for(s->pool, s->ny - 2, poisson_rows, &ctx);
-    if (!s->no_boundaries)
+    if (!s->flow_mode == 2)
         c_pressure_bcs(s, p_dest);
 
     s->pk ^= 1;
@@ -537,7 +530,7 @@ static void c_pressure_poisson(solver_c_t *s) {
         ctx.p_src = p_src;
         ctx.with_build_up = 0;
         ff_pool_for(s->pool, s->ny - 2, poisson_rows, &ctx);
-        if (!s->no_boundaries)
+        if (!s->flow_mode == 2)
             c_pressure_bcs(s, p_dest);
         s->pk ^= 1;
         src = s->pk;
@@ -715,11 +708,11 @@ static void c_clamp_momentum_boundary(solver_c_t *s) {
     double *u = s->u[s->uvk];
     double *v = s->v[s->uvk];
 
-    /* no_boundaries: the domain edges are not forced to
+    /* flow_mode == 2: the domain edges are not forced to
      * any condition (they evolve via the Poisson stencil
      * and the handler forces). Solids are still enforced
      * (in c_enforce_solids, separately). */
-    if (s->no_boundaries)
+    if (s->flow_mode == 2)
         return;
 
     if (s->flow_mode == 1) {

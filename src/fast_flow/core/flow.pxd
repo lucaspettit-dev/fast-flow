@@ -35,11 +35,6 @@ cdef class FlowSolverCore:
     cdef int N
     cdef int flow_mode
     cdef DTYPE_f inflow_u
-    # no_boundaries: when True, the solver does not
-    # enforce domain boundaries (velocity clamp + pressure
-    # BCs are skipped). Solids are still enforced.
-    cdef bint no_boundaries
-
     cdef object _solid
     cdef DTYPE_f* b
     cdef DTYPE_f** u

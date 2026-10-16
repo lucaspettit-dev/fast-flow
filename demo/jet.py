@@ -5,13 +5,15 @@ import time
 import cv2
 import numpy as np
 
-from fast_flow import ElectrostaticForceHandler, FlowSolver
+from fast_flow import ElectrostaticForceHandler, FlowSolver, Boundry
 from fast_flow.core.renderer import Renderer
 
 TOTAL_TIME = 5.0
+P_CHARGE = 40000
+N_ChARGE_MULTIPLIER = -4
 
 if __name__ == '__main__':
-    img = cv2.imread('./res/jet.png')
+    img = cv2.imread('./res/jet2.png')
     img = cv2.flip(img, 0)
     ny, nx = img.shape[0], img.shape[1]
     print(f'Loaded image: dims=({ny}, {nx})')
@@ -19,11 +21,10 @@ if __name__ == '__main__':
     # channel 2 (red) = cow -> +charge; channel 0 (blue) =
     # rooster -> -charge
     handler = ElectrostaticForceHandler(
-        img, layermap={2: 20000, 0: -20000})
-    renderer = Renderer("jet", 120, ny, nx)
+        img, layermap={0: P_CHARGE, 2: P_CHARGE * N_ChARGE_MULTIPLIER})
+    renderer = Renderer("jet2", 120, ny, nx)
     solver = FlowSolver(img=img, nit=50, rho=1.0, nu=0.05,
-                        boundary="throughflow",
-                        inflow_velocity=0.001,
+                        boundary=Boundry.THROUGHFLOW,
                         lx=8.0, ly=5.0,
                         force_handlers=[handler],
                         renderer=renderer)
@@ -51,6 +52,6 @@ if __name__ == '__main__':
     out_dir = os.path.join(
         os.path.dirname(os.path.abspath(__file__)), 'out')
     os.makedirs(out_dir, exist_ok=True)
-    out = os.path.join(out_dir, 'jet_velocity.png')
+    out = os.path.join(out_dir, 'jet_velocity_1.png')
     renderer.save(out)
     print(f"saved {out}")
