@@ -2,8 +2,8 @@
 (demo/res/cow-cock.png): with zero inflow, all of the air
 motion comes from the ions.
 
-The cow (red channel, 2) is charged +20000 and the rooster
-(blue channel, 0) -20000 through the
+The cow (red channel, 2) is charged +40000 and the rooster
+(blue channel, 0) -40000 through the
 ElectrostaticForceHandler's layermap.  The handler
 generates +ions in the air cells at the cow's surface,
 drifts them along the Coulomb field (plus the air's own
@@ -11,6 +11,13 @@ motion) toward the rooster, and the moving ions drag the
 air with them -- the ion wind.  The domain starts at
 rest and inflow is 0, so every bit of velocity in the
 result was imparted by the ions.
+
+The domain is a bounded box (cavity): all four walls
+are no-slip, so the ion wind recirculates inside
+instead of leaving through an outflow -- the right
+side swirls like the left, nothing flows off the
+screen.  (--boundary throughflow re-opens the right
+edge as a zero-gradient outflow, for comparison.)
 
 The air velocity is rendered live by the new Renderer
 (fast_flow.core.renderer): after every solver step the
@@ -44,7 +51,12 @@ def parse_args():
     p.add_argument("--img", default="./res/cow-cock.png")
     p.add_argument("--lx", type=float, default=8.0)
     p.add_argument("--ly", type=float, default=2.0)
-    p.add_argument("--inflow", type=float, default=0.0)
+    p.add_argument("--inflow", type=float, default=0.0,
+                   help="throughflow inflow only; ignored for cavity")
+    p.add_argument("--boundary", default="cavity",
+                   choices=["cavity", "throughflow"],
+                   help="cavity = bounded box (all walls no-slip); "
+                        "throughflow = open right-edge outflow")
     p.add_argument("--nu", type=float, default=0.05)
     p.add_argument("--total-time", type=float, default=1.0,
                    help="simulated seconds to advance")
@@ -53,6 +65,9 @@ def parse_args():
     p.add_argument("--fps", type=int, default=120,
                    help="renderer frames per simulated second")
     p.add_argument("--out-dir", default=None)
+    p.add_argument("--no-boundaries", action="store_true",
+                   help="do not enforce domain boundaries "
+                        "(velocity clamp + pressure BCs skipped)")
     return p.parse_args()
 
 
@@ -67,13 +82,19 @@ if __name__ == '__main__':
     # rooster -> -charge
     handler = ElectrostaticForceHandler(
         img, layermap={2: args.charge, 0: -args.charge})
-    renderer = Renderer("ehd_cow_cock", args.fps, ny, nx)
+    # Fixed brightness scale (1.0): the renderer scales
+    # by this, not by each frame's own max, so runs at
+    # different voltages render at different brightness
+    # and are directly comparable (per-frame scaling
+    # made a 2x-faster flow pixel-identical).
+    renderer = Renderer("ehd_cow_cock", args.fps, ny, nx, scale_max=1.0)
     solver = FlowSolver(img=img, nit=50, rho=1.0, nu=args.nu,
-                        boundary="throughflow",
+                        boundary=args.boundary,
                         inflow_velocity=args.inflow,
                         lx=args.lx, ly=args.ly,
                         force_handlers=[handler],
-                        renderer=renderer)
+                        renderer=renderer,
+                        no_boundaries=args.no_boundaries)
 
     renderer.run()
     t0 = time.perf_counter()

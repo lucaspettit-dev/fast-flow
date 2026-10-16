@@ -25,6 +25,12 @@ cdef class Renderer:
     cdef DTYPE_f next_frame_time
     cdef DTYPE_f frame_interval
     cdef DTYPE_f max_magnitude
+    # Fixed brightness scale: if > 0, draw_frame scales by
+    # this (so runs at different speeds are directly
+    # comparable); if 0, each frame scales by its own max
+    # (the old behaviour, which makes a 2x-faster flow
+    # render pixel-identical).
+    cdef DTYPE_f scale_max
     cdef bint _running
 
     cdef void render_frame(self, DTYPE_f dt, Py_ssize_t n, DTYPE_f* u, DTYPE_f* v) noexcept

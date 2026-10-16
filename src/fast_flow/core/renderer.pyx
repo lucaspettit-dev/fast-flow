@@ -48,7 +48,8 @@ cdef class Renderer:
     # holds that name once run() has created the window,
     # and is None before and after close().
 
-    def __init__(self, str winname, Py_ssize_t fps, Py_ssize_t ny, Py_ssize_t nx):
+    def __init__(self, str winname, Py_ssize_t fps, Py_ssize_t ny, Py_ssize_t nx,
+                 DTYPE_f scale_max=0.0):
         self.winname = winname
         self.fps = fps if fps > 0 else 30
         self.ny = ny
@@ -58,6 +59,7 @@ cdef class Renderer:
         self.current_frame_id = 0
         self.shown_frame_id = -1
         self.max_magnitude = 0
+        self.scale_max = scale_max
         self.total_time = 0.0
         self.next_frame_time = 0.0
         self.frame_interval = 1.0 / self.fps
@@ -139,8 +141,13 @@ cdef class Renderer:
         if frame_max_mag > self.max_magnitude:
             self.max_magnitude = frame_max_mag
 
+        # Fixed scale (if set) so a faster run renders
+        # brighter instead of pixel-identical; otherwise
+        # the frame's own max (old behaviour).
+        cdef DTYPE_f scale = self.scale_max if self.scale_max > 0 \
+            else frame_max_mag
         for i in range(n):
-            vector_to_rgb(u[i], v[i], frame_max_mag, self.buffer + i * 3)
+            vector_to_rgb(u[i], v[i], scale, self.buffer + i * 3)
 
     cdef void _publish(self):
         """Stamp the frame just drawn into self.buffer as

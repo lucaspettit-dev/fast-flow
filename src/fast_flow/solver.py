@@ -150,7 +150,8 @@ class FlowSolver:
                  lx: float = 2.0,
                  ly: float = 2.0,
                  force_handlers: [ForceHandler] = None,
-                 renderer: Renderer = None):
+                 renderer: Renderer = None,
+                 no_boundaries: bool = False):
         if boundary not in ("cavity", "throughflow"):
             raise ValueError(
                 'boundary must be "cavity" or "throughflow"')
@@ -159,8 +160,10 @@ class FlowSolver:
         self._cy = FlowSolverCore(
             img=img, nit=nit, rho=rho, nu=nu, dt=dt,
             flow_mode=1 if boundary == "throughflow" else 0,
-            inflow_u=inflow_velocity, lx=lx, ly=ly)
+            inflow_u=inflow_velocity, lx=lx, ly=ly,
+            no_boundaries=no_boundaries)
         self.boundary = boundary
+        self.no_boundaries = no_boundaries
         self.inflow_velocity = inflow_velocity
         self.lx = float(lx)
         self.ly = float(ly)

@@ -84,6 +84,12 @@ void solver_c_set_inflow(solver_c_t *s, double inflow_u);
 void solver_c_set_dt(solver_c_t *s, double dt);
 void solver_c_set_uvk(solver_c_t *s, long uvk);
 void solver_c_set_pk(solver_c_t *s, long pk);
+/* When nonzero, the solver does not enforce domain
+ * boundaries: the velocity clamp and the pressure BCs
+ * are skipped (the edges evolve only via the Poisson
+ * stencil and the handler forces). Solids are still
+ * enforced (they are obstacles, not boundaries). */
+void solver_c_set_no_boundaries(solver_c_t *s, int no_boundaries);
 /* Buffer indices (the Cython side syncs its pk/uvk from these). */
 long solver_c_pk(const solver_c_t *s);
 long solver_c_uvk(const solver_c_t *s);
