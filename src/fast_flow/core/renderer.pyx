@@ -21,11 +21,15 @@ window.
 The Renderer class tracks the max magnitude per frame using
 the `fast_hypot` approximation. Each frame needs to be
 scaled between 0-255. For the live run, each frame's max
-magnitude scale will be unique. But in later iterations, we'll
-keep a buffer of all rendered frames, then re-calculate the
-scale according to the overall max magnitude of the run, then
-save the video. This'll let the user see the properly scaled
-render after the run.
+magnitude scale will be unique. When the renderer is
+constructed with record=True, every drawn frame is saved
+(a copy of the buffer plus the scale it was drawn with);
+save_video() then unwinds each frame's scale and re-scales
+all frames to the run's global max, so the video's
+brightness is consistent across frames (a dim frame stays
+dim instead of being normalized up to full brightness).
+save_video()'s fps must be <= the renderer's fps (slower
+or equal -- slow-mo); faster is rejected.
 """
 
 import numpy as np
@@ -49,7 +53,7 @@ cdef class Renderer:
     # and is None before and after close().
 
     def __init__(self, str winname, Py_ssize_t fps, Py_ssize_t ny, Py_ssize_t nx,
-                 DTYPE_f scale_max=0.0):
+                 DTYPE_f scale_max=0.0, bint record=False):
         self.winname = winname
         self.fps = fps if fps > 0 else 30
         self.ny = ny
@@ -60,6 +64,8 @@ cdef class Renderer:
         self.shown_frame_id = -1
         self.max_magnitude = 0
         self.scale_max = scale_max
+        self.record = record
+        self._recorded = [] if record else None
         self.total_time = 0.0
         self.next_frame_time = 0.0
         self.frame_interval = 1.0 / self.fps
@@ -148,6 +154,19 @@ cdef class Renderer:
             else frame_max_mag
         for i in range(n):
             vector_to_rgb(u[i], v[i], scale, self.buffer + i * 3)
+        if self.record:
+            # Save a copy of this frame plus the scale it
+            # was drawn with, for save_video() to unwind and
+            # re-scale. to_numpy_3d copies, so the recorded
+            # frame is safe from the next draw overwriting
+            # the buffer. Recording must never break the
+            # render, so a failure here is swallowed.
+            try:
+                self._recorded.append(
+                    (to_numpy_3d(self.buffer, self.ny, self.nx, 3, True),
+                     scale))
+            except Exception:
+                pass
 
     cdef void _publish(self):
         """Stamp the frame just drawn into self.buffer as
@@ -186,6 +205,65 @@ cdef class Renderer:
             self.img = to_numpy_3d(self.buffer, self.ny, self.nx, 3, True)
         if not cv2.imwrite(filepath, cv2.cvtColor(cv2.flip(self.img, 0),cv2.COLOR_BGR2RGB)):
             raise IOError(f"cv2.imwrite failed for {filepath!r}")
+
+    cpdef void save_video(self, str filepath, Py_ssize_t fps):
+        """Write the recorded frames to a video at `fps`.
+
+        Only available when the renderer was constructed with
+        record=True. `fps` must be <= the renderer's fps
+        (slower or equal -- slow-mo); faster is rejected
+        because there are no frames to fill the gaps.
+
+        Every recorded frame was drawn scaled by its own
+        scale (scale_max if set, else that frame's own max).
+        Here each frame is unwound and re-scaled to the
+        run's global max, so brightness is consistent across
+        frames: a frame whose own max was small is dimmed
+        back down instead of staying normalized to full
+        brightness. The unwind is exact for the renderer's
+        fourth-root gamma: brightness = (mag/scale)^0.25,
+        so re-scaling to the global max multiplies the RGB
+        channels by (scale/global_max)^0.25 (RGB scales
+        linearly with brightness at fixed hue/saturation,
+        and the factor is <= 1, so nothing clips). The
+        frames get the same flip + BGR->RGB transform as
+        save(), so the video matches the saved PNGs."""
+        if not self.record:
+            raise RuntimeError(
+                "renderer was not constructed with record=True; "
+                "no frames were saved for post-processing")
+        if not self._recorded:
+            raise RuntimeError("no frames recorded yet")
+        if fps <= 0:
+            raise ValueError("fps must be > 0")
+        if fps > self.fps:
+            raise ValueError(
+                f"save fps {fps} exceeds rendered fps {self.fps}; "
+                "save fps must be <= rendered fps (slower or equal)")
+        cdef DTYPE_f global_max = 0.0
+        for _, scale in self._recorded:
+            if scale > global_max:
+                global_max = scale
+        writer = cv2.VideoWriter(
+            filepath, cv2.VideoWriter_fourcc(*'mp4v'),
+            float(fps), (self.nx, self.ny))
+        if not writer.isOpened():
+            raise IOError(
+                f"could not open video writer for {filepath!r} "
+                "(check the extension/codec)")
+        try:
+            for frame, scale in self._recorded:
+                if global_max > 0.0:
+                    factor = (scale / global_max) ** 0.25
+                else:
+                    factor = 1.0
+                out = np.clip(
+                    frame.astype(np.float32) * factor,
+                    0.0, 255.0).astype(np.uint8)
+                out = cv2.cvtColor(cv2.flip(out, 0), cv2.COLOR_BGR2RGB)
+                writer.write(out)
+        finally:
+            writer.release()
 
     cpdef void close(self):
         """Destroy the window. Safe to call when not running."""

@@ -32,6 +32,16 @@ cdef class Renderer:
     # render pixel-identical).
     cdef DTYPE_f scale_max
     cdef bint _running
+    # Record flag: when True, render_frame() saves a copy of
+    # every drawn frame plus the scale it was drawn with,
+    # for post-processing by save_video(). Off by default
+    # (recording costs one ny*nx*3 copy per frame).
+    cdef bint record
+    # Recorded frames (only when record=True): a list of
+    # (frame ndarray (ny, nx, 3) uint8 copy, scale) tuples,
+    # where scale is the max_magnitude the frame was drawn
+    # with (scale_max if > 0, else that frame's own max).
+    cdef object _recorded
 
     cdef void render_frame(self, DTYPE_f dt, Py_ssize_t n, DTYPE_f* u, DTYPE_f* v) noexcept
     cdef void draw_frame(self, Py_ssize_t n, DTYPE_f* u, DTYPE_f* v) noexcept
@@ -40,4 +50,5 @@ cdef class Renderer:
     cpdef void refresh(self, const DTYPE_f[:, :] u, const DTYPE_f[:, :] v)
     cpdef void run(self)
     cpdef void save(self, str filepath)
+    cpdef void save_video(self, str filepath, Py_ssize_t fps)
     cpdef void close(self)
