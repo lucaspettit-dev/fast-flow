@@ -984,6 +984,9 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
             'net': (f_pos_fx + f_neg_fx, f_pos_fy + f_neg_fy),
             'electrode_electrode': (self.ee_fx, self.ee_fy),
         }
+
+    @property
+    def neg_corona_active(self):
         """True if any negative electrode is in corona
         (its surface field exceeds breakdown), i.e. the
         O2- generation zone is non-empty and O2- is
