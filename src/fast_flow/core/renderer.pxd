@@ -42,9 +42,23 @@ cdef class Renderer:
     # where scale is the max_magnitude the frame was drawn
     # with (scale_max if > 0, else that frame's own max).
     cdef object _recorded
+    # Legend (color wheel) flag: when True, draw_frame
+    # overlays a precomputed color wheel in the
+    # bottom-left corner (5px padding, 3px white border,
+    # wheel diameter <= ny/4).  Built once in __init__.
+    cdef bint legend
+    # Precomputed legend wheel: footprint is legend_size x
+    # legend_size (wheel diameter + 7); legend_buf holds
+    # BGR colors, legend_mask is 1 where the wheel or its
+    # border is (0 = leave the flow pixel alone).
+    cdef unsigned char* legend_buf
+    cdef unsigned char* legend_mask
+    cdef Py_ssize_t legend_size
 
     cdef void render_frame(self, DTYPE_f dt, Py_ssize_t n, DTYPE_f* u, DTYPE_f* v) noexcept
     cdef void draw_frame(self, Py_ssize_t n, DTYPE_f* u, DTYPE_f* v) noexcept
+    cdef void _build_legend(self) except *
+    cdef void _overlay_legend(self) noexcept
     cdef void _publish(self)
     cdef Py_ssize_t idx(self, Py_ssize_t x, Py_ssize_t y, Py_ssize_t z) noexcept nogil
     cpdef void refresh(self, const DTYPE_f[:, :] u, const DTYPE_f[:, :] v)

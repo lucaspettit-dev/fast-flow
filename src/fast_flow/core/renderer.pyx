@@ -53,7 +53,7 @@ cdef class Renderer:
     # and is None before and after close().
 
     def __init__(self, str winname, Py_ssize_t fps, Py_ssize_t ny, Py_ssize_t nx,
-                 DTYPE_f scale_max=0.0, bint record=False):
+                 DTYPE_f scale_max=0.0, bint record=False, bint legend=False):
         self.winname = winname
         self.fps = fps if fps > 0 else 30
         self.ny = ny
@@ -78,10 +78,104 @@ cdef class Renderer:
         cdef Py_ssize_t i = 0
         for i in range(self.N):
             self.buffer[i] = 0
+        # legend wheel (precomputed once, overlaid per frame)
+        self.legend = False
+        self.legend_buf = NULL
+        self.legend_mask = NULL
+        self.legend_size = 0
+        if legend:
+            self._build_legend()
 
     def __dealloc__(self):
        if self.buffer is not NULL:
            free(self.buffer)
+       if self.legend_buf is not NULL:
+           free(self.legend_buf)
+       if self.legend_mask is not NULL:
+           free(self.legend_mask)
+
+    cdef void _build_legend(self) except *:
+        """Precompute the legend color wheel (once, at init).
+
+        The wheel is a disc of diameter D = ny // 4 (no
+        more than 1/4 of the image height), clipped so
+        the footprint (D + 7) still fits with 5px padding
+        on all sides; if it cannot fit, the legend stays
+        off.  Each wheel pixel's color comes from the
+        same vector_to_rgb() as the flow pixels: the
+        vector from the wheel center, normalized so the
+        edge has magnitude 1.0 (angle = direction, radius
+        = relative magnitude, center = black), with dy
+        negated to match draw_frame's -v.  A 3px
+        white ring borders the wheel.  Outside the ring
+        the mask is 0 (leave the flow pixel alone), so
+        the overlay writes only the wheel + border."""
+        cdef Py_ssize_t D, S
+        cdef double R, c
+        cdef Py_ssize_t lx, ly, k
+        cdef double dx, dy, dist
+        cdef unsigned char* buf
+        cdef unsigned char* mask
+        D = self.ny // 4
+        if D > self.ny - 17:
+            D = self.ny - 17
+        if D > self.nx - 17:
+            D = self.nx - 17
+        if D < 1:
+            return
+        S = D + 7
+        buf = <unsigned char*>malloc(S * S * 3 * sizeof(unsigned char))
+        mask = <unsigned char*>malloc(S * S * sizeof(unsigned char))
+        if buf is NULL or mask is NULL:
+            if buf is not NULL:
+                free(buf)
+            if mask is not NULL:
+                free(mask)
+            raise MemoryError("could not allocate legend wheel")
+        R = D / 2.0
+        c = (S - 1) / 2.0
+        for ly in range(S):
+            for lx in range(S):
+                dx = lx - c
+                dy = ly - c
+                dist = sqrt(dx * dx + dy * dy)
+                k = ly * S + lx
+                if dist <= R:
+                    # Negate dy to match draw_frame's -v (and
+                    # colorwheel's -y_c): the flow's "up" must
+                    # read the same hue as the wheel's "up".
+                    vector_to_rgb(dx / R, -dy / R, 1.0, buf + k * 3)
+                    mask[k] = 1
+                elif dist <= R + 3.0:
+                    buf[k * 3] = 255
+                    buf[k * 3 + 1] = 255
+                    buf[k * 3 + 2] = 255
+                    mask[k] = 1
+                else:
+                    mask[k] = 0
+        self.legend = True
+        self.legend_buf = buf
+        self.legend_mask = mask
+        self.legend_size = S
+
+    cdef void _overlay_legend(self) noexcept:
+        """Copy the precomputed legend wheel into the
+        buffer's bottom-left corner (5px padding from the
+        left and bottom edges).  Only wheel + border
+        pixels are written; the rest keep the flow."""
+        cdef Py_ssize_t S
+        cdef Py_ssize_t lx, ly, src, dst
+        if not self.legend:
+            return
+        S = self.legend_size
+        for ly in range(S):
+            for lx in range(S):
+                if self.legend_mask[ly * S + lx]:
+                    src = (ly * S + lx) * 3
+                    dst = ((5 + ly) * self.nx + (5 + lx)) * 3
+                    self.buffer[dst] = self.legend_buf[src]
+                    self.buffer[dst + 1] = self.legend_buf[src + 1]
+                    self.buffer[dst + 2] = self.legend_buf[src + 2]
 
     cdef inline Py_ssize_t idx(self, Py_ssize_t x, Py_ssize_t y, Py_ssize_t z) noexcept nogil:
         return (y * self.nx + x) * 3 + z
@@ -154,6 +248,10 @@ cdef class Renderer:
             else frame_max_mag
         for i in range(n):
             vector_to_rgb(u[i], -v[i], scale, self.buffer + i * 3)
+        # Legend overlay (no-op when legend is off): runs
+        # before the record copy, so recorded frames and
+        # save_video() include the wheel.
+        self._overlay_legend()
         if self.record:
             # Save a copy of this frame plus the scale it
             # was drawn with, for save_video() to unwind and
