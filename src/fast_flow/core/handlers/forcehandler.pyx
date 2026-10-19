@@ -73,6 +73,14 @@ cdef class ForceHandlerCore:
         if self.next_handler is not None:
             self.next_handler.accumulate(y, x, idx, u_dest, v_dest)
 
+    cdef void prepare_pressure(self) noexcept nogil:
+        if self.next_handler is not None:
+            self.next_handler.prepare_pressure()
+
+    cdef void finish_pressure(self) noexcept nogil:
+        if self.next_handler is not None:
+            self.next_handler.finish_pressure()
+
     cdef void accumulate_p(
         self,
         Py_ssize_t y,

@@ -1,4 +1,3 @@
-import argparse
 import os
 import time
 
@@ -57,5 +56,5 @@ if __name__ == '__main__':
         os.makedirs(out_dir, exist_ok=True)
         out = os.path.join(out_dir, f'jet_velocity_{jet_id}.png')
         renderer.save(out)
-        renderer.save_video(os.path.join(out_dir, f'/jet_velocity_{jet_id}.mp4'), 30)
+        renderer.save_video(os.path.join(out_dir, f'jet_velocity_{jet_id}.mp4'), 30)
         print(f"saved {out}")

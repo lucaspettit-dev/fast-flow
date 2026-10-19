@@ -352,10 +352,12 @@ cdef class FlowSolverCore:
         # Handler pressure pass (serial, exactly-once: a
         # handler's get_p may advance per-cell state).
         if self.force is not None:
+            self.force.prepare_pressure()
             p = self.p[self.pk]
             for y in range(self.ny):
                 for x in range(self.nx):
                     self.force.accumulate_p(y, x, y * self.nx + x, p)
+            self.force.finish_pressure()
 
         solver_c_enforce(cs)
 
