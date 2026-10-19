@@ -35,7 +35,7 @@ or equal -- slow-mo); faster is rejected.
 import numpy as np
 import cv2
 cimport numpy as cnp
-from libc.math cimport floor
+from libc.math cimport floor, sqrt
 from libc.stdlib cimport malloc, free
 from fast_flow.core.common cimport DTYPE_f, vector_to_rgb, to_numpy_3d, fast_hypot
 
@@ -153,7 +153,7 @@ cdef class Renderer:
         cdef DTYPE_f scale = self.scale_max if self.scale_max > 0 \
             else frame_max_mag
         for i in range(n):
-            vector_to_rgb(u[i], v[i], scale, self.buffer + i * 3)
+            vector_to_rgb(u[i], -v[i], scale, self.buffer + i * 3)
         if self.record:
             # Save a copy of this frame plus the scale it
             # was drawn with, for save_video() to unwind and
@@ -274,3 +274,43 @@ cdef class Renderer:
             except cv2.error:
                 pass
             self.window = None
+
+    cpdef cnp.ndarray colorwheel(self):
+        cdef Py_ssize_t ny = 56
+        cdef Py_ssize_t nx = 56
+        cdef Py_ssize_t nz = 4
+        cdef Py_ssize_t c = 28
+        cdef DTYPE_f max_mag = 25.0
+        cdef DTYPE_f mag = 0.0
+        cdef Py_ssize_t n = ny * nx * nz
+        cdef unsigned char* a = <unsigned char*>malloc(n * sizeof(unsigned char))
+        if a is NULL:
+            raise MemoryError("could not allocate ion state")
+
+        cdef Py_ssize_t x, y, i
+        cdef DTYPE_f x_c, y_c
+        cdef cnp.ndarray img
+        try:
+            for y in range(ny):
+                y_c = <DTYPE_f>(y - c)
+                for x in range(nx):
+                    i = (y * nx + x) * nz
+                    x_c = <DTYPE_f>(x - c)
+                    mag = sqrt(x_c * x_c + y_c * y_c)
+                    if mag > 28:
+                        a[i] = 0
+                        a[i+1] = 0
+                        a[i+2] = 0
+                        a[i+3] = 0
+                    if mag > max_mag:
+                        a[i] = 255
+                        a[i+1] = 255
+                        a[i+2] = 255
+                        a[i+3] = 255
+                    else:
+                        vector_to_rgb(x_c, -y_c, max_mag, a + (i * sizeof(unsigned char)))
+                        a[i+3] = 255
+            img = to_numpy_3d(a, ny, nx, nz, True)
+        finally:
+            free(a)
+        return img

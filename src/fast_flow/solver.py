@@ -26,19 +26,6 @@ class Boundry(Enum):
 class ForceHandler:
     pass
 
-
-class ConstantVelocityForceHandler(ForceHandler):
-    def __init__(self,
-                 direction: Direction,
-                 velocity: float):
-        self._direction = direction
-        self._velocity = velocity
-
-    def _set_solver(self, solver: FlowSolverCore):
-        self._handler = ConstantVelocityForceHandlerCore(
-            solver, self._direction.value, self._velocity)
-
-
 class ElectrostaticForceHandler(ForceHandler):
     """Electrostatic forcing from the charged regions of an image.
 

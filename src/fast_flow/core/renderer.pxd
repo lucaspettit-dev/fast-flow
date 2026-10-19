@@ -52,3 +52,4 @@ cdef class Renderer:
     cpdef void save(self, str filepath)
     cpdef void save_video(self, str filepath, Py_ssize_t fps)
     cpdef void close(self)
+    cpdef cnp.ndarray colorwheel(self)
