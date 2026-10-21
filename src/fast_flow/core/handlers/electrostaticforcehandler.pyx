@@ -1078,33 +1078,6 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         return self._drag(idx, self.v[self.uvk][idx],
                           self.solver.v[self.solver.uvk][idx])
 
-    cdef void accumulate(self, Py_ssize_t y, Py_ssize_t x,
-                         Py_ssize_t idx, DTYPE_f* u_dest,
-                         DTYPE_f* v_dest) noexcept nogil:
-        """Compute the shared drag fraction once for both components."""
-        cdef DTYPE_f density, resistance, dt, frac
-        if not self._solid_at(idx):
-            density = self.d[self.dk][idx]
-            if density > 0.0:
-                resistance = (ION_AMBIENT_PRESSURE +
-                              self.solver.p[self.solver.pk][idx]) / ION_AMBIENT_PRESSURE
-                if resistance < 0.1:
-                    resistance = 0.1
-                if resistance > ION_RESISTANCE_MAX:
-                    resistance = ION_RESISTANCE_MAX
-                dt = self.solver.dt
-                if dt <= 0.0:
-                    dt = self.solver.dt_base
-                frac = dt * density * ION_AIR_COUPLING * resistance / self.solver.rho
-                if frac > 1.0:
-                    frac = 1.0
-                u_dest[idx] += frac * (self.u[self.uvk][idx] -
-                                       self.solver.u[self.solver.uvk][idx])
-                v_dest[idx] += frac * (self.v[self.uvk][idx] -
-                                       self.solver.v[self.solver.uvk][idx])
-        if self.next_handler is not None:
-            self.next_handler.accumulate(y, x, idx, u_dest, v_dest)
-
     cdef void prepare_pressure(self) noexcept nogil:
         handler_c_advance(<handler_c_t*>self.c_handler,
                           self.solver.u[self.solver.uvk],
@@ -1113,14 +1086,10 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                           self.solver.dt, self.solver.dt_base)
         self.dk = handler_c_dk(<handler_c_t*>self.c_handler)
         self.dnk = handler_c_dnk(<handler_c_t*>self.c_handler)
-        if self.next_handler is not None:
-            self.next_handler.prepare_pressure()
 
     cdef void finish_pressure(self) noexcept nogil:
         self.pk = 1 - self.pk
         handler_c_set_pk(<handler_c_t*>self.c_handler, self.pk)
-        if self.next_handler is not None:
-            self.next_handler.finish_pressure()
 
     cdef DTYPE_f get_p(self, Py_ssize_t y, Py_ssize_t x,
                        Py_ssize_t idx) noexcept nogil:

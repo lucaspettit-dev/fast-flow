@@ -4,12 +4,6 @@
 # cython: cdivision=True
 """ForceHandlerCore: abstract parent of the force handlers,
 plus the general-purpose handlers (constant velocity).
-
-Handlers are chained (each holds the next) and contribute
-per-cell u/v increments through get_u/get_v; the chain is
-walked nogil via accumulate().  Implementations of concrete
-handlers live in their own modules (see
-core/handlers/electrostaticforcehandler.pyx).
 """
 
 from fast_flow.core.common cimport DTYPE_f
@@ -20,15 +14,6 @@ cdef class ForceHandlerCore:
 
     def __init__(self, FlowSolverCore solver):
         self.solver = solver
-        self.next_handler = None
-
-    cdef add_next(self, ForceHandlerCore handler):
-        if self.next_handler is not None:
-            raise ValueError("Next handler already assigned")
-        self.next_handler = handler
-
-    cdef ForceHandlerCore next(self):
-        return self.next_handler
 
     cdef DTYPE_f get_u(
         self,
@@ -53,47 +38,4 @@ cdef class ForceHandlerCore:
         Py_ssize_t idx
     ) noexcept nogil:
         return 0.0
-
-    cdef void accumulate(
-        self,
-        Py_ssize_t y,
-        Py_ssize_t x,
-        Py_ssize_t idx,
-        DTYPE_f* u_dest,
-        DTYPE_f* v_dest
-    ) noexcept nogil:
-        """Add this handler's contribution at one cell, then the
-        next handler's.  The chain is walked by recursion through
-        the stored attribute rather than a local variable:
-        assigning a handler (a Python object) to a local would
-        need the GIL, and apply_uv_force runs nogil inside
-        update_momentum's parallel loop."""
-        u_dest[idx] += self.get_u(y, x, idx)
-        v_dest[idx] += self.get_v(y, x, idx)
-        if self.next_handler is not None:
-            self.next_handler.accumulate(y, x, idx, u_dest, v_dest)
-
-    cdef void prepare_pressure(self) noexcept nogil:
-        if self.next_handler is not None:
-            self.next_handler.prepare_pressure()
-
-    cdef void finish_pressure(self) noexcept nogil:
-        if self.next_handler is not None:
-            self.next_handler.finish_pressure()
-
-    cdef void accumulate_p(
-        self,
-        Py_ssize_t y,
-        Py_ssize_t x,
-        Py_ssize_t idx,
-        DTYPE_f* p_dest
-    ) noexcept nogil:
-        """Add this handler's pressure contribution at one cell,
-        then the next handler's.  Walked by FlowSolverCore's
-        pressure-force pass, which visits every cell exactly
-        once per step (some handlers advance per-cell state in
-        get_p and rely on that contract)."""
-        p_dest[idx] += self.get_p(y, x, idx)
-        if self.next_handler is not None:
-            self.next_handler.accumulate_p(y, x, idx, p_dest)
 

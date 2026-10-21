@@ -6,7 +6,9 @@ import numpy as np
 from enum import Enum
 from .core.flow import FlowSolverCore
 from .core.handlers.electrostaticforcehandler import ElectrostaticForceHandler as ElectrostaticForceHandlerCore
+from .core.handlers.forcehandler import ForceHandlerCore
 from .core.renderer import Renderer
+from typing import Callable
 
 
 class Direction(Enum):
@@ -23,7 +25,12 @@ class Boundry(Enum):
 
 
 class ForceHandler:
-    pass
+
+    def __init__(self, constructor: Callable[..., ForceHandler]):
+        self._f = constructor
+
+    def _build(self, solver: FlowSolverCore) -> ForceHandlerCore:
+        return self._f(solver)
 
 
 class ElectrostaticForceHandler(ForceHandler):
@@ -44,6 +51,7 @@ class ElectrostaticForceHandler(ForceHandler):
     def __init__(self, image, layermap: dict = None):
         self._image = image
         self._layermap = layermap
+        super().__init__(lambda s: ElectrostaticForceHandlerCore(s, self._image, self._layermap))
 
     def _set_solver(self, solver: FlowSolverCore):
         # The core constructor flattens the image, builds the
@@ -186,22 +194,27 @@ class FlowSolver:
                  renderer: Renderer = None):
         if dt <= 0:
             raise ValueError("dt must be > 0")
-        self._cy = FlowSolverCore(
-            img=img, nit=nit, rho=rho, nu=nu, dt=dt,
-            flow_mode=boundary.value,
-            inflow_u=inflow_velocity, lx=lx, ly=ly)
         self.boundary = boundary
         self.inflow_velocity = inflow_velocity
         self.lx = float(lx)
         self.ly = float(ly)
         self.obstacles: list = []
-        if force_handlers is not None:
-            for handler in force_handlers:
-                handler._set_solver(self._cy)
-                self._cy.add_force_handler(handler._handler)
+        if force_handlers is None:
+            force_handlers = []
+
+        self._cy = FlowSolverCore(
+            img=img, nit=nit, rho=rho, nu=nu, dt=dt,
+            flow_mode=boundary.value,
+            inflow_u=inflow_velocity, lx=lx, ly=ly,
+            n_force_handlers=len(force_handlers))
+
+        for handler in force_handlers:
+            handler._set_solver(self._cy)
+            self._cy.add_force_handler(handler._handler)
+
         self._renderer = renderer
-        if renderer is not None:
-            self._cy.set_renderer(renderer)
+        if self._renderer is not None:
+            self._cy.set_renderer(self._renderer)
 
     @property
     def nx(self): return self._cy.nx

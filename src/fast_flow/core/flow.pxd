@@ -49,11 +49,10 @@ cdef class FlowSolverCore:
     # it owns the thread pool.
     cdef void* c_solver
 
-    cdef ForceHandlerCore force
+    cdef ForceHandlerCore* forces
+    cdef Py_ssize_t nforces
     cdef Renderer renderer
 
-    cpdef void add_force_handler(self, ForceHandlerCore next)
-    cpdef void set_renderer(self, Renderer renderer)
     cdef init_arrays(self)
     cdef inline Py_ssize_t idx(self, Py_ssize_t y,
                                Py_ssize_t x) noexcept nogil
