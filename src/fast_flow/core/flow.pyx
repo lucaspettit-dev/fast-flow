@@ -11,7 +11,8 @@ only the solver; force handlers live in core/handlers/.
 import numpy as np
 cimport numpy as cnp
 cimport cython
-from libc.stdlib cimport malloc, free
+from libc.stdlib cimport malloc, free, realloc
+from cpython.ref cimport PyObject
 from libc.math cimport sqrt, atan2, fabs, floor
 
 from fast_flow.core.common cimport DTYPE_f, build_solids_mask, to_numpy
@@ -83,7 +84,7 @@ cdef class FlowSolverCore:
             DTYPE_f inflow_u=1.0,
             DTYPE_f lx=2.0,
             DTYPE_f ly=2.0,
-            Py_ssize_t n_force_handlers):
+            Py_ssize_t n_force_handlers=0):
 
         self.nx = img.shape[1]
         self.ny = img.shape[0]
@@ -125,8 +126,21 @@ cdef class FlowSolverCore:
         self.sum_dt = 0.0
         self.init_arrays()
 
-        self.nforces = n_force_handlers
-        self.forces = <ForceHandlerCore*> malloc(self.nforces * sizeof(ForceHandlerCore*))
+        # Force-handler pointer array: capacity comes from
+        # the constructor's count; add_force_handler fills
+        # the slots and grows past it by realloc.  Slots
+        # hold borrowed PyObject*; _force_refs owns them.
+        self._force_refs = []
+        self.nforces = 0
+        self._forces_cap = n_force_handlers
+        if self._forces_cap > 0:
+            self.forces = <PyObject**> malloc(
+                self._forces_cap * sizeof(PyObject*))
+            if self.forces == NULL:
+                raise MemoryError(
+                    "could not allocate force handler array")
+        else:
+            self.forces = NULL
 
         # Native-C solver: references the buffers above (same
         # memory the Python accessors view); owns the thread
@@ -148,6 +162,10 @@ cdef class FlowSolverCore:
         if self.c_solver != NULL:
             solver_c_destroy(<solver_c_t*>self.c_solver)
             self.c_solver = NULL
+
+        if self.forces != NULL:
+            free(self.forces)
+            self.forces = NULL
 
         if self.solid != NULL:
             free(self.solid)
@@ -178,6 +196,26 @@ cdef class FlowSolverCore:
                 free(self.p[1])
             free(self.p)
             self.p = NULL
+
+    cpdef void add_force_handler(self, ForceHandlerCore handler):
+        """Register a force handler: append its borrowed
+        pointer to the native array the nogil passes
+        iterate.  The owning reference is kept in
+        _force_refs, so the pointer stays valid for the
+        solver's lifetime."""
+        cdef PyObject** grown
+        if self.nforces == self._forces_cap:
+            self._forces_cap = (2 * self._forces_cap
+                                if self._forces_cap > 0 else 4)
+            grown = <PyObject**> realloc(
+                self.forces, self._forces_cap * sizeof(PyObject*))
+            if grown == NULL:
+                raise MemoryError(
+                    "could not grow force handler array")
+            self.forces = grown
+        self.forces[self.nforces] = <PyObject*> handler
+        self._force_refs.append(handler)
+        self.nforces += 1
 
     cpdef void set_renderer(self, Renderer renderer):
         """Attach a Renderer (or None to detach).  After
@@ -325,8 +363,8 @@ cdef class FlowSolverCore:
                     idx = y * self.nx + x
                     if not self.solid[idx]:
                         for i in range(self.nforces):
-                           self.u_dest += self.forces[i].get_u(y, x, idx)
-                           self.v_dest += self.forces[i].get_v(y, x, idx)
+                            u_dest[idx] += (<ForceHandlerCore>self.forces[i]).get_u(y, x, idx)
+                            v_dest[idx] += (<ForceHandlerCore>self.forces[i]).get_v(y, x, idx)
 
         # Flip uvk (both sides: Cython + C struct).
         self.uvk ^= 1
@@ -345,27 +383,31 @@ cdef class FlowSolverCore:
                 u[(self.ny - 1) * self.nx + x] = 0.0
             for x in range(self.nx):
                 for i in range(self.nforces):
-                    u[x] += self.forces[i].get_u(0, x, x)
-                    u[(self.ny - 1) * self.nx + x] += self.forces[i].get_u(self.ny - 1, x, (self.ny - 1) * self.nx + x)
+                    u[x] += (<ForceHandlerCore>self.forces[i]).get_u(0, x, x)
+                    v[x] += (<ForceHandlerCore>self.forces[i]).get_v(0, x, x)
+                    u[(self.ny - 1) * self.nx + x] += (<ForceHandlerCore>self.forces[i]).get_u(self.ny - 1, x, (self.ny - 1) * self.nx + x)
+                    v[(self.ny - 1) * self.nx + x] += (<ForceHandlerCore>self.forces[i]).get_v(self.ny - 1, x, (self.ny - 1) * self.nx + x)
             for y in range(1, self.ny - 1):
                 for i in range(self.nforces):
-                    v[y * self.nx] += self.forces[i].get_v(y, 0, y * self.nx)
-                    v[y, self.nx - 1] = self.forces[i].get_v(y, self.nx-1, y * self.nx + self.nx - 1)
+                    u[y * self.nx] += (<ForceHandlerCore>self.forces[i]).get_u(y, 0, y * self.nx)
+                    v[y * self.nx] += (<ForceHandlerCore>self.forces[i]).get_v(y, 0, y * self.nx)
+                    u[y * self.nx + self.nx - 1] += (<ForceHandlerCore>self.forces[i]).get_u(y, self.nx - 1, y * self.nx + self.nx - 1)
+                    v[y * self.nx + self.nx - 1] += (<ForceHandlerCore>self.forces[i]).get_v(y, self.nx - 1, y * self.nx + self.nx - 1)
 
         # Handler pressure pass (serial, exactly-once: a
         # handler's get_p may advance per-cell state).
         if self.nforces > 0:
             for i in range(self.nforces):
-                self.forces[i].prepare_pressure()
+                (<ForceHandlerCore>self.forces[i]).prepare_pressure()
 
             p = self.p[self.pk]
             for y in range(self.ny):
                 for x in range(self.nx):
                     for i in range(self.nforces):
-                        p[y * self.nx + x] += self.forces[i].get_p(y, x, y * self.nx + x)
+                        p[y * self.nx + x] += (<ForceHandlerCore>self.forces[i]).get_p(y, x, y * self.nx + x)
 
             for i in range(self.nforces):
-                self.forces[i].finish_pressure()
+                (<ForceHandlerCore>self.forces[i]).finish_pressure()
 
         solver_c_enforce(cs)
 

@@ -12,6 +12,7 @@
 # compute methods are gone (replaced by the C step).
 
 cimport numpy as cnp
+from cpython.ref cimport PyObject
 
 from fast_flow.core.common cimport DTYPE_f,VectorBinding, ScalarBinding
 from fast_flow.core.handlers.forcehandler cimport ForceHandlerCore
@@ -49,9 +50,20 @@ cdef class FlowSolverCore:
     # it owns the thread pool.
     cdef void* c_solver
 
-    cdef ForceHandlerCore* forces
+    # Force handlers: a native array of borrowed object
+    # pointers (PyObject*).  The nogil passes index it and
+    # call through a cast, so there is no Python-object
+    # check per cell or per hop.  _force_refs holds the
+    # owning references; nforces is the live count and
+    # _forces_cap the allocated capacity.
+    cdef PyObject** forces
     cdef Py_ssize_t nforces
+    cdef Py_ssize_t _forces_cap
+    cdef list _force_refs
     cdef Renderer renderer
+
+    cpdef void add_force_handler(self, ForceHandlerCore handler)
+    cpdef void set_renderer(self, Renderer renderer)
 
     cdef init_arrays(self)
     cdef inline Py_ssize_t idx(self, Py_ssize_t y,

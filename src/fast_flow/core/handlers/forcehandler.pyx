@@ -39,3 +39,9 @@ cdef class ForceHandlerCore:
     ) noexcept nogil:
         return 0.0
 
+    cdef void prepare_pressure(self) noexcept nogil:
+        pass
+
+    cdef void finish_pressure(self) noexcept nogil:
+        pass
+
