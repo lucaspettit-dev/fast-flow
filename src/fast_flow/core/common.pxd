@@ -9,6 +9,22 @@ cimport numpy as cnp
 from libc.math cimport fmod, floor, sqrt
 cimport cython
 
+DEF MAX_BUFFERS = 2
+
+cdef struct ScalarBinding:
+    DTYPE_f** buffers
+    Py_ssize_t* active
+    Py_ssize_t ny
+    Py_ssize_t nx
+
+cdef struct VectorBinding:
+    DTYPE_f** u_buffers
+    DTYPE_f** v_buffers
+    Py_ssize_t* active
+    Py_ssize_t ny
+    Py_ssize_t nx
+
+
 # NOTE: do not declare module-level `cdef` variables here
 # (e.g. `cdef double PI = ...`).  Cython then generates a
 # runtime `import fast_flow.core.common` in every module

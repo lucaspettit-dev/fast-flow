@@ -14,7 +14,7 @@ cimport numpy as cnp
 from libc.stdlib cimport malloc, free, realloc
 from libc.math cimport sqrt, fabs
 
-from fast_flow.core.common cimport DTYPE_f, build_solids_mask, to_numpy
+from fast_flow.core.common cimport DTYPE_f, build_solids_mask, to_numpy, VectorBinding,ScalarBinding
 from fast_flow.core.flow cimport FlowSolverCore
 from fast_flow.core.handlers.forcehandler cimport ForceHandlerCore
 
@@ -392,6 +392,30 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
             pool)
         if self.c_handler == NULL:
             raise MemoryError("could not allocate native-C handler")
+
+    cdef VectorBinding coulomb_field_binding(self) noexcept:
+        cdef VectorBinding field = VectorBinding()
+        field.ny = self.ny
+        field.nx = self.nx
+        field.v_buffers = self.cv
+        field.u_buffers = self.cu
+        field.active = &self.ck
+        return field
+
+    cdef ScalarBinding ion_density_binding(self) noexcept:
+        cdef ScalarBinding field = ScalarBinding()
+        field.ny = self.ny
+        field.nx = self.nx
+        field.buffers = self.d
+        field.active = &self.dk
+        return field
+
+    cdef ScalarBinding o2_density_binding(self) noexcept:
+        cdef ScalarBinding field = ScalarBinding()
+        field.ny = self.ny
+        field.nx = self.nx
+        field.buffers = self.dn
+        field.active = &self.dnk
 
     cdef Py_ssize_t _new_shape_slot(self, Py_ssize_t n, DTYPE_f charge):
         """Grow the shape array if full and allocate the next
@@ -1103,3 +1127,5 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         if self._solid_at(idx):
             return 0.0
         return self.p[1 - self.pk][idx] - self.p[self.pk][idx]
+
+

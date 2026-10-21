@@ -18,7 +18,7 @@ def parse_args():
     p.add_argument("--nu", type=float, default=0.05)
     p.add_argument("--fps", type=int, default=120*4,
                    help="renderer frames per simulated second")
-    p.add_argument("--total-time", type=float, default=1.0,
+    p.add_argument("--total-time", type=float, default=5.0,
                    help="simulated seconds to advance "
                         "(default 1.0 = 10000 steps x 0.0001)")
     p.add_argument("--file", type=str, default="./res/cow.png")

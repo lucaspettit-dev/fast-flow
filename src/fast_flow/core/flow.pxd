@@ -13,7 +13,7 @@
 
 cimport numpy as cnp
 
-from fast_flow.core.common cimport DTYPE_f
+from fast_flow.core.common cimport DTYPE_f,VectorBinding, ScalarBinding
 from fast_flow.core.handlers.forcehandler cimport ForceHandlerCore
 from fast_flow.core.renderer cimport Renderer
 
@@ -67,3 +67,6 @@ cdef class FlowSolverCore:
     cpdef void step(self) noexcept
     cpdef int run(self, DTYPE_f total_time) noexcept
     cpdef set_inflow(self, DTYPE_f velocity)
+
+    cdef VectorBinding velocity_binding(self) noexcept
+    cdef ScalarBinding density_binding(self) noexcept

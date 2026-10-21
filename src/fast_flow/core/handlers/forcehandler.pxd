@@ -10,7 +10,6 @@
 # void* -> Python-object cast (which would need the GIL
 # for the refcount). The handler pointer is borrowed; the
 # solver holds the owning reference.
-
 from fast_flow.core.common cimport DTYPE_f
 from fast_flow.core.flow cimport FlowSolverCore
 
@@ -35,13 +34,3 @@ cdef class ForceHandlerCore:
     cdef void accumulate_p(self, Py_ssize_t y, Py_ssize_t x,
                            Py_ssize_t idx,
                            DTYPE_f* p_dest) noexcept nogil
-
-
-cdef class ConstantVelocityForceHandlerCore(ForceHandlerCore):
-    cdef Py_ssize_t direction
-    cdef DTYPE_f velocity
-
-    cdef DTYPE_f get_u(self, Py_ssize_t y, Py_ssize_t x,
-                       Py_ssize_t idx) noexcept nogil
-    cdef DTYPE_f get_v(self, Py_ssize_t y, Py_ssize_t x,
-                       Py_ssize_t idx) noexcept nogil

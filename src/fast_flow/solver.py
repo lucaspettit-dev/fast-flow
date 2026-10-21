@@ -5,7 +5,6 @@ from __future__ import annotations
 import numpy as np
 from enum import Enum
 from .core.flow import FlowSolverCore
-from .core.handlers.forcehandler import ConstantVelocityForceHandlerCore
 from .core.electrostaticforcehandler import ElectrostaticForceHandler as ElectrostaticForceHandlerCore
 from .core.renderer import Renderer
 
@@ -25,6 +24,7 @@ class Boundry(Enum):
 
 class ForceHandler:
     pass
+
 
 class ElectrostaticForceHandler(ForceHandler):
     """Electrostatic forcing from the charged regions of an image.

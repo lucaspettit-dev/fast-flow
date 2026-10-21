@@ -4,11 +4,11 @@
 {
     "distutils": {
         "depends": [
-            "/private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/_core/include/numpy/arrayobject.h",
-            "/private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/_core/include/numpy/arrayscalars.h",
-            "/private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/_core/include/numpy/ndarrayobject.h",
-            "/private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/_core/include/numpy/ndarraytypes.h",
-            "/private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/_core/include/numpy/ufuncobject.h",
+            "/private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/_core/include/numpy/arrayobject.h",
+            "/private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/_core/include/numpy/arrayscalars.h",
+            "/private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/_core/include/numpy/ndarrayobject.h",
+            "/private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/_core/include/numpy/ndarraytypes.h",
+            "/private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/_core/include/numpy/ufuncobject.h",
             "src/fast_flow/core/native/handler_c.h",
             "src/fast_flow/core/solver_c.h"
         ],
@@ -22,7 +22,7 @@
         ],
         "include_dirs": [
             "src/fast_flow/core",
-            "/private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/_core/include",
+            "/private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/_core/include",
             "src/fast_flow/core/handlers",
             "/opt/homebrew/opt/libomp/include"
         ],
@@ -1562,10 +1562,9 @@ static const char * const __pyx_cfilenm = __FILE__;
 static const char* const __pyx_f[] = {
   "src/fast_flow/core/electrostaticforcehandler.pyx",
   "View.MemoryView",
-  "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd",
+  "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd",
   "src/fast_flow/core/common.pxd",
   "cpython/type.pxd",
-  "src/fast_flow/core/handlers/forcehandler.pxd",
   "src/fast_flow/core/renderer.pxd",
   "src/fast_flow/core/flow.pxd",
 };
@@ -1819,7 +1818,7 @@ typedef struct {
 
 /* #### Code section: numeric_typedefs ### */
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":787
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":787
  * # in Cython to enable them only on the right systems.
  * 
  * ctypedef npy_int8       int8_t             # <<<<<<<<<<<<<<
@@ -1828,7 +1827,7 @@ typedef struct {
 */
 typedef npy_int8 __pyx_t_5numpy_int8_t;
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":788
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":788
  * 
  * ctypedef npy_int8       int8_t
  * ctypedef npy_int16      int16_t             # <<<<<<<<<<<<<<
@@ -1837,7 +1836,7 @@ typedef npy_int8 __pyx_t_5numpy_int8_t;
 */
 typedef npy_int16 __pyx_t_5numpy_int16_t;
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":789
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":789
  * ctypedef npy_int8       int8_t
  * ctypedef npy_int16      int16_t
  * ctypedef npy_int32      int32_t             # <<<<<<<<<<<<<<
@@ -1846,7 +1845,7 @@ typedef npy_int16 __pyx_t_5numpy_int16_t;
 */
 typedef npy_int32 __pyx_t_5numpy_int32_t;
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":790
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":790
  * ctypedef npy_int16      int16_t
  * ctypedef npy_int32      int32_t
  * ctypedef npy_int64      int64_t             # <<<<<<<<<<<<<<
@@ -1855,7 +1854,7 @@ typedef npy_int32 __pyx_t_5numpy_int32_t;
 */
 typedef npy_int64 __pyx_t_5numpy_int64_t;
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":794
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":794
  * #ctypedef npy_int128     int128_t
  * 
  * ctypedef npy_uint8      uint8_t             # <<<<<<<<<<<<<<
@@ -1864,7 +1863,7 @@ typedef npy_int64 __pyx_t_5numpy_int64_t;
 */
 typedef npy_uint8 __pyx_t_5numpy_uint8_t;
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":795
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":795
  * 
  * ctypedef npy_uint8      uint8_t
  * ctypedef npy_uint16     uint16_t             # <<<<<<<<<<<<<<
@@ -1873,7 +1872,7 @@ typedef npy_uint8 __pyx_t_5numpy_uint8_t;
 */
 typedef npy_uint16 __pyx_t_5numpy_uint16_t;
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":796
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":796
  * ctypedef npy_uint8      uint8_t
  * ctypedef npy_uint16     uint16_t
  * ctypedef npy_uint32     uint32_t             # <<<<<<<<<<<<<<
@@ -1882,7 +1881,7 @@ typedef npy_uint16 __pyx_t_5numpy_uint16_t;
 */
 typedef npy_uint32 __pyx_t_5numpy_uint32_t;
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":797
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":797
  * ctypedef npy_uint16     uint16_t
  * ctypedef npy_uint32     uint32_t
  * ctypedef npy_uint64     uint64_t             # <<<<<<<<<<<<<<
@@ -1891,7 +1890,7 @@ typedef npy_uint32 __pyx_t_5numpy_uint32_t;
 */
 typedef npy_uint64 __pyx_t_5numpy_uint64_t;
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":801
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":801
  * #ctypedef npy_uint128    uint128_t
  * 
  * ctypedef npy_float32    float32_t             # <<<<<<<<<<<<<<
@@ -1900,7 +1899,7 @@ typedef npy_uint64 __pyx_t_5numpy_uint64_t;
 */
 typedef npy_float32 __pyx_t_5numpy_float32_t;
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":802
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":802
  * 
  * ctypedef npy_float32    float32_t
  * ctypedef npy_float64    float64_t             # <<<<<<<<<<<<<<
@@ -1909,7 +1908,7 @@ typedef npy_float32 __pyx_t_5numpy_float32_t;
 */
 typedef npy_float64 __pyx_t_5numpy_float64_t;
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":809
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":809
  * ctypedef double complex complex128_t
  * 
  * ctypedef npy_longlong   longlong_t             # <<<<<<<<<<<<<<
@@ -1918,7 +1917,7 @@ typedef npy_float64 __pyx_t_5numpy_float64_t;
 */
 typedef npy_longlong __pyx_t_5numpy_longlong_t;
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":810
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":810
  * 
  * ctypedef npy_longlong   longlong_t
  * ctypedef npy_ulonglong  ulonglong_t             # <<<<<<<<<<<<<<
@@ -1927,7 +1926,7 @@ typedef npy_longlong __pyx_t_5numpy_longlong_t;
 */
 typedef npy_ulonglong __pyx_t_5numpy_ulonglong_t;
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":812
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":812
  * ctypedef npy_ulonglong  ulonglong_t
  * 
  * ctypedef npy_intp       intp_t             # <<<<<<<<<<<<<<
@@ -1936,7 +1935,7 @@ typedef npy_ulonglong __pyx_t_5numpy_ulonglong_t;
 */
 typedef npy_intp __pyx_t_5numpy_intp_t;
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":813
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":813
  * 
  * ctypedef npy_intp       intp_t
  * ctypedef npy_uintp      uintp_t             # <<<<<<<<<<<<<<
@@ -1945,7 +1944,7 @@ typedef npy_intp __pyx_t_5numpy_intp_t;
 */
 typedef npy_uintp __pyx_t_5numpy_uintp_t;
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":815
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":815
  * ctypedef npy_uintp      uintp_t
  * 
  * ctypedef npy_double     float_t             # <<<<<<<<<<<<<<
@@ -1954,7 +1953,7 @@ typedef npy_uintp __pyx_t_5numpy_uintp_t;
 */
 typedef npy_double __pyx_t_5numpy_float_t;
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":816
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":816
  * 
  * ctypedef npy_double     float_t
  * ctypedef npy_double     double_t             # <<<<<<<<<<<<<<
@@ -1963,7 +1962,7 @@ typedef npy_double __pyx_t_5numpy_float_t;
 */
 typedef npy_double __pyx_t_5numpy_double_t;
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":817
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":817
  * ctypedef npy_double     float_t
  * ctypedef npy_double     double_t
  * ctypedef npy_longdouble longdouble_t             # <<<<<<<<<<<<<<
@@ -2021,7 +2020,6 @@ static CYTHON_INLINE __pyx_t_long_double_complex __pyx_t_long_double_complex_fro
 
 /*--- Type declarations ---*/
 struct __pyx_obj_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore;
-struct __pyx_obj_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore;
 struct __pyx_obj_9fast_flow_4core_8renderer_Renderer;
 struct __pyx_obj_9fast_flow_4core_4flow_FlowSolverCore;
 struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler;
@@ -2029,6 +2027,37 @@ struct __pyx_array_obj;
 struct __pyx_MemviewEnum_obj;
 struct __pyx_memoryview_obj;
 struct __pyx_memoryviewslice_obj;
+struct __pyx_t_9fast_flow_4core_6common_ScalarBinding;
+struct __pyx_t_9fast_flow_4core_6common_VectorBinding;
+
+/* "fast_flow/core/common.pxd":14
+ * DEF MAX_BUFFERS = 2
+ * 
+ * cdef struct ScalarBinding:             # <<<<<<<<<<<<<<
+ *     DTYPE_f** buffers
+ *     Py_ssize_t* active
+*/
+struct __pyx_t_9fast_flow_4core_6common_ScalarBinding {
+  __pyx_t_9fast_flow_4core_6common_DTYPE_f **buffers;
+  Py_ssize_t *active;
+  Py_ssize_t ny;
+  Py_ssize_t nx;
+};
+
+/* "fast_flow/core/common.pxd":20
+ *     Py_ssize_t nx
+ * 
+ * cdef struct VectorBinding:             # <<<<<<<<<<<<<<
+ *     DTYPE_f** u_buffers
+ *     DTYPE_f** v_buffers
+*/
+struct __pyx_t_9fast_flow_4core_6common_VectorBinding {
+  __pyx_t_9fast_flow_4core_6common_DTYPE_f **u_buffers;
+  __pyx_t_9fast_flow_4core_6common_DTYPE_f **v_buffers;
+  Py_ssize_t *active;
+  Py_ssize_t ny;
+  Py_ssize_t nx;
+};
 struct __pyx_t_9fast_flow_4core_25electrostaticforcehandler_ShapeExtraData;
 struct __pyx_t_9fast_flow_4core_25electrostaticforcehandler_Shape;
 
@@ -2056,7 +2085,7 @@ struct __pyx_t_9fast_flow_4core_25electrostaticforcehandler_Shape {
   struct __pyx_t_9fast_flow_4core_25electrostaticforcehandler_ShapeExtraData extradata;
 };
 
-/* "fast_flow/core/handlers/forcehandler.pxd":18
+/* "fast_flow/core/handlers/forcehandler.pxd":17
  * 
  * 
  * cdef class ForceHandlerCore:             # <<<<<<<<<<<<<<
@@ -2068,20 +2097,6 @@ struct __pyx_obj_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore {
   struct __pyx_vtabstruct_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore *__pyx_vtab;
   struct __pyx_obj_9fast_flow_4core_4flow_FlowSolverCore *solver;
   struct __pyx_obj_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore *next_handler;
-};
-
-
-/* "fast_flow/core/handlers/forcehandler.pxd":40
- * 
- * 
- * cdef class ConstantVelocityForceHandlerCore(ForceHandlerCore):             # <<<<<<<<<<<<<<
- *     cdef Py_ssize_t direction
- *     cdef DTYPE_f velocity
-*/
-struct __pyx_obj_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore {
-  struct __pyx_obj_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore __pyx_base;
-  Py_ssize_t direction;
-  __pyx_t_9fast_flow_4core_6common_DTYPE_f velocity;
 };
 
 
@@ -2113,6 +2128,10 @@ struct __pyx_obj_9fast_flow_4core_8renderer_Renderer {
   int _running;
   int record;
   PyObject *_recorded;
+  int legend;
+  unsigned char *legend_buf;
+  unsigned char *legend_mask;
+  Py_ssize_t legend_size;
 };
 
 
@@ -2275,7 +2294,7 @@ struct __pyx_memoryviewslice_obj {
 
 
 
-/* "fast_flow/core/handlers/forcehandler.pxd":18
+/* "fast_flow/core/handlers/forcehandler.pxd":17
  * 
  * 
  * cdef class ForceHandlerCore:             # <<<<<<<<<<<<<<
@@ -2297,20 +2316,6 @@ struct __pyx_vtabstruct_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCo
 static struct __pyx_vtabstruct_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore *__pyx_vtabptr_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore;
 
 
-/* "fast_flow/core/handlers/forcehandler.pxd":40
- * 
- * 
- * cdef class ConstantVelocityForceHandlerCore(ForceHandlerCore):             # <<<<<<<<<<<<<<
- *     cdef Py_ssize_t direction
- *     cdef DTYPE_f velocity
-*/
-
-struct __pyx_vtabstruct_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore {
-  struct __pyx_vtabstruct_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore __pyx_base;
-};
-static struct __pyx_vtabstruct_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore *__pyx_vtabptr_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore;
-
-
 /* "fast_flow/core/renderer.pxd":10
  * 
  * 
@@ -2322,6 +2327,8 @@ static struct __pyx_vtabstruct_9fast_flow_4core_8handlers_12forcehandler_Constan
 struct __pyx_vtabstruct_9fast_flow_4core_8renderer_Renderer {
   void (*render_frame)(struct __pyx_obj_9fast_flow_4core_8renderer_Renderer *, __pyx_t_9fast_flow_4core_6common_DTYPE_f, Py_ssize_t, __pyx_t_9fast_flow_4core_6common_DTYPE_f *, __pyx_t_9fast_flow_4core_6common_DTYPE_f *);
   void (*draw_frame)(struct __pyx_obj_9fast_flow_4core_8renderer_Renderer *, Py_ssize_t, __pyx_t_9fast_flow_4core_6common_DTYPE_f *, __pyx_t_9fast_flow_4core_6common_DTYPE_f *);
+  void (*_build_legend)(struct __pyx_obj_9fast_flow_4core_8renderer_Renderer *);
+  void (*_overlay_legend)(struct __pyx_obj_9fast_flow_4core_8renderer_Renderer *);
   void (*_publish)(struct __pyx_obj_9fast_flow_4core_8renderer_Renderer *);
   Py_ssize_t (*idx)(struct __pyx_obj_9fast_flow_4core_8renderer_Renderer *, Py_ssize_t, Py_ssize_t, Py_ssize_t);
   void (*refresh)(struct __pyx_obj_9fast_flow_4core_8renderer_Renderer *, __Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch);
@@ -2357,6 +2364,8 @@ struct __pyx_vtabstruct_9fast_flow_4core_4flow_FlowSolverCore {
   void (*step)(struct __pyx_obj_9fast_flow_4core_4flow_FlowSolverCore *, int __pyx_skip_dispatch);
   int (*run)(struct __pyx_obj_9fast_flow_4core_4flow_FlowSolverCore *, __pyx_t_9fast_flow_4core_6common_DTYPE_f, int __pyx_skip_dispatch);
   PyObject *(*set_inflow)(struct __pyx_obj_9fast_flow_4core_4flow_FlowSolverCore *, __pyx_t_9fast_flow_4core_6common_DTYPE_f, int __pyx_skip_dispatch);
+  struct __pyx_t_9fast_flow_4core_6common_VectorBinding (*velocity_binding)(struct __pyx_obj_9fast_flow_4core_4flow_FlowSolverCore *);
+  struct __pyx_t_9fast_flow_4core_6common_ScalarBinding (*density_binding)(struct __pyx_obj_9fast_flow_4core_4flow_FlowSolverCore *);
 };
 static struct __pyx_vtabstruct_9fast_flow_4core_4flow_FlowSolverCore *__pyx_vtabptr_9fast_flow_4core_4flow_FlowSolverCore;
 
@@ -2371,6 +2380,9 @@ static struct __pyx_vtabstruct_9fast_flow_4core_4flow_FlowSolverCore *__pyx_vtab
 
 struct __pyx_vtabstruct_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler {
   struct __pyx_vtabstruct_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore __pyx_base;
+  struct __pyx_t_9fast_flow_4core_6common_VectorBinding (*coulomb_field_binding)(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *);
+  struct __pyx_t_9fast_flow_4core_6common_ScalarBinding (*ion_density_binding)(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *);
+  struct __pyx_t_9fast_flow_4core_6common_ScalarBinding (*o2_density_binding)(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *);
   Py_ssize_t (*_new_shape_slot)(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *, Py_ssize_t, __pyx_t_9fast_flow_4core_6common_DTYPE_f);
   PyObject *(*_build_edges)(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *, PyArrayObject *, PyObject *);
   void (*_build_ion_zone)(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *, PyArrayObject *, PyObject *);
@@ -4241,6 +4253,9 @@ static CYTHON_INLINE npy_intp *__pyx_f_5numpy_7ndarray_5shape___get__(PyArrayObj
 static CYTHON_INLINE npy_intp *__pyx_f_5numpy_7ndarray_7strides___get__(PyArrayObject *__pyx_v_self); /* proto*/
 static CYTHON_INLINE npy_intp __pyx_f_5numpy_7ndarray_4size___get__(PyArrayObject *__pyx_v_self); /* proto*/
 static CYTHON_INLINE char *__pyx_f_5numpy_7ndarray_4data___get__(PyArrayObject *__pyx_v_self); /* proto*/
+static struct __pyx_t_9fast_flow_4core_6common_VectorBinding __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_coulomb_field_binding(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *__pyx_v_self); /* proto*/
+static struct __pyx_t_9fast_flow_4core_6common_ScalarBinding __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_ion_density_binding(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *__pyx_v_self); /* proto*/
+static struct __pyx_t_9fast_flow_4core_6common_ScalarBinding __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_o2_density_binding(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *__pyx_v_self); /* proto*/
 static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler__new_shape_slot(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *__pyx_v_self, Py_ssize_t __pyx_v_n, __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_v_charge); /* proto*/
 static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler__build_edges(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *__pyx_v_self, PyArrayObject *__pyx_v_image, PyObject *__pyx_v_layermap); /* proto*/
 static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler__build_ion_zone(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *__pyx_v_self, PyArrayObject *__pyx_v_image, PyObject *__pyx_v_layermap); /* proto*/
@@ -4600,7 +4615,6 @@ namespace {
     PyTypeObject *__pyx_ptype_5numpy_character;
     PyTypeObject *__pyx_ptype_5numpy_ufunc;
     PyTypeObject *__pyx_ptype_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore;
-    PyTypeObject *__pyx_ptype_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore;
     PyTypeObject *__pyx_ptype_9fast_flow_4core_8renderer_Renderer;
     PyTypeObject *__pyx_ptype_9fast_flow_4core_4flow_FlowSolverCore;
     PyObject *__pyx_type_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler;
@@ -4619,7 +4633,7 @@ namespace {
     PyObject *__pyx_slice[1];
     PyObject *__pyx_tuple[5];
     PyObject *__pyx_codeobj_tab[11];
-    PyObject *__pyx_string_tab[183];
+    PyObject *__pyx_string_tab[185];
     PyObject *__pyx_number_tab[6];
 /* #### Code section: module_state_contents ### */
 /* PyFrozenDict.module_state_decls */
@@ -4809,49 +4823,51 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_n_u_np __pyx_string_tab[137]
 #define __pyx_n_u_num_shapes __pyx_string_tab[138]
 #define __pyx_n_u_numpy __pyx_string_tab[139]
-#define __pyx_n_u_o2_density __pyx_string_tab[140]
-#define __pyx_n_u_o2_velocity __pyx_string_tab[141]
-#define __pyx_n_u_obj __pyx_string_tab[142]
-#define __pyx_n_u_pack __pyx_string_tab[143]
-#define __pyx_n_u_pop __pyx_string_tab[144]
-#define __pyx_n_u_positive __pyx_string_tab[145]
-#define __pyx_n_u_register __pyx_string_tab[146]
-#define __pyx_n_u_reshape __pyx_string_tab[147]
-#define __pyx_n_u_self __pyx_string_tab[148]
-#define __pyx_n_u_setdefault __pyx_string_tab[149]
-#define __pyx_n_u_shape __pyx_string_tab[150]
-#define __pyx_n_u_shape_charge __pyx_string_tab[151]
-#define __pyx_n_u_shape_edges __pyx_string_tab[152]
-#define __pyx_n_u_size __pyx_string_tab[153]
-#define __pyx_n_u_solid_forces __pyx_string_tab[154]
-#define __pyx_n_u_solver __pyx_string_tab[155]
-#define __pyx_n_u_start __pyx_string_tab[156]
-#define __pyx_n_u_step __pyx_string_tab[157]
-#define __pyx_n_u_stop __pyx_string_tab[158]
-#define __pyx_n_u_struct __pyx_string_tab[159]
-#define __pyx_n_u_uint8 __pyx_string_tab[160]
-#define __pyx_n_u_unpack __pyx_string_tab[161]
-#define __pyx_n_u_update __pyx_string_tab[162]
-#define __pyx_n_u_values __pyx_string_tab[163]
-#define __pyx_n_u_writeable __pyx_string_tab[164]
-#define __pyx_n_u_x __pyx_string_tab[165]
-#define __pyx_n_u_zeros __pyx_string_tab[166]
-#define __pyx_kp_b__6 __pyx_string_tab[167]
-#define __pyx_kp_b__7 __pyx_string_tab[168]
-#define __pyx_n_b_O __pyx_string_tab[169]
-#define __pyx_kp_b_T __pyx_string_tab[170]
-#define __pyx_kp_b__5 __pyx_string_tab[171]
-#define __pyx_kp_b__8 __pyx_string_tab[172]
-#define __pyx_kp_b_iso88591_Q __pyx_string_tab[173]
-#define __pyx_kp_b_iso88591_A_2Rr_Bc_Q_AQ_t7_2Zq __pyx_string_tab[174]
-#define __pyx_kp_b_iso88591_A_t1 __pyx_string_tab[175]
-#define __pyx_kp_b_iso88591_A_xq_Bat6_WA_G5 __pyx_string_tab[176]
-#define __pyx_kp_b_iso88591_A_Rq_G4we4we1_Rq_G4we4we1 __pyx_string_tab[177]
-#define __pyx_kp_b_iso88591_A_S_V4we4we1_S_V4we4we1 __pyx_string_tab[178]
-#define __pyx_kp_b_iso88591_A_2Rr_Bc_Q_AQ_r_WARvQb_WARvQb_Ba __pyx_string_tab[179]
-#define __pyx_kp_b_iso88591_A_S_WD_uD_uA_S_WD_uD_uA __pyx_string_tab[180]
-#define __pyx_kp_b_iso88591_A_xq_Cq_G4wa_G5 __pyx_string_tab[181]
-#define __pyx_kp_b_iso88591_AP_gQ_gQ_Rq_b_Q_4s_4q_G5_WA_r_1A __pyx_string_tab[182]
+#define __pyx_n_u_nx __pyx_string_tab[140]
+#define __pyx_n_u_ny __pyx_string_tab[141]
+#define __pyx_n_u_o2_density __pyx_string_tab[142]
+#define __pyx_n_u_o2_velocity __pyx_string_tab[143]
+#define __pyx_n_u_obj __pyx_string_tab[144]
+#define __pyx_n_u_pack __pyx_string_tab[145]
+#define __pyx_n_u_pop __pyx_string_tab[146]
+#define __pyx_n_u_positive __pyx_string_tab[147]
+#define __pyx_n_u_register __pyx_string_tab[148]
+#define __pyx_n_u_reshape __pyx_string_tab[149]
+#define __pyx_n_u_self __pyx_string_tab[150]
+#define __pyx_n_u_setdefault __pyx_string_tab[151]
+#define __pyx_n_u_shape __pyx_string_tab[152]
+#define __pyx_n_u_shape_charge __pyx_string_tab[153]
+#define __pyx_n_u_shape_edges __pyx_string_tab[154]
+#define __pyx_n_u_size __pyx_string_tab[155]
+#define __pyx_n_u_solid_forces __pyx_string_tab[156]
+#define __pyx_n_u_solver __pyx_string_tab[157]
+#define __pyx_n_u_start __pyx_string_tab[158]
+#define __pyx_n_u_step __pyx_string_tab[159]
+#define __pyx_n_u_stop __pyx_string_tab[160]
+#define __pyx_n_u_struct __pyx_string_tab[161]
+#define __pyx_n_u_uint8 __pyx_string_tab[162]
+#define __pyx_n_u_unpack __pyx_string_tab[163]
+#define __pyx_n_u_update __pyx_string_tab[164]
+#define __pyx_n_u_values __pyx_string_tab[165]
+#define __pyx_n_u_writeable __pyx_string_tab[166]
+#define __pyx_n_u_x __pyx_string_tab[167]
+#define __pyx_n_u_zeros __pyx_string_tab[168]
+#define __pyx_kp_b__6 __pyx_string_tab[169]
+#define __pyx_kp_b__7 __pyx_string_tab[170]
+#define __pyx_n_b_O __pyx_string_tab[171]
+#define __pyx_kp_b_T __pyx_string_tab[172]
+#define __pyx_kp_b__5 __pyx_string_tab[173]
+#define __pyx_kp_b__8 __pyx_string_tab[174]
+#define __pyx_kp_b_iso88591_Q __pyx_string_tab[175]
+#define __pyx_kp_b_iso88591_A_2Rr_Bc_Q_AQ_t7_2Zq __pyx_string_tab[176]
+#define __pyx_kp_b_iso88591_A_t1 __pyx_string_tab[177]
+#define __pyx_kp_b_iso88591_A_xq_Bat6_WA_G5 __pyx_string_tab[178]
+#define __pyx_kp_b_iso88591_A_Rq_G4we4we1_Rq_G4we4we1 __pyx_string_tab[179]
+#define __pyx_kp_b_iso88591_A_S_V4we4we1_S_V4we4we1 __pyx_string_tab[180]
+#define __pyx_kp_b_iso88591_A_2Rr_Bc_Q_AQ_r_WARvQb_WARvQb_Ba __pyx_string_tab[181]
+#define __pyx_kp_b_iso88591_A_S_WD_uD_uA_S_WD_uD_uA __pyx_string_tab[182]
+#define __pyx_kp_b_iso88591_A_xq_Cq_G4wa_G5 __pyx_string_tab[183]
+#define __pyx_kp_b_iso88591_AP_gQ_gQ_Rq_b_Q_4s_4q_G5_WA_r_1A __pyx_string_tab[184]
 #define __pyx_float_0_0 __pyx_number_tab[0]
 #define __pyx_int_0 __pyx_number_tab[1]
 #define __pyx_int_neg_1 __pyx_number_tab[2]
@@ -4889,7 +4905,6 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_ptype_5numpy_character);
   Py_CLEAR(clear_module_state->__pyx_ptype_5numpy_ufunc);
   Py_CLEAR(clear_module_state->__pyx_ptype_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore);
-  Py_CLEAR(clear_module_state->__pyx_ptype_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore);
   Py_CLEAR(clear_module_state->__pyx_ptype_9fast_flow_4core_8renderer_Renderer);
   Py_CLEAR(clear_module_state->__pyx_ptype_9fast_flow_4core_4flow_FlowSolverCore);
   Py_CLEAR(clear_module_state->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler);
@@ -4908,7 +4923,7 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   for (int i=0; i<1; ++i) { Py_CLEAR(clear_module_state->__pyx_slice[i]); }
   for (int i=0; i<5; ++i) { Py_CLEAR(clear_module_state->__pyx_tuple[i]); }
   for (int i=0; i<11; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<183; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<185; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
   for (int i=0; i<6; ++i) { Py_CLEAR(clear_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_clear_contents ### */
 /* CommonTypesMetaclass.module_state_clear */
@@ -4949,7 +4964,6 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   Py_VISIT(traverse_module_state->__pyx_ptype_5numpy_character);
   Py_VISIT(traverse_module_state->__pyx_ptype_5numpy_ufunc);
   Py_VISIT(traverse_module_state->__pyx_ptype_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore);
-  Py_VISIT(traverse_module_state->__pyx_ptype_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore);
   Py_VISIT(traverse_module_state->__pyx_ptype_9fast_flow_4core_8renderer_Renderer);
   Py_VISIT(traverse_module_state->__pyx_ptype_9fast_flow_4core_4flow_FlowSolverCore);
   Py_VISIT(traverse_module_state->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler);
@@ -4968,7 +4982,7 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   for (int i=0; i<1; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_slice[i]); }
   for (int i=0; i<5; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_tuple[i]); }
   for (int i=0; i<11; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<183; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<185; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
   for (int i=0; i<6; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_traverse_contents ### */
 /* CommonTypesMetaclass.module_state_traverse */
@@ -19556,7 +19570,7 @@ static PyObject *__pyx_format_from_typeinfo(__Pyx_TypeInfo const *__pyx_v_type) 
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":286
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":286
  *         cdef int type_num
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19567,7 +19581,7 @@ static PyObject *__pyx_format_from_typeinfo(__Pyx_TypeInfo const *__pyx_v_type) 
 static CYTHON_INLINE npy_intp __pyx_f_5numpy_5dtype_8itemsize___get__(PyArray_Descr *__pyx_v_self) {
   npy_intp __pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":288
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":288
  *         @property
  *         cdef inline npy_intp itemsize(self) noexcept nogil:
  *             return PyDataType_ELSIZE(self)             # <<<<<<<<<<<<<<
@@ -19580,7 +19594,7 @@ static CYTHON_INLINE npy_intp __pyx_f_5numpy_5dtype_8itemsize___get__(PyArray_De
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":286
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":286
  *         cdef int type_num
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19593,7 +19607,7 @@ static CYTHON_INLINE npy_intp __pyx_f_5numpy_5dtype_8itemsize___get__(PyArray_De
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":290
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":290
  *             return PyDataType_ELSIZE(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19604,7 +19618,7 @@ static CYTHON_INLINE npy_intp __pyx_f_5numpy_5dtype_8itemsize___get__(PyArray_De
 static CYTHON_INLINE npy_intp __pyx_f_5numpy_5dtype_9alignment___get__(PyArray_Descr *__pyx_v_self) {
   npy_intp __pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":292
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":292
  *         @property
  *         cdef inline npy_intp alignment(self) noexcept nogil:
  *             return PyDataType_ALIGNMENT(self)             # <<<<<<<<<<<<<<
@@ -19617,7 +19631,7 @@ static CYTHON_INLINE npy_intp __pyx_f_5numpy_5dtype_9alignment___get__(PyArray_D
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":290
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":290
  *             return PyDataType_ELSIZE(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19630,7 +19644,7 @@ static CYTHON_INLINE npy_intp __pyx_f_5numpy_5dtype_9alignment___get__(PyArray_D
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":296
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":296
  *         # Use fields/names with care as they may be NULL.  You must check
  *         # for this using PyDataType_HASFIELDS.
  *         @property             # <<<<<<<<<<<<<<
@@ -19644,7 +19658,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_5dtype_6fields___get__(PyArray_Des
   PyObject *__pyx_t_1;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":298
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":298
  *         @property
  *         cdef inline object fields(self):
  *             return <object>PyDataType_FIELDS(self)             # <<<<<<<<<<<<<<
@@ -19665,7 +19679,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_5dtype_6fields___get__(PyArray_Des
 
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":296
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":296
  *         # Use fields/names with care as they may be NULL.  You must check
  *         # for this using PyDataType_HASFIELDS.
  *         @property             # <<<<<<<<<<<<<<
@@ -19680,7 +19694,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_5dtype_6fields___get__(PyArray_Des
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":300
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":300
  *             return <object>PyDataType_FIELDS(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19694,7 +19708,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_5dtype_5names___get__(PyArray_Desc
   PyObject *__pyx_t_1;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":302
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":302
  *         @property
  *         cdef inline tuple names(self):
  *             return <tuple>PyDataType_NAMES(self)             # <<<<<<<<<<<<<<
@@ -19715,7 +19729,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_5dtype_5names___get__(PyArray_Desc
 
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":300
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":300
  *             return <object>PyDataType_FIELDS(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19730,7 +19744,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_5dtype_5names___get__(PyArray_Desc
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":307
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":307
  *         # valid (the pointer can be NULL). Most users should access
  *         # this field via the inline helper method PyDataType_SHAPE.
  *         @property             # <<<<<<<<<<<<<<
@@ -19741,7 +19755,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_5dtype_5names___get__(PyArray_Desc
 static CYTHON_INLINE PyArray_ArrayDescr *__pyx_f_5numpy_5dtype_8subarray___get__(PyArray_Descr *__pyx_v_self) {
   PyArray_ArrayDescr *__pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":309
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":309
  *         @property
  *         cdef inline PyArray_ArrayDescr* subarray(self) noexcept nogil:
  *             return PyDataType_SUBARRAY(self)             # <<<<<<<<<<<<<<
@@ -19754,7 +19768,7 @@ static CYTHON_INLINE PyArray_ArrayDescr *__pyx_f_5numpy_5dtype_8subarray___get__
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":307
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":307
  *         # valid (the pointer can be NULL). Most users should access
  *         # this field via the inline helper method PyDataType_SHAPE.
  *         @property             # <<<<<<<<<<<<<<
@@ -19767,7 +19781,7 @@ static CYTHON_INLINE PyArray_ArrayDescr *__pyx_f_5numpy_5dtype_8subarray___get__
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":311
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":311
  *             return PyDataType_SUBARRAY(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19778,7 +19792,7 @@ static CYTHON_INLINE PyArray_ArrayDescr *__pyx_f_5numpy_5dtype_8subarray___get__
 static CYTHON_INLINE npy_uint64 __pyx_f_5numpy_5dtype_5flags___get__(PyArray_Descr *__pyx_v_self) {
   npy_uint64 __pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":314
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":314
  *         cdef inline npy_uint64 flags(self) noexcept nogil:
  *             """The data types flags."""
  *             return PyDataType_FLAGS(self)             # <<<<<<<<<<<<<<
@@ -19791,7 +19805,7 @@ static CYTHON_INLINE npy_uint64 __pyx_f_5numpy_5dtype_5flags___get__(PyArray_Des
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":311
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":311
  *             return PyDataType_SUBARRAY(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19804,7 +19818,7 @@ static CYTHON_INLINE npy_uint64 __pyx_f_5numpy_5dtype_5flags___get__(PyArray_Des
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":323
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":323
  *     ctypedef class numpy.broadcast [object PyArrayMultiIterObject, check_size ignore]:
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19815,7 +19829,7 @@ static CYTHON_INLINE npy_uint64 __pyx_f_5numpy_5dtype_5flags___get__(PyArray_Des
 static CYTHON_INLINE int __pyx_f_5numpy_9broadcast_7numiter___get__(PyArrayMultiIterObject *__pyx_v_self) {
   int __pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":326
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":326
  *         cdef inline int numiter(self) noexcept nogil:
  *             """The number of arrays that need to be broadcast to the same shape."""
  *             return PyArray_MultiIter_NUMITER(self)             # <<<<<<<<<<<<<<
@@ -19828,7 +19842,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_9broadcast_7numiter___get__(PyArrayMulti
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":323
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":323
  *     ctypedef class numpy.broadcast [object PyArrayMultiIterObject, check_size ignore]:
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19841,7 +19855,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_9broadcast_7numiter___get__(PyArrayMulti
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":328
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":328
  *             return PyArray_MultiIter_NUMITER(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19852,7 +19866,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_9broadcast_7numiter___get__(PyArrayMulti
 static CYTHON_INLINE npy_intp __pyx_f_5numpy_9broadcast_4size___get__(PyArrayMultiIterObject *__pyx_v_self) {
   npy_intp __pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":331
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":331
  *         cdef inline npy_intp size(self) noexcept nogil:
  *             """The total broadcasted size."""
  *             return PyArray_MultiIter_SIZE(self)             # <<<<<<<<<<<<<<
@@ -19865,7 +19879,7 @@ static CYTHON_INLINE npy_intp __pyx_f_5numpy_9broadcast_4size___get__(PyArrayMul
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":328
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":328
  *             return PyArray_MultiIter_NUMITER(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19878,7 +19892,7 @@ static CYTHON_INLINE npy_intp __pyx_f_5numpy_9broadcast_4size___get__(PyArrayMul
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":333
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":333
  *             return PyArray_MultiIter_SIZE(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19889,7 +19903,7 @@ static CYTHON_INLINE npy_intp __pyx_f_5numpy_9broadcast_4size___get__(PyArrayMul
 static CYTHON_INLINE npy_intp __pyx_f_5numpy_9broadcast_5index___get__(PyArrayMultiIterObject *__pyx_v_self) {
   npy_intp __pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":336
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":336
  *         cdef inline npy_intp index(self) noexcept nogil:
  *             """The current (1-d) index into the broadcasted result."""
  *             return PyArray_MultiIter_INDEX(self)             # <<<<<<<<<<<<<<
@@ -19902,7 +19916,7 @@ static CYTHON_INLINE npy_intp __pyx_f_5numpy_9broadcast_5index___get__(PyArrayMu
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":333
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":333
  *             return PyArray_MultiIter_SIZE(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19915,7 +19929,7 @@ static CYTHON_INLINE npy_intp __pyx_f_5numpy_9broadcast_5index___get__(PyArrayMu
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":338
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":338
  *             return PyArray_MultiIter_INDEX(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19926,7 +19940,7 @@ static CYTHON_INLINE npy_intp __pyx_f_5numpy_9broadcast_5index___get__(PyArrayMu
 static CYTHON_INLINE int __pyx_f_5numpy_9broadcast_2nd___get__(PyArrayMultiIterObject *__pyx_v_self) {
   int __pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":341
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":341
  *         cdef inline int nd(self) noexcept nogil:
  *             """The number of dimensions in the broadcasted result."""
  *             return PyArray_MultiIter_NDIM(self)             # <<<<<<<<<<<<<<
@@ -19939,7 +19953,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_9broadcast_2nd___get__(PyArrayMultiIterO
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":338
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":338
  *             return PyArray_MultiIter_INDEX(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19952,7 +19966,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_9broadcast_2nd___get__(PyArrayMultiIterO
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":343
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":343
  *             return PyArray_MultiIter_NDIM(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19963,7 +19977,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_9broadcast_2nd___get__(PyArrayMultiIterO
 static CYTHON_INLINE npy_intp *__pyx_f_5numpy_9broadcast_10dimensions___get__(PyArrayMultiIterObject *__pyx_v_self) {
   npy_intp *__pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":346
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":346
  *         cdef inline npy_intp* dimensions(self) noexcept nogil:
  *             """The shape of the broadcasted result."""
  *             return PyArray_MultiIter_DIMS(self)             # <<<<<<<<<<<<<<
@@ -19976,7 +19990,7 @@ static CYTHON_INLINE npy_intp *__pyx_f_5numpy_9broadcast_10dimensions___get__(Py
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":343
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":343
  *             return PyArray_MultiIter_NDIM(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -19989,7 +20003,7 @@ static CYTHON_INLINE npy_intp *__pyx_f_5numpy_9broadcast_10dimensions___get__(Py
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":348
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":348
  *             return PyArray_MultiIter_DIMS(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -20000,7 +20014,7 @@ static CYTHON_INLINE npy_intp *__pyx_f_5numpy_9broadcast_10dimensions___get__(Py
 static CYTHON_INLINE void **__pyx_f_5numpy_9broadcast_5iters___get__(PyArrayMultiIterObject *__pyx_v_self) {
   void **__pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":352
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":352
  *             """An array of iterator objects that holds the iterators for the arrays to be broadcast together.
  *             On return, the iterators are adjusted for broadcasting."""
  *             return PyArray_MultiIter_ITERS(self)             # <<<<<<<<<<<<<<
@@ -20013,7 +20027,7 @@ static CYTHON_INLINE void **__pyx_f_5numpy_9broadcast_5iters___get__(PyArrayMult
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":348
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":348
  *             return PyArray_MultiIter_DIMS(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -20026,7 +20040,7 @@ static CYTHON_INLINE void **__pyx_f_5numpy_9broadcast_5iters___get__(PyArrayMult
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":366
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":366
  *         # Instead, we use properties that map to the corresponding C-API functions.
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -20037,7 +20051,7 @@ static CYTHON_INLINE void **__pyx_f_5numpy_9broadcast_5iters___get__(PyArrayMult
 static CYTHON_INLINE PyObject *__pyx_f_5numpy_7ndarray_4base___get__(PyArrayObject *__pyx_v_self) {
   PyObject *__pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":370
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":370
  *             """Returns a borrowed reference to the object owning the data/memory.
  *             """
  *             return PyArray_BASE(self)             # <<<<<<<<<<<<<<
@@ -20050,7 +20064,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_7ndarray_4base___get__(PyArrayObje
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":366
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":366
  *         # Instead, we use properties that map to the corresponding C-API functions.
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -20063,7 +20077,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_7ndarray_4base___get__(PyArrayObje
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":372
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":372
  *             return PyArray_BASE(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -20077,7 +20091,7 @@ static CYTHON_INLINE PyArray_Descr *__pyx_f_5numpy_7ndarray_5descr___get__(PyArr
   PyArray_Descr *__pyx_t_1;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":376
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":376
  *             """Returns an owned reference to the dtype of the array.
  *             """
  *             return <dtype>PyArray_DESCR(self)             # <<<<<<<<<<<<<<
@@ -20098,7 +20112,7 @@ static CYTHON_INLINE PyArray_Descr *__pyx_f_5numpy_7ndarray_5descr___get__(PyArr
 
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":372
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":372
  *             return PyArray_BASE(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -20113,7 +20127,7 @@ static CYTHON_INLINE PyArray_Descr *__pyx_f_5numpy_7ndarray_5descr___get__(PyArr
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":378
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":378
  *             return <dtype>PyArray_DESCR(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -20124,7 +20138,7 @@ static CYTHON_INLINE PyArray_Descr *__pyx_f_5numpy_7ndarray_5descr___get__(PyArr
 static CYTHON_INLINE int __pyx_f_5numpy_7ndarray_4ndim___get__(PyArrayObject *__pyx_v_self) {
   int __pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":382
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":382
  *             """Returns the number of dimensions in the array.
  *             """
  *             return PyArray_NDIM(self)             # <<<<<<<<<<<<<<
@@ -20137,7 +20151,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_7ndarray_4ndim___get__(PyArrayObject *__
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":378
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":378
  *             return <dtype>PyArray_DESCR(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -20150,7 +20164,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_7ndarray_4ndim___get__(PyArrayObject *__
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":384
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":384
  *             return PyArray_NDIM(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -20161,7 +20175,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_7ndarray_4ndim___get__(PyArrayObject *__
 static CYTHON_INLINE npy_intp *__pyx_f_5numpy_7ndarray_5shape___get__(PyArrayObject *__pyx_v_self) {
   npy_intp *__pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":390
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":390
  *             Can return NULL for 0-dimensional arrays.
  *             """
  *             return PyArray_DIMS(self)             # <<<<<<<<<<<<<<
@@ -20174,7 +20188,7 @@ static CYTHON_INLINE npy_intp *__pyx_f_5numpy_7ndarray_5shape___get__(PyArrayObj
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":384
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":384
  *             return PyArray_NDIM(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -20187,7 +20201,7 @@ static CYTHON_INLINE npy_intp *__pyx_f_5numpy_7ndarray_5shape___get__(PyArrayObj
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":392
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":392
  *             return PyArray_DIMS(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -20198,7 +20212,7 @@ static CYTHON_INLINE npy_intp *__pyx_f_5numpy_7ndarray_5shape___get__(PyArrayObj
 static CYTHON_INLINE npy_intp *__pyx_f_5numpy_7ndarray_7strides___get__(PyArrayObject *__pyx_v_self) {
   npy_intp *__pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":397
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":397
  *             The number of elements matches the number of dimensions of the array (ndim).
  *             """
  *             return PyArray_STRIDES(self)             # <<<<<<<<<<<<<<
@@ -20211,7 +20225,7 @@ static CYTHON_INLINE npy_intp *__pyx_f_5numpy_7ndarray_7strides___get__(PyArrayO
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":392
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":392
  *             return PyArray_DIMS(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -20224,7 +20238,7 @@ static CYTHON_INLINE npy_intp *__pyx_f_5numpy_7ndarray_7strides___get__(PyArrayO
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":399
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":399
  *             return PyArray_STRIDES(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -20235,7 +20249,7 @@ static CYTHON_INLINE npy_intp *__pyx_f_5numpy_7ndarray_7strides___get__(PyArrayO
 static CYTHON_INLINE npy_intp __pyx_f_5numpy_7ndarray_4size___get__(PyArrayObject *__pyx_v_self) {
   npy_intp __pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":403
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":403
  *             """Returns the total size (in number of elements) of the array.
  *             """
  *             return PyArray_SIZE(self)             # <<<<<<<<<<<<<<
@@ -20248,7 +20262,7 @@ static CYTHON_INLINE npy_intp __pyx_f_5numpy_7ndarray_4size___get__(PyArrayObjec
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":399
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":399
  *             return PyArray_STRIDES(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -20261,7 +20275,7 @@ static CYTHON_INLINE npy_intp __pyx_f_5numpy_7ndarray_4size___get__(PyArrayObjec
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":405
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":405
  *             return PyArray_SIZE(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -20272,7 +20286,7 @@ static CYTHON_INLINE npy_intp __pyx_f_5numpy_7ndarray_4size___get__(PyArrayObjec
 static CYTHON_INLINE char *__pyx_f_5numpy_7ndarray_4data___get__(PyArrayObject *__pyx_v_self) {
   char *__pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":412
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":412
  *             of `PyArray_DATA()` instead, which returns a 'void*'.
  *             """
  *             return PyArray_BYTES(self)             # <<<<<<<<<<<<<<
@@ -20285,7 +20299,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy_7ndarray_4data___get__(PyArrayObject *
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":405
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":405
  *             return PyArray_SIZE(self)
  * 
  *         @property             # <<<<<<<<<<<<<<
@@ -20298,7 +20312,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy_7ndarray_4data___get__(PyArrayObject *
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":824
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":824
  * ctypedef long double complex clongdouble_t
  * 
  * cdef inline object PyArray_MultiIterNew1(a):             # <<<<<<<<<<<<<<
@@ -20315,7 +20329,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew1(PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew1", 0);
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":825
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":825
  * 
  * cdef inline object PyArray_MultiIterNew1(a):
  *     return PyArray_MultiIterNew(1, <void*>a)             # <<<<<<<<<<<<<<
@@ -20335,7 +20349,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew1(PyObject *__
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":824
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":824
  * ctypedef long double complex clongdouble_t
  * 
  * cdef inline object PyArray_MultiIterNew1(a):             # <<<<<<<<<<<<<<
@@ -20354,7 +20368,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew1(PyObject *__
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":827
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":827
  *     return PyArray_MultiIterNew(1, <void*>a)
  * 
  * cdef inline object PyArray_MultiIterNew2(a, b):             # <<<<<<<<<<<<<<
@@ -20371,7 +20385,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew2(PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew2", 0);
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":828
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":828
  * 
  * cdef inline object PyArray_MultiIterNew2(a, b):
  *     return PyArray_MultiIterNew(2, <void*>a, <void*>b)             # <<<<<<<<<<<<<<
@@ -20391,7 +20405,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew2(PyObject *__
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":827
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":827
  *     return PyArray_MultiIterNew(1, <void*>a)
  * 
  * cdef inline object PyArray_MultiIterNew2(a, b):             # <<<<<<<<<<<<<<
@@ -20410,7 +20424,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew2(PyObject *__
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":830
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":830
  *     return PyArray_MultiIterNew(2, <void*>a, <void*>b)
  * 
  * cdef inline object PyArray_MultiIterNew3(a, b, c):             # <<<<<<<<<<<<<<
@@ -20427,7 +20441,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew3(PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew3", 0);
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":831
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":831
  * 
  * cdef inline object PyArray_MultiIterNew3(a, b, c):
  *     return PyArray_MultiIterNew(3, <void*>a, <void*>b, <void*> c)             # <<<<<<<<<<<<<<
@@ -20447,7 +20461,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew3(PyObject *__
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":830
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":830
  *     return PyArray_MultiIterNew(2, <void*>a, <void*>b)
  * 
  * cdef inline object PyArray_MultiIterNew3(a, b, c):             # <<<<<<<<<<<<<<
@@ -20466,7 +20480,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew3(PyObject *__
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":833
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":833
  *     return PyArray_MultiIterNew(3, <void*>a, <void*>b, <void*> c)
  * 
  * cdef inline object PyArray_MultiIterNew4(a, b, c, d):             # <<<<<<<<<<<<<<
@@ -20483,7 +20497,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew4(PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew4", 0);
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":834
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":834
  * 
  * cdef inline object PyArray_MultiIterNew4(a, b, c, d):
  *     return PyArray_MultiIterNew(4, <void*>a, <void*>b, <void*>c, <void*> d)             # <<<<<<<<<<<<<<
@@ -20503,7 +20517,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew4(PyObject *__
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":833
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":833
  *     return PyArray_MultiIterNew(3, <void*>a, <void*>b, <void*> c)
  * 
  * cdef inline object PyArray_MultiIterNew4(a, b, c, d):             # <<<<<<<<<<<<<<
@@ -20522,7 +20536,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew4(PyObject *__
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":836
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":836
  *     return PyArray_MultiIterNew(4, <void*>a, <void*>b, <void*>c, <void*> d)
  * 
  * cdef inline object PyArray_MultiIterNew5(a, b, c, d, e):             # <<<<<<<<<<<<<<
@@ -20539,7 +20553,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew5(PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("PyArray_MultiIterNew5", 0);
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":837
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":837
  * 
  * cdef inline object PyArray_MultiIterNew5(a, b, c, d, e):
  *     return PyArray_MultiIterNew(5, <void*>a, <void*>b, <void*>c, <void*> d, <void*> e)             # <<<<<<<<<<<<<<
@@ -20559,7 +20573,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew5(PyObject *__
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":836
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":836
  *     return PyArray_MultiIterNew(4, <void*>a, <void*>b, <void*>c, <void*> d)
  * 
  * cdef inline object PyArray_MultiIterNew5(a, b, c, d, e):             # <<<<<<<<<<<<<<
@@ -20578,7 +20592,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyArray_MultiIterNew5(PyObject *__
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":839
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":839
  *     return PyArray_MultiIterNew(5, <void*>a, <void*>b, <void*>c, <void*> d, <void*> e)
  * 
  * cdef inline tuple PyDataType_SHAPE(dtype d):             # <<<<<<<<<<<<<<
@@ -20593,7 +20607,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
   PyObject *__pyx_t_2;
   __Pyx_RefNannySetupContext("PyDataType_SHAPE", 0);
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":840
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":840
  * 
  * cdef inline tuple PyDataType_SHAPE(dtype d):
  *     if PyDataType_HASSUBARRAY(d):             # <<<<<<<<<<<<<<
@@ -20605,7 +20619,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
   if (__pyx_t_1) {
 
 
-    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":841
+    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":841
  * cdef inline tuple PyDataType_SHAPE(dtype d):
  *     if PyDataType_HASSUBARRAY(d):
  *         return <tuple>d.subarray.shape             # <<<<<<<<<<<<<<
@@ -20626,7 +20640,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
 
     goto __pyx_L0;
 
-    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":840
+    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":840
  * 
  * cdef inline tuple PyDataType_SHAPE(dtype d):
  *     if PyDataType_HASSUBARRAY(d):             # <<<<<<<<<<<<<<
@@ -20635,7 +20649,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
 */
   }
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":843
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":843
  *         return <tuple>d.subarray.shape
  *     else:
  *         return ()             # <<<<<<<<<<<<<<
@@ -20655,7 +20669,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
     goto __pyx_L0;
   }
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":839
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":839
  *     return PyArray_MultiIterNew(5, <void*>a, <void*>b, <void*>c, <void*> d, <void*> e)
  * 
  * cdef inline tuple PyDataType_SHAPE(dtype d):             # <<<<<<<<<<<<<<
@@ -20670,7 +20684,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1035
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1035
  *     int _import_umath() except -1
  * 
  * cdef inline void set_array_base(ndarray arr, object base) except *:             # <<<<<<<<<<<<<<
@@ -20684,7 +20698,7 @@ static CYTHON_INLINE void __pyx_f_5numpy_set_array_base(PyArrayObject *__pyx_v_a
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1036
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1036
  * 
  * cdef inline void set_array_base(ndarray arr, object base) except *:
  *     Py_INCREF(base) # important to do this before stealing the reference below!             # <<<<<<<<<<<<<<
@@ -20693,7 +20707,7 @@ static CYTHON_INLINE void __pyx_f_5numpy_set_array_base(PyArrayObject *__pyx_v_a
 */
   Py_INCREF(__pyx_v_base);
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1037
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1037
  * cdef inline void set_array_base(ndarray arr, object base) except *:
  *     Py_INCREF(base) # important to do this before stealing the reference below!
  *     PyArray_SetBaseObject(arr, base)             # <<<<<<<<<<<<<<
@@ -20703,7 +20717,7 @@ static CYTHON_INLINE void __pyx_f_5numpy_set_array_base(PyArrayObject *__pyx_v_a
   __pyx_t_1 = PyArray_SetBaseObject(__pyx_v_arr, __pyx_v_base); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(2, 1037, __pyx_L1_error)
 
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1035
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1035
  *     int _import_umath() except -1
  * 
  * cdef inline void set_array_base(ndarray arr, object base) except *:             # <<<<<<<<<<<<<<
@@ -20719,7 +20733,7 @@ static CYTHON_INLINE void __pyx_f_5numpy_set_array_base(PyArrayObject *__pyx_v_a
 
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1039
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1039
  *     PyArray_SetBaseObject(arr, base)
  * 
  * cdef inline object get_array_base(ndarray arr):             # <<<<<<<<<<<<<<
@@ -20734,7 +20748,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("get_array_base", 0);
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1040
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1040
  * 
  * cdef inline object get_array_base(ndarray arr):
  *     base = PyArray_BASE(arr)             # <<<<<<<<<<<<<<
@@ -20743,7 +20757,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
 */
   __pyx_v_base = PyArray_BASE(__pyx_v_arr);
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1041
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1041
  * cdef inline object get_array_base(ndarray arr):
  *     base = PyArray_BASE(arr)
  *     if base is NULL:             # <<<<<<<<<<<<<<
@@ -20755,7 +20769,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
   if (__pyx_t_1) {
 
 
-    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1042
+    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1042
  *     base = PyArray_BASE(arr)
  *     if base is NULL:
  *         return None             # <<<<<<<<<<<<<<
@@ -20772,7 +20786,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
     }
     goto __pyx_L0;
 
-    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1041
+    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1041
  * cdef inline object get_array_base(ndarray arr):
  *     base = PyArray_BASE(arr)
  *     if base is NULL:             # <<<<<<<<<<<<<<
@@ -20781,7 +20795,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
 */
   }
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1043
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1043
  *     if base is NULL:
  *         return None
  *     return <object>base             # <<<<<<<<<<<<<<
@@ -20799,7 +20813,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1039
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1039
  *     PyArray_SetBaseObject(arr, base)
  * 
  * cdef inline object get_array_base(ndarray arr):             # <<<<<<<<<<<<<<
@@ -20815,7 +20829,7 @@ static CYTHON_INLINE PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__py
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1047
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1047
  * # Versions of the import_* functions which are more suitable for
  * # Cython code.
  * cdef inline int import_array() except -1:             # <<<<<<<<<<<<<<
@@ -20841,7 +20855,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("import_array", 0);
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1048
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1048
  * # Cython code.
  * cdef inline int import_array() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -20857,7 +20871,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1049
+      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1049
  * cdef inline int import_array() except -1:
  *     try:
  *         __pyx_import_array()             # <<<<<<<<<<<<<<
@@ -20867,7 +20881,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
       __pyx_t_4 = _import_array(); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(2, 1049, __pyx_L3_error)
 
 
-      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1048
+      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1048
  * # Cython code.
  * cdef inline int import_array() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -20881,7 +20895,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
     goto __pyx_L8_try_end;
     __pyx_L3_error:;
 
-    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1050
+    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1050
  *     try:
  *         __pyx_import_array()
  *     except Exception:             # <<<<<<<<<<<<<<
@@ -20896,7 +20910,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
       __Pyx_XGOTREF(__pyx_t_6);
       __Pyx_XGOTREF(__pyx_t_7);
 
-      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1051
+      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1051
  *         __pyx_import_array()
  *     except Exception:
  *         raise ImportError("numpy._core.multiarray failed to import")             # <<<<<<<<<<<<<<
@@ -20918,7 +20932,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
     }
     goto __pyx_L5_except_error;
 
-    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1048
+    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1048
  * # Cython code.
  * cdef inline int import_array() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -20934,7 +20948,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
     __pyx_L8_try_end:;
   }
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1047
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1047
  * # Versions of the import_* functions which are more suitable for
  * # Cython code.
  * cdef inline int import_array() except -1:             # <<<<<<<<<<<<<<
@@ -20959,7 +20973,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1053
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1053
  *         raise ImportError("numpy._core.multiarray failed to import")
  * 
  * cdef inline int import_umath() except -1:             # <<<<<<<<<<<<<<
@@ -20985,7 +20999,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("import_umath", 0);
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1054
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1054
  * 
  * cdef inline int import_umath() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -21001,7 +21015,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1055
+      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1055
  * cdef inline int import_umath() except -1:
  *     try:
  *         _import_umath()             # <<<<<<<<<<<<<<
@@ -21011,7 +21025,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
       __pyx_t_4 = _import_umath(); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(2, 1055, __pyx_L3_error)
 
 
-      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1054
+      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1054
  * 
  * cdef inline int import_umath() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -21025,7 +21039,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
     goto __pyx_L8_try_end;
     __pyx_L3_error:;
 
-    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1056
+    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1056
  *     try:
  *         _import_umath()
  *     except Exception:             # <<<<<<<<<<<<<<
@@ -21040,7 +21054,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
       __Pyx_XGOTREF(__pyx_t_6);
       __Pyx_XGOTREF(__pyx_t_7);
 
-      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1057
+      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1057
  *         _import_umath()
  *     except Exception:
  *         raise ImportError("numpy._core.umath failed to import")             # <<<<<<<<<<<<<<
@@ -21062,7 +21076,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
     }
     goto __pyx_L5_except_error;
 
-    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1054
+    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1054
  * 
  * cdef inline int import_umath() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -21078,7 +21092,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
     __pyx_L8_try_end:;
   }
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1053
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1053
  *         raise ImportError("numpy._core.multiarray failed to import")
  * 
  * cdef inline int import_umath() except -1:             # <<<<<<<<<<<<<<
@@ -21103,7 +21117,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1059
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1059
  *         raise ImportError("numpy._core.umath failed to import")
  * 
  * cdef inline int import_ufunc() except -1:             # <<<<<<<<<<<<<<
@@ -21129,7 +21143,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("import_ufunc", 0);
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1060
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1060
  * 
  * cdef inline int import_ufunc() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -21145,7 +21159,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1061
+      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1061
  * cdef inline int import_ufunc() except -1:
  *     try:
  *         _import_umath()             # <<<<<<<<<<<<<<
@@ -21155,7 +21169,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
       __pyx_t_4 = _import_umath(); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(2, 1061, __pyx_L3_error)
 
 
-      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1060
+      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1060
  * 
  * cdef inline int import_ufunc() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -21169,7 +21183,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
     goto __pyx_L8_try_end;
     __pyx_L3_error:;
 
-    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1062
+    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1062
  *     try:
  *         _import_umath()
  *     except Exception:             # <<<<<<<<<<<<<<
@@ -21184,7 +21198,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
       __Pyx_XGOTREF(__pyx_t_6);
       __Pyx_XGOTREF(__pyx_t_7);
 
-      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1063
+      /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1063
  *         _import_umath()
  *     except Exception:
  *         raise ImportError("numpy._core.umath failed to import")             # <<<<<<<<<<<<<<
@@ -21206,7 +21220,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
     }
     goto __pyx_L5_except_error;
 
-    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1060
+    /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1060
  * 
  * cdef inline int import_ufunc() except -1:
  *     try:             # <<<<<<<<<<<<<<
@@ -21222,7 +21236,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
     __pyx_L8_try_end:;
   }
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1059
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1059
  *         raise ImportError("numpy._core.umath failed to import")
  * 
  * cdef inline int import_ufunc() except -1:             # <<<<<<<<<<<<<<
@@ -21247,7 +21261,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1066
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1066
  * 
  * 
  * cdef inline bint is_timedelta64_object(object obj) noexcept:             # <<<<<<<<<<<<<<
@@ -21258,7 +21272,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
 static CYTHON_INLINE int __pyx_f_5numpy_is_timedelta64_object(PyObject *__pyx_v_obj) {
   int __pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1078
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1078
  *     bool
  *     """
  *     return PyObject_TypeCheck(obj, &PyTimedeltaArrType_Type)             # <<<<<<<<<<<<<<
@@ -21271,7 +21285,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_is_timedelta64_object(PyObject *__pyx_v_
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1066
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1066
  * 
  * 
  * cdef inline bint is_timedelta64_object(object obj) noexcept:             # <<<<<<<<<<<<<<
@@ -21285,7 +21299,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_is_timedelta64_object(PyObject *__pyx_v_
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1081
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1081
  * 
  * 
  * cdef inline bint is_datetime64_object(object obj) noexcept:             # <<<<<<<<<<<<<<
@@ -21296,7 +21310,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_is_timedelta64_object(PyObject *__pyx_v_
 static CYTHON_INLINE int __pyx_f_5numpy_is_datetime64_object(PyObject *__pyx_v_obj) {
   int __pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1093
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1093
  *     bool
  *     """
  *     return PyObject_TypeCheck(obj, &PyDatetimeArrType_Type)             # <<<<<<<<<<<<<<
@@ -21309,7 +21323,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_is_datetime64_object(PyObject *__pyx_v_o
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1081
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1081
  * 
  * 
  * cdef inline bint is_datetime64_object(object obj) noexcept:             # <<<<<<<<<<<<<<
@@ -21323,7 +21337,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_is_datetime64_object(PyObject *__pyx_v_o
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1096
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1096
  * 
  * 
  * cdef inline npy_datetime get_datetime64_value(object obj) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -21334,7 +21348,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_is_datetime64_object(PyObject *__pyx_v_o
 static CYTHON_INLINE npy_datetime __pyx_f_5numpy_get_datetime64_value(PyObject *__pyx_v_obj) {
   npy_datetime __pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1103
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1103
  *     also needed.  That can be found using `get_datetime64_unit`.
  *     """
  *     return (<PyDatetimeScalarObject*>obj).obval             # <<<<<<<<<<<<<<
@@ -21347,7 +21361,7 @@ static CYTHON_INLINE npy_datetime __pyx_f_5numpy_get_datetime64_value(PyObject *
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1096
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1096
  * 
  * 
  * cdef inline npy_datetime get_datetime64_value(object obj) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -21360,7 +21374,7 @@ static CYTHON_INLINE npy_datetime __pyx_f_5numpy_get_datetime64_value(PyObject *
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1106
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1106
  * 
  * 
  * cdef inline npy_timedelta get_timedelta64_value(object obj) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -21371,7 +21385,7 @@ static CYTHON_INLINE npy_datetime __pyx_f_5numpy_get_datetime64_value(PyObject *
 static CYTHON_INLINE npy_timedelta __pyx_f_5numpy_get_timedelta64_value(PyObject *__pyx_v_obj) {
   npy_timedelta __pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1110
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1110
  *     returns the int64 value underlying scalar numpy timedelta64 object
  *     """
  *     return (<PyTimedeltaScalarObject*>obj).obval             # <<<<<<<<<<<<<<
@@ -21384,7 +21398,7 @@ static CYTHON_INLINE npy_timedelta __pyx_f_5numpy_get_timedelta64_value(PyObject
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1106
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1106
  * 
  * 
  * cdef inline npy_timedelta get_timedelta64_value(object obj) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -21397,7 +21411,7 @@ static CYTHON_INLINE npy_timedelta __pyx_f_5numpy_get_timedelta64_value(PyObject
   return __pyx_r;
 }
 
-/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1113
+/* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1113
  * 
  * 
  * cdef inline NPY_DATETIMEUNIT get_datetime64_unit(object obj) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -21408,7 +21422,7 @@ static CYTHON_INLINE npy_timedelta __pyx_f_5numpy_get_timedelta64_value(PyObject
 static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObject *__pyx_v_obj) {
   NPY_DATETIMEUNIT __pyx_r;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1117
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1117
  *     returns the unit part of the dtype for a numpy datetime64 object.
  *     """
  *     return <NPY_DATETIMEUNIT>(<PyDatetimeScalarObject*>obj).obmeta.base             # <<<<<<<<<<<<<<
@@ -21421,7 +21435,7 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
   }
   goto __pyx_L0;
 
-  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-6s2fkytd/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1113
+  /* "../../../../../private/var/folders/wx/pqq3t48x5kj_v9v9zv4syq640000gn/T/pip-build-env-j932fyzw/overlay/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1113
  * 
  * 
  * cdef inline NPY_DATETIMEUNIT get_datetime64_unit(object obj) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -21434,7 +21448,7 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
   return __pyx_r;
 }
 
-/* "fast_flow/core/common.pxd":20
+/* "fast_flow/core/common.pxd":36
  * # them (see TWO_PI in vector_to_rgb).
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
@@ -21482,7 +21496,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("build_solids_mask", 0);
 
-  /* "fast_flow/core/common.pxd":30
+  /* "fast_flow/core/common.pxd":46
  *     cdef unsigned char[:, :, :] src3
  *     cdef unsigned char solid
  *     cdef unsigned char thresh = 127             # <<<<<<<<<<<<<<
@@ -21491,7 +21505,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
 */
   __pyx_v_thresh = 0x7F;
 
-  /* "fast_flow/core/common.pxd":32
+  /* "fast_flow/core/common.pxd":48
  *     cdef unsigned char thresh = 127
  * 
  *     if dest == NULL:             # <<<<<<<<<<<<<<
@@ -21503,7 +21517,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
   if (unlikely(__pyx_t_1)) {
 
 
-    /* "fast_flow/core/common.pxd":33
+    /* "fast_flow/core/common.pxd":49
  * 
  *     if dest == NULL:
  *         raise ValueError("build_solids_mask: dest is NULL")             # <<<<<<<<<<<<<<
@@ -21516,14 +21530,14 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
       PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_mstate_global->__pyx_kp_u_build_solids_mask_dest_is_NULL};
       __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 33, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 49, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(3, 33, __pyx_L1_error)
+    __PYX_ERR(3, 49, __pyx_L1_error)
 
-    /* "fast_flow/core/common.pxd":32
+    /* "fast_flow/core/common.pxd":48
  *     cdef unsigned char thresh = 127
  * 
  *     if dest == NULL:             # <<<<<<<<<<<<<<
@@ -21532,19 +21546,19 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
 */
   }
 
-  /* "fast_flow/core/common.pxd":34
+  /* "fast_flow/core/common.pxd":50
  *     if dest == NULL:
  *         raise ValueError("build_solids_mask: dest is NULL")
  *     if not isinstance(src, np.ndarray):             # <<<<<<<<<<<<<<
  *         raise TypeError("build_solids_mask: src must be a NumPy array")
  *     if src.dtype != np.uint8:
 */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 34, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_ndarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 34, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_ndarray); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_1 = PyObject_IsInstance(__pyx_v_src, __pyx_t_3); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(3, 34, __pyx_L1_error)
+  __pyx_t_1 = PyObject_IsInstance(__pyx_v_src, __pyx_t_3); if (unlikely(__pyx_t_1 == ((int)-1))) __PYX_ERR(3, 50, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_5 = (!__pyx_t_1);
 
@@ -21552,7 +21566,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
   if (unlikely(__pyx_t_5)) {
 
 
-    /* "fast_flow/core/common.pxd":35
+    /* "fast_flow/core/common.pxd":51
  *         raise ValueError("build_solids_mask: dest is NULL")
  *     if not isinstance(src, np.ndarray):
  *         raise TypeError("build_solids_mask: src must be a NumPy array")             # <<<<<<<<<<<<<<
@@ -21565,14 +21579,14 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
       PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_mstate_global->__pyx_kp_u_build_solids_mask_src_must_be_a};
       __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_TypeError)), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 35, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 51, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(3, 35, __pyx_L1_error)
+    __PYX_ERR(3, 51, __pyx_L1_error)
 
-    /* "fast_flow/core/common.pxd":34
+    /* "fast_flow/core/common.pxd":50
  *     if dest == NULL:
  *         raise ValueError("build_solids_mask: dest is NULL")
  *     if not isinstance(src, np.ndarray):             # <<<<<<<<<<<<<<
@@ -21581,27 +21595,27 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
 */
   }
 
-  /* "fast_flow/core/common.pxd":36
+  /* "fast_flow/core/common.pxd":52
  *     if not isinstance(src, np.ndarray):
  *         raise TypeError("build_solids_mask: src must be a NumPy array")
  *     if src.dtype != np.uint8:             # <<<<<<<<<<<<<<
  *         raise TypeError("build_solids_mask: src must have dtype uint8")
  *     if src.ndim != 2 and src.ndim != 3:
 */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_src, __pyx_mstate_global->__pyx_n_u_dtype); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 36, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_src, __pyx_mstate_global->__pyx_n_u_dtype); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 36, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_uint8); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 36, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_uint8); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_5 = __Pyx_PyObject_CompareBoolNe_object_object(__pyx_t_3, __pyx_t_6, Py_NE); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(3, 36, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_CompareBoolNe_object_object(__pyx_t_3, __pyx_t_6, Py_NE); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(3, 52, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   if (unlikely(__pyx_t_5)) {
 
 
-    /* "fast_flow/core/common.pxd":37
+    /* "fast_flow/core/common.pxd":53
  *         raise TypeError("build_solids_mask: src must be a NumPy array")
  *     if src.dtype != np.uint8:
  *         raise TypeError("build_solids_mask: src must have dtype uint8")             # <<<<<<<<<<<<<<
@@ -21614,14 +21628,14 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
       PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_mstate_global->__pyx_kp_u_build_solids_mask_src_must_have};
       __pyx_t_6 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_TypeError)), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 37, __pyx_L1_error)
+      if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 53, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
     }
     __Pyx_Raise(__pyx_t_6, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __PYX_ERR(3, 37, __pyx_L1_error)
+    __PYX_ERR(3, 53, __pyx_L1_error)
 
-    /* "fast_flow/core/common.pxd":36
+    /* "fast_flow/core/common.pxd":52
  *     if not isinstance(src, np.ndarray):
  *         raise TypeError("build_solids_mask: src must be a NumPy array")
  *     if src.dtype != np.uint8:             # <<<<<<<<<<<<<<
@@ -21630,16 +21644,16 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
 */
   }
 
-  /* "fast_flow/core/common.pxd":38
+  /* "fast_flow/core/common.pxd":54
  *     if src.dtype != np.uint8:
  *         raise TypeError("build_solids_mask: src must have dtype uint8")
  *     if src.ndim != 2 and src.ndim != 3:             # <<<<<<<<<<<<<<
  *         raise ValueError("build_solids_mask: src must be 2D or 3D")
  * 
 */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_src, __pyx_mstate_global->__pyx_n_u_ndim); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 38, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_src, __pyx_mstate_global->__pyx_n_u_ndim); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_1 = (__Pyx_PyLong_BoolNeObjC(__pyx_t_6, __pyx_mstate_global->__pyx_int_2, 2, 0)); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(3, 38, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyLong_BoolNeObjC(__pyx_t_6, __pyx_mstate_global->__pyx_int_2, 2, 0)); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(3, 54, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   if (__pyx_t_1) {
 
@@ -21649,9 +21663,9 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
 
     goto __pyx_L7_bool_binop_done;
   }
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_src, __pyx_mstate_global->__pyx_n_u_ndim); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 38, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_src, __pyx_mstate_global->__pyx_n_u_ndim); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_1 = (__Pyx_PyLong_BoolNeObjC(__pyx_t_6, __pyx_mstate_global->__pyx_int_3, 3, 0)); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(3, 38, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyLong_BoolNeObjC(__pyx_t_6, __pyx_mstate_global->__pyx_int_3, 3, 0)); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(3, 54, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
   __pyx_t_5 = __pyx_t_1;
@@ -21660,7 +21674,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
   if (unlikely(__pyx_t_5)) {
 
 
-    /* "fast_flow/core/common.pxd":39
+    /* "fast_flow/core/common.pxd":55
  *         raise TypeError("build_solids_mask: src must have dtype uint8")
  *     if src.ndim != 2 and src.ndim != 3:
  *         raise ValueError("build_solids_mask: src must be 2D or 3D")             # <<<<<<<<<<<<<<
@@ -21673,14 +21687,14 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
       PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_mstate_global->__pyx_kp_u_build_solids_mask_src_must_be_2D};
       __pyx_t_6 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 39, __pyx_L1_error)
+      if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 55, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
     }
     __Pyx_Raise(__pyx_t_6, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __PYX_ERR(3, 39, __pyx_L1_error)
+    __PYX_ERR(3, 55, __pyx_L1_error)
 
-    /* "fast_flow/core/common.pxd":38
+    /* "fast_flow/core/common.pxd":54
  *     if src.dtype != np.uint8:
  *         raise TypeError("build_solids_mask: src must have dtype uint8")
  *     if src.ndim != 2 and src.ndim != 3:             # <<<<<<<<<<<<<<
@@ -21689,39 +21703,39 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
 */
   }
 
-  /* "fast_flow/core/common.pxd":41
+  /* "fast_flow/core/common.pxd":57
  *         raise ValueError("build_solids_mask: src must be 2D or 3D")
  * 
  *     ny = src.shape[0]             # <<<<<<<<<<<<<<
  *     nx = src.shape[1]
  *     if ny < 10 or nx < 10:
 */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_src, __pyx_mstate_global->__pyx_n_u_shape); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 41, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_src, __pyx_mstate_global->__pyx_n_u_shape); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_6, 0, long, 1, __Pyx_PyLong_From_long, 0, 1, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 41, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_6, 0, long, 1, __Pyx_PyLong_From_long, 0, 1, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_7 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_7 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(3, 41, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_7 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(3, 57, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_ny = __pyx_t_7;
 
-  /* "fast_flow/core/common.pxd":42
+  /* "fast_flow/core/common.pxd":58
  * 
  *     ny = src.shape[0]
  *     nx = src.shape[1]             # <<<<<<<<<<<<<<
  *     if ny < 10 or nx < 10:
  *         raise ValueError("build_solids_mask: src must be at least 10x10")
 */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_src, __pyx_mstate_global->__pyx_n_u_shape); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 42, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_src, __pyx_mstate_global->__pyx_n_u_shape); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = __Pyx_GetItemInt(__pyx_t_3, 1, long, 1, __Pyx_PyLong_From_long, 0, 1, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 42, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_GetItemInt(__pyx_t_3, 1, long, 1, __Pyx_PyLong_From_long, 0, 1, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_7 = __Pyx_PyIndex_AsSsize_t(__pyx_t_6); if (unlikely((__pyx_t_7 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(3, 42, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyIndex_AsSsize_t(__pyx_t_6); if (unlikely((__pyx_t_7 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(3, 58, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_nx = __pyx_t_7;
 
-  /* "fast_flow/core/common.pxd":43
+  /* "fast_flow/core/common.pxd":59
  *     ny = src.shape[0]
  *     nx = src.shape[1]
  *     if ny < 10 or nx < 10:             # <<<<<<<<<<<<<<
@@ -21747,7 +21761,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
   if (unlikely(__pyx_t_5)) {
 
 
-    /* "fast_flow/core/common.pxd":44
+    /* "fast_flow/core/common.pxd":60
  *     nx = src.shape[1]
  *     if ny < 10 or nx < 10:
  *         raise ValueError("build_solids_mask: src must be at least 10x10")             # <<<<<<<<<<<<<<
@@ -21760,14 +21774,14 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
       PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_mstate_global->__pyx_kp_u_build_solids_mask_src_must_be_at};
       __pyx_t_6 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 44, __pyx_L1_error)
+      if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 60, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
     }
     __Pyx_Raise(__pyx_t_6, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __PYX_ERR(3, 44, __pyx_L1_error)
+    __PYX_ERR(3, 60, __pyx_L1_error)
 
-    /* "fast_flow/core/common.pxd":43
+    /* "fast_flow/core/common.pxd":59
  *     ny = src.shape[0]
  *     nx = src.shape[1]
  *     if ny < 10 or nx < 10:             # <<<<<<<<<<<<<<
@@ -21776,33 +21790,33 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
 */
   }
 
-  /* "fast_flow/core/common.pxd":46
+  /* "fast_flow/core/common.pxd":62
  *         raise ValueError("build_solids_mask: src must be at least 10x10")
  * 
  *     if src.ndim == 2:             # <<<<<<<<<<<<<<
  *         src2 = src
  *         for y in range(ny):
 */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_src, __pyx_mstate_global->__pyx_n_u_ndim); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 46, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_src, __pyx_mstate_global->__pyx_n_u_ndim); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_5 = (__Pyx_PyLong_BoolEqObjC(__pyx_t_6, __pyx_mstate_global->__pyx_int_2, 2, 0)); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(3, 46, __pyx_L1_error)
+  __pyx_t_5 = (__Pyx_PyLong_BoolEqObjC(__pyx_t_6, __pyx_mstate_global->__pyx_int_2, 2, 0)); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(3, 62, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   if (__pyx_t_5) {
 
 
-    /* "fast_flow/core/common.pxd":47
+    /* "fast_flow/core/common.pxd":63
  * 
  *     if src.ndim == 2:
  *         src2 = src             # <<<<<<<<<<<<<<
  *         for y in range(ny):
  *             for x in range(nx):
 */
-    __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dsds_unsigned_char(__pyx_v_src, PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(3, 47, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dsds_unsigned_char(__pyx_v_src, PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(3, 63, __pyx_L1_error)
     __pyx_v_src2 = __pyx_t_8;
     __pyx_t_8.memview = NULL;
     __pyx_t_8.data = NULL;
 
-    /* "fast_flow/core/common.pxd":48
+    /* "fast_flow/core/common.pxd":64
  *     if src.ndim == 2:
  *         src2 = src
  *         for y in range(ny):             # <<<<<<<<<<<<<<
@@ -21816,7 +21830,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
     for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
       __pyx_v_y = __pyx_t_10;
 
-      /* "fast_flow/core/common.pxd":49
+      /* "fast_flow/core/common.pxd":65
  *         src2 = src
  *         for y in range(ny):
  *             for x in range(nx):             # <<<<<<<<<<<<<<
@@ -21830,7 +21844,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
       for (__pyx_t_13 = 0; __pyx_t_13 < __pyx_t_12; __pyx_t_13+=1) {
         __pyx_v_x = __pyx_t_13;
 
-        /* "fast_flow/core/common.pxd":50
+        /* "fast_flow/core/common.pxd":66
  *         for y in range(ny):
  *             for x in range(nx):
  *                 idx = y * nx + x             # <<<<<<<<<<<<<<
@@ -21839,7 +21853,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
 */
         __pyx_v_idx = ((__pyx_v_y * __pyx_v_nx) + __pyx_v_x);
 
-        /* "fast_flow/core/common.pxd":51
+        /* "fast_flow/core/common.pxd":67
  *             for x in range(nx):
  *                 idx = y * nx + x
  *                 dest[idx] = 1 if src2[y, x] > thresh else 0             # <<<<<<<<<<<<<<
@@ -21859,7 +21873,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
         } else if (unlikely(__pyx_t_16 >= __pyx_v_src2.shape[1])) __pyx_t_17 = 1;
         if (unlikely(__pyx_t_17 != -1)) {
           __Pyx_RaiseBufferIndexError(__pyx_t_17);
-          __PYX_ERR(3, 51, __pyx_L1_error)
+          __PYX_ERR(3, 67, __pyx_L1_error)
         }
         __pyx_t_5 = ((*((unsigned char *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_src2.data + __pyx_t_15 * __pyx_v_src2.strides[0]) ) + __pyx_t_16 * __pyx_v_src2.strides[1]) ))) > __pyx_v_thresh);
 
@@ -21878,7 +21892,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
     }
 
 
-    /* "fast_flow/core/common.pxd":46
+    /* "fast_flow/core/common.pxd":62
  *         raise ValueError("build_solids_mask: src must be at least 10x10")
  * 
  *     if src.ndim == 2:             # <<<<<<<<<<<<<<
@@ -21888,7 +21902,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
     goto __pyx_L12;
   }
 
-  /* "fast_flow/core/common.pxd":54
+  /* "fast_flow/core/common.pxd":70
  * 
  *     else:
  *         src3 = src             # <<<<<<<<<<<<<<
@@ -21896,28 +21910,28 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
  *         for y in range(ny):
 */
   /*else*/ {
-    __pyx_t_18 = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_unsigned_char(__pyx_v_src, PyBUF_WRITABLE); if (unlikely(!__pyx_t_18.memview)) __PYX_ERR(3, 54, __pyx_L1_error)
+    __pyx_t_18 = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_unsigned_char(__pyx_v_src, PyBUF_WRITABLE); if (unlikely(!__pyx_t_18.memview)) __PYX_ERR(3, 70, __pyx_L1_error)
     __pyx_v_src3 = __pyx_t_18;
     __pyx_t_18.memview = NULL;
     __pyx_t_18.data = NULL;
 
-    /* "fast_flow/core/common.pxd":55
+    /* "fast_flow/core/common.pxd":71
  *     else:
  *         src3 = src
  *         nz = src.shape[2]             # <<<<<<<<<<<<<<
  *         for y in range(ny):
  *             for x in range(nx):
 */
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_src, __pyx_mstate_global->__pyx_n_u_shape); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 55, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_src, __pyx_mstate_global->__pyx_n_u_shape); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_6, 2, long, 1, __Pyx_PyLong_From_long, 0, 1, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 55, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_6, 2, long, 1, __Pyx_PyLong_From_long, 0, 1, 1, __Pyx_ReferenceSharing_OwnStrongReference); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_7 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_7 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(3, 55, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_7 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(3, 71, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_nz = __pyx_t_7;
 
-    /* "fast_flow/core/common.pxd":56
+    /* "fast_flow/core/common.pxd":72
  *         src3 = src
  *         nz = src.shape[2]
  *         for y in range(ny):             # <<<<<<<<<<<<<<
@@ -21931,7 +21945,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
     for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
       __pyx_v_y = __pyx_t_10;
 
-      /* "fast_flow/core/common.pxd":57
+      /* "fast_flow/core/common.pxd":73
  *         nz = src.shape[2]
  *         for y in range(ny):
  *             for x in range(nx):             # <<<<<<<<<<<<<<
@@ -21945,7 +21959,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
       for (__pyx_t_13 = 0; __pyx_t_13 < __pyx_t_12; __pyx_t_13+=1) {
         __pyx_v_x = __pyx_t_13;
 
-        /* "fast_flow/core/common.pxd":58
+        /* "fast_flow/core/common.pxd":74
  *         for y in range(ny):
  *             for x in range(nx):
  *                 idx = y * nx + x             # <<<<<<<<<<<<<<
@@ -21954,7 +21968,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
 */
         __pyx_v_idx = ((__pyx_v_y * __pyx_v_nx) + __pyx_v_x);
 
-        /* "fast_flow/core/common.pxd":59
+        /* "fast_flow/core/common.pxd":75
  *             for x in range(nx):
  *                 idx = y * nx + x
  *                 solid = 0             # <<<<<<<<<<<<<<
@@ -21963,7 +21977,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
 */
         __pyx_v_solid = 0;
 
-        /* "fast_flow/core/common.pxd":60
+        /* "fast_flow/core/common.pxd":76
  *                 idx = y * nx + x
  *                 solid = 0
  *                 for z in range(nz):             # <<<<<<<<<<<<<<
@@ -21977,7 +21991,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
         for (__pyx_t_21 = 0; __pyx_t_21 < __pyx_t_20; __pyx_t_21+=1) {
           __pyx_v_z = __pyx_t_21;
 
-          /* "fast_flow/core/common.pxd":61
+          /* "fast_flow/core/common.pxd":77
  *                 solid = 0
  *                 for z in range(nz):
  *                     if src3[y, x, z] > thresh:             # <<<<<<<<<<<<<<
@@ -22002,14 +22016,14 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
           } else if (unlikely(__pyx_t_22 >= __pyx_v_src3.shape[2])) __pyx_t_17 = 2;
           if (unlikely(__pyx_t_17 != -1)) {
             __Pyx_RaiseBufferIndexError(__pyx_t_17);
-            __PYX_ERR(3, 61, __pyx_L1_error)
+            __PYX_ERR(3, 77, __pyx_L1_error)
           }
           __pyx_t_5 = ((*((unsigned char *) ( /* dim=2 */ (( /* dim=1 */ (( /* dim=0 */ (__pyx_v_src3.data + __pyx_t_16 * __pyx_v_src3.strides[0]) ) + __pyx_t_15 * __pyx_v_src3.strides[1]) ) + __pyx_t_22 * __pyx_v_src3.strides[2]) ))) > __pyx_v_thresh);
 
           if (__pyx_t_5) {
 
 
-            /* "fast_flow/core/common.pxd":62
+            /* "fast_flow/core/common.pxd":78
  *                 for z in range(nz):
  *                     if src3[y, x, z] > thresh:
  *                         solid = 1             # <<<<<<<<<<<<<<
@@ -22018,7 +22032,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
 */
             __pyx_v_solid = 1;
 
-            /* "fast_flow/core/common.pxd":63
+            /* "fast_flow/core/common.pxd":79
  *                     if src3[y, x, z] > thresh:
  *                         solid = 1
  *                         break             # <<<<<<<<<<<<<<
@@ -22027,7 +22041,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
 */
             goto __pyx_L22_break;
 
-            /* "fast_flow/core/common.pxd":61
+            /* "fast_flow/core/common.pxd":77
  *                 solid = 0
  *                 for z in range(nz):
  *                     if src3[y, x, z] > thresh:             # <<<<<<<<<<<<<<
@@ -22039,7 +22053,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
         __pyx_L22_break:;
 
 
-        /* "fast_flow/core/common.pxd":64
+        /* "fast_flow/core/common.pxd":80
  *                         solid = 1
  *                         break
  *                 dest[idx] = solid             # <<<<<<<<<<<<<<
@@ -22054,7 +22068,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
   }
   __pyx_L12:;
 
-  /* "fast_flow/core/common.pxd":20
+  /* "fast_flow/core/common.pxd":36
  * # them (see TWO_PI in vector_to_rgb).
  * 
  * @cython.boundscheck(False)             # <<<<<<<<<<<<<<
@@ -22087,7 +22101,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_build_solids_mask(PyO
   __Pyx_RefNannyFinishContext();
 }
 
-/* "fast_flow/core/common.pxd":70
+/* "fast_flow/core/common.pxd":86
  *     DTYPE_f
  * 
  * cdef inline cnp.ndarray to_numpy(             # <<<<<<<<<<<<<<
@@ -22114,7 +22128,7 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_0__pyx_f_9fast_flow_4core_6common
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_numpy[unsigned char *]", 0);
 
-  /* "fast_flow/core/common.pxd":76
+  /* "fast_flow/core/common.pxd":92
  *     bint readonly
  * ):
  *     cdef ArrayType[:] view = <ArrayType[:nx * ny]> a             # <<<<<<<<<<<<<<
@@ -22123,28 +22137,28 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_0__pyx_f_9fast_flow_4core_6common
 */
   if (!__pyx_v_a) {
     PyErr_SetString(PyExc_ValueError,"Cannot create cython.array from NULL pointer");
-    __PYX_ERR(3, 76, __pyx_L1_error)
+    __PYX_ERR(3, 92, __pyx_L1_error)
   }
-  __pyx_t_3 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_unsigned_char); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 76, __pyx_L1_error)
+  __pyx_t_3 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_unsigned_char); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = Py_BuildValue("("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)(__pyx_v_nx * __pyx_v_ny))); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 76, __pyx_L1_error)
+  __pyx_t_2 = Py_BuildValue("("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)(__pyx_v_nx * __pyx_v_ny))); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_LIMITED_API
-  __pyx_t_4 = PyBytes_AsString(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(3, 76, __pyx_L1_error)
+  __pyx_t_4 = PyBytes_AsString(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(3, 92, __pyx_L1_error)
   #else
   __pyx_t_4 = PyBytes_AS_STRING(__pyx_t_3);
   #endif
-  __pyx_t_1 = __pyx_array_new(__pyx_t_2, sizeof(unsigned char), __pyx_t_4, "c", (char *) __pyx_v_a); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 76, __pyx_L1_error)
+  __pyx_t_1 = __pyx_array_new(__pyx_t_2, sizeof(unsigned char), __pyx_t_4, "c", (char *) __pyx_v_a); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 92, __pyx_L1_error)
   __Pyx_GOTREF((PyObject *)__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_ds_unsigned_char(((PyObject *)__pyx_t_1), PyBUF_WRITABLE); if (unlikely(!__pyx_t_5.memview)) __PYX_ERR(3, 76, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_ds_unsigned_char(((PyObject *)__pyx_t_1), PyBUF_WRITABLE); if (unlikely(!__pyx_t_5.memview)) __PYX_ERR(3, 92, __pyx_L1_error)
   __Pyx_DECREF((PyObject *)__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_view = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "fast_flow/core/common.pxd":78
+  /* "fast_flow/core/common.pxd":94
  *     cdef ArrayType[:] view = <ArrayType[:nx * ny]> a
  * 
  *     cdef cnp.ndarray arr = np.array(view, copy=True)             # <<<<<<<<<<<<<<
@@ -22152,12 +22166,12 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_0__pyx_f_9fast_flow_4core_6common
  *     arr.flags.writeable = not readonly
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 78, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_array); if (unlikely(!__pyx_t_7)) __PYX_ERR(3, 78, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_array); if (unlikely(!__pyx_t_7)) __PYX_ERR(3, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __pyx_memoryview_fromslice(__pyx_v_view, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char, (int (*)(char *, PyObject *)) __pyx_memview_set_unsigned_char, 0);; if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 78, __pyx_L1_error)
+  __pyx_t_6 = __pyx_memoryview_fromslice(__pyx_v_view, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char, (int (*)(char *, PyObject *)) __pyx_memview_set_unsigned_char, 0);; if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_8 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -22175,13 +22189,13 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_0__pyx_f_9fast_flow_4core_6common
     PyObject *__pyx_callargs[3] = {__pyx_t_2, __pyx_t_6, Py_True};
     #if CYTHON_VECTORCALL
     __pyx_t_9 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 78, __pyx_L1_error)
+    if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 94, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_9);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_copy};
       __pyx_t_9 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-      if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 78, __pyx_L1_error)
+      if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 94, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
     }
     #endif
@@ -22190,14 +22204,14 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_0__pyx_f_9fast_flow_4core_6common
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 78, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 94, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
-  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(3, 78, __pyx_L1_error)
+  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(3, 94, __pyx_L1_error)
   __pyx_v_arr = ((PyArrayObject *)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "fast_flow/core/common.pxd":79
+  /* "fast_flow/core/common.pxd":95
  * 
  *     cdef cnp.ndarray arr = np.array(view, copy=True)
  *     arr = arr.reshape((ny, nx))             # <<<<<<<<<<<<<<
@@ -22206,16 +22220,16 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_0__pyx_f_9fast_flow_4core_6common
 */
   __pyx_t_7 = ((PyObject *)__pyx_v_arr);
   __Pyx_INCREF(__pyx_t_7);
-  __pyx_t_9 = PyLong_FromSsize_t(__pyx_v_ny); if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 79, __pyx_L1_error)
+  __pyx_t_9 = PyLong_FromSsize_t(__pyx_v_ny); if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_6 = PyLong_FromSsize_t(__pyx_v_nx); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 79, __pyx_L1_error)
+  __pyx_t_6 = PyLong_FromSsize_t(__pyx_v_nx); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 79, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_9);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_9) != (0)) __PYX_ERR(3, 79, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_9) != (0)) __PYX_ERR(3, 95, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_6);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_6) != (0)) __PYX_ERR(3, 79, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_6) != (0)) __PYX_ERR(3, 95, __pyx_L1_error);
   __pyx_t_9 = 0;
   __pyx_t_6 = 0;
   __pyx_t_8 = 0;
@@ -22224,29 +22238,29 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_0__pyx_f_9fast_flow_4core_6common
     __pyx_t_3 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_reshape, __pyx_callargs+__pyx_t_8, (2-__pyx_t_8) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 79, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 95, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
-  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(3, 79, __pyx_L1_error)
+  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(3, 95, __pyx_L1_error)
   __Pyx_DECREF_SET(__pyx_v_arr, ((PyArrayObject *)__pyx_t_3));
   __pyx_t_3 = 0;
 
-  /* "fast_flow/core/common.pxd":80
+  /* "fast_flow/core/common.pxd":96
  *     cdef cnp.ndarray arr = np.array(view, copy=True)
  *     arr = arr.reshape((ny, nx))
  *     arr.flags.writeable = not readonly             # <<<<<<<<<<<<<<
  * 
  *     return arr
 */
-  __pyx_t_3 = __Pyx_PyBool_FromLong((!__pyx_v_readonly)); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 80, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyBool_FromLong((!__pyx_v_readonly)); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 96, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_arr), __pyx_mstate_global->__pyx_n_u_flags); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 80, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_arr), __pyx_mstate_global->__pyx_n_u_flags); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 96, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_writeable, __pyx_t_3) < (0)) __PYX_ERR(3, 80, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_writeable, __pyx_t_3) < (0)) __PYX_ERR(3, 96, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "fast_flow/core/common.pxd":82
+  /* "fast_flow/core/common.pxd":98
  *     arr.flags.writeable = not readonly
  * 
  *     return arr             # <<<<<<<<<<<<<<
@@ -22264,7 +22278,7 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_0__pyx_f_9fast_flow_4core_6common
   }
   goto __pyx_L0;
 
-  /* "fast_flow/core/common.pxd":70
+  /* "fast_flow/core/common.pxd":86
  *     DTYPE_f
  * 
  * cdef inline cnp.ndarray to_numpy(             # <<<<<<<<<<<<<<
@@ -22310,7 +22324,7 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_numpy[DTYPE_f *]", 0);
 
-  /* "fast_flow/core/common.pxd":76
+  /* "fast_flow/core/common.pxd":92
  *     bint readonly
  * ):
  *     cdef ArrayType[:] view = <ArrayType[:nx * ny]> a             # <<<<<<<<<<<<<<
@@ -22319,28 +22333,28 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
 */
   if (!__pyx_v_a) {
     PyErr_SetString(PyExc_ValueError,"Cannot create cython.array from NULL pointer");
-    __PYX_ERR(3, 76, __pyx_L1_error)
+    __PYX_ERR(3, 92, __pyx_L1_error)
   }
-  __pyx_t_3 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_nn___pyx_t_9fast_flow_4core_6common_DTYPE_f); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 76, __pyx_L1_error)
+  __pyx_t_3 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_nn___pyx_t_9fast_flow_4core_6common_DTYPE_f); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = Py_BuildValue("("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)(__pyx_v_nx * __pyx_v_ny))); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 76, __pyx_L1_error)
+  __pyx_t_2 = Py_BuildValue("("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)(__pyx_v_nx * __pyx_v_ny))); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_LIMITED_API
-  __pyx_t_4 = PyBytes_AsString(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(3, 76, __pyx_L1_error)
+  __pyx_t_4 = PyBytes_AsString(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(3, 92, __pyx_L1_error)
   #else
   __pyx_t_4 = PyBytes_AS_STRING(__pyx_t_3);
   #endif
-  __pyx_t_1 = __pyx_array_new(__pyx_t_2, sizeof(__pyx_t_9fast_flow_4core_6common_DTYPE_f), __pyx_t_4, "c", (char *) __pyx_v_a); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 76, __pyx_L1_error)
+  __pyx_t_1 = __pyx_array_new(__pyx_t_2, sizeof(__pyx_t_9fast_flow_4core_6common_DTYPE_f), __pyx_t_4, "c", (char *) __pyx_v_a); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 92, __pyx_L1_error)
   __Pyx_GOTREF((PyObject *)__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_9fast_flow_4core_6common_DTYPE_f(((PyObject *)__pyx_t_1), PyBUF_WRITABLE); if (unlikely(!__pyx_t_5.memview)) __PYX_ERR(3, 76, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_9fast_flow_4core_6common_DTYPE_f(((PyObject *)__pyx_t_1), PyBUF_WRITABLE); if (unlikely(!__pyx_t_5.memview)) __PYX_ERR(3, 92, __pyx_L1_error)
   __Pyx_DECREF((PyObject *)__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_view = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "fast_flow/core/common.pxd":78
+  /* "fast_flow/core/common.pxd":94
  *     cdef ArrayType[:] view = <ArrayType[:nx * ny]> a
  * 
  *     cdef cnp.ndarray arr = np.array(view, copy=True)             # <<<<<<<<<<<<<<
@@ -22348,12 +22362,12 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
  *     arr.flags.writeable = not readonly
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 78, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_array); if (unlikely(!__pyx_t_7)) __PYX_ERR(3, 78, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_array); if (unlikely(!__pyx_t_7)) __PYX_ERR(3, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __pyx_memoryview_fromslice(__pyx_v_view, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_9fast_flow_4core_6common_DTYPE_f, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_9fast_flow_4core_6common_DTYPE_f, 0);; if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 78, __pyx_L1_error)
+  __pyx_t_6 = __pyx_memoryview_fromslice(__pyx_v_view, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_9fast_flow_4core_6common_DTYPE_f, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_9fast_flow_4core_6common_DTYPE_f, 0);; if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_8 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -22371,13 +22385,13 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
     PyObject *__pyx_callargs[3] = {__pyx_t_2, __pyx_t_6, Py_True};
     #if CYTHON_VECTORCALL
     __pyx_t_9 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 78, __pyx_L1_error)
+    if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 94, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_9);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_copy};
       __pyx_t_9 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-      if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 78, __pyx_L1_error)
+      if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 94, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
     }
     #endif
@@ -22386,14 +22400,14 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 78, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 94, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
-  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(3, 78, __pyx_L1_error)
+  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(3, 94, __pyx_L1_error)
   __pyx_v_arr = ((PyArrayObject *)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "fast_flow/core/common.pxd":79
+  /* "fast_flow/core/common.pxd":95
  * 
  *     cdef cnp.ndarray arr = np.array(view, copy=True)
  *     arr = arr.reshape((ny, nx))             # <<<<<<<<<<<<<<
@@ -22402,16 +22416,16 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
 */
   __pyx_t_7 = ((PyObject *)__pyx_v_arr);
   __Pyx_INCREF(__pyx_t_7);
-  __pyx_t_9 = PyLong_FromSsize_t(__pyx_v_ny); if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 79, __pyx_L1_error)
+  __pyx_t_9 = PyLong_FromSsize_t(__pyx_v_ny); if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_6 = PyLong_FromSsize_t(__pyx_v_nx); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 79, __pyx_L1_error)
+  __pyx_t_6 = PyLong_FromSsize_t(__pyx_v_nx); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 79, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_9);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_9) != (0)) __PYX_ERR(3, 79, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_9) != (0)) __PYX_ERR(3, 95, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_6);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_6) != (0)) __PYX_ERR(3, 79, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_6) != (0)) __PYX_ERR(3, 95, __pyx_L1_error);
   __pyx_t_9 = 0;
   __pyx_t_6 = 0;
   __pyx_t_8 = 0;
@@ -22420,29 +22434,29 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
     __pyx_t_3 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_reshape, __pyx_callargs+__pyx_t_8, (2-__pyx_t_8) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 79, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 95, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
-  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(3, 79, __pyx_L1_error)
+  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(3, 95, __pyx_L1_error)
   __Pyx_DECREF_SET(__pyx_v_arr, ((PyArrayObject *)__pyx_t_3));
   __pyx_t_3 = 0;
 
-  /* "fast_flow/core/common.pxd":80
+  /* "fast_flow/core/common.pxd":96
  *     cdef cnp.ndarray arr = np.array(view, copy=True)
  *     arr = arr.reshape((ny, nx))
  *     arr.flags.writeable = not readonly             # <<<<<<<<<<<<<<
  * 
  *     return arr
 */
-  __pyx_t_3 = __Pyx_PyBool_FromLong((!__pyx_v_readonly)); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 80, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyBool_FromLong((!__pyx_v_readonly)); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 96, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_arr), __pyx_mstate_global->__pyx_n_u_flags); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 80, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_arr), __pyx_mstate_global->__pyx_n_u_flags); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 96, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_writeable, __pyx_t_3) < (0)) __PYX_ERR(3, 80, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_writeable, __pyx_t_3) < (0)) __PYX_ERR(3, 96, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "fast_flow/core/common.pxd":82
+  /* "fast_flow/core/common.pxd":98
  *     arr.flags.writeable = not readonly
  * 
  *     return arr             # <<<<<<<<<<<<<<
@@ -22460,7 +22474,7 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
   }
   goto __pyx_L0;
 
-  /* "fast_flow/core/common.pxd":70
+  /* "fast_flow/core/common.pxd":86
  *     DTYPE_f
  * 
  * cdef inline cnp.ndarray to_numpy(             # <<<<<<<<<<<<<<
@@ -22487,7 +22501,7 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
   return __pyx_r;
 }
 
-/* "fast_flow/core/common.pxd":84
+/* "fast_flow/core/common.pxd":100
  *     return arr
  * 
  * cdef inline cnp.ndarray to_numpy_3d(             # <<<<<<<<<<<<<<
@@ -22515,7 +22529,7 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_0__pyx_f_9fast_flow_4core_6common
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_numpy_3d[unsigned char *]", 0);
 
-  /* "fast_flow/core/common.pxd":91
+  /* "fast_flow/core/common.pxd":107
  *     bint readonly
  * ):
  *     cdef ArrayType[:] view = <ArrayType[:nx * ny * nz]> a             # <<<<<<<<<<<<<<
@@ -22524,28 +22538,28 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_0__pyx_f_9fast_flow_4core_6common
 */
   if (!__pyx_v_a) {
     PyErr_SetString(PyExc_ValueError,"Cannot create cython.array from NULL pointer");
-    __PYX_ERR(3, 91, __pyx_L1_error)
+    __PYX_ERR(3, 107, __pyx_L1_error)
   }
-  __pyx_t_3 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_unsigned_char); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 91, __pyx_L1_error)
+  __pyx_t_3 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_unsigned_char); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = Py_BuildValue("("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)((__pyx_v_nx * __pyx_v_ny) * __pyx_v_nz))); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 91, __pyx_L1_error)
+  __pyx_t_2 = Py_BuildValue("("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)((__pyx_v_nx * __pyx_v_ny) * __pyx_v_nz))); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_LIMITED_API
-  __pyx_t_4 = PyBytes_AsString(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(3, 91, __pyx_L1_error)
+  __pyx_t_4 = PyBytes_AsString(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(3, 107, __pyx_L1_error)
   #else
   __pyx_t_4 = PyBytes_AS_STRING(__pyx_t_3);
   #endif
-  __pyx_t_1 = __pyx_array_new(__pyx_t_2, sizeof(unsigned char), __pyx_t_4, "c", (char *) __pyx_v_a); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 91, __pyx_L1_error)
+  __pyx_t_1 = __pyx_array_new(__pyx_t_2, sizeof(unsigned char), __pyx_t_4, "c", (char *) __pyx_v_a); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 107, __pyx_L1_error)
   __Pyx_GOTREF((PyObject *)__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_ds_unsigned_char(((PyObject *)__pyx_t_1), PyBUF_WRITABLE); if (unlikely(!__pyx_t_5.memview)) __PYX_ERR(3, 91, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_ds_unsigned_char(((PyObject *)__pyx_t_1), PyBUF_WRITABLE); if (unlikely(!__pyx_t_5.memview)) __PYX_ERR(3, 107, __pyx_L1_error)
   __Pyx_DECREF((PyObject *)__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_view = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "fast_flow/core/common.pxd":93
+  /* "fast_flow/core/common.pxd":109
  *     cdef ArrayType[:] view = <ArrayType[:nx * ny * nz]> a
  * 
  *     cdef cnp.ndarray arr = np.array(view, copy=True)             # <<<<<<<<<<<<<<
@@ -22553,12 +22567,12 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_0__pyx_f_9fast_flow_4core_6common
  *     arr.flags.writeable = not readonly
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 93, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_array); if (unlikely(!__pyx_t_7)) __PYX_ERR(3, 93, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_array); if (unlikely(!__pyx_t_7)) __PYX_ERR(3, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __pyx_memoryview_fromslice(__pyx_v_view, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char, (int (*)(char *, PyObject *)) __pyx_memview_set_unsigned_char, 0);; if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 93, __pyx_L1_error)
+  __pyx_t_6 = __pyx_memoryview_fromslice(__pyx_v_view, 1, (PyObject *(*)(char *)) __pyx_memview_get_unsigned_char, (int (*)(char *, PyObject *)) __pyx_memview_set_unsigned_char, 0);; if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_8 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -22576,13 +22590,13 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_0__pyx_f_9fast_flow_4core_6common
     PyObject *__pyx_callargs[3] = {__pyx_t_2, __pyx_t_6, Py_True};
     #if CYTHON_VECTORCALL
     __pyx_t_9 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 93, __pyx_L1_error)
+    if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 109, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_9);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_copy};
       __pyx_t_9 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-      if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 93, __pyx_L1_error)
+      if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 109, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
     }
     #endif
@@ -22591,14 +22605,14 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_0__pyx_f_9fast_flow_4core_6common
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 93, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
-  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(3, 93, __pyx_L1_error)
+  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(3, 109, __pyx_L1_error)
   __pyx_v_arr = ((PyArrayObject *)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "fast_flow/core/common.pxd":94
+  /* "fast_flow/core/common.pxd":110
  * 
  *     cdef cnp.ndarray arr = np.array(view, copy=True)
  *     arr = arr.reshape((ny, nx, nz))             # <<<<<<<<<<<<<<
@@ -22607,20 +22621,20 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_0__pyx_f_9fast_flow_4core_6common
 */
   __pyx_t_7 = ((PyObject *)__pyx_v_arr);
   __Pyx_INCREF(__pyx_t_7);
-  __pyx_t_9 = PyLong_FromSsize_t(__pyx_v_ny); if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 94, __pyx_L1_error)
+  __pyx_t_9 = PyLong_FromSsize_t(__pyx_v_ny); if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_6 = PyLong_FromSsize_t(__pyx_v_nx); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 94, __pyx_L1_error)
+  __pyx_t_6 = PyLong_FromSsize_t(__pyx_v_nx); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = PyLong_FromSsize_t(__pyx_v_nz); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 94, __pyx_L1_error)
+  __pyx_t_2 = PyLong_FromSsize_t(__pyx_v_nz); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_10 = PyTuple_New(3); if (unlikely(!__pyx_t_10)) __PYX_ERR(3, 94, __pyx_L1_error)
+  __pyx_t_10 = PyTuple_New(3); if (unlikely(!__pyx_t_10)) __PYX_ERR(3, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_GIVEREF(__pyx_t_9);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_9) != (0)) __PYX_ERR(3, 94, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_9) != (0)) __PYX_ERR(3, 110, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_6);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_10, 1, __pyx_t_6) != (0)) __PYX_ERR(3, 94, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_10, 1, __pyx_t_6) != (0)) __PYX_ERR(3, 110, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_10, 2, __pyx_t_2) != (0)) __PYX_ERR(3, 94, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_10, 2, __pyx_t_2) != (0)) __PYX_ERR(3, 110, __pyx_L1_error);
   __pyx_t_9 = 0;
   __pyx_t_6 = 0;
   __pyx_t_2 = 0;
@@ -22630,29 +22644,29 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_0__pyx_f_9fast_flow_4core_6common
     __pyx_t_3 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_reshape, __pyx_callargs+__pyx_t_8, (2-__pyx_t_8) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 94, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 110, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
-  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(3, 94, __pyx_L1_error)
+  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(3, 110, __pyx_L1_error)
   __Pyx_DECREF_SET(__pyx_v_arr, ((PyArrayObject *)__pyx_t_3));
   __pyx_t_3 = 0;
 
-  /* "fast_flow/core/common.pxd":95
+  /* "fast_flow/core/common.pxd":111
  *     cdef cnp.ndarray arr = np.array(view, copy=True)
  *     arr = arr.reshape((ny, nx, nz))
  *     arr.flags.writeable = not readonly             # <<<<<<<<<<<<<<
  * 
  *     return arr
 */
-  __pyx_t_3 = __Pyx_PyBool_FromLong((!__pyx_v_readonly)); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 95, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyBool_FromLong((!__pyx_v_readonly)); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_arr), __pyx_mstate_global->__pyx_n_u_flags); if (unlikely(!__pyx_t_10)) __PYX_ERR(3, 95, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_arr), __pyx_mstate_global->__pyx_n_u_flags); if (unlikely(!__pyx_t_10)) __PYX_ERR(3, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_t_10, __pyx_mstate_global->__pyx_n_u_writeable, __pyx_t_3) < (0)) __PYX_ERR(3, 95, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_t_10, __pyx_mstate_global->__pyx_n_u_writeable, __pyx_t_3) < (0)) __PYX_ERR(3, 111, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-  /* "fast_flow/core/common.pxd":97
+  /* "fast_flow/core/common.pxd":113
  *     arr.flags.writeable = not readonly
  * 
  *     return arr             # <<<<<<<<<<<<<<
@@ -22670,7 +22684,7 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_0__pyx_f_9fast_flow_4core_6common
   }
   goto __pyx_L0;
 
-  /* "fast_flow/core/common.pxd":84
+  /* "fast_flow/core/common.pxd":100
  *     return arr
  * 
  * cdef inline cnp.ndarray to_numpy_3d(             # <<<<<<<<<<<<<<
@@ -22718,7 +22732,7 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("to_numpy_3d[DTYPE_f *]", 0);
 
-  /* "fast_flow/core/common.pxd":91
+  /* "fast_flow/core/common.pxd":107
  *     bint readonly
  * ):
  *     cdef ArrayType[:] view = <ArrayType[:nx * ny * nz]> a             # <<<<<<<<<<<<<<
@@ -22727,28 +22741,28 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
 */
   if (!__pyx_v_a) {
     PyErr_SetString(PyExc_ValueError,"Cannot create cython.array from NULL pointer");
-    __PYX_ERR(3, 91, __pyx_L1_error)
+    __PYX_ERR(3, 107, __pyx_L1_error)
   }
-  __pyx_t_3 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_nn___pyx_t_9fast_flow_4core_6common_DTYPE_f); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 91, __pyx_L1_error)
+  __pyx_t_3 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_nn___pyx_t_9fast_flow_4core_6common_DTYPE_f); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = Py_BuildValue("("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)((__pyx_v_nx * __pyx_v_ny) * __pyx_v_nz))); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 91, __pyx_L1_error)
+  __pyx_t_2 = Py_BuildValue("("  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)((__pyx_v_nx * __pyx_v_ny) * __pyx_v_nz))); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_LIMITED_API
-  __pyx_t_4 = PyBytes_AsString(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(3, 91, __pyx_L1_error)
+  __pyx_t_4 = PyBytes_AsString(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(3, 107, __pyx_L1_error)
   #else
   __pyx_t_4 = PyBytes_AS_STRING(__pyx_t_3);
   #endif
-  __pyx_t_1 = __pyx_array_new(__pyx_t_2, sizeof(__pyx_t_9fast_flow_4core_6common_DTYPE_f), __pyx_t_4, "c", (char *) __pyx_v_a); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 91, __pyx_L1_error)
+  __pyx_t_1 = __pyx_array_new(__pyx_t_2, sizeof(__pyx_t_9fast_flow_4core_6common_DTYPE_f), __pyx_t_4, "c", (char *) __pyx_v_a); if (unlikely(!__pyx_t_1)) __PYX_ERR(3, 107, __pyx_L1_error)
   __Pyx_GOTREF((PyObject *)__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_9fast_flow_4core_6common_DTYPE_f(((PyObject *)__pyx_t_1), PyBUF_WRITABLE); if (unlikely(!__pyx_t_5.memview)) __PYX_ERR(3, 91, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_9fast_flow_4core_6common_DTYPE_f(((PyObject *)__pyx_t_1), PyBUF_WRITABLE); if (unlikely(!__pyx_t_5.memview)) __PYX_ERR(3, 107, __pyx_L1_error)
   __Pyx_DECREF((PyObject *)__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_view = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "fast_flow/core/common.pxd":93
+  /* "fast_flow/core/common.pxd":109
  *     cdef ArrayType[:] view = <ArrayType[:nx * ny * nz]> a
  * 
  *     cdef cnp.ndarray arr = np.array(view, copy=True)             # <<<<<<<<<<<<<<
@@ -22756,12 +22770,12 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
  *     arr.flags.writeable = not readonly
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 93, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_array); if (unlikely(!__pyx_t_7)) __PYX_ERR(3, 93, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_array); if (unlikely(!__pyx_t_7)) __PYX_ERR(3, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __pyx_memoryview_fromslice(__pyx_v_view, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_9fast_flow_4core_6common_DTYPE_f, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_9fast_flow_4core_6common_DTYPE_f, 0);; if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 93, __pyx_L1_error)
+  __pyx_t_6 = __pyx_memoryview_fromslice(__pyx_v_view, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_9fast_flow_4core_6common_DTYPE_f, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_9fast_flow_4core_6common_DTYPE_f, 0);; if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_8 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -22779,13 +22793,13 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
     PyObject *__pyx_callargs[3] = {__pyx_t_2, __pyx_t_6, Py_True};
     #if CYTHON_VECTORCALL
     __pyx_t_9 = __pyx_mstate_global->__pyx_tuple[2];
-    if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 93, __pyx_L1_error)
+    if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 109, __pyx_L1_error)
     __Pyx_INCREF(__pyx_t_9);
     #else
     {
       PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_copy};
       __pyx_t_9 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-      if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 93, __pyx_L1_error)
+      if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 109, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
     }
     #endif
@@ -22794,14 +22808,14 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 93, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
-  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(3, 93, __pyx_L1_error)
+  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(3, 109, __pyx_L1_error)
   __pyx_v_arr = ((PyArrayObject *)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "fast_flow/core/common.pxd":94
+  /* "fast_flow/core/common.pxd":110
  * 
  *     cdef cnp.ndarray arr = np.array(view, copy=True)
  *     arr = arr.reshape((ny, nx, nz))             # <<<<<<<<<<<<<<
@@ -22810,20 +22824,20 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
 */
   __pyx_t_7 = ((PyObject *)__pyx_v_arr);
   __Pyx_INCREF(__pyx_t_7);
-  __pyx_t_9 = PyLong_FromSsize_t(__pyx_v_ny); if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 94, __pyx_L1_error)
+  __pyx_t_9 = PyLong_FromSsize_t(__pyx_v_ny); if (unlikely(!__pyx_t_9)) __PYX_ERR(3, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_6 = PyLong_FromSsize_t(__pyx_v_nx); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 94, __pyx_L1_error)
+  __pyx_t_6 = PyLong_FromSsize_t(__pyx_v_nx); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = PyLong_FromSsize_t(__pyx_v_nz); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 94, __pyx_L1_error)
+  __pyx_t_2 = PyLong_FromSsize_t(__pyx_v_nz); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_10 = PyTuple_New(3); if (unlikely(!__pyx_t_10)) __PYX_ERR(3, 94, __pyx_L1_error)
+  __pyx_t_10 = PyTuple_New(3); if (unlikely(!__pyx_t_10)) __PYX_ERR(3, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_GIVEREF(__pyx_t_9);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_9) != (0)) __PYX_ERR(3, 94, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_9) != (0)) __PYX_ERR(3, 110, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_6);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_10, 1, __pyx_t_6) != (0)) __PYX_ERR(3, 94, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_10, 1, __pyx_t_6) != (0)) __PYX_ERR(3, 110, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_10, 2, __pyx_t_2) != (0)) __PYX_ERR(3, 94, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_10, 2, __pyx_t_2) != (0)) __PYX_ERR(3, 110, __pyx_L1_error);
   __pyx_t_9 = 0;
   __pyx_t_6 = 0;
   __pyx_t_2 = 0;
@@ -22833,29 +22847,29 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
     __pyx_t_3 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_reshape, __pyx_callargs+__pyx_t_8, (2-__pyx_t_8) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 94, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 110, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
-  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(3, 94, __pyx_L1_error)
+  if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(3, 110, __pyx_L1_error)
   __Pyx_DECREF_SET(__pyx_v_arr, ((PyArrayObject *)__pyx_t_3));
   __pyx_t_3 = 0;
 
-  /* "fast_flow/core/common.pxd":95
+  /* "fast_flow/core/common.pxd":111
  *     cdef cnp.ndarray arr = np.array(view, copy=True)
  *     arr = arr.reshape((ny, nx, nz))
  *     arr.flags.writeable = not readonly             # <<<<<<<<<<<<<<
  * 
  *     return arr
 */
-  __pyx_t_3 = __Pyx_PyBool_FromLong((!__pyx_v_readonly)); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 95, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyBool_FromLong((!__pyx_v_readonly)); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_arr), __pyx_mstate_global->__pyx_n_u_flags); if (unlikely(!__pyx_t_10)) __PYX_ERR(3, 95, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_arr), __pyx_mstate_global->__pyx_n_u_flags); if (unlikely(!__pyx_t_10)) __PYX_ERR(3, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_t_10, __pyx_mstate_global->__pyx_n_u_writeable, __pyx_t_3) < (0)) __PYX_ERR(3, 95, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_t_10, __pyx_mstate_global->__pyx_n_u_writeable, __pyx_t_3) < (0)) __PYX_ERR(3, 111, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-  /* "fast_flow/core/common.pxd":97
+  /* "fast_flow/core/common.pxd":113
  *     arr.flags.writeable = not readonly
  * 
  *     return arr             # <<<<<<<<<<<<<<
@@ -22873,7 +22887,7 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
   }
   goto __pyx_L0;
 
-  /* "fast_flow/core/common.pxd":84
+  /* "fast_flow/core/common.pxd":100
  *     return arr
  * 
  * cdef inline cnp.ndarray to_numpy_3d(             # <<<<<<<<<<<<<<
@@ -22901,7 +22915,7 @@ static CYTHON_INLINE PyArrayObject *__pyx_fuse_1__pyx_f_9fast_flow_4core_6common
   return __pyx_r;
 }
 
-/* "fast_flow/core/common.pxd":99
+/* "fast_flow/core/common.pxd":115
  *     return arr
  * 
  * cdef inline double fast_hypot(             # <<<<<<<<<<<<<<
@@ -22916,7 +22930,7 @@ static CYTHON_INLINE double __pyx_f_9fast_flow_4core_6common_fast_hypot(__pyx_t_
   __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_t_1;
   int __pyx_t_2;
 
-  /* "fast_flow/core/common.pxd":103
+  /* "fast_flow/core/common.pxd":119
  *     DTYPE_f y
  * ) noexcept nogil:
  *     cdef DTYPE_f ax = -x if x < 0 else x             # <<<<<<<<<<<<<<
@@ -22935,7 +22949,7 @@ static CYTHON_INLINE double __pyx_f_9fast_flow_4core_6common_fast_hypot(__pyx_t_
 
   __pyx_v_ax = __pyx_t_1;
 
-  /* "fast_flow/core/common.pxd":104
+  /* "fast_flow/core/common.pxd":120
  * ) noexcept nogil:
  *     cdef DTYPE_f ax = -x if x < 0 else x
  *     cdef DTYPE_f ay = -y if y < 0 else y             # <<<<<<<<<<<<<<
@@ -22954,7 +22968,7 @@ static CYTHON_INLINE double __pyx_f_9fast_flow_4core_6common_fast_hypot(__pyx_t_
 
   __pyx_v_ay = __pyx_t_1;
 
-  /* "fast_flow/core/common.pxd":106
+  /* "fast_flow/core/common.pxd":122
  *     cdef DTYPE_f ay = -y if y < 0 else y
  * 
  *     if ax > ay:             # <<<<<<<<<<<<<<
@@ -22966,7 +22980,7 @@ static CYTHON_INLINE double __pyx_f_9fast_flow_4core_6common_fast_hypot(__pyx_t_
   if (__pyx_t_2) {
 
 
-    /* "fast_flow/core/common.pxd":107
+    /* "fast_flow/core/common.pxd":123
  * 
  *     if ax > ay:
  *         return 0.9604 * ax + 0.3978 * ay             # <<<<<<<<<<<<<<
@@ -22979,7 +22993,7 @@ static CYTHON_INLINE double __pyx_f_9fast_flow_4core_6common_fast_hypot(__pyx_t_
     }
     goto __pyx_L0;
 
-    /* "fast_flow/core/common.pxd":106
+    /* "fast_flow/core/common.pxd":122
  *     cdef DTYPE_f ay = -y if y < 0 else y
  * 
  *     if ax > ay:             # <<<<<<<<<<<<<<
@@ -22988,7 +23002,7 @@ static CYTHON_INLINE double __pyx_f_9fast_flow_4core_6common_fast_hypot(__pyx_t_
 */
   }
 
-  /* "fast_flow/core/common.pxd":109
+  /* "fast_flow/core/common.pxd":125
  *         return 0.9604 * ax + 0.3978 * ay
  *     else:
  *         return 0.9604 * ay + 0.3978 * ax             # <<<<<<<<<<<<<<
@@ -23003,7 +23017,7 @@ static CYTHON_INLINE double __pyx_f_9fast_flow_4core_6common_fast_hypot(__pyx_t_
     goto __pyx_L0;
   }
 
-  /* "fast_flow/core/common.pxd":99
+  /* "fast_flow/core/common.pxd":115
  *     return arr
  * 
  * cdef inline double fast_hypot(             # <<<<<<<<<<<<<<
@@ -23018,7 +23032,7 @@ static CYTHON_INLINE double __pyx_f_9fast_flow_4core_6common_fast_hypot(__pyx_t_
   return __pyx_r;
 }
 
-/* "fast_flow/core/common.pxd":113
+/* "fast_flow/core/common.pxd":129
  * from libc.math cimport fabs
  * 
  * cdef inline DTYPE_f fast_atan2(             # <<<<<<<<<<<<<<
@@ -23040,7 +23054,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
   int __pyx_clineno = 0;
   PyGILState_STATE __pyx_gilstate_save;
 
-  /* "fast_flow/core/common.pxd":117
+  /* "fast_flow/core/common.pxd":133
  *     DTYPE_f x
  * ) noexcept nogil:
  *     cdef DTYPE_f ax = -x if x < 0 else x             # <<<<<<<<<<<<<<
@@ -23059,7 +23073,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
 
   __pyx_v_ax = __pyx_t_1;
 
-  /* "fast_flow/core/common.pxd":118
+  /* "fast_flow/core/common.pxd":134
  * ) noexcept nogil:
  *     cdef DTYPE_f ax = -x if x < 0 else x
  *     cdef DTYPE_f ay = -y if y < 0 else y             # <<<<<<<<<<<<<<
@@ -23078,7 +23092,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
 
   __pyx_v_ay = __pyx_t_1;
 
-  /* "fast_flow/core/common.pxd":122
+  /* "fast_flow/core/common.pxd":138
  *     cdef DTYPE_f angle
  * 
  *     if ax == 0.0 and ay == 0.0:             # <<<<<<<<<<<<<<
@@ -23104,7 +23118,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
   if (__pyx_t_2) {
 
 
-    /* "fast_flow/core/common.pxd":123
+    /* "fast_flow/core/common.pxd":139
  * 
  *     if ax == 0.0 and ay == 0.0:
  *         return 0.0             # <<<<<<<<<<<<<<
@@ -23117,7 +23131,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
     }
     goto __pyx_L0;
 
-    /* "fast_flow/core/common.pxd":122
+    /* "fast_flow/core/common.pxd":138
  *     cdef DTYPE_f angle
  * 
  *     if ax == 0.0 and ay == 0.0:             # <<<<<<<<<<<<<<
@@ -23126,7 +23140,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
 */
   }
 
-  /* "fast_flow/core/common.pxd":125
+  /* "fast_flow/core/common.pxd":141
  *         return 0.0
  * 
  *     if ax >= ay:             # <<<<<<<<<<<<<<
@@ -23138,7 +23152,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
   if (__pyx_t_2) {
 
 
-    /* "fast_flow/core/common.pxd":126
+    /* "fast_flow/core/common.pxd":142
  * 
  *     if ax >= ay:
  *         z = ay / ax             # <<<<<<<<<<<<<<
@@ -23149,11 +23163,11 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
       PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
       __Pyx_PyGILState_Release(__pyx_gilstate_save);
-      __PYX_ERR(3, 126, __pyx_L1_error)
+      __PYX_ERR(3, 142, __pyx_L1_error)
     }
     __pyx_v_z = (__pyx_v_ay / __pyx_v_ax);
 
-    /* "fast_flow/core/common.pxd":127
+    /* "fast_flow/core/common.pxd":143
  *     if ax >= ay:
  *         z = ay / ax
  *         angle = z * (0.7853981633974483 + 0.273 * (1.0 - z))             # <<<<<<<<<<<<<<
@@ -23162,7 +23176,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
 */
     __pyx_v_angle = (__pyx_v_z * (0.7853981633974483 + (0.273 * (1.0 - __pyx_v_z))));
 
-    /* "fast_flow/core/common.pxd":125
+    /* "fast_flow/core/common.pxd":141
  *         return 0.0
  * 
  *     if ax >= ay:             # <<<<<<<<<<<<<<
@@ -23172,7 +23186,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
     goto __pyx_L6;
   }
 
-  /* "fast_flow/core/common.pxd":129
+  /* "fast_flow/core/common.pxd":145
  *         angle = z * (0.7853981633974483 + 0.273 * (1.0 - z))
  *     else:
  *         z = ax / ay             # <<<<<<<<<<<<<<
@@ -23184,11 +23198,11 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
       PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
       __Pyx_PyGILState_Release(__pyx_gilstate_save);
-      __PYX_ERR(3, 129, __pyx_L1_error)
+      __PYX_ERR(3, 145, __pyx_L1_error)
     }
     __pyx_v_z = (__pyx_v_ax / __pyx_v_ay);
 
-    /* "fast_flow/core/common.pxd":130
+    /* "fast_flow/core/common.pxd":146
  *     else:
  *         z = ax / ay
  *         angle = 1.5707963267948966 - \             # <<<<<<<<<<<<<<
@@ -23199,7 +23213,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
   }
   __pyx_L6:;
 
-  /* "fast_flow/core/common.pxd":133
+  /* "fast_flow/core/common.pxd":149
  *                 z * (0.7853981633974483 + 0.273 * (1.0 - z))
  * 
  *     if x < 0.0:             # <<<<<<<<<<<<<<
@@ -23211,7 +23225,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
   if (__pyx_t_2) {
 
 
-    /* "fast_flow/core/common.pxd":134
+    /* "fast_flow/core/common.pxd":150
  * 
  *     if x < 0.0:
  *         angle = 3.141592653589793 - angle             # <<<<<<<<<<<<<<
@@ -23220,7 +23234,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
 */
     __pyx_v_angle = (3.141592653589793 - __pyx_v_angle);
 
-    /* "fast_flow/core/common.pxd":133
+    /* "fast_flow/core/common.pxd":149
  *                 z * (0.7853981633974483 + 0.273 * (1.0 - z))
  * 
  *     if x < 0.0:             # <<<<<<<<<<<<<<
@@ -23229,7 +23243,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
 */
   }
 
-  /* "fast_flow/core/common.pxd":136
+  /* "fast_flow/core/common.pxd":152
  *         angle = 3.141592653589793 - angle
  * 
  *     if y < 0.0:             # <<<<<<<<<<<<<<
@@ -23241,7 +23255,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
   if (__pyx_t_2) {
 
 
-    /* "fast_flow/core/common.pxd":137
+    /* "fast_flow/core/common.pxd":153
  * 
  *     if y < 0.0:
  *         angle = -angle             # <<<<<<<<<<<<<<
@@ -23250,7 +23264,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
 */
     __pyx_v_angle = (-__pyx_v_angle);
 
-    /* "fast_flow/core/common.pxd":136
+    /* "fast_flow/core/common.pxd":152
  *         angle = 3.141592653589793 - angle
  * 
  *     if y < 0.0:             # <<<<<<<<<<<<<<
@@ -23259,7 +23273,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
 */
   }
 
-  /* "fast_flow/core/common.pxd":139
+  /* "fast_flow/core/common.pxd":155
  *         angle = -angle
  * 
  *     return angle             # <<<<<<<<<<<<<<
@@ -23272,7 +23286,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
   }
   goto __pyx_L0;
 
-  /* "fast_flow/core/common.pxd":113
+  /* "fast_flow/core/common.pxd":129
  * from libc.math cimport fabs
  * 
  * cdef inline DTYPE_f fast_atan2(             # <<<<<<<<<<<<<<
@@ -23294,7 +23308,7 @@ static CYTHON_INLINE __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow
   return __pyx_r;
 }
 
-/* "fast_flow/core/common.pxd":141
+/* "fast_flow/core/common.pxd":157
  *     return angle
  * 
  * cdef inline double clamp01(double x) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -23306,7 +23320,7 @@ static CYTHON_INLINE double __pyx_f_9fast_flow_4core_6common_clamp01(double __py
   double __pyx_r;
   int __pyx_t_1;
 
-  /* "fast_flow/core/common.pxd":142
+  /* "fast_flow/core/common.pxd":158
  * 
  * cdef inline double clamp01(double x) noexcept nogil:
  *     if x < 0.0:             # <<<<<<<<<<<<<<
@@ -23318,7 +23332,7 @@ static CYTHON_INLINE double __pyx_f_9fast_flow_4core_6common_clamp01(double __py
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/common.pxd":143
+    /* "fast_flow/core/common.pxd":159
  * cdef inline double clamp01(double x) noexcept nogil:
  *     if x < 0.0:
  *         return 0.0             # <<<<<<<<<<<<<<
@@ -23331,7 +23345,7 @@ static CYTHON_INLINE double __pyx_f_9fast_flow_4core_6common_clamp01(double __py
     }
     goto __pyx_L0;
 
-    /* "fast_flow/core/common.pxd":142
+    /* "fast_flow/core/common.pxd":158
  * 
  * cdef inline double clamp01(double x) noexcept nogil:
  *     if x < 0.0:             # <<<<<<<<<<<<<<
@@ -23340,7 +23354,7 @@ static CYTHON_INLINE double __pyx_f_9fast_flow_4core_6common_clamp01(double __py
 */
   }
 
-  /* "fast_flow/core/common.pxd":144
+  /* "fast_flow/core/common.pxd":160
  *     if x < 0.0:
  *         return 0.0
  *     if x > 1.0:             # <<<<<<<<<<<<<<
@@ -23352,7 +23366,7 @@ static CYTHON_INLINE double __pyx_f_9fast_flow_4core_6common_clamp01(double __py
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/common.pxd":145
+    /* "fast_flow/core/common.pxd":161
  *         return 0.0
  *     if x > 1.0:
  *         return 1.0             # <<<<<<<<<<<<<<
@@ -23365,7 +23379,7 @@ static CYTHON_INLINE double __pyx_f_9fast_flow_4core_6common_clamp01(double __py
     }
     goto __pyx_L0;
 
-    /* "fast_flow/core/common.pxd":144
+    /* "fast_flow/core/common.pxd":160
  *     if x < 0.0:
  *         return 0.0
  *     if x > 1.0:             # <<<<<<<<<<<<<<
@@ -23374,7 +23388,7 @@ static CYTHON_INLINE double __pyx_f_9fast_flow_4core_6common_clamp01(double __py
 */
   }
 
-  /* "fast_flow/core/common.pxd":146
+  /* "fast_flow/core/common.pxd":162
  *     if x > 1.0:
  *         return 1.0
  *     return x             # <<<<<<<<<<<<<<
@@ -23387,7 +23401,7 @@ static CYTHON_INLINE double __pyx_f_9fast_flow_4core_6common_clamp01(double __py
   }
   goto __pyx_L0;
 
-  /* "fast_flow/core/common.pxd":141
+  /* "fast_flow/core/common.pxd":157
  *     return angle
  * 
  * cdef inline double clamp01(double x) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -23400,7 +23414,7 @@ static CYTHON_INLINE double __pyx_f_9fast_flow_4core_6common_clamp01(double __py
   return __pyx_r;
 }
 
-/* "fast_flow/core/common.pxd":148
+/* "fast_flow/core/common.pxd":164
  *     return x
  * 
  * cdef inline void vector_to_rgb(             # <<<<<<<<<<<<<<
@@ -23420,7 +23434,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_vector_to_rgb(__pyx_t
   int __pyx_clineno = 0;
   PyGILState_STATE __pyx_gilstate_save;
 
-  /* "fast_flow/core/common.pxd":157
+  /* "fast_flow/core/common.pxd":173
  *     cdef DTYPE_f magnitude
  *     cdef DTYPE_f value
  *     cdef DTYPE_f TWO_PI = 6.28318530717958647692             # <<<<<<<<<<<<<<
@@ -23429,7 +23443,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_vector_to_rgb(__pyx_t
 */
   __pyx_v_TWO_PI = 6.28318530717958647692;
 
-  /* "fast_flow/core/common.pxd":160
+  /* "fast_flow/core/common.pxd":176
  * 
  *     # Direction determines hue [0, 1)
  *     hue = fast_atan2(y, x) / TWO_PI             # <<<<<<<<<<<<<<
@@ -23442,12 +23456,12 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_vector_to_rgb(__pyx_t
     PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
     __Pyx_PyGILState_Release(__pyx_gilstate_save);
-    __PYX_ERR(3, 160, __pyx_L1_error)
+    __PYX_ERR(3, 176, __pyx_L1_error)
   }
   __pyx_v_hue = (__pyx_t_1 / __pyx_v_TWO_PI);
 
 
-  /* "fast_flow/core/common.pxd":161
+  /* "fast_flow/core/common.pxd":177
  *     # Direction determines hue [0, 1)
  *     hue = fast_atan2(y, x) / TWO_PI
  *     if hue < 0.0:             # <<<<<<<<<<<<<<
@@ -23459,7 +23473,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_vector_to_rgb(__pyx_t
   if (__pyx_t_2) {
 
 
-    /* "fast_flow/core/common.pxd":162
+    /* "fast_flow/core/common.pxd":178
  *     hue = fast_atan2(y, x) / TWO_PI
  *     if hue < 0.0:
  *         hue += 1.0             # <<<<<<<<<<<<<<
@@ -23468,7 +23482,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_vector_to_rgb(__pyx_t
 */
     __pyx_v_hue = (__pyx_v_hue + 1.0);
 
-    /* "fast_flow/core/common.pxd":161
+    /* "fast_flow/core/common.pxd":177
  *     # Direction determines hue [0, 1)
  *     hue = fast_atan2(y, x) / TWO_PI
  *     if hue < 0.0:             # <<<<<<<<<<<<<<
@@ -23477,7 +23491,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_vector_to_rgb(__pyx_t
 */
   }
 
-  /* "fast_flow/core/common.pxd":175
+  /* "fast_flow/core/common.pxd":191
  *     # fourth root lifts the bulk recirculation into view
  *     # while the jet stays brightest.
  *     magnitude = fast_hypot(x, y)             # <<<<<<<<<<<<<<
@@ -23486,7 +23500,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_vector_to_rgb(__pyx_t
 */
   __pyx_v_magnitude = __pyx_f_9fast_flow_4core_6common_fast_hypot(__pyx_v_x, __pyx_v_y);
 
-  /* "fast_flow/core/common.pxd":177
+  /* "fast_flow/core/common.pxd":193
  *     magnitude = fast_hypot(x, y)
  * 
  *     if max_magnitude > 0.0:             # <<<<<<<<<<<<<<
@@ -23498,7 +23512,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_vector_to_rgb(__pyx_t
   if (__pyx_t_2) {
 
 
-    /* "fast_flow/core/common.pxd":178
+    /* "fast_flow/core/common.pxd":194
  * 
  *     if max_magnitude > 0.0:
  *         value = clamp01(sqrt(sqrt(magnitude / max_magnitude)))             # <<<<<<<<<<<<<<
@@ -23509,11 +23523,11 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_vector_to_rgb(__pyx_t
       PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
       __Pyx_PyGILState_Release(__pyx_gilstate_save);
-      __PYX_ERR(3, 178, __pyx_L1_error)
+      __PYX_ERR(3, 194, __pyx_L1_error)
     }
     __pyx_v_value = __pyx_f_9fast_flow_4core_6common_clamp01(sqrt(sqrt((__pyx_v_magnitude / __pyx_v_max_magnitude))));
 
-    /* "fast_flow/core/common.pxd":177
+    /* "fast_flow/core/common.pxd":193
  *     magnitude = fast_hypot(x, y)
  * 
  *     if max_magnitude > 0.0:             # <<<<<<<<<<<<<<
@@ -23523,7 +23537,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_vector_to_rgb(__pyx_t
     goto __pyx_L4;
   }
 
-  /* "fast_flow/core/common.pxd":180
+  /* "fast_flow/core/common.pxd":196
  *         value = clamp01(sqrt(sqrt(magnitude / max_magnitude)))
  *     else:
  *         value = 0.0             # <<<<<<<<<<<<<<
@@ -23535,7 +23549,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_vector_to_rgb(__pyx_t
   }
   __pyx_L4:;
 
-  /* "fast_flow/core/common.pxd":182
+  /* "fast_flow/core/common.pxd":198
  *         value = 0.0
  * 
  *     hsv_to_rgb(             # <<<<<<<<<<<<<<
@@ -23544,7 +23558,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_vector_to_rgb(__pyx_t
 */
   __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_v_hue, 1.0, __pyx_v_value, __pyx_v_o);
 
-  /* "fast_flow/core/common.pxd":148
+  /* "fast_flow/core/common.pxd":164
  *     return x
  * 
  * cdef inline void vector_to_rgb(             # <<<<<<<<<<<<<<
@@ -23565,7 +23579,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_vector_to_rgb(__pyx_t
 
 }
 
-/* "fast_flow/core/common.pxd":189
+/* "fast_flow/core/common.pxd":205
  *     )
  * 
  * cdef inline void hsv_to_rgb(             # <<<<<<<<<<<<<<
@@ -23584,7 +23598,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
   __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_v_t;
   int __pyx_v_sector;
 
-  /* "fast_flow/core/common.pxd":206
+  /* "fast_flow/core/common.pxd":222
  * 
  *     # h is normalized to [0, 1)
  *     i = floor(h * 6.0)             # <<<<<<<<<<<<<<
@@ -23593,7 +23607,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
   __pyx_v_i = floor((__pyx_v_h * 6.0));
 
-  /* "fast_flow/core/common.pxd":207
+  /* "fast_flow/core/common.pxd":223
  *     # h is normalized to [0, 1)
  *     i = floor(h * 6.0)
  *     sector = <int>i             # <<<<<<<<<<<<<<
@@ -23602,7 +23616,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
   __pyx_v_sector = ((int)__pyx_v_i);
 
-  /* "fast_flow/core/common.pxd":208
+  /* "fast_flow/core/common.pxd":224
  *     i = floor(h * 6.0)
  *     sector = <int>i
  *     f = h * 6.0 - i             # <<<<<<<<<<<<<<
@@ -23611,7 +23625,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
   __pyx_v_f = ((__pyx_v_h * 6.0) - __pyx_v_i);
 
-  /* "fast_flow/core/common.pxd":210
+  /* "fast_flow/core/common.pxd":226
  *     f = h * 6.0 - i
  * 
  *     p = v * (1.0 - s)             # <<<<<<<<<<<<<<
@@ -23620,7 +23634,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
   __pyx_v_p = (__pyx_v_v * (1.0 - __pyx_v_s));
 
-  /* "fast_flow/core/common.pxd":211
+  /* "fast_flow/core/common.pxd":227
  * 
  *     p = v * (1.0 - s)
  *     q = v * (1.0 - s * f)             # <<<<<<<<<<<<<<
@@ -23629,7 +23643,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
   __pyx_v_q = (__pyx_v_v * (1.0 - (__pyx_v_s * __pyx_v_f)));
 
-  /* "fast_flow/core/common.pxd":212
+  /* "fast_flow/core/common.pxd":228
  *     p = v * (1.0 - s)
  *     q = v * (1.0 - s * f)
  *     t = v * (1.0 - s * (1.0 - f))             # <<<<<<<<<<<<<<
@@ -23638,7 +23652,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
   __pyx_v_t = (__pyx_v_v * (1.0 - (__pyx_v_s * (1.0 - __pyx_v_f))));
 
-  /* "fast_flow/core/common.pxd":214
+  /* "fast_flow/core/common.pxd":230
  *     t = v * (1.0 - s * (1.0 - f))
  * 
  *     if sector == 0:             # <<<<<<<<<<<<<<
@@ -23648,7 +23662,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
   switch (__pyx_v_sector) {
     case 0:
 
-    /* "fast_flow/core/common.pxd":215
+    /* "fast_flow/core/common.pxd":231
  * 
  *     if sector == 0:
  *         r = v             # <<<<<<<<<<<<<<
@@ -23657,7 +23671,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
     __pyx_v_r = __pyx_v_v;
 
-    /* "fast_flow/core/common.pxd":216
+    /* "fast_flow/core/common.pxd":232
  *     if sector == 0:
  *         r = v
  *         g = t             # <<<<<<<<<<<<<<
@@ -23666,7 +23680,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
     __pyx_v_g = __pyx_v_t;
 
-    /* "fast_flow/core/common.pxd":217
+    /* "fast_flow/core/common.pxd":233
  *         r = v
  *         g = t
  *         b = p             # <<<<<<<<<<<<<<
@@ -23675,7 +23689,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
     __pyx_v_b = __pyx_v_p;
 
-    /* "fast_flow/core/common.pxd":214
+    /* "fast_flow/core/common.pxd":230
  *     t = v * (1.0 - s * (1.0 - f))
  * 
  *     if sector == 0:             # <<<<<<<<<<<<<<
@@ -23685,7 +23699,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
     break;
     case 1:
 
-    /* "fast_flow/core/common.pxd":219
+    /* "fast_flow/core/common.pxd":235
  *         b = p
  *     elif sector == 1:
  *         r = q             # <<<<<<<<<<<<<<
@@ -23694,7 +23708,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
     __pyx_v_r = __pyx_v_q;
 
-    /* "fast_flow/core/common.pxd":220
+    /* "fast_flow/core/common.pxd":236
  *     elif sector == 1:
  *         r = q
  *         g = v             # <<<<<<<<<<<<<<
@@ -23703,7 +23717,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
     __pyx_v_g = __pyx_v_v;
 
-    /* "fast_flow/core/common.pxd":221
+    /* "fast_flow/core/common.pxd":237
  *         r = q
  *         g = v
  *         b = p             # <<<<<<<<<<<<<<
@@ -23712,7 +23726,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
     __pyx_v_b = __pyx_v_p;
 
-    /* "fast_flow/core/common.pxd":218
+    /* "fast_flow/core/common.pxd":234
  *         g = t
  *         b = p
  *     elif sector == 1:             # <<<<<<<<<<<<<<
@@ -23722,7 +23736,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
     break;
     case 2:
 
-    /* "fast_flow/core/common.pxd":223
+    /* "fast_flow/core/common.pxd":239
  *         b = p
  *     elif sector == 2:
  *         r = p             # <<<<<<<<<<<<<<
@@ -23731,7 +23745,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
     __pyx_v_r = __pyx_v_p;
 
-    /* "fast_flow/core/common.pxd":224
+    /* "fast_flow/core/common.pxd":240
  *     elif sector == 2:
  *         r = p
  *         g = v             # <<<<<<<<<<<<<<
@@ -23740,7 +23754,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
     __pyx_v_g = __pyx_v_v;
 
-    /* "fast_flow/core/common.pxd":225
+    /* "fast_flow/core/common.pxd":241
  *         r = p
  *         g = v
  *         b = t             # <<<<<<<<<<<<<<
@@ -23749,7 +23763,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
     __pyx_v_b = __pyx_v_t;
 
-    /* "fast_flow/core/common.pxd":222
+    /* "fast_flow/core/common.pxd":238
  *         g = v
  *         b = p
  *     elif sector == 2:             # <<<<<<<<<<<<<<
@@ -23759,7 +23773,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
     break;
     case 3:
 
-    /* "fast_flow/core/common.pxd":227
+    /* "fast_flow/core/common.pxd":243
  *         b = t
  *     elif sector == 3:
  *         r = p             # <<<<<<<<<<<<<<
@@ -23768,7 +23782,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
     __pyx_v_r = __pyx_v_p;
 
-    /* "fast_flow/core/common.pxd":228
+    /* "fast_flow/core/common.pxd":244
  *     elif sector == 3:
  *         r = p
  *         g = q             # <<<<<<<<<<<<<<
@@ -23777,7 +23791,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
     __pyx_v_g = __pyx_v_q;
 
-    /* "fast_flow/core/common.pxd":229
+    /* "fast_flow/core/common.pxd":245
  *         r = p
  *         g = q
  *         b = v             # <<<<<<<<<<<<<<
@@ -23786,7 +23800,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
     __pyx_v_b = __pyx_v_v;
 
-    /* "fast_flow/core/common.pxd":226
+    /* "fast_flow/core/common.pxd":242
  *         g = v
  *         b = t
  *     elif sector == 3:             # <<<<<<<<<<<<<<
@@ -23796,7 +23810,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
     break;
     case 4:
 
-    /* "fast_flow/core/common.pxd":231
+    /* "fast_flow/core/common.pxd":247
  *         b = v
  *     elif sector == 4:
  *         r = t             # <<<<<<<<<<<<<<
@@ -23805,7 +23819,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
     __pyx_v_r = __pyx_v_t;
 
-    /* "fast_flow/core/common.pxd":232
+    /* "fast_flow/core/common.pxd":248
  *     elif sector == 4:
  *         r = t
  *         g = p             # <<<<<<<<<<<<<<
@@ -23814,7 +23828,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
     __pyx_v_g = __pyx_v_p;
 
-    /* "fast_flow/core/common.pxd":233
+    /* "fast_flow/core/common.pxd":249
  *         r = t
  *         g = p
  *         b = v             # <<<<<<<<<<<<<<
@@ -23823,7 +23837,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
     __pyx_v_b = __pyx_v_v;
 
-    /* "fast_flow/core/common.pxd":230
+    /* "fast_flow/core/common.pxd":246
  *         g = q
  *         b = v
  *     elif sector == 4:             # <<<<<<<<<<<<<<
@@ -23833,7 +23847,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
     break;
     default:
 
-    /* "fast_flow/core/common.pxd":235
+    /* "fast_flow/core/common.pxd":251
  *         b = v
  *     else:
  *         r = v             # <<<<<<<<<<<<<<
@@ -23842,7 +23856,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
     __pyx_v_r = __pyx_v_v;
 
-    /* "fast_flow/core/common.pxd":236
+    /* "fast_flow/core/common.pxd":252
  *     else:
  *         r = v
  *         g = p             # <<<<<<<<<<<<<<
@@ -23851,7 +23865,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
     __pyx_v_g = __pyx_v_p;
 
-    /* "fast_flow/core/common.pxd":237
+    /* "fast_flow/core/common.pxd":253
  *         r = v
  *         g = p
  *         b = q             # <<<<<<<<<<<<<<
@@ -23862,7 +23876,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
     break;
   }
 
-  /* "fast_flow/core/common.pxd":243
+  /* "fast_flow/core/common.pxd":259
  *     # cv2.imshow/imwrite, which expect BGR), so the blue
  *     # channel goes first.
  *     o[0] = <unsigned char>(b * 255.0)             # <<<<<<<<<<<<<<
@@ -23871,7 +23885,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
   (__pyx_v_o[0]) = ((unsigned char)(__pyx_v_b * 255.0));
 
-  /* "fast_flow/core/common.pxd":244
+  /* "fast_flow/core/common.pxd":260
  *     # channel goes first.
  *     o[0] = <unsigned char>(b * 255.0)
  *     o[1] = <unsigned char>(g * 255.0)             # <<<<<<<<<<<<<<
@@ -23880,7 +23894,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
   (__pyx_v_o[1]) = ((unsigned char)(__pyx_v_g * 255.0));
 
-  /* "fast_flow/core/common.pxd":245
+  /* "fast_flow/core/common.pxd":261
  *     o[0] = <unsigned char>(b * 255.0)
  *     o[1] = <unsigned char>(g * 255.0)
  *     o[2] = <unsigned char>(r * 255.0)             # <<<<<<<<<<<<<<
@@ -23888,7 +23902,7 @@ static CYTHON_INLINE void __pyx_f_9fast_flow_4core_6common_hsv_to_rgb(__pyx_t_9f
 */
   (__pyx_v_o[2]) = ((unsigned char)(__pyx_v_r * 255.0));
 
-  /* "fast_flow/core/common.pxd":189
+  /* "fast_flow/core/common.pxd":205
  *     )
  * 
  * cdef inline void hsv_to_rgb(             # <<<<<<<<<<<<<<
@@ -25309,7 +25323,7 @@ static int __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
  *         if self.c_handler == NULL:
  *             raise MemoryError("could not allocate native-C handler")             # <<<<<<<<<<<<<<
  * 
- *     cdef Py_ssize_t _new_shape_slot(self, Py_ssize_t n, DTYPE_f charge):
+ *     cdef VectorBinding coulomb_field_binding(self) noexcept:
 */
     __pyx_t_2 = NULL;
     __pyx_t_3 = 1;
@@ -25372,6 +25386,333 @@ static int __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 /* "fast_flow/core/electrostaticforcehandler.pyx":396
  *             raise MemoryError("could not allocate native-C handler")
  * 
+ *     cdef VectorBinding coulomb_field_binding(self) noexcept:             # <<<<<<<<<<<<<<
+ *         cdef VectorBinding field = VectorBinding()
+ *         field.ny = self.ny
+*/
+
+static struct __pyx_t_9fast_flow_4core_6common_VectorBinding __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_coulomb_field_binding(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *__pyx_v_self) {
+  struct __pyx_t_9fast_flow_4core_6common_VectorBinding __pyx_v_field;
+  struct __pyx_t_9fast_flow_4core_6common_VectorBinding __pyx_r;
+  __Pyx_RefNannyDeclarations
+  struct __pyx_t_9fast_flow_4core_6common_VectorBinding __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  Py_ssize_t __pyx_t_3;
+  __pyx_t_9fast_flow_4core_6common_DTYPE_f **__pyx_t_4;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("coulomb_field_binding", 0);
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":397
+ * 
+ *     cdef VectorBinding coulomb_field_binding(self) noexcept:
+ *         cdef VectorBinding field = VectorBinding()             # <<<<<<<<<<<<<<
+ *         field.ny = self.ny
+ *         field.nx = self.nx
+*/
+  __pyx_v_field = __pyx_t_1;
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":398
+ *     cdef VectorBinding coulomb_field_binding(self) noexcept:
+ *         cdef VectorBinding field = VectorBinding()
+ *         field.ny = self.ny             # <<<<<<<<<<<<<<
+ *         field.nx = self.nx
+ *         field.v_buffers = self.cv
+*/
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_ny); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 398, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyIndex_AsSsize_t(__pyx_t_2); if (unlikely((__pyx_t_3 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 398, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_field.ny = __pyx_t_3;
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":399
+ *         cdef VectorBinding field = VectorBinding()
+ *         field.ny = self.ny
+ *         field.nx = self.nx             # <<<<<<<<<<<<<<
+ *         field.v_buffers = self.cv
+ *         field.u_buffers = self.cu
+*/
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_nx); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 399, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyIndex_AsSsize_t(__pyx_t_2); if (unlikely((__pyx_t_3 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 399, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_field.nx = __pyx_t_3;
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":400
+ *         field.ny = self.ny
+ *         field.nx = self.nx
+ *         field.v_buffers = self.cv             # <<<<<<<<<<<<<<
+ *         field.u_buffers = self.cu
+ *         field.active = &self.ck
+*/
+  __pyx_t_4 = __pyx_v_self->cv;
+
+  __pyx_v_field.v_buffers = __pyx_t_4;
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":401
+ *         field.nx = self.nx
+ *         field.v_buffers = self.cv
+ *         field.u_buffers = self.cu             # <<<<<<<<<<<<<<
+ *         field.active = &self.ck
+ *         return field
+*/
+  __pyx_t_4 = __pyx_v_self->cu;
+
+  __pyx_v_field.u_buffers = __pyx_t_4;
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":402
+ *         field.v_buffers = self.cv
+ *         field.u_buffers = self.cu
+ *         field.active = &self.ck             # <<<<<<<<<<<<<<
+ *         return field
+ * 
+*/
+  __pyx_v_field.active = (&__pyx_v_self->ck);
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":403
+ *         field.u_buffers = self.cu
+ *         field.active = &self.ck
+ *         return field             # <<<<<<<<<<<<<<
+ * 
+ *     cdef ScalarBinding ion_density_binding(self) noexcept:
+*/
+  {
+
+    __pyx_r = __pyx_v_field;
+  }
+  goto __pyx_L0;
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":396
+ *             raise MemoryError("could not allocate native-C handler")
+ * 
+ *     cdef VectorBinding coulomb_field_binding(self) noexcept:             # <<<<<<<<<<<<<<
+ *         cdef VectorBinding field = VectorBinding()
+ *         field.ny = self.ny
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_WriteUnraisable("fast_flow.core.electrostaticforcehandler.ElectrostaticForceHandler.coulomb_field_binding", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_pretend_to_initialize(&__pyx_r);
+  __pyx_L0:;
+
+
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "fast_flow/core/electrostaticforcehandler.pyx":405
+ *         return field
+ * 
+ *     cdef ScalarBinding ion_density_binding(self) noexcept:             # <<<<<<<<<<<<<<
+ *         cdef ScalarBinding field = ScalarBinding()
+ *         field.ny = self.ny
+*/
+
+static struct __pyx_t_9fast_flow_4core_6common_ScalarBinding __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_ion_density_binding(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *__pyx_v_self) {
+  struct __pyx_t_9fast_flow_4core_6common_ScalarBinding __pyx_v_field;
+  struct __pyx_t_9fast_flow_4core_6common_ScalarBinding __pyx_r;
+  __Pyx_RefNannyDeclarations
+  struct __pyx_t_9fast_flow_4core_6common_ScalarBinding __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  Py_ssize_t __pyx_t_3;
+  __pyx_t_9fast_flow_4core_6common_DTYPE_f **__pyx_t_4;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("ion_density_binding", 0);
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":406
+ * 
+ *     cdef ScalarBinding ion_density_binding(self) noexcept:
+ *         cdef ScalarBinding field = ScalarBinding()             # <<<<<<<<<<<<<<
+ *         field.ny = self.ny
+ *         field.nx = self.nx
+*/
+  __pyx_v_field = __pyx_t_1;
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":407
+ *     cdef ScalarBinding ion_density_binding(self) noexcept:
+ *         cdef ScalarBinding field = ScalarBinding()
+ *         field.ny = self.ny             # <<<<<<<<<<<<<<
+ *         field.nx = self.nx
+ *         field.buffers = self.d
+*/
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_ny); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 407, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyIndex_AsSsize_t(__pyx_t_2); if (unlikely((__pyx_t_3 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 407, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_field.ny = __pyx_t_3;
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":408
+ *         cdef ScalarBinding field = ScalarBinding()
+ *         field.ny = self.ny
+ *         field.nx = self.nx             # <<<<<<<<<<<<<<
+ *         field.buffers = self.d
+ *         field.active = &self.dk
+*/
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_nx); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 408, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyIndex_AsSsize_t(__pyx_t_2); if (unlikely((__pyx_t_3 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 408, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_field.nx = __pyx_t_3;
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":409
+ *         field.ny = self.ny
+ *         field.nx = self.nx
+ *         field.buffers = self.d             # <<<<<<<<<<<<<<
+ *         field.active = &self.dk
+ *         return field
+*/
+  __pyx_t_4 = __pyx_v_self->d;
+
+  __pyx_v_field.buffers = __pyx_t_4;
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":410
+ *         field.nx = self.nx
+ *         field.buffers = self.d
+ *         field.active = &self.dk             # <<<<<<<<<<<<<<
+ *         return field
+ * 
+*/
+  __pyx_v_field.active = (&__pyx_v_self->dk);
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":411
+ *         field.buffers = self.d
+ *         field.active = &self.dk
+ *         return field             # <<<<<<<<<<<<<<
+ * 
+ *     cdef ScalarBinding o2_density_binding(self) noexcept:
+*/
+  {
+
+    __pyx_r = __pyx_v_field;
+  }
+  goto __pyx_L0;
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":405
+ *         return field
+ * 
+ *     cdef ScalarBinding ion_density_binding(self) noexcept:             # <<<<<<<<<<<<<<
+ *         cdef ScalarBinding field = ScalarBinding()
+ *         field.ny = self.ny
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_WriteUnraisable("fast_flow.core.electrostaticforcehandler.ElectrostaticForceHandler.ion_density_binding", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_pretend_to_initialize(&__pyx_r);
+  __pyx_L0:;
+
+
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "fast_flow/core/electrostaticforcehandler.pyx":413
+ *         return field
+ * 
+ *     cdef ScalarBinding o2_density_binding(self) noexcept:             # <<<<<<<<<<<<<<
+ *         cdef ScalarBinding field = ScalarBinding()
+ *         field.ny = self.ny
+*/
+
+static struct __pyx_t_9fast_flow_4core_6common_ScalarBinding __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_o2_density_binding(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *__pyx_v_self) {
+  struct __pyx_t_9fast_flow_4core_6common_ScalarBinding __pyx_v_field;
+  struct __pyx_t_9fast_flow_4core_6common_ScalarBinding __pyx_r;
+  __Pyx_RefNannyDeclarations
+  struct __pyx_t_9fast_flow_4core_6common_ScalarBinding __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  Py_ssize_t __pyx_t_3;
+  __pyx_t_9fast_flow_4core_6common_DTYPE_f **__pyx_t_4;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("o2_density_binding", 0);
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":414
+ * 
+ *     cdef ScalarBinding o2_density_binding(self) noexcept:
+ *         cdef ScalarBinding field = ScalarBinding()             # <<<<<<<<<<<<<<
+ *         field.ny = self.ny
+ *         field.nx = self.nx
+*/
+  __pyx_v_field = __pyx_t_1;
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":415
+ *     cdef ScalarBinding o2_density_binding(self) noexcept:
+ *         cdef ScalarBinding field = ScalarBinding()
+ *         field.ny = self.ny             # <<<<<<<<<<<<<<
+ *         field.nx = self.nx
+ *         field.buffers = self.dn
+*/
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_ny); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 415, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyIndex_AsSsize_t(__pyx_t_2); if (unlikely((__pyx_t_3 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 415, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_field.ny = __pyx_t_3;
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":416
+ *         cdef ScalarBinding field = ScalarBinding()
+ *         field.ny = self.ny
+ *         field.nx = self.nx             # <<<<<<<<<<<<<<
+ *         field.buffers = self.dn
+ *         field.active = &self.dnk
+*/
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_nx); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 416, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyIndex_AsSsize_t(__pyx_t_2); if (unlikely((__pyx_t_3 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 416, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_field.nx = __pyx_t_3;
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":417
+ *         field.ny = self.ny
+ *         field.nx = self.nx
+ *         field.buffers = self.dn             # <<<<<<<<<<<<<<
+ *         field.active = &self.dnk
+ * 
+*/
+  __pyx_t_4 = __pyx_v_self->dn;
+
+  __pyx_v_field.buffers = __pyx_t_4;
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":418
+ *         field.nx = self.nx
+ *         field.buffers = self.dn
+ *         field.active = &self.dnk             # <<<<<<<<<<<<<<
+ * 
+ *     cdef Py_ssize_t _new_shape_slot(self, Py_ssize_t n, DTYPE_f charge):
+*/
+  __pyx_v_field.active = (&__pyx_v_self->dnk);
+
+  /* "fast_flow/core/electrostaticforcehandler.pyx":413
+ *         return field
+ * 
+ *     cdef ScalarBinding o2_density_binding(self) noexcept:             # <<<<<<<<<<<<<<
+ *         cdef ScalarBinding field = ScalarBinding()
+ *         field.ny = self.ny
+*/
+
+  /* function exit code */
+  __Pyx_pretend_to_initialize(&__pyx_r);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_WriteUnraisable("fast_flow.core.electrostaticforcehandler.ElectrostaticForceHandler.o2_density_binding", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_pretend_to_initialize(&__pyx_r);
+  __pyx_L0:;
+
+
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "fast_flow/core/electrostaticforcehandler.pyx":420
+ *         field.active = &self.dnk
+ * 
  *     cdef Py_ssize_t _new_shape_slot(self, Py_ssize_t n, DTYPE_f charge):             # <<<<<<<<<<<<<<
  *         """Grow the shape array if full and allocate the next
  *         slot's edges buffer for n points; returns the new
@@ -25393,7 +25734,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_new_shape_slot", 0);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":403
+  /* "fast_flow/core/electrostaticforcehandler.pyx":427
  *         cdef Py_ssize_t new_cap
  *         cdef Py_ssize_t slot
  *         if self.n_shapes == self.shapes_cap:             # <<<<<<<<<<<<<<
@@ -25405,7 +25746,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":404
+    /* "fast_flow/core/electrostaticforcehandler.pyx":428
  *         cdef Py_ssize_t slot
  *         if self.n_shapes == self.shapes_cap:
  *             new_cap = 8 if self.shapes_cap == 0 else 2 * self.shapes_cap             # <<<<<<<<<<<<<<
@@ -25424,7 +25765,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
 
     __pyx_v_new_cap = __pyx_t_2;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":405
+    /* "fast_flow/core/electrostaticforcehandler.pyx":429
  *         if self.n_shapes == self.shapes_cap:
  *             new_cap = 8 if self.shapes_cap == 0 else 2 * self.shapes_cap
  *             grown = <Shape*> realloc(self.shapes,             # <<<<<<<<<<<<<<
@@ -25433,7 +25774,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
 */
     __pyx_v_grown = ((struct __pyx_t_9fast_flow_4core_25electrostaticforcehandler_Shape *)realloc(__pyx_v_self->shapes, (__pyx_v_new_cap * (sizeof(struct __pyx_t_9fast_flow_4core_25electrostaticforcehandler_Shape)))));
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":407
+    /* "fast_flow/core/electrostaticforcehandler.pyx":431
  *             grown = <Shape*> realloc(self.shapes,
  *                                      new_cap * sizeof(Shape))
  *             if grown == NULL:             # <<<<<<<<<<<<<<
@@ -25445,7 +25786,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
     if (unlikely(__pyx_t_1)) {
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":408
+      /* "fast_flow/core/electrostaticforcehandler.pyx":432
  *                                      new_cap * sizeof(Shape))
  *             if grown == NULL:
  *                 raise MemoryError("could not grow shape array")             # <<<<<<<<<<<<<<
@@ -25458,14 +25799,14 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
         PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_could_not_grow_shape_array};
         __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_MemoryError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 408, __pyx_L1_error)
+        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 432, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
       }
       __Pyx_Raise(__pyx_t_3, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __PYX_ERR(0, 408, __pyx_L1_error)
+      __PYX_ERR(0, 432, __pyx_L1_error)
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":407
+      /* "fast_flow/core/electrostaticforcehandler.pyx":431
  *             grown = <Shape*> realloc(self.shapes,
  *                                      new_cap * sizeof(Shape))
  *             if grown == NULL:             # <<<<<<<<<<<<<<
@@ -25474,7 +25815,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
 */
     }
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":409
+    /* "fast_flow/core/electrostaticforcehandler.pyx":433
  *             if grown == NULL:
  *                 raise MemoryError("could not grow shape array")
  *             self.shapes = grown             # <<<<<<<<<<<<<<
@@ -25483,7 +25824,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
 */
     __pyx_v_self->shapes = __pyx_v_grown;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":410
+    /* "fast_flow/core/electrostaticforcehandler.pyx":434
  *                 raise MemoryError("could not grow shape array")
  *             self.shapes = grown
  *             self.shapes_cap = new_cap             # <<<<<<<<<<<<<<
@@ -25492,7 +25833,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
 */
     __pyx_v_self->shapes_cap = __pyx_v_new_cap;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":403
+    /* "fast_flow/core/electrostaticforcehandler.pyx":427
  *         cdef Py_ssize_t new_cap
  *         cdef Py_ssize_t slot
  *         if self.n_shapes == self.shapes_cap:             # <<<<<<<<<<<<<<
@@ -25501,7 +25842,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":411
+  /* "fast_flow/core/electrostaticforcehandler.pyx":435
  *             self.shapes = grown
  *             self.shapes_cap = new_cap
  *         slot = self.n_shapes             # <<<<<<<<<<<<<<
@@ -25512,7 +25853,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
 
   __pyx_v_slot = __pyx_t_2;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":412
+  /* "fast_flow/core/electrostaticforcehandler.pyx":436
  *             self.shapes_cap = new_cap
  *         slot = self.n_shapes
  *         self.shapes[slot].edges = \             # <<<<<<<<<<<<<<
@@ -25521,7 +25862,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
 */
   (__pyx_v_self->shapes[__pyx_v_slot]).edges = ((__pyx_t_9fast_flow_4core_6common_DTYPE_f *)malloc(((2 * __pyx_v_n) * (sizeof(__pyx_t_9fast_flow_4core_6common_DTYPE_f)))));
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":414
+  /* "fast_flow/core/electrostaticforcehandler.pyx":438
  *         self.shapes[slot].edges = \
  *             <DTYPE_f*> malloc(2 * n * sizeof(DTYPE_f))
  *         if self.shapes[slot].edges == NULL:             # <<<<<<<<<<<<<<
@@ -25533,7 +25874,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
   if (unlikely(__pyx_t_1)) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":415
+    /* "fast_flow/core/electrostaticforcehandler.pyx":439
  *             <DTYPE_f*> malloc(2 * n * sizeof(DTYPE_f))
  *         if self.shapes[slot].edges == NULL:
  *             raise MemoryError("could not allocate shape edges")             # <<<<<<<<<<<<<<
@@ -25546,14 +25887,14 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
       PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_could_not_allocate_shape_edges};
       __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_MemoryError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 415, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 439, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 415, __pyx_L1_error)
+    __PYX_ERR(0, 439, __pyx_L1_error)
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":414
+    /* "fast_flow/core/electrostaticforcehandler.pyx":438
  *         self.shapes[slot].edges = \
  *             <DTYPE_f*> malloc(2 * n * sizeof(DTYPE_f))
  *         if self.shapes[slot].edges == NULL:             # <<<<<<<<<<<<<<
@@ -25562,7 +25903,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":416
+  /* "fast_flow/core/electrostaticforcehandler.pyx":440
  *         if self.shapes[slot].edges == NULL:
  *             raise MemoryError("could not allocate shape edges")
  *         self.shapes[slot].n_edges = n             # <<<<<<<<<<<<<<
@@ -25571,7 +25912,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
 */
   (__pyx_v_self->shapes[__pyx_v_slot]).n_edges = __pyx_v_n;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":417
+  /* "fast_flow/core/electrostaticforcehandler.pyx":441
  *             raise MemoryError("could not allocate shape edges")
  *         self.shapes[slot].n_edges = n
  *         self.shapes[slot].extradata.charge = charge             # <<<<<<<<<<<<<<
@@ -25580,7 +25921,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
 */
   (__pyx_v_self->shapes[__pyx_v_slot]).extradata.charge = __pyx_v_charge;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":418
+  /* "fast_flow/core/electrostaticforcehandler.pyx":442
  *         self.shapes[slot].n_edges = n
  *         self.shapes[slot].extradata.charge = charge
  *         self.n_shapes += 1             # <<<<<<<<<<<<<<
@@ -25589,7 +25930,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
 */
   __pyx_v_self->n_shapes = (__pyx_v_self->n_shapes + 1);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":419
+  /* "fast_flow/core/electrostaticforcehandler.pyx":443
  *         self.shapes[slot].extradata.charge = charge
  *         self.n_shapes += 1
  *         return slot             # <<<<<<<<<<<<<<
@@ -25602,8 +25943,8 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
   }
   goto __pyx_L0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":396
- *             raise MemoryError("could not allocate native-C handler")
+  /* "fast_flow/core/electrostaticforcehandler.pyx":420
+ *         field.active = &self.dnk
  * 
  *     cdef Py_ssize_t _new_shape_slot(self, Py_ssize_t n, DTYPE_f charge):             # <<<<<<<<<<<<<<
  *         """Grow the shape array if full and allocate the next
@@ -25625,7 +25966,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
   return __pyx_r;
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":421
+/* "fast_flow/core/electrostaticforcehandler.pyx":445
  *         return slot
  * 
  *     cdef _build_edges(self, cnp.ndarray[unsigned char, ndim=3] image, object layermap):             # <<<<<<<<<<<<<<
@@ -25692,11 +26033,11 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
   __pyx_pybuffernd_image.rcbuffer = &__pyx_pybuffer_image;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_unsigned_char, PyBUF_FORMAT| PyBUF_STRIDES, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 421, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_unsigned_char, PyBUF_FORMAT| PyBUF_STRIDES, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 445, __pyx_L1_error)
   }
   __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_image.diminfo[2].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_image.diminfo[2].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[2];
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":424
+  /* "fast_flow/core/electrostaticforcehandler.pyx":448
  *         """Flatten the image and extract per-sign-group edges
  *         (see __init__ for the semantics)."""
  *         cdef Py_ssize_t nx = image.shape[1]             # <<<<<<<<<<<<<<
@@ -25705,7 +26046,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
   __pyx_v_nx = (__pyx_f_5numpy_7ndarray_5shape___get__(((PyArrayObject *)__pyx_v_image))[1]);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":425
+  /* "fast_flow/core/electrostaticforcehandler.pyx":449
  *         (see __init__ for the semantics)."""
  *         cdef Py_ssize_t nx = image.shape[1]
  *         cdef Py_ssize_t ny = image.shape[0]             # <<<<<<<<<<<<<<
@@ -25714,7 +26055,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
   __pyx_v_ny = (__pyx_f_5numpy_7ndarray_5shape___get__(((PyArrayObject *)__pyx_v_image))[0]);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":426
+  /* "fast_flow/core/electrostaticforcehandler.pyx":450
  *         cdef Py_ssize_t nx = image.shape[1]
  *         cdef Py_ssize_t ny = image.shape[0]
  *         cdef Py_ssize_t nz = image.shape[2]             # <<<<<<<<<<<<<<
@@ -25723,7 +26064,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
   __pyx_v_nz = (__pyx_f_5numpy_7ndarray_5shape___get__(((PyArrayObject *)__pyx_v_image))[2]);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":438
+  /* "fast_flow/core/electrostaticforcehandler.pyx":462
  *         cdef Py_ssize_t e
  *         cdef list layers
  *         cdef DTYPE_f sx = self.solver.lx / (nx - 1) if nx > 1 else 0.0             # <<<<<<<<<<<<<<
@@ -25742,7 +26083,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 
   __pyx_v_sx = __pyx_t_1;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":439
+  /* "fast_flow/core/electrostaticforcehandler.pyx":463
  *         cdef list layers
  *         cdef DTYPE_f sx = self.solver.lx / (nx - 1) if nx > 1 else 0.0
  *         cdef DTYPE_f sy = self.solver.ly / (ny - 1) if ny > 1 else 0.0             # <<<<<<<<<<<<<<
@@ -25761,7 +26102,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 
   __pyx_v_sy = __pyx_t_1;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":442
+  /* "fast_flow/core/electrostaticforcehandler.pyx":466
  * 
  *         # get each channels bitmask of solids
  *         channels = <unsigned char**> malloc(nz * sizeof(unsigned char*))             # <<<<<<<<<<<<<<
@@ -25770,7 +26111,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
   __pyx_v_channels = ((unsigned char **)malloc((__pyx_v_nz * (sizeof(unsigned char *)))));
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":443
+  /* "fast_flow/core/electrostaticforcehandler.pyx":467
  *         # get each channels bitmask of solids
  *         channels = <unsigned char**> malloc(nz * sizeof(unsigned char*))
  *         if channels == NULL:             # <<<<<<<<<<<<<<
@@ -25782,7 +26123,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
   if (unlikely(__pyx_t_2)) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":444
+    /* "fast_flow/core/electrostaticforcehandler.pyx":468
  *         channels = <unsigned char**> malloc(nz * sizeof(unsigned char*))
  *         if channels == NULL:
  *             raise MemoryError("could not allocate flattened image")             # <<<<<<<<<<<<<<
@@ -25795,14 +26136,14 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_could_not_allocate_flattened_ima};
       __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_MemoryError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 444, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 468, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 444, __pyx_L1_error)
+    __PYX_ERR(0, 468, __pyx_L1_error)
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":443
+    /* "fast_flow/core/electrostaticforcehandler.pyx":467
  *         # get each channels bitmask of solids
  *         channels = <unsigned char**> malloc(nz * sizeof(unsigned char*))
  *         if channels == NULL:             # <<<<<<<<<<<<<<
@@ -25811,7 +26152,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":445
+  /* "fast_flow/core/electrostaticforcehandler.pyx":469
  *         if channels == NULL:
  *             raise MemoryError("could not allocate flattened image")
  *         for z in range(nz):             # <<<<<<<<<<<<<<
@@ -25825,7 +26166,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
   for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
     __pyx_v_z = __pyx_t_8;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":446
+    /* "fast_flow/core/electrostaticforcehandler.pyx":470
  *             raise MemoryError("could not allocate flattened image")
  *         for z in range(nz):
  *             channels[z] = <unsigned char*> malloc(ny * nx * sizeof(unsigned char))             # <<<<<<<<<<<<<<
@@ -25834,7 +26175,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
     (__pyx_v_channels[__pyx_v_z]) = ((unsigned char *)malloc(((__pyx_v_ny * __pyx_v_nx) * (sizeof(unsigned char)))));
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":447
+    /* "fast_flow/core/electrostaticforcehandler.pyx":471
  *         for z in range(nz):
  *             channels[z] = <unsigned char*> malloc(ny * nx * sizeof(unsigned char))
  *             if channels[z] == NULL:             # <<<<<<<<<<<<<<
@@ -25846,7 +26187,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
     if (__pyx_t_2) {
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":448
+      /* "fast_flow/core/electrostaticforcehandler.pyx":472
  *             channels[z] = <unsigned char*> malloc(ny * nx * sizeof(unsigned char))
  *             if channels[z] == NULL:
  *                 for i in range(z):             # <<<<<<<<<<<<<<
@@ -25860,7 +26201,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
         __pyx_v_i = __pyx_t_11;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":449
+        /* "fast_flow/core/electrostaticforcehandler.pyx":473
  *             if channels[z] == NULL:
  *                 for i in range(z):
  *                     free(channels[i])             # <<<<<<<<<<<<<<
@@ -25871,7 +26212,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       }
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":450
+      /* "fast_flow/core/electrostaticforcehandler.pyx":474
  *                 for i in range(z):
  *                     free(channels[i])
  *                 free(channels)             # <<<<<<<<<<<<<<
@@ -25880,7 +26221,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
       free(__pyx_v_channels);
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":451
+      /* "fast_flow/core/electrostaticforcehandler.pyx":475
  *                     free(channels[i])
  *                 free(channels)
  *                 raise MemoryError("could not allocate channel mask image")             # <<<<<<<<<<<<<<
@@ -25893,14 +26234,14 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
         PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u_could_not_allocate_channel_mask};
         __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_MemoryError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 451, __pyx_L1_error)
+        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 475, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
       }
       __Pyx_Raise(__pyx_t_3, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __PYX_ERR(0, 451, __pyx_L1_error)
+      __PYX_ERR(0, 475, __pyx_L1_error)
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":447
+      /* "fast_flow/core/electrostaticforcehandler.pyx":471
  *         for z in range(nz):
  *             channels[z] = <unsigned char*> malloc(ny * nx * sizeof(unsigned char))
  *             if channels[z] == NULL:             # <<<<<<<<<<<<<<
@@ -25909,35 +26250,35 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
     }
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":452
+    /* "fast_flow/core/electrostaticforcehandler.pyx":476
  *                 free(channels)
  *                 raise MemoryError("could not allocate channel mask image")
  *             build_solids_mask(image[:, :, z], channels[z])             # <<<<<<<<<<<<<<
  * 
  *         try:
 */
-    __pyx_t_3 = PyLong_FromSsize_t(__pyx_v_z); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 452, __pyx_L1_error)
+    __pyx_t_3 = PyLong_FromSsize_t(__pyx_v_z); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 476, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 452, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 476, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_INCREF(__pyx_mstate_global->__pyx_slice[0]);
     __Pyx_GIVEREF(__pyx_mstate_global->__pyx_slice[0]);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_mstate_global->__pyx_slice[0]) != (0)) __PYX_ERR(0, 452, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_mstate_global->__pyx_slice[0]) != (0)) __PYX_ERR(0, 476, __pyx_L1_error);
     __Pyx_INCREF(__pyx_mstate_global->__pyx_slice[0]);
     __Pyx_GIVEREF(__pyx_mstate_global->__pyx_slice[0]);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_mstate_global->__pyx_slice[0]) != (0)) __PYX_ERR(0, 452, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_mstate_global->__pyx_slice[0]) != (0)) __PYX_ERR(0, 476, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_3);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_t_3) != (0)) __PYX_ERR(0, 452, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_t_3) != (0)) __PYX_ERR(0, 476, __pyx_L1_error);
     __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_image), __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 452, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_image), __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 476, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_f_9fast_flow_4core_6common_build_solids_mask(__pyx_t_3, (__pyx_v_channels[__pyx_v_z])); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 452, __pyx_L1_error)
+    __pyx_f_9fast_flow_4core_6common_build_solids_mask(__pyx_t_3, (__pyx_v_channels[__pyx_v_z])); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 476, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
 
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":454
+  /* "fast_flow/core/electrostaticforcehandler.pyx":478
  *             build_solids_mask(image[:, :, z], channels[z])
  * 
  *         try:             # <<<<<<<<<<<<<<
@@ -25946,7 +26287,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
   /*try:*/ {
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":455
+    /* "fast_flow/core/electrostaticforcehandler.pyx":479
  * 
  *         try:
  *             if layermap is None:             # <<<<<<<<<<<<<<
@@ -25957,7 +26298,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
     if (__pyx_t_2) {
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":456
+      /* "fast_flow/core/electrostaticforcehandler.pyx":480
  *         try:
  *             if layermap is None:
  *                 return             # <<<<<<<<<<<<<<
@@ -25974,7 +26315,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       }
       goto __pyx_L9_return;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":455
+      /* "fast_flow/core/electrostaticforcehandler.pyx":479
  * 
  *         try:
  *             if layermap is None:             # <<<<<<<<<<<<<<
@@ -25983,7 +26324,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
     }
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":460
+    /* "fast_flow/core/electrostaticforcehandler.pyx":484
  *             # iterate over each layer, if there's a non-zero charge
  *             # then add the electrod edges
  *             for layer in sorted(layermap.keys()):             # <<<<<<<<<<<<<<
@@ -25997,13 +26338,13 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       PyObject *__pyx_callargs[2] = {__pyx_t_4, NULL};
       __pyx_t_3 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_keys, __pyx_callargs+__pyx_t_5, (1-__pyx_t_5) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 460, __pyx_L10_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 484, __pyx_L10_error)
       __Pyx_GOTREF(__pyx_t_3);
     }
-    __pyx_t_4 = PySequence_List(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 460, __pyx_L10_error)
+    __pyx_t_4 = PySequence_List(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 484, __pyx_L10_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely((PyList_Sort(__pyx_t_4) < 0))) __PYX_ERR(0, 460, __pyx_L10_error)
+    if (unlikely((PyList_Sort(__pyx_t_4) < 0))) __PYX_ERR(0, 484, __pyx_L10_error)
     __pyx_t_3 = __pyx_t_4; __Pyx_INCREF(__pyx_t_3);
     __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -26011,32 +26352,32 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       {
         Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_3);
         #if !CYTHON_ASSUME_SAFE_SIZE
-        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 460, __pyx_L10_error)
+        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 484, __pyx_L10_error)
         #endif
         if (__pyx_t_6 >= __pyx_temp) break;
       }
       __pyx_t_4 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_3, __pyx_t_6, __Pyx_ReferenceSharing_OwnStrongReference);
       ++__pyx_t_6;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 460, __pyx_L10_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 484, __pyx_L10_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_XDECREF_SET(__pyx_v_layer, __pyx_t_4);
       __pyx_t_4 = 0;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":461
+      /* "fast_flow/core/electrostaticforcehandler.pyx":485
  *             # then add the electrod edges
  *             for layer in sorted(layermap.keys()):
  *                 if layer >= image.ndim:             # <<<<<<<<<<<<<<
  *                     raise ValueError(
  *                         f"layermap keys must reference a real channel in "
 */
-      __pyx_t_4 = __Pyx_PyLong_From_int(__pyx_f_5numpy_7ndarray_4ndim___get__(((PyArrayObject *)__pyx_v_image))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 461, __pyx_L10_error)
+      __pyx_t_4 = __Pyx_PyLong_From_int(__pyx_f_5numpy_7ndarray_4ndim___get__(((PyArrayObject *)__pyx_v_image))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 485, __pyx_L10_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_2 = __Pyx_PyObject_CompareBoolGe_object_int(__pyx_v_layer, __pyx_t_4, Py_GE); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 461, __pyx_L10_error)
+      __pyx_t_2 = __Pyx_PyObject_CompareBoolGe_object_int(__pyx_v_layer, __pyx_t_4, Py_GE); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 485, __pyx_L10_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       if (unlikely(__pyx_t_2)) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":462
+        /* "fast_flow/core/electrostaticforcehandler.pyx":486
  *             for layer in sorted(layermap.keys()):
  *                 if layer >= image.ndim:
  *                     raise ValueError(             # <<<<<<<<<<<<<<
@@ -26045,16 +26386,16 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
         __pyx_t_12 = NULL;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":464
+        /* "fast_flow/core/electrostaticforcehandler.pyx":488
  *                     raise ValueError(
  *                         f"layermap keys must reference a real channel in "
  *                         f"the source image (image.ndim={image.ndim} but got key={layer})")             # <<<<<<<<<<<<<<
  *                 charge = float(layermap[layer])
  *                 if charge == 0:
 */
-        __pyx_t_13 = __Pyx_PyUnicode_From_int(__pyx_f_5numpy_7ndarray_4ndim___get__(((PyArrayObject *)__pyx_v_image)), 0, ' ', 'd'); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 464, __pyx_L10_error)
+        __pyx_t_13 = __Pyx_PyUnicode_From_int(__pyx_f_5numpy_7ndarray_4ndim___get__(((PyArrayObject *)__pyx_v_image)), 0, ' ', 'd'); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 488, __pyx_L10_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_14 = __Pyx_PyObject_FormatSimple(__pyx_v_layer, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 464, __pyx_L10_error)
+        __pyx_t_14 = __Pyx_PyObject_FormatSimple(__pyx_v_layer, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 488, __pyx_L10_error)
         __Pyx_GOTREF(__pyx_t_14);
         __pyx_t_15[0] = __pyx_mstate_global->__pyx_kp_u_layermap_keys_must_reference_a_r;
         __pyx_t_15[1] = __pyx_t_13;
@@ -26062,7 +26403,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
         __pyx_t_15[3] = __pyx_t_14;
         __pyx_t_15[4] = __pyx_mstate_global->__pyx_kp_u__11;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":463
+        /* "fast_flow/core/electrostaticforcehandler.pyx":487
  *                 if layer >= image.ndim:
  *                     raise ValueError(
  *                         f"layermap keys must reference a real channel in "             # <<<<<<<<<<<<<<
@@ -26078,7 +26419,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
         __pyx_t_16 |= __Pyx_PyUnicode_KIND_04(__pyx_t_15[3]);
         #endif
         __pyx_t_17 = __Pyx_PyUnicode_Join(__pyx_t_15, 5, __pyx_t_7, __pyx_t_16);
-        if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 463, __pyx_L10_error)
+        if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 487, __pyx_L10_error)
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
@@ -26088,14 +26429,14 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
           __pyx_t_4 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
           __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-          if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 462, __pyx_L10_error)
+          if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 486, __pyx_L10_error)
           __Pyx_GOTREF(__pyx_t_4);
         }
         __Pyx_Raise(__pyx_t_4, 0, 0, 0);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __PYX_ERR(0, 462, __pyx_L10_error)
+        __PYX_ERR(0, 486, __pyx_L10_error)
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":461
+        /* "fast_flow/core/electrostaticforcehandler.pyx":485
  *             # then add the electrod edges
  *             for layer in sorted(layermap.keys()):
  *                 if layer >= image.ndim:             # <<<<<<<<<<<<<<
@@ -26104,20 +26445,20 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
       }
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":465
+      /* "fast_flow/core/electrostaticforcehandler.pyx":489
  *                         f"layermap keys must reference a real channel in "
  *                         f"the source image (image.ndim={image.ndim} but got key={layer})")
  *                 charge = float(layermap[layer])             # <<<<<<<<<<<<<<
  *                 if charge == 0:
  *                     continue
 */
-      __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_v_layermap, __pyx_v_layer); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 465, __pyx_L10_error)
+      __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_v_layermap, __pyx_v_layer); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 489, __pyx_L10_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_18 = __Pyx_PyObject_AsDouble(__pyx_t_4); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_18, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 465, __pyx_L10_error)
+      __pyx_t_18 = __Pyx_PyObject_AsDouble(__pyx_t_4); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_18, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 489, __pyx_L10_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __pyx_v_charge = __pyx_t_18;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":466
+      /* "fast_flow/core/electrostaticforcehandler.pyx":490
  *                         f"the source image (image.ndim={image.ndim} but got key={layer})")
  *                 charge = float(layermap[layer])
  *                 if charge == 0:             # <<<<<<<<<<<<<<
@@ -26129,7 +26470,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       if (__pyx_t_2) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":467
+        /* "fast_flow/core/electrostaticforcehandler.pyx":491
  *                 charge = float(layermap[layer])
  *                 if charge == 0:
  *                     continue             # <<<<<<<<<<<<<<
@@ -26138,7 +26479,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
         goto __pyx_L13_continue;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":466
+        /* "fast_flow/core/electrostaticforcehandler.pyx":490
  *                         f"the source image (image.ndim={image.ndim} but got key={layer})")
  *                 charge = float(layermap[layer])
  *                 if charge == 0:             # <<<<<<<<<<<<<<
@@ -26147,18 +26488,18 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
       }
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":471
+      /* "fast_flow/core/electrostaticforcehandler.pyx":495
  *                 # count, then fill: non-solid cells with a solid
  *                 # horizontal or vertical neighbour
  *                 channel = channels[layer]             # <<<<<<<<<<<<<<
  *                 count = 0
  *                 for y in range(ny):
 */
-      __pyx_t_7 = __Pyx_PyIndex_AsSsize_t(__pyx_v_layer); if (unlikely((__pyx_t_7 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 471, __pyx_L10_error)
+      __pyx_t_7 = __Pyx_PyIndex_AsSsize_t(__pyx_v_layer); if (unlikely((__pyx_t_7 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 495, __pyx_L10_error)
       __pyx_v_channel = (__pyx_v_channels[__pyx_t_7]);
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":472
+      /* "fast_flow/core/electrostaticforcehandler.pyx":496
  *                 # horizontal or vertical neighbour
  *                 channel = channels[layer]
  *                 count = 0             # <<<<<<<<<<<<<<
@@ -26167,7 +26508,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
       __pyx_v_count = 0;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":473
+      /* "fast_flow/core/electrostaticforcehandler.pyx":497
  *                 channel = channels[layer]
  *                 count = 0
  *                 for y in range(ny):             # <<<<<<<<<<<<<<
@@ -26181,7 +26522,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
         __pyx_v_y = __pyx_t_9;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":474
+        /* "fast_flow/core/electrostaticforcehandler.pyx":498
  *                 count = 0
  *                 for y in range(ny):
  *                     i = y * nx             # <<<<<<<<<<<<<<
@@ -26190,7 +26531,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
         __pyx_v_i = (__pyx_v_y * __pyx_v_nx);
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":475
+        /* "fast_flow/core/electrostaticforcehandler.pyx":499
  *                 for y in range(ny):
  *                     i = y * nx
  *                     for x in range(nx):             # <<<<<<<<<<<<<<
@@ -26204,7 +26545,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
         for (__pyx_t_19 = 0; __pyx_t_19 < __pyx_t_11; __pyx_t_19+=1) {
           __pyx_v_x = __pyx_t_19;
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":478
+          /* "fast_flow/core/electrostaticforcehandler.pyx":502
  *                         # we want to take the solid layer that's touching air
  *                         # we skip if channel[i] == 0 because that's air
  *                         if channel[i] == 0:             # <<<<<<<<<<<<<<
@@ -26216,7 +26557,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
           if (__pyx_t_2) {
 
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":479
+            /* "fast_flow/core/electrostaticforcehandler.pyx":503
  *                         # we skip if channel[i] == 0 because that's air
  *                         if channel[i] == 0:
  *                             i += 1             # <<<<<<<<<<<<<<
@@ -26225,7 +26566,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
             __pyx_v_i = (__pyx_v_i + 1);
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":480
+            /* "fast_flow/core/electrostaticforcehandler.pyx":504
  *                         if channel[i] == 0:
  *                             i += 1
  *                             continue             # <<<<<<<<<<<<<<
@@ -26234,7 +26575,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
             goto __pyx_L19_continue;
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":478
+            /* "fast_flow/core/electrostaticforcehandler.pyx":502
  *                         # we want to take the solid layer that's touching air
  *                         # we skip if channel[i] == 0 because that's air
  *                         if channel[i] == 0:             # <<<<<<<<<<<<<<
@@ -26243,7 +26584,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
           }
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":481
+          /* "fast_flow/core/electrostaticforcehandler.pyx":505
  *                             i += 1
  *                             continue
  *                         if (x > 0 and channel[i-1] == 0) or \             # <<<<<<<<<<<<<<
@@ -26270,7 +26611,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
           }
           __pyx_L24_next_or:;
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":482
+          /* "fast_flow/core/electrostaticforcehandler.pyx":506
  *                             continue
  *                         if (x > 0 and channel[i-1] == 0) or \
  *                                 (x + 1 < nx and channel[i+1] == 0) or \             # <<<<<<<<<<<<<<
@@ -26297,7 +26638,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
           }
           __pyx_L26_next_or:;
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":483
+          /* "fast_flow/core/electrostaticforcehandler.pyx":507
  *                         if (x > 0 and channel[i-1] == 0) or \
  *                                 (x + 1 < nx and channel[i+1] == 0) or \
  *                                 (y > 0 and channel[i-nx] == 0) or \             # <<<<<<<<<<<<<<
@@ -26324,7 +26665,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
           }
           __pyx_L28_next_or:;
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":484
+          /* "fast_flow/core/electrostaticforcehandler.pyx":508
  *                                 (x + 1 < nx and channel[i+1] == 0) or \
  *                                 (y > 0 and channel[i-nx] == 0) or \
  *                                 (y + 1 < ny and channel[i+nx] == 0):             # <<<<<<<<<<<<<<
@@ -26348,7 +26689,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 
           __pyx_L23_bool_binop_done:;
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":481
+          /* "fast_flow/core/electrostaticforcehandler.pyx":505
  *                             i += 1
  *                             continue
  *                         if (x > 0 and channel[i-1] == 0) or \             # <<<<<<<<<<<<<<
@@ -26358,7 +26699,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
           if (__pyx_t_2) {
 
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":485
+            /* "fast_flow/core/electrostaticforcehandler.pyx":509
  *                                 (y > 0 and channel[i-nx] == 0) or \
  *                                 (y + 1 < ny and channel[i+nx] == 0):
  *                             count += 1             # <<<<<<<<<<<<<<
@@ -26367,7 +26708,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
             __pyx_v_count = (__pyx_v_count + 1);
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":481
+            /* "fast_flow/core/electrostaticforcehandler.pyx":505
  *                             i += 1
  *                             continue
  *                         if (x > 0 and channel[i-1] == 0) or \             # <<<<<<<<<<<<<<
@@ -26376,7 +26717,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
           }
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":486
+          /* "fast_flow/core/electrostaticforcehandler.pyx":510
  *                                 (y + 1 < ny and channel[i+nx] == 0):
  *                             count += 1
  *                         i += 1             # <<<<<<<<<<<<<<
@@ -26390,7 +26731,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       }
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":488
+      /* "fast_flow/core/electrostaticforcehandler.pyx":512
  *                         i += 1
  * 
  *                 if count == 0:             # <<<<<<<<<<<<<<
@@ -26402,7 +26743,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       if (__pyx_t_2) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":489
+        /* "fast_flow/core/electrostaticforcehandler.pyx":513
  * 
  *                 if count == 0:
  *                     continue             # <<<<<<<<<<<<<<
@@ -26411,7 +26752,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
         goto __pyx_L13_continue;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":488
+        /* "fast_flow/core/electrostaticforcehandler.pyx":512
  *                         i += 1
  * 
  *                 if count == 0:             # <<<<<<<<<<<<<<
@@ -26420,17 +26761,17 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
       }
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":491
+      /* "fast_flow/core/electrostaticforcehandler.pyx":515
  *                     continue
  * 
  *                 slot = self._new_shape_slot(count, charge)             # <<<<<<<<<<<<<<
  *                 e = 0
  *                 for y in range(ny):
 */
-      __pyx_t_7 = ((struct __pyx_vtabstruct_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->_new_shape_slot(__pyx_v_self, __pyx_v_count, __pyx_v_charge); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 491, __pyx_L10_error)
+      __pyx_t_7 = ((struct __pyx_vtabstruct_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *)__pyx_v_self->__pyx_base.__pyx_vtab)->_new_shape_slot(__pyx_v_self, __pyx_v_count, __pyx_v_charge); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 515, __pyx_L10_error)
       __pyx_v_slot = __pyx_t_7;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":492
+      /* "fast_flow/core/electrostaticforcehandler.pyx":516
  * 
  *                 slot = self._new_shape_slot(count, charge)
  *                 e = 0             # <<<<<<<<<<<<<<
@@ -26439,7 +26780,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
       __pyx_v_e = 0;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":493
+      /* "fast_flow/core/electrostaticforcehandler.pyx":517
  *                 slot = self._new_shape_slot(count, charge)
  *                 e = 0
  *                 for y in range(ny):             # <<<<<<<<<<<<<<
@@ -26453,7 +26794,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
         __pyx_v_y = __pyx_t_9;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":494
+        /* "fast_flow/core/electrostaticforcehandler.pyx":518
  *                 e = 0
  *                 for y in range(ny):
  *                     i = y * nx             # <<<<<<<<<<<<<<
@@ -26462,7 +26803,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
         __pyx_v_i = (__pyx_v_y * __pyx_v_nx);
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":495
+        /* "fast_flow/core/electrostaticforcehandler.pyx":519
  *                 for y in range(ny):
  *                     i = y * nx
  *                     for x in range(nx):             # <<<<<<<<<<<<<<
@@ -26476,7 +26817,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
         for (__pyx_t_19 = 0; __pyx_t_19 < __pyx_t_11; __pyx_t_19+=1) {
           __pyx_v_x = __pyx_t_19;
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":498
+          /* "fast_flow/core/electrostaticforcehandler.pyx":522
  *                         # we want to take the solid layer that's touching air
  *                         # we skip if channel[i] == 0 because that's air
  *                         if channel[i] == 0:             # <<<<<<<<<<<<<<
@@ -26488,7 +26829,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
           if (__pyx_t_2) {
 
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":499
+            /* "fast_flow/core/electrostaticforcehandler.pyx":523
  *                         # we skip if channel[i] == 0 because that's air
  *                         if channel[i] == 0:
  *                             i += 1             # <<<<<<<<<<<<<<
@@ -26497,7 +26838,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
             __pyx_v_i = (__pyx_v_i + 1);
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":500
+            /* "fast_flow/core/electrostaticforcehandler.pyx":524
  *                         if channel[i] == 0:
  *                             i += 1
  *                             continue             # <<<<<<<<<<<<<<
@@ -26506,7 +26847,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
             goto __pyx_L34_continue;
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":498
+            /* "fast_flow/core/electrostaticforcehandler.pyx":522
  *                         # we want to take the solid layer that's touching air
  *                         # we skip if channel[i] == 0 because that's air
  *                         if channel[i] == 0:             # <<<<<<<<<<<<<<
@@ -26515,7 +26856,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
           }
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":501
+          /* "fast_flow/core/electrostaticforcehandler.pyx":525
  *                             i += 1
  *                             continue
  *                         if (x > 0 and channel[i-1] == 0) or \             # <<<<<<<<<<<<<<
@@ -26542,7 +26883,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
           }
           __pyx_L39_next_or:;
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":502
+          /* "fast_flow/core/electrostaticforcehandler.pyx":526
  *                             continue
  *                         if (x > 0 and channel[i-1] == 0) or \
  *                                 (x + 1 < nx and channel[i+1] == 0) or \             # <<<<<<<<<<<<<<
@@ -26569,7 +26910,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
           }
           __pyx_L41_next_or:;
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":503
+          /* "fast_flow/core/electrostaticforcehandler.pyx":527
  *                         if (x > 0 and channel[i-1] == 0) or \
  *                                 (x + 1 < nx and channel[i+1] == 0) or \
  *                                 (y > 0 and channel[i-nx] == 0) or \             # <<<<<<<<<<<<<<
@@ -26596,7 +26937,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
           }
           __pyx_L43_next_or:;
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":504
+          /* "fast_flow/core/electrostaticforcehandler.pyx":528
  *                                 (x + 1 < nx and channel[i+1] == 0) or \
  *                                 (y > 0 and channel[i-nx] == 0) or \
  *                                 (y + 1 < ny and channel[i+nx] == 0):             # <<<<<<<<<<<<<<
@@ -26620,7 +26961,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 
           __pyx_L38_bool_binop_done:;
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":501
+          /* "fast_flow/core/electrostaticforcehandler.pyx":525
  *                             i += 1
  *                             continue
  *                         if (x > 0 and channel[i-1] == 0) or \             # <<<<<<<<<<<<<<
@@ -26630,7 +26971,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
           if (__pyx_t_2) {
 
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":505
+            /* "fast_flow/core/electrostaticforcehandler.pyx":529
  *                                 (y > 0 and channel[i-nx] == 0) or \
  *                                 (y + 1 < ny and channel[i+nx] == 0):
  *                             self.shapes[slot].edges[2 * e] = x * sx             # <<<<<<<<<<<<<<
@@ -26639,7 +26980,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
             ((__pyx_v_self->shapes[__pyx_v_slot]).edges[(2 * __pyx_v_e)]) = (__pyx_v_x * __pyx_v_sx);
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":506
+            /* "fast_flow/core/electrostaticforcehandler.pyx":530
  *                                 (y + 1 < ny and channel[i+nx] == 0):
  *                             self.shapes[slot].edges[2 * e] = x * sx
  *                             self.shapes[slot].edges[2 * e + 1] = y * sy             # <<<<<<<<<<<<<<
@@ -26648,7 +26989,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
             ((__pyx_v_self->shapes[__pyx_v_slot]).edges[((2 * __pyx_v_e) + 1)]) = (__pyx_v_y * __pyx_v_sy);
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":507
+            /* "fast_flow/core/electrostaticforcehandler.pyx":531
  *                             self.shapes[slot].edges[2 * e] = x * sx
  *                             self.shapes[slot].edges[2 * e + 1] = y * sy
  *                             e += 1             # <<<<<<<<<<<<<<
@@ -26657,7 +26998,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
             __pyx_v_e = (__pyx_v_e + 1);
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":501
+            /* "fast_flow/core/electrostaticforcehandler.pyx":525
  *                             i += 1
  *                             continue
  *                         if (x > 0 and channel[i-1] == 0) or \             # <<<<<<<<<<<<<<
@@ -26666,7 +27007,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
           }
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":508
+          /* "fast_flow/core/electrostaticforcehandler.pyx":532
  *                             self.shapes[slot].edges[2 * e + 1] = y * sy
  *                             e += 1
  *                         i += 1             # <<<<<<<<<<<<<<
@@ -26680,7 +27021,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       }
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":460
+      /* "fast_flow/core/electrostaticforcehandler.pyx":484
  *             # iterate over each layer, if there's a non-zero charge
  *             # then add the electrod edges
  *             for layer in sorted(layermap.keys()):             # <<<<<<<<<<<<<<
@@ -26692,7 +27033,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":510
+  /* "fast_flow/core/electrostaticforcehandler.pyx":534
  *                         i += 1
  *         finally:
  *             for z in range(nz):             # <<<<<<<<<<<<<<
@@ -26708,7 +27049,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
         __pyx_v_z = __pyx_t_8;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":511
+        /* "fast_flow/core/electrostaticforcehandler.pyx":535
  *         finally:
  *             for z in range(nz):
  *                 free(channels[z])             # <<<<<<<<<<<<<<
@@ -26719,7 +27060,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       }
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":512
+      /* "fast_flow/core/electrostaticforcehandler.pyx":536
  *             for z in range(nz):
  *                 free(channels[z])
  *             free(channels)             # <<<<<<<<<<<<<<
@@ -26751,7 +27092,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       __pyx_t_16 = __pyx_lineno; __pyx_t_21 = __pyx_clineno; __pyx_t_22 = __pyx_filename;
       {
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":510
+        /* "fast_flow/core/electrostaticforcehandler.pyx":534
  *                         i += 1
  *         finally:
  *             for z in range(nz):             # <<<<<<<<<<<<<<
@@ -26765,7 +27106,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
         for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
           __pyx_v_z = __pyx_t_8;
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":511
+          /* "fast_flow/core/electrostaticforcehandler.pyx":535
  *         finally:
  *             for z in range(nz):
  *                 free(channels[z])             # <<<<<<<<<<<<<<
@@ -26776,7 +27117,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
         }
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":512
+        /* "fast_flow/core/electrostaticforcehandler.pyx":536
  *             for z in range(nz):
  *                 free(channels[z])
  *             free(channels)             # <<<<<<<<<<<<<<
@@ -26801,7 +27142,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       __pyx_t_28 = __pyx_r;
       __pyx_r = 0;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":510
+      /* "fast_flow/core/electrostaticforcehandler.pyx":534
  *                         i += 1
  *         finally:
  *             for z in range(nz):             # <<<<<<<<<<<<<<
@@ -26815,7 +27156,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
         __pyx_v_z = __pyx_t_8;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":511
+        /* "fast_flow/core/electrostaticforcehandler.pyx":535
  *         finally:
  *             for z in range(nz):
  *                 free(channels[z])             # <<<<<<<<<<<<<<
@@ -26826,7 +27167,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       }
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":512
+      /* "fast_flow/core/electrostaticforcehandler.pyx":536
  *             for z in range(nz):
  *                 free(channels[z])
  *             free(channels)             # <<<<<<<<<<<<<<
@@ -26841,7 +27182,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
     __pyx_L11:;
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":421
+  /* "fast_flow/core/electrostaticforcehandler.pyx":445
  *         return slot
  * 
  *     cdef _build_edges(self, cnp.ndarray[unsigned char, ndim=3] image, object layermap):             # <<<<<<<<<<<<<<
@@ -26894,7 +27235,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
   return __pyx_r;
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":514
+/* "fast_flow/core/electrostaticforcehandler.pyx":538
  *             free(channels)
  * 
  *     cdef void _build_ion_zone(self,             # <<<<<<<<<<<<<<
@@ -26946,11 +27287,11 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   __pyx_pybuffernd_image.rcbuffer = &__pyx_pybuffer_image;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_unsigned_char, PyBUF_FORMAT| PyBUF_STRIDES, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 514, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_unsigned_char, PyBUF_FORMAT| PyBUF_STRIDES, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 538, __pyx_L1_error)
   }
   __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_image.diminfo[2].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_image.diminfo[2].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[2];
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":523
+  /* "fast_flow/core/electrostaticforcehandler.pyx":547
  *         surface, so new +ions appear in exactly these
  *         cells."""
  *         cdef Py_ssize_t nx = image.shape[1]             # <<<<<<<<<<<<<<
@@ -26959,7 +27300,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_nx = (__pyx_f_5numpy_7ndarray_5shape___get__(((PyArrayObject *)__pyx_v_image))[1]);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":524
+  /* "fast_flow/core/electrostaticforcehandler.pyx":548
  *         cells."""
  *         cdef Py_ssize_t nx = image.shape[1]
  *         cdef Py_ssize_t ny = image.shape[0]             # <<<<<<<<<<<<<<
@@ -26968,7 +27309,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_ny = (__pyx_f_5numpy_7ndarray_5shape___get__(((PyArrayObject *)__pyx_v_image))[0]);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":528
+  /* "fast_flow/core/electrostaticforcehandler.pyx":552
  *         cdef unsigned char* channel
  * 
  *         self.ion_zone = <unsigned char*> malloc(             # <<<<<<<<<<<<<<
@@ -26977,7 +27318,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_self->ion_zone = ((unsigned char *)malloc(((__pyx_v_ny * __pyx_v_nx) * (sizeof(unsigned char)))));
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":530
+  /* "fast_flow/core/electrostaticforcehandler.pyx":554
  *         self.ion_zone = <unsigned char*> malloc(
  *             ny * nx * sizeof(unsigned char))
  *         if self.ion_zone == NULL:             # <<<<<<<<<<<<<<
@@ -26989,7 +27330,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   if (unlikely(__pyx_t_1)) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":531
+    /* "fast_flow/core/electrostaticforcehandler.pyx":555
  *             ny * nx * sizeof(unsigned char))
  *         if self.ion_zone == NULL:
  *             raise MemoryError("could not allocate ion zone")             # <<<<<<<<<<<<<<
@@ -27002,14 +27343,14 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_mstate_global->__pyx_kp_u_could_not_allocate_ion_zone};
       __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_MemoryError)), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 531, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 555, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 531, __pyx_L1_error)
+    __PYX_ERR(0, 555, __pyx_L1_error)
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":530
+    /* "fast_flow/core/electrostaticforcehandler.pyx":554
  *         self.ion_zone = <unsigned char*> malloc(
  *             ny * nx * sizeof(unsigned char))
  *         if self.ion_zone == NULL:             # <<<<<<<<<<<<<<
@@ -27018,7 +27359,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":532
+  /* "fast_flow/core/electrostaticforcehandler.pyx":556
  *         if self.ion_zone == NULL:
  *             raise MemoryError("could not allocate ion zone")
  *         for i in range(ny * nx):             # <<<<<<<<<<<<<<
@@ -27032,7 +27373,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
     __pyx_v_i = __pyx_t_7;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":533
+    /* "fast_flow/core/electrostaticforcehandler.pyx":557
  *             raise MemoryError("could not allocate ion zone")
  *         for i in range(ny * nx):
  *             self.ion_zone[i] = 0             # <<<<<<<<<<<<<<
@@ -27043,7 +27384,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   }
 
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":534
+  /* "fast_flow/core/electrostaticforcehandler.pyx":558
  *         for i in range(ny * nx):
  *             self.ion_zone[i] = 0
  *         if layermap is None:             # <<<<<<<<<<<<<<
@@ -27054,7 +27395,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":535
+    /* "fast_flow/core/electrostaticforcehandler.pyx":559
  *             self.ion_zone[i] = 0
  *         if layermap is None:
  *             return             # <<<<<<<<<<<<<<
@@ -27065,7 +27406,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
     }
     goto __pyx_L0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":534
+    /* "fast_flow/core/electrostaticforcehandler.pyx":558
  *         for i in range(ny * nx):
  *             self.ion_zone[i] = 0
  *         if layermap is None:             # <<<<<<<<<<<<<<
@@ -27074,7 +27415,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":537
+  /* "fast_flow/core/electrostaticforcehandler.pyx":561
  *             return
  * 
  *         channel = <unsigned char*> malloc(             # <<<<<<<<<<<<<<
@@ -27083,7 +27424,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_channel = ((unsigned char *)malloc(((__pyx_v_ny * __pyx_v_nx) * (sizeof(unsigned char)))));
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":539
+  /* "fast_flow/core/electrostaticforcehandler.pyx":563
  *         channel = <unsigned char*> malloc(
  *             ny * nx * sizeof(unsigned char))
  *         if channel == NULL:             # <<<<<<<<<<<<<<
@@ -27095,7 +27436,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   if (unlikely(__pyx_t_1)) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":540
+    /* "fast_flow/core/electrostaticforcehandler.pyx":564
  *             ny * nx * sizeof(unsigned char))
  *         if channel == NULL:
  *             raise MemoryError("could not allocate channel mask")             # <<<<<<<<<<<<<<
@@ -27108,14 +27449,14 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_mstate_global->__pyx_kp_u_could_not_allocate_channel_mask_2};
       __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_MemoryError)), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 540, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 564, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 540, __pyx_L1_error)
+    __PYX_ERR(0, 564, __pyx_L1_error)
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":539
+    /* "fast_flow/core/electrostaticforcehandler.pyx":563
  *         channel = <unsigned char*> malloc(
  *             ny * nx * sizeof(unsigned char))
  *         if channel == NULL:             # <<<<<<<<<<<<<<
@@ -27124,7 +27465,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":541
+  /* "fast_flow/core/electrostaticforcehandler.pyx":565
  *         if channel == NULL:
  *             raise MemoryError("could not allocate channel mask")
  *         try:             # <<<<<<<<<<<<<<
@@ -27133,7 +27474,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   /*try:*/ {
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":542
+    /* "fast_flow/core/electrostaticforcehandler.pyx":566
  *             raise MemoryError("could not allocate channel mask")
  *         try:
  *             for layer in sorted(layermap.keys()):             # <<<<<<<<<<<<<<
@@ -27147,13 +27488,13 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
       __pyx_t_2 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_keys, __pyx_callargs+__pyx_t_4, (1-__pyx_t_4) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 542, __pyx_L9_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 566, __pyx_L9_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
-    __pyx_t_3 = PySequence_List(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 542, __pyx_L9_error)
+    __pyx_t_3 = PySequence_List(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 566, __pyx_L9_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely((PyList_Sort(__pyx_t_3) < 0))) __PYX_ERR(0, 542, __pyx_L9_error)
+    if (unlikely((PyList_Sort(__pyx_t_3) < 0))) __PYX_ERR(0, 566, __pyx_L9_error)
     __pyx_t_2 = __pyx_t_3; __Pyx_INCREF(__pyx_t_2);
     __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -27161,25 +27502,25 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       {
         Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_2);
         #if !CYTHON_ASSUME_SAFE_SIZE
-        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 542, __pyx_L9_error)
+        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 566, __pyx_L9_error)
         #endif
         if (__pyx_t_5 >= __pyx_temp) break;
       }
       __pyx_t_3 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_2, __pyx_t_5, __Pyx_ReferenceSharing_OwnStrongReference);
       ++__pyx_t_5;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 542, __pyx_L9_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 566, __pyx_L9_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_XDECREF_SET(__pyx_v_layer, __pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":543
+      /* "fast_flow/core/electrostaticforcehandler.pyx":567
  *         try:
  *             for layer in sorted(layermap.keys()):
  *                 if layer < 0 or layer >= image.shape[2]:             # <<<<<<<<<<<<<<
  *                     raise ValueError(
  *                         "layermap keys must reference a real "
 */
-      __pyx_t_8 = __Pyx_PyObject_CompareBoolLt_object_int(__pyx_v_layer, __pyx_mstate_global->__pyx_int_0, Py_LT); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 543, __pyx_L9_error)
+      __pyx_t_8 = __Pyx_PyObject_CompareBoolLt_object_int(__pyx_v_layer, __pyx_mstate_global->__pyx_int_0, Py_LT); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 567, __pyx_L9_error)
       if (!__pyx_t_8) {
 
       } else {
@@ -27188,9 +27529,9 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
         goto __pyx_L14_bool_binop_done;
       }
-      __pyx_t_3 = __Pyx_PyLong_From_npy_intp((__pyx_f_5numpy_7ndarray_5shape___get__(((PyArrayObject *)__pyx_v_image))[2])); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 543, __pyx_L9_error)
+      __pyx_t_3 = __Pyx_PyLong_From_npy_intp((__pyx_f_5numpy_7ndarray_5shape___get__(((PyArrayObject *)__pyx_v_image))[2])); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 567, __pyx_L9_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_8 = __Pyx_PyObject_CompareBoolGe_object_int(__pyx_v_layer, __pyx_t_3, Py_GE); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 543, __pyx_L9_error)
+      __pyx_t_8 = __Pyx_PyObject_CompareBoolGe_object_int(__pyx_v_layer, __pyx_t_3, Py_GE); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 567, __pyx_L9_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
       __pyx_t_1 = __pyx_t_8;
@@ -27199,7 +27540,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       if (unlikely(__pyx_t_1)) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":544
+        /* "fast_flow/core/electrostaticforcehandler.pyx":568
  *             for layer in sorted(layermap.keys()):
  *                 if layer < 0 or layer >= image.shape[2]:
  *                     raise ValueError(             # <<<<<<<<<<<<<<
@@ -27212,14 +27553,14 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
           PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_mstate_global->__pyx_kp_u_layermap_keys_must_reference_a_r_2};
           __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 544, __pyx_L9_error)
+          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 568, __pyx_L9_error)
           __Pyx_GOTREF(__pyx_t_3);
         }
         __Pyx_Raise(__pyx_t_3, 0, 0, 0);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __PYX_ERR(0, 544, __pyx_L9_error)
+        __PYX_ERR(0, 568, __pyx_L9_error)
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":543
+        /* "fast_flow/core/electrostaticforcehandler.pyx":567
  *         try:
  *             for layer in sorted(layermap.keys()):
  *                 if layer < 0 or layer >= image.shape[2]:             # <<<<<<<<<<<<<<
@@ -27228,16 +27569,16 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       }
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":547
+      /* "fast_flow/core/electrostaticforcehandler.pyx":571
  *                         "layermap keys must reference a real "
  *                         "channel in the source image")
  *                 if float(layermap[layer]) <= 0.0:             # <<<<<<<<<<<<<<
  *                     continue
  *                 build_solids_mask(image[:, :, layer], channel)
 */
-      __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_layermap, __pyx_v_layer); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 547, __pyx_L9_error)
+      __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_layermap, __pyx_v_layer); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 571, __pyx_L9_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_10 = __Pyx_PyObject_AsDouble(__pyx_t_3); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_10, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 547, __pyx_L9_error)
+      __pyx_t_10 = __Pyx_PyObject_AsDouble(__pyx_t_3); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_10, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 571, __pyx_L9_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __pyx_t_1 = (__pyx_t_10 <= 0.0);
 
@@ -27245,7 +27586,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":548
+        /* "fast_flow/core/electrostaticforcehandler.pyx":572
  *                         "channel in the source image")
  *                 if float(layermap[layer]) <= 0.0:
  *                     continue             # <<<<<<<<<<<<<<
@@ -27254,7 +27595,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
         goto __pyx_L11_continue;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":547
+        /* "fast_flow/core/electrostaticforcehandler.pyx":571
  *                         "layermap keys must reference a real "
  *                         "channel in the source image")
  *                 if float(layermap[layer]) <= 0.0:             # <<<<<<<<<<<<<<
@@ -27263,31 +27604,31 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       }
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":549
+      /* "fast_flow/core/electrostaticforcehandler.pyx":573
  *                 if float(layermap[layer]) <= 0.0:
  *                     continue
  *                 build_solids_mask(image[:, :, layer], channel)             # <<<<<<<<<<<<<<
  *                 for y in range(ny):
  *                     i = y * nx
 */
-      __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 549, __pyx_L9_error)
+      __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 573, __pyx_L9_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_INCREF(__pyx_mstate_global->__pyx_slice[0]);
       __Pyx_GIVEREF(__pyx_mstate_global->__pyx_slice[0]);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_slice[0]) != (0)) __PYX_ERR(0, 549, __pyx_L9_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_slice[0]) != (0)) __PYX_ERR(0, 573, __pyx_L9_error);
       __Pyx_INCREF(__pyx_mstate_global->__pyx_slice[0]);
       __Pyx_GIVEREF(__pyx_mstate_global->__pyx_slice[0]);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_mstate_global->__pyx_slice[0]) != (0)) __PYX_ERR(0, 549, __pyx_L9_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_mstate_global->__pyx_slice[0]) != (0)) __PYX_ERR(0, 573, __pyx_L9_error);
       __Pyx_INCREF(__pyx_v_layer);
       __Pyx_GIVEREF(__pyx_v_layer);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 2, __pyx_v_layer) != (0)) __PYX_ERR(0, 549, __pyx_L9_error);
-      __pyx_t_9 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_image), __pyx_t_3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 549, __pyx_L9_error)
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 2, __pyx_v_layer) != (0)) __PYX_ERR(0, 573, __pyx_L9_error);
+      __pyx_t_9 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_image), __pyx_t_3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 573, __pyx_L9_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_f_9fast_flow_4core_6common_build_solids_mask(__pyx_t_9, __pyx_v_channel); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 549, __pyx_L9_error)
+      __pyx_f_9fast_flow_4core_6common_build_solids_mask(__pyx_t_9, __pyx_v_channel); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 573, __pyx_L9_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":550
+      /* "fast_flow/core/electrostaticforcehandler.pyx":574
  *                     continue
  *                 build_solids_mask(image[:, :, layer], channel)
  *                 for y in range(ny):             # <<<<<<<<<<<<<<
@@ -27301,7 +27642,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_7; __pyx_t_11+=1) {
         __pyx_v_y = __pyx_t_11;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":551
+        /* "fast_flow/core/electrostaticforcehandler.pyx":575
  *                 build_solids_mask(image[:, :, layer], channel)
  *                 for y in range(ny):
  *                     i = y * nx             # <<<<<<<<<<<<<<
@@ -27310,7 +27651,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
         __pyx_v_i = (__pyx_v_y * __pyx_v_nx);
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":552
+        /* "fast_flow/core/electrostaticforcehandler.pyx":576
  *                 for y in range(ny):
  *                     i = y * nx
  *                     for x in range(nx):             # <<<<<<<<<<<<<<
@@ -27324,7 +27665,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
         for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_13; __pyx_t_14+=1) {
           __pyx_v_x = __pyx_t_14;
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":553
+          /* "fast_flow/core/electrostaticforcehandler.pyx":577
  *                     i = y * nx
  *                     for x in range(nx):
  *                         if not self.solids[i]:             # <<<<<<<<<<<<<<
@@ -27336,7 +27677,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
           if (__pyx_t_1) {
 
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":554
+            /* "fast_flow/core/electrostaticforcehandler.pyx":578
  *                     for x in range(nx):
  *                         if not self.solids[i]:
  *                             if (x > 0 and channel[i - 1]) or \             # <<<<<<<<<<<<<<
@@ -27363,7 +27704,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
             }
             __pyx_L24_next_or:;
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":555
+            /* "fast_flow/core/electrostaticforcehandler.pyx":579
  *                         if not self.solids[i]:
  *                             if (x > 0 and channel[i - 1]) or \
  *                                     (x + 1 < nx and channel[i + 1]) or \             # <<<<<<<<<<<<<<
@@ -27390,7 +27731,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
             }
             __pyx_L26_next_or:;
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":556
+            /* "fast_flow/core/electrostaticforcehandler.pyx":580
  *                             if (x > 0 and channel[i - 1]) or \
  *                                     (x + 1 < nx and channel[i + 1]) or \
  *                                     (y > 0 and channel[i - nx]) or \             # <<<<<<<<<<<<<<
@@ -27417,7 +27758,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
             }
             __pyx_L28_next_or:;
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":557
+            /* "fast_flow/core/electrostaticforcehandler.pyx":581
  *                                     (x + 1 < nx and channel[i + 1]) or \
  *                                     (y > 0 and channel[i - nx]) or \
  *                                     (y + 1 < ny and channel[i + nx]):             # <<<<<<<<<<<<<<
@@ -27441,7 +27782,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
             __pyx_L23_bool_binop_done:;
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":554
+            /* "fast_flow/core/electrostaticforcehandler.pyx":578
  *                     for x in range(nx):
  *                         if not self.solids[i]:
  *                             if (x > 0 and channel[i - 1]) or \             # <<<<<<<<<<<<<<
@@ -27451,7 +27792,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
             if (__pyx_t_1) {
 
 
-              /* "fast_flow/core/electrostaticforcehandler.pyx":558
+              /* "fast_flow/core/electrostaticforcehandler.pyx":582
  *                                     (y > 0 and channel[i - nx]) or \
  *                                     (y + 1 < ny and channel[i + nx]):
  *                                 self.ion_zone[i] = 1             # <<<<<<<<<<<<<<
@@ -27460,7 +27801,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
               (__pyx_v_self->ion_zone[__pyx_v_i]) = 1;
 
-              /* "fast_flow/core/electrostaticforcehandler.pyx":554
+              /* "fast_flow/core/electrostaticforcehandler.pyx":578
  *                     for x in range(nx):
  *                         if not self.solids[i]:
  *                             if (x > 0 and channel[i - 1]) or \             # <<<<<<<<<<<<<<
@@ -27469,7 +27810,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
             }
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":553
+            /* "fast_flow/core/electrostaticforcehandler.pyx":577
  *                     i = y * nx
  *                     for x in range(nx):
  *                         if not self.solids[i]:             # <<<<<<<<<<<<<<
@@ -27478,7 +27819,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
           }
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":559
+          /* "fast_flow/core/electrostaticforcehandler.pyx":583
  *                                     (y + 1 < ny and channel[i + nx]):
  *                                 self.ion_zone[i] = 1
  *                         i += 1             # <<<<<<<<<<<<<<
@@ -27491,7 +27832,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       }
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":542
+      /* "fast_flow/core/electrostaticforcehandler.pyx":566
  *             raise MemoryError("could not allocate channel mask")
  *         try:
  *             for layer in sorted(layermap.keys()):             # <<<<<<<<<<<<<<
@@ -27503,7 +27844,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":561
+  /* "fast_flow/core/electrostaticforcehandler.pyx":585
  *                         i += 1
  *         finally:
  *             free(channel)             # <<<<<<<<<<<<<<
@@ -27550,7 +27891,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
     __pyx_L10:;
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":514
+  /* "fast_flow/core/electrostaticforcehandler.pyx":538
  *             free(channels)
  * 
  *     cdef void _build_ion_zone(self,             # <<<<<<<<<<<<<<
@@ -27588,7 +27929,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   __Pyx_RefNannyFinishContext();
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":563
+/* "fast_flow/core/electrostaticforcehandler.pyx":587
  *             free(channel)
  * 
  *     cdef void _build_ion_zone_neg(self,             # <<<<<<<<<<<<<<
@@ -27644,11 +27985,11 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   __pyx_pybuffernd_image.rcbuffer = &__pyx_pybuffer_image;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_unsigned_char, PyBUF_FORMAT| PyBUF_STRIDES, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 563, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_image.rcbuffer->pybuffer, (PyObject*)__pyx_v_image, &__Pyx_TypeInfo_unsigned_char, PyBUF_FORMAT| PyBUF_STRIDES, 3, 0, __pyx_stack) == -1)) __PYX_ERR(0, 587, __pyx_L1_error)
   }
   __pyx_pybuffernd_image.diminfo[0].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_image.diminfo[0].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_image.diminfo[1].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_image.diminfo[1].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[1]; __pyx_pybuffernd_image.diminfo[2].strides = __pyx_pybuffernd_image.rcbuffer->pybuffer.strides[2]; __pyx_pybuffernd_image.diminfo[2].shape = __pyx_pybuffernd_image.rcbuffer->pybuffer.shape[2];
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":584
+  /* "fast_flow/core/electrostaticforcehandler.pyx":608
  *         Must run after init_field(), which fills cu/cv.
  *         """
  *         cdef Py_ssize_t nx = image.shape[1]             # <<<<<<<<<<<<<<
@@ -27657,7 +27998,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_nx = (__pyx_f_5numpy_7ndarray_5shape___get__(((PyArrayObject *)__pyx_v_image))[1]);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":585
+  /* "fast_flow/core/electrostaticforcehandler.pyx":609
  *         """
  *         cdef Py_ssize_t nx = image.shape[1]
  *         cdef Py_ssize_t ny = image.shape[0]             # <<<<<<<<<<<<<<
@@ -27666,7 +28007,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_ny = (__pyx_f_5numpy_7ndarray_5shape___get__(((PyArrayObject *)__pyx_v_image))[0]);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":589
+  /* "fast_flow/core/electrostaticforcehandler.pyx":613
  *         cdef unsigned char* channel
  *         cdef DTYPE_f e_surf, e2
  *         cdef DTYPE_f* cu = self.cu[self.ck]             # <<<<<<<<<<<<<<
@@ -27675,7 +28016,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_cu = (__pyx_v_self->cu[__pyx_v_self->ck]);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":590
+  /* "fast_flow/core/electrostaticforcehandler.pyx":614
  *         cdef DTYPE_f e_surf, e2
  *         cdef DTYPE_f* cu = self.cu[self.ck]
  *         cdef DTYPE_f* cv = self.cv[self.ck]             # <<<<<<<<<<<<<<
@@ -27684,7 +28025,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_cv = (__pyx_v_self->cv[__pyx_v_self->ck]);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":592
+  /* "fast_flow/core/electrostaticforcehandler.pyx":616
  *         cdef DTYPE_f* cv = self.cv[self.ck]
  * 
  *         self.ion_zone_neg = <unsigned char*> malloc(             # <<<<<<<<<<<<<<
@@ -27693,7 +28034,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_self->ion_zone_neg = ((unsigned char *)malloc(((__pyx_v_ny * __pyx_v_nx) * (sizeof(unsigned char)))));
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":594
+  /* "fast_flow/core/electrostaticforcehandler.pyx":618
  *         self.ion_zone_neg = <unsigned char*> malloc(
  *             ny * nx * sizeof(unsigned char))
  *         if self.ion_zone_neg == NULL:             # <<<<<<<<<<<<<<
@@ -27705,7 +28046,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   if (unlikely(__pyx_t_1)) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":595
+    /* "fast_flow/core/electrostaticforcehandler.pyx":619
  *             ny * nx * sizeof(unsigned char))
  *         if self.ion_zone_neg == NULL:
  *             raise MemoryError("could not allocate O2- zone")             # <<<<<<<<<<<<<<
@@ -27718,14 +28059,14 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_mstate_global->__pyx_kp_u_could_not_allocate_O2_zone};
       __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_MemoryError)), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 595, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 619, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 595, __pyx_L1_error)
+    __PYX_ERR(0, 619, __pyx_L1_error)
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":594
+    /* "fast_flow/core/electrostaticforcehandler.pyx":618
  *         self.ion_zone_neg = <unsigned char*> malloc(
  *             ny * nx * sizeof(unsigned char))
  *         if self.ion_zone_neg == NULL:             # <<<<<<<<<<<<<<
@@ -27734,7 +28075,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":596
+  /* "fast_flow/core/electrostaticforcehandler.pyx":620
  *         if self.ion_zone_neg == NULL:
  *             raise MemoryError("could not allocate O2- zone")
  *         for i in range(ny * nx):             # <<<<<<<<<<<<<<
@@ -27748,7 +28089,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_6; __pyx_t_7+=1) {
     __pyx_v_i = __pyx_t_7;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":597
+    /* "fast_flow/core/electrostaticforcehandler.pyx":621
  *             raise MemoryError("could not allocate O2- zone")
  *         for i in range(ny * nx):
  *             self.ion_zone_neg[i] = 0             # <<<<<<<<<<<<<<
@@ -27759,7 +28100,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   }
 
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":598
+  /* "fast_flow/core/electrostaticforcehandler.pyx":622
  *         for i in range(ny * nx):
  *             self.ion_zone_neg[i] = 0
  *         if layermap is None:             # <<<<<<<<<<<<<<
@@ -27770,7 +28111,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":599
+    /* "fast_flow/core/electrostaticforcehandler.pyx":623
  *             self.ion_zone_neg[i] = 0
  *         if layermap is None:
  *             return             # <<<<<<<<<<<<<<
@@ -27781,7 +28122,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
     }
     goto __pyx_L0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":598
+    /* "fast_flow/core/electrostaticforcehandler.pyx":622
  *         for i in range(ny * nx):
  *             self.ion_zone_neg[i] = 0
  *         if layermap is None:             # <<<<<<<<<<<<<<
@@ -27790,7 +28131,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":601
+  /* "fast_flow/core/electrostaticforcehandler.pyx":625
  *             return
  * 
  *         channel = <unsigned char*> malloc(             # <<<<<<<<<<<<<<
@@ -27799,7 +28140,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_channel = ((unsigned char *)malloc(((__pyx_v_ny * __pyx_v_nx) * (sizeof(unsigned char)))));
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":603
+  /* "fast_flow/core/electrostaticforcehandler.pyx":627
  *         channel = <unsigned char*> malloc(
  *             ny * nx * sizeof(unsigned char))
  *         if channel == NULL:             # <<<<<<<<<<<<<<
@@ -27811,7 +28152,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   if (unlikely(__pyx_t_1)) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":604
+    /* "fast_flow/core/electrostaticforcehandler.pyx":628
  *             ny * nx * sizeof(unsigned char))
  *         if channel == NULL:
  *             raise MemoryError("could not allocate channel mask")             # <<<<<<<<<<<<<<
@@ -27824,14 +28165,14 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_mstate_global->__pyx_kp_u_could_not_allocate_channel_mask_2};
       __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_MemoryError)), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 604, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 628, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 604, __pyx_L1_error)
+    __PYX_ERR(0, 628, __pyx_L1_error)
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":603
+    /* "fast_flow/core/electrostaticforcehandler.pyx":627
  *         channel = <unsigned char*> malloc(
  *             ny * nx * sizeof(unsigned char))
  *         if channel == NULL:             # <<<<<<<<<<<<<<
@@ -27840,7 +28181,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":605
+  /* "fast_flow/core/electrostaticforcehandler.pyx":629
  *         if channel == NULL:
  *             raise MemoryError("could not allocate channel mask")
  *         try:             # <<<<<<<<<<<<<<
@@ -27849,7 +28190,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   /*try:*/ {
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":606
+    /* "fast_flow/core/electrostaticforcehandler.pyx":630
  *             raise MemoryError("could not allocate channel mask")
  *         try:
  *             for layer in sorted(layermap.keys()):             # <<<<<<<<<<<<<<
@@ -27863,13 +28204,13 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
       __pyx_t_2 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_keys, __pyx_callargs+__pyx_t_4, (1-__pyx_t_4) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 606, __pyx_L9_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 630, __pyx_L9_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
-    __pyx_t_3 = PySequence_List(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 606, __pyx_L9_error)
+    __pyx_t_3 = PySequence_List(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 630, __pyx_L9_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely((PyList_Sort(__pyx_t_3) < 0))) __PYX_ERR(0, 606, __pyx_L9_error)
+    if (unlikely((PyList_Sort(__pyx_t_3) < 0))) __PYX_ERR(0, 630, __pyx_L9_error)
     __pyx_t_2 = __pyx_t_3; __Pyx_INCREF(__pyx_t_2);
     __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -27877,25 +28218,25 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       {
         Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_2);
         #if !CYTHON_ASSUME_SAFE_SIZE
-        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 606, __pyx_L9_error)
+        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 630, __pyx_L9_error)
         #endif
         if (__pyx_t_5 >= __pyx_temp) break;
       }
       __pyx_t_3 = __Pyx_PyList_GET_ITEM_REF(__pyx_t_2, __pyx_t_5, __Pyx_ReferenceSharing_OwnStrongReference);
       ++__pyx_t_5;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 606, __pyx_L9_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 630, __pyx_L9_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_XDECREF_SET(__pyx_v_layer, __pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":607
+      /* "fast_flow/core/electrostaticforcehandler.pyx":631
  *         try:
  *             for layer in sorted(layermap.keys()):
  *                 if layer < 0 or layer >= image.shape[2]:             # <<<<<<<<<<<<<<
  *                     raise ValueError(
  *                         "layermap keys must reference a real "
 */
-      __pyx_t_8 = __Pyx_PyObject_CompareBoolLt_object_int(__pyx_v_layer, __pyx_mstate_global->__pyx_int_0, Py_LT); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 607, __pyx_L9_error)
+      __pyx_t_8 = __Pyx_PyObject_CompareBoolLt_object_int(__pyx_v_layer, __pyx_mstate_global->__pyx_int_0, Py_LT); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 631, __pyx_L9_error)
       if (!__pyx_t_8) {
 
       } else {
@@ -27904,9 +28245,9 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
         goto __pyx_L14_bool_binop_done;
       }
-      __pyx_t_3 = __Pyx_PyLong_From_npy_intp((__pyx_f_5numpy_7ndarray_5shape___get__(((PyArrayObject *)__pyx_v_image))[2])); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 607, __pyx_L9_error)
+      __pyx_t_3 = __Pyx_PyLong_From_npy_intp((__pyx_f_5numpy_7ndarray_5shape___get__(((PyArrayObject *)__pyx_v_image))[2])); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 631, __pyx_L9_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_8 = __Pyx_PyObject_CompareBoolGe_object_int(__pyx_v_layer, __pyx_t_3, Py_GE); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 607, __pyx_L9_error)
+      __pyx_t_8 = __Pyx_PyObject_CompareBoolGe_object_int(__pyx_v_layer, __pyx_t_3, Py_GE); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 631, __pyx_L9_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
       __pyx_t_1 = __pyx_t_8;
@@ -27915,7 +28256,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       if (unlikely(__pyx_t_1)) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":608
+        /* "fast_flow/core/electrostaticforcehandler.pyx":632
  *             for layer in sorted(layermap.keys()):
  *                 if layer < 0 or layer >= image.shape[2]:
  *                     raise ValueError(             # <<<<<<<<<<<<<<
@@ -27928,14 +28269,14 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
           PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_mstate_global->__pyx_kp_u_layermap_keys_must_reference_a_r_2};
           __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_ValueError)), __pyx_callargs+__pyx_t_4, (2-__pyx_t_4) | (__pyx_t_4*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 608, __pyx_L9_error)
+          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 632, __pyx_L9_error)
           __Pyx_GOTREF(__pyx_t_3);
         }
         __Pyx_Raise(__pyx_t_3, 0, 0, 0);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __PYX_ERR(0, 608, __pyx_L9_error)
+        __PYX_ERR(0, 632, __pyx_L9_error)
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":607
+        /* "fast_flow/core/electrostaticforcehandler.pyx":631
  *         try:
  *             for layer in sorted(layermap.keys()):
  *                 if layer < 0 or layer >= image.shape[2]:             # <<<<<<<<<<<<<<
@@ -27944,16 +28285,16 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       }
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":611
+      /* "fast_flow/core/electrostaticforcehandler.pyx":635
  *                         "layermap keys must reference a real "
  *                         "channel in the source image")
  *                 if float(layermap[layer]) >= 0.0:             # <<<<<<<<<<<<<<
  *                     continue
  *                 build_solids_mask(image[:, :, layer], channel)
 */
-      __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_layermap, __pyx_v_layer); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 611, __pyx_L9_error)
+      __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_layermap, __pyx_v_layer); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 635, __pyx_L9_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_10 = __Pyx_PyObject_AsDouble(__pyx_t_3); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_10, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 611, __pyx_L9_error)
+      __pyx_t_10 = __Pyx_PyObject_AsDouble(__pyx_t_3); if (unlikely(__PYX_CHECK_FLOAT_EXCEPTION(__pyx_t_10, ((double)((double)-1))) && PyErr_Occurred())) __PYX_ERR(0, 635, __pyx_L9_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __pyx_t_1 = (__pyx_t_10 >= 0.0);
 
@@ -27961,7 +28302,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":612
+        /* "fast_flow/core/electrostaticforcehandler.pyx":636
  *                         "channel in the source image")
  *                 if float(layermap[layer]) >= 0.0:
  *                     continue             # <<<<<<<<<<<<<<
@@ -27970,7 +28311,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
         goto __pyx_L11_continue;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":611
+        /* "fast_flow/core/electrostaticforcehandler.pyx":635
  *                         "layermap keys must reference a real "
  *                         "channel in the source image")
  *                 if float(layermap[layer]) >= 0.0:             # <<<<<<<<<<<<<<
@@ -27979,31 +28320,31 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       }
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":613
+      /* "fast_flow/core/electrostaticforcehandler.pyx":637
  *                 if float(layermap[layer]) >= 0.0:
  *                     continue
  *                 build_solids_mask(image[:, :, layer], channel)             # <<<<<<<<<<<<<<
  *                 # Surface field: max |E| over the air
  *                 # cells bordering this layer's solids.
 */
-      __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 613, __pyx_L9_error)
+      __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 637, __pyx_L9_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_INCREF(__pyx_mstate_global->__pyx_slice[0]);
       __Pyx_GIVEREF(__pyx_mstate_global->__pyx_slice[0]);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_slice[0]) != (0)) __PYX_ERR(0, 613, __pyx_L9_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_mstate_global->__pyx_slice[0]) != (0)) __PYX_ERR(0, 637, __pyx_L9_error);
       __Pyx_INCREF(__pyx_mstate_global->__pyx_slice[0]);
       __Pyx_GIVEREF(__pyx_mstate_global->__pyx_slice[0]);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_mstate_global->__pyx_slice[0]) != (0)) __PYX_ERR(0, 613, __pyx_L9_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_mstate_global->__pyx_slice[0]) != (0)) __PYX_ERR(0, 637, __pyx_L9_error);
       __Pyx_INCREF(__pyx_v_layer);
       __Pyx_GIVEREF(__pyx_v_layer);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 2, __pyx_v_layer) != (0)) __PYX_ERR(0, 613, __pyx_L9_error);
-      __pyx_t_9 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_image), __pyx_t_3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 613, __pyx_L9_error)
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 2, __pyx_v_layer) != (0)) __PYX_ERR(0, 637, __pyx_L9_error);
+      __pyx_t_9 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_image), __pyx_t_3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 637, __pyx_L9_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_f_9fast_flow_4core_6common_build_solids_mask(__pyx_t_9, __pyx_v_channel); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 613, __pyx_L9_error)
+      __pyx_f_9fast_flow_4core_6common_build_solids_mask(__pyx_t_9, __pyx_v_channel); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 637, __pyx_L9_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":616
+      /* "fast_flow/core/electrostaticforcehandler.pyx":640
  *                 # Surface field: max |E| over the air
  *                 # cells bordering this layer's solids.
  *                 e_surf = 0.0             # <<<<<<<<<<<<<<
@@ -28012,7 +28353,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       __pyx_v_e_surf = 0.0;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":617
+      /* "fast_flow/core/electrostaticforcehandler.pyx":641
  *                 # cells bordering this layer's solids.
  *                 e_surf = 0.0
  *                 for y in range(ny):             # <<<<<<<<<<<<<<
@@ -28026,7 +28367,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_7; __pyx_t_11+=1) {
         __pyx_v_y = __pyx_t_11;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":618
+        /* "fast_flow/core/electrostaticforcehandler.pyx":642
  *                 e_surf = 0.0
  *                 for y in range(ny):
  *                     i = y * nx             # <<<<<<<<<<<<<<
@@ -28035,7 +28376,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
         __pyx_v_i = (__pyx_v_y * __pyx_v_nx);
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":619
+        /* "fast_flow/core/electrostaticforcehandler.pyx":643
  *                 for y in range(ny):
  *                     i = y * nx
  *                     for x in range(nx):             # <<<<<<<<<<<<<<
@@ -28049,7 +28390,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
         for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_13; __pyx_t_14+=1) {
           __pyx_v_x = __pyx_t_14;
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":620
+          /* "fast_flow/core/electrostaticforcehandler.pyx":644
  *                     i = y * nx
  *                     for x in range(nx):
  *                         if not self.solids[i]:             # <<<<<<<<<<<<<<
@@ -28061,7 +28402,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
           if (__pyx_t_1) {
 
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":621
+            /* "fast_flow/core/electrostaticforcehandler.pyx":645
  *                     for x in range(nx):
  *                         if not self.solids[i]:
  *                             if (x > 0 and channel[i - 1]) or \             # <<<<<<<<<<<<<<
@@ -28088,7 +28429,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
             }
             __pyx_L24_next_or:;
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":622
+            /* "fast_flow/core/electrostaticforcehandler.pyx":646
  *                         if not self.solids[i]:
  *                             if (x > 0 and channel[i - 1]) or \
  *                                     (x + 1 < nx and channel[i + 1]) or \             # <<<<<<<<<<<<<<
@@ -28115,7 +28456,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
             }
             __pyx_L26_next_or:;
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":623
+            /* "fast_flow/core/electrostaticforcehandler.pyx":647
  *                             if (x > 0 and channel[i - 1]) or \
  *                                     (x + 1 < nx and channel[i + 1]) or \
  *                                     (y > 0 and channel[i - nx]) or \             # <<<<<<<<<<<<<<
@@ -28142,7 +28483,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
             }
             __pyx_L28_next_or:;
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":624
+            /* "fast_flow/core/electrostaticforcehandler.pyx":648
  *                                     (x + 1 < nx and channel[i + 1]) or \
  *                                     (y > 0 and channel[i - nx]) or \
  *                                     (y + 1 < ny and channel[i + nx]):             # <<<<<<<<<<<<<<
@@ -28166,7 +28507,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
             __pyx_L23_bool_binop_done:;
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":621
+            /* "fast_flow/core/electrostaticforcehandler.pyx":645
  *                     for x in range(nx):
  *                         if not self.solids[i]:
  *                             if (x > 0 and channel[i - 1]) or \             # <<<<<<<<<<<<<<
@@ -28176,7 +28517,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
             if (__pyx_t_1) {
 
 
-              /* "fast_flow/core/electrostaticforcehandler.pyx":625
+              /* "fast_flow/core/electrostaticforcehandler.pyx":649
  *                                     (y > 0 and channel[i - nx]) or \
  *                                     (y + 1 < ny and channel[i + nx]):
  *                                 e2 = cu[i] * cu[i] + cv[i] * cv[i]             # <<<<<<<<<<<<<<
@@ -28185,7 +28526,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
               __pyx_v_e2 = (((__pyx_v_cu[__pyx_v_i]) * (__pyx_v_cu[__pyx_v_i])) + ((__pyx_v_cv[__pyx_v_i]) * (__pyx_v_cv[__pyx_v_i])));
 
-              /* "fast_flow/core/electrostaticforcehandler.pyx":626
+              /* "fast_flow/core/electrostaticforcehandler.pyx":650
  *                                     (y + 1 < ny and channel[i + nx]):
  *                                 e2 = cu[i] * cu[i] + cv[i] * cv[i]
  *                                 if e2 > e_surf:             # <<<<<<<<<<<<<<
@@ -28197,7 +28538,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
               if (__pyx_t_1) {
 
 
-                /* "fast_flow/core/electrostaticforcehandler.pyx":627
+                /* "fast_flow/core/electrostaticforcehandler.pyx":651
  *                                 e2 = cu[i] * cu[i] + cv[i] * cv[i]
  *                                 if e2 > e_surf:
  *                                     e_surf = e2             # <<<<<<<<<<<<<<
@@ -28206,7 +28547,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
                 __pyx_v_e_surf = __pyx_v_e2;
 
-                /* "fast_flow/core/electrostaticforcehandler.pyx":626
+                /* "fast_flow/core/electrostaticforcehandler.pyx":650
  *                                     (y + 1 < ny and channel[i + nx]):
  *                                 e2 = cu[i] * cu[i] + cv[i] * cv[i]
  *                                 if e2 > e_surf:             # <<<<<<<<<<<<<<
@@ -28215,7 +28556,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
               }
 
-              /* "fast_flow/core/electrostaticforcehandler.pyx":621
+              /* "fast_flow/core/electrostaticforcehandler.pyx":645
  *                     for x in range(nx):
  *                         if not self.solids[i]:
  *                             if (x > 0 and channel[i - 1]) or \             # <<<<<<<<<<<<<<
@@ -28224,7 +28565,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
             }
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":620
+            /* "fast_flow/core/electrostaticforcehandler.pyx":644
  *                     i = y * nx
  *                     for x in range(nx):
  *                         if not self.solids[i]:             # <<<<<<<<<<<<<<
@@ -28233,7 +28574,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
           }
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":628
+          /* "fast_flow/core/electrostaticforcehandler.pyx":652
  *                                 if e2 > e_surf:
  *                                     e_surf = e2
  *                         i += 1             # <<<<<<<<<<<<<<
@@ -28246,7 +28587,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       }
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":629
+      /* "fast_flow/core/electrostaticforcehandler.pyx":653
  *                                     e_surf = e2
  *                         i += 1
  *                 e_surf = sqrt(e_surf)             # <<<<<<<<<<<<<<
@@ -28255,7 +28596,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       __pyx_v_e_surf = sqrt(__pyx_v_e_surf);
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":630
+      /* "fast_flow/core/electrostaticforcehandler.pyx":654
  *                         i += 1
  *                 e_surf = sqrt(e_surf)
  *                 if e_surf <= ION_NEG_CORONA_E_BREAKDOWN:             # <<<<<<<<<<<<<<
@@ -28267,7 +28608,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":631
+        /* "fast_flow/core/electrostaticforcehandler.pyx":655
  *                 e_surf = sqrt(e_surf)
  *                 if e_surf <= ION_NEG_CORONA_E_BREAKDOWN:
  *                     continue             # <<<<<<<<<<<<<<
@@ -28276,7 +28617,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
         goto __pyx_L11_continue;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":630
+        /* "fast_flow/core/electrostaticforcehandler.pyx":654
  *                         i += 1
  *                 e_surf = sqrt(e_surf)
  *                 if e_surf <= ION_NEG_CORONA_E_BREAKDOWN:             # <<<<<<<<<<<<<<
@@ -28285,7 +28626,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       }
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":632
+      /* "fast_flow/core/electrostaticforcehandler.pyx":656
  *                 if e_surf <= ION_NEG_CORONA_E_BREAKDOWN:
  *                     continue
  *                 for y in range(ny):             # <<<<<<<<<<<<<<
@@ -28299,7 +28640,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_7; __pyx_t_11+=1) {
         __pyx_v_y = __pyx_t_11;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":633
+        /* "fast_flow/core/electrostaticforcehandler.pyx":657
  *                     continue
  *                 for y in range(ny):
  *                     i = y * nx             # <<<<<<<<<<<<<<
@@ -28308,7 +28649,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
         __pyx_v_i = (__pyx_v_y * __pyx_v_nx);
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":634
+        /* "fast_flow/core/electrostaticforcehandler.pyx":658
  *                 for y in range(ny):
  *                     i = y * nx
  *                     for x in range(nx):             # <<<<<<<<<<<<<<
@@ -28322,7 +28663,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
         for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_13; __pyx_t_14+=1) {
           __pyx_v_x = __pyx_t_14;
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":635
+          /* "fast_flow/core/electrostaticforcehandler.pyx":659
  *                     i = y * nx
  *                     for x in range(nx):
  *                         if not self.solids[i]:             # <<<<<<<<<<<<<<
@@ -28334,7 +28675,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
           if (__pyx_t_1) {
 
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":636
+            /* "fast_flow/core/electrostaticforcehandler.pyx":660
  *                     for x in range(nx):
  *                         if not self.solids[i]:
  *                             if (x > 0 and channel[i - 1]) or \             # <<<<<<<<<<<<<<
@@ -28361,7 +28702,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
             }
             __pyx_L40_next_or:;
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":637
+            /* "fast_flow/core/electrostaticforcehandler.pyx":661
  *                         if not self.solids[i]:
  *                             if (x > 0 and channel[i - 1]) or \
  *                                     (x + 1 < nx and channel[i + 1]) or \             # <<<<<<<<<<<<<<
@@ -28388,7 +28729,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
             }
             __pyx_L42_next_or:;
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":638
+            /* "fast_flow/core/electrostaticforcehandler.pyx":662
  *                             if (x > 0 and channel[i - 1]) or \
  *                                     (x + 1 < nx and channel[i + 1]) or \
  *                                     (y > 0 and channel[i - nx]) or \             # <<<<<<<<<<<<<<
@@ -28415,7 +28756,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
             }
             __pyx_L44_next_or:;
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":639
+            /* "fast_flow/core/electrostaticforcehandler.pyx":663
  *                                     (x + 1 < nx and channel[i + 1]) or \
  *                                     (y > 0 and channel[i - nx]) or \
  *                                     (y + 1 < ny and channel[i + nx]):             # <<<<<<<<<<<<<<
@@ -28439,7 +28780,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
             __pyx_L39_bool_binop_done:;
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":636
+            /* "fast_flow/core/electrostaticforcehandler.pyx":660
  *                     for x in range(nx):
  *                         if not self.solids[i]:
  *                             if (x > 0 and channel[i - 1]) or \             # <<<<<<<<<<<<<<
@@ -28449,7 +28790,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
             if (__pyx_t_1) {
 
 
-              /* "fast_flow/core/electrostaticforcehandler.pyx":640
+              /* "fast_flow/core/electrostaticforcehandler.pyx":664
  *                                     (y > 0 and channel[i - nx]) or \
  *                                     (y + 1 < ny and channel[i + nx]):
  *                                 self.ion_zone_neg[i] = 1             # <<<<<<<<<<<<<<
@@ -28458,7 +28799,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
               (__pyx_v_self->ion_zone_neg[__pyx_v_i]) = 1;
 
-              /* "fast_flow/core/electrostaticforcehandler.pyx":636
+              /* "fast_flow/core/electrostaticforcehandler.pyx":660
  *                     for x in range(nx):
  *                         if not self.solids[i]:
  *                             if (x > 0 and channel[i - 1]) or \             # <<<<<<<<<<<<<<
@@ -28467,7 +28808,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
             }
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":635
+            /* "fast_flow/core/electrostaticforcehandler.pyx":659
  *                     i = y * nx
  *                     for x in range(nx):
  *                         if not self.solids[i]:             # <<<<<<<<<<<<<<
@@ -28476,7 +28817,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
           }
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":641
+          /* "fast_flow/core/electrostaticforcehandler.pyx":665
  *                                     (y + 1 < ny and channel[i + nx]):
  *                                 self.ion_zone_neg[i] = 1
  *                         i += 1             # <<<<<<<<<<<<<<
@@ -28489,7 +28830,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       }
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":606
+      /* "fast_flow/core/electrostaticforcehandler.pyx":630
  *             raise MemoryError("could not allocate channel mask")
  *         try:
  *             for layer in sorted(layermap.keys()):             # <<<<<<<<<<<<<<
@@ -28501,7 +28842,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":643
+  /* "fast_flow/core/electrostaticforcehandler.pyx":667
  *                         i += 1
  *         finally:
  *             free(channel)             # <<<<<<<<<<<<<<
@@ -28548,7 +28889,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
     __pyx_L10:;
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":563
+  /* "fast_flow/core/electrostaticforcehandler.pyx":587
  *             free(channel)
  * 
  *     cdef void _build_ion_zone_neg(self,             # <<<<<<<<<<<<<<
@@ -28590,7 +28931,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   __Pyx_RefNannyFinishContext();
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":645
+/* "fast_flow/core/electrostaticforcehandler.pyx":669
  *             free(channel)
  * 
  *     cdef void _electrode_electrode_force(self):             # <<<<<<<<<<<<<<
@@ -28621,7 +28962,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   Py_ssize_t __pyx_t_7;
   Py_ssize_t __pyx_t_8;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":661
+  /* "fast_flow/core/electrostaticforcehandler.pyx":685
  *         group (charge < 0) are the two operands."""
  *         cdef Py_ssize_t s, e, t, u
  *         cdef Py_ssize_t pos = -1             # <<<<<<<<<<<<<<
@@ -28630,7 +28971,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_pos = -1L;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":662
+  /* "fast_flow/core/electrostaticforcehandler.pyx":686
  *         cdef Py_ssize_t s, e, t, u
  *         cdef Py_ssize_t pos = -1
  *         cdef Py_ssize_t neg = -1             # <<<<<<<<<<<<<<
@@ -28639,7 +28980,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_neg = -1L;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":664
+  /* "fast_flow/core/electrostaticforcehandler.pyx":688
  *         cdef Py_ssize_t neg = -1
  *         cdef DTYPE_f q_pos, q_neg, rx, ry, r2, inv_r3
  *         cdef DTYPE_f fx = 0.0             # <<<<<<<<<<<<<<
@@ -28648,7 +28989,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_fx = 0.0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":665
+  /* "fast_flow/core/electrostaticforcehandler.pyx":689
  *         cdef DTYPE_f q_pos, q_neg, rx, ry, r2, inv_r3
  *         cdef DTYPE_f fx = 0.0
  *         cdef DTYPE_f fy = 0.0             # <<<<<<<<<<<<<<
@@ -28657,7 +28998,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_fy = 0.0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":666
+  /* "fast_flow/core/electrostaticforcehandler.pyx":690
  *         cdef DTYPE_f fx = 0.0
  *         cdef DTYPE_f fy = 0.0
  *         for s in range(self.n_shapes):             # <<<<<<<<<<<<<<
@@ -28671,7 +29012,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_s = __pyx_t_3;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":667
+    /* "fast_flow/core/electrostaticforcehandler.pyx":691
  *         cdef DTYPE_f fy = 0.0
  *         for s in range(self.n_shapes):
  *             if self.shapes[s].extradata.charge > 0.0:             # <<<<<<<<<<<<<<
@@ -28683,7 +29024,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
     if (__pyx_t_4) {
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":668
+      /* "fast_flow/core/electrostaticforcehandler.pyx":692
  *         for s in range(self.n_shapes):
  *             if self.shapes[s].extradata.charge > 0.0:
  *                 pos = s             # <<<<<<<<<<<<<<
@@ -28692,7 +29033,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       __pyx_v_pos = __pyx_v_s;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":667
+      /* "fast_flow/core/electrostaticforcehandler.pyx":691
  *         cdef DTYPE_f fy = 0.0
  *         for s in range(self.n_shapes):
  *             if self.shapes[s].extradata.charge > 0.0:             # <<<<<<<<<<<<<<
@@ -28702,7 +29043,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       goto __pyx_L5;
     }
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":669
+    /* "fast_flow/core/electrostaticforcehandler.pyx":693
  *             if self.shapes[s].extradata.charge > 0.0:
  *                 pos = s
  *             elif self.shapes[s].extradata.charge < 0.0:             # <<<<<<<<<<<<<<
@@ -28714,7 +29055,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
     if (__pyx_t_4) {
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":670
+      /* "fast_flow/core/electrostaticforcehandler.pyx":694
  *                 pos = s
  *             elif self.shapes[s].extradata.charge < 0.0:
  *                 neg = s             # <<<<<<<<<<<<<<
@@ -28723,7 +29064,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       __pyx_v_neg = __pyx_v_s;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":669
+      /* "fast_flow/core/electrostaticforcehandler.pyx":693
  *             if self.shapes[s].extradata.charge > 0.0:
  *                 pos = s
  *             elif self.shapes[s].extradata.charge < 0.0:             # <<<<<<<<<<<<<<
@@ -28735,7 +29076,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   }
 
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":671
+  /* "fast_flow/core/electrostaticforcehandler.pyx":695
  *             elif self.shapes[s].extradata.charge < 0.0:
  *                 neg = s
  *         if pos < 0 or neg < 0:             # <<<<<<<<<<<<<<
@@ -28761,7 +29102,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   if (__pyx_t_4) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":672
+    /* "fast_flow/core/electrostaticforcehandler.pyx":696
  *                 neg = s
  *         if pos < 0 or neg < 0:
  *             self.ee_fx = 0.0             # <<<<<<<<<<<<<<
@@ -28770,7 +29111,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
     __pyx_v_self->ee_fx = 0.0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":673
+    /* "fast_flow/core/electrostaticforcehandler.pyx":697
  *         if pos < 0 or neg < 0:
  *             self.ee_fx = 0.0
  *             self.ee_fy = 0.0             # <<<<<<<<<<<<<<
@@ -28779,7 +29120,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
     __pyx_v_self->ee_fy = 0.0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":674
+    /* "fast_flow/core/electrostaticforcehandler.pyx":698
  *             self.ee_fx = 0.0
  *             self.ee_fy = 0.0
  *             return             # <<<<<<<<<<<<<<
@@ -28790,7 +29131,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
     }
     goto __pyx_L0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":671
+    /* "fast_flow/core/electrostaticforcehandler.pyx":695
  *             elif self.shapes[s].extradata.charge < 0.0:
  *                 neg = s
  *         if pos < 0 or neg < 0:             # <<<<<<<<<<<<<<
@@ -28799,7 +29140,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":675
+  /* "fast_flow/core/electrostaticforcehandler.pyx":699
  *             self.ee_fy = 0.0
  *             return
  *         q_pos = self.shapes[pos].extradata.charge / \             # <<<<<<<<<<<<<<
@@ -28808,7 +29149,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_q_pos = ((__pyx_v_self->shapes[__pyx_v_pos]).extradata.charge / ((__pyx_t_9fast_flow_4core_6common_DTYPE_f)(__pyx_v_self->shapes[__pyx_v_pos]).n_edges));
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":677
+  /* "fast_flow/core/electrostaticforcehandler.pyx":701
  *         q_pos = self.shapes[pos].extradata.charge / \
  *             self.shapes[pos].n_edges
  *         q_neg = self.shapes[neg].extradata.charge / \             # <<<<<<<<<<<<<<
@@ -28817,7 +29158,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_q_neg = ((__pyx_v_self->shapes[__pyx_v_neg]).extradata.charge / ((__pyx_t_9fast_flow_4core_6common_DTYPE_f)(__pyx_v_self->shapes[__pyx_v_neg]).n_edges));
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":679
+  /* "fast_flow/core/electrostaticforcehandler.pyx":703
  *         q_neg = self.shapes[neg].extradata.charge / \
  *             self.shapes[neg].n_edges
  *         for e in range(self.shapes[pos].n_edges):             # <<<<<<<<<<<<<<
@@ -28831,7 +29172,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_e = __pyx_t_3;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":680
+    /* "fast_flow/core/electrostaticforcehandler.pyx":704
  *             self.shapes[neg].n_edges
  *         for e in range(self.shapes[pos].n_edges):
  *             for t in range(self.shapes[neg].n_edges):             # <<<<<<<<<<<<<<
@@ -28845,7 +29186,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
     for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
       __pyx_v_t = __pyx_t_8;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":681
+      /* "fast_flow/core/electrostaticforcehandler.pyx":705
  *         for e in range(self.shapes[pos].n_edges):
  *             for t in range(self.shapes[neg].n_edges):
  *                 rx = self.shapes[pos].edges[2 * e] - \             # <<<<<<<<<<<<<<
@@ -28854,7 +29195,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       __pyx_v_rx = (((__pyx_v_self->shapes[__pyx_v_pos]).edges[(2 * __pyx_v_e)]) - ((__pyx_v_self->shapes[__pyx_v_neg]).edges[(2 * __pyx_v_t)]));
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":683
+      /* "fast_flow/core/electrostaticforcehandler.pyx":707
  *                 rx = self.shapes[pos].edges[2 * e] - \
  *                     self.shapes[neg].edges[2 * t]
  *                 ry = self.shapes[pos].edges[2 * e + 1] - \             # <<<<<<<<<<<<<<
@@ -28863,7 +29204,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       __pyx_v_ry = (((__pyx_v_self->shapes[__pyx_v_pos]).edges[((2 * __pyx_v_e) + 1)]) - ((__pyx_v_self->shapes[__pyx_v_neg]).edges[((2 * __pyx_v_t) + 1)]));
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":685
+      /* "fast_flow/core/electrostaticforcehandler.pyx":709
  *                 ry = self.shapes[pos].edges[2 * e + 1] - \
  *                     self.shapes[neg].edges[2 * t + 1]
  *                 r2 = rx * rx + ry * ry             # <<<<<<<<<<<<<<
@@ -28872,7 +29213,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       __pyx_v_r2 = ((__pyx_v_rx * __pyx_v_rx) + (__pyx_v_ry * __pyx_v_ry));
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":686
+      /* "fast_flow/core/electrostaticforcehandler.pyx":710
  *                     self.shapes[neg].edges[2 * t + 1]
  *                 r2 = rx * rx + ry * ry
  *                 if r2 == 0.0:             # <<<<<<<<<<<<<<
@@ -28884,7 +29225,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       if (__pyx_t_4) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":687
+        /* "fast_flow/core/electrostaticforcehandler.pyx":711
  *                 r2 = rx * rx + ry * ry
  *                 if r2 == 0.0:
  *                     continue             # <<<<<<<<<<<<<<
@@ -28893,7 +29234,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
         goto __pyx_L11_continue;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":686
+        /* "fast_flow/core/electrostaticforcehandler.pyx":710
  *                     self.shapes[neg].edges[2 * t + 1]
  *                 r2 = rx * rx + ry * ry
  *                 if r2 == 0.0:             # <<<<<<<<<<<<<<
@@ -28902,7 +29243,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       }
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":688
+      /* "fast_flow/core/electrostaticforcehandler.pyx":712
  *                 if r2 == 0.0:
  *                     continue
  *                 inv_r3 = 1.0 / (r2 * sqrt(r2))             # <<<<<<<<<<<<<<
@@ -28911,7 +29252,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       __pyx_v_inv_r3 = (((__pyx_t_9fast_flow_4core_6common_DTYPE_f)1.0) / (__pyx_v_r2 * sqrt(__pyx_v_r2)));
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":689
+      /* "fast_flow/core/electrostaticforcehandler.pyx":713
  *                     continue
  *                 inv_r3 = 1.0 / (r2 * sqrt(r2))
  *                 fx += q_pos * q_neg * rx * inv_r3             # <<<<<<<<<<<<<<
@@ -28920,7 +29261,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       __pyx_v_fx = (__pyx_v_fx + (((__pyx_v_q_pos * __pyx_v_q_neg) * __pyx_v_rx) * __pyx_v_inv_r3));
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":690
+      /* "fast_flow/core/electrostaticforcehandler.pyx":714
  *                 inv_r3 = 1.0 / (r2 * sqrt(r2))
  *                 fx += q_pos * q_neg * rx * inv_r3
  *                 fy += q_pos * q_neg * ry * inv_r3             # <<<<<<<<<<<<<<
@@ -28934,7 +29275,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   }
 
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":691
+  /* "fast_flow/core/electrostaticforcehandler.pyx":715
  *                 fx += q_pos * q_neg * rx * inv_r3
  *                 fy += q_pos * q_neg * ry * inv_r3
  *         self.ee_fx = fx             # <<<<<<<<<<<<<<
@@ -28943,7 +29284,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_self->ee_fx = __pyx_v_fx;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":692
+  /* "fast_flow/core/electrostaticforcehandler.pyx":716
  *                 fy += q_pos * q_neg * ry * inv_r3
  *         self.ee_fx = fx
  *         self.ee_fy = fy             # <<<<<<<<<<<<<<
@@ -28952,7 +29293,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_self->ee_fy = __pyx_v_fy;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":645
+  /* "fast_flow/core/electrostaticforcehandler.pyx":669
  *             free(channel)
  * 
  *     cdef void _electrode_electrode_force(self):             # <<<<<<<<<<<<<<
@@ -28978,7 +29319,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":694
+/* "fast_flow/core/electrostaticforcehandler.pyx":718
  *         self.ee_fy = fy
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -29006,7 +29347,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   Py_ssize_t __pyx_t_3;
   Py_ssize_t __pyx_t_4;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":695
+  /* "fast_flow/core/electrostaticforcehandler.pyx":719
  * 
  *     def __dealloc__(self):
  *         if self.c_handler != NULL:             # <<<<<<<<<<<<<<
@@ -29018,7 +29359,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":696
+    /* "fast_flow/core/electrostaticforcehandler.pyx":720
  *     def __dealloc__(self):
  *         if self.c_handler != NULL:
  *             handler_c_destroy(<handler_c_t*>self.c_handler)             # <<<<<<<<<<<<<<
@@ -29027,7 +29368,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     handler_c_destroy(((handler_c_t *)__pyx_v_self->c_handler));
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":697
+    /* "fast_flow/core/electrostaticforcehandler.pyx":721
  *         if self.c_handler != NULL:
  *             handler_c_destroy(<handler_c_t*>self.c_handler)
  *             self.c_handler = NULL             # <<<<<<<<<<<<<<
@@ -29036,7 +29377,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->c_handler = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":695
+    /* "fast_flow/core/electrostaticforcehandler.pyx":719
  * 
  *     def __dealloc__(self):
  *         if self.c_handler != NULL:             # <<<<<<<<<<<<<<
@@ -29045,7 +29386,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":698
+  /* "fast_flow/core/electrostaticforcehandler.pyx":722
  *             handler_c_destroy(<handler_c_t*>self.c_handler)
  *             self.c_handler = NULL
  *         if self.d != NULL:             # <<<<<<<<<<<<<<
@@ -29057,7 +29398,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":699
+    /* "fast_flow/core/electrostaticforcehandler.pyx":723
  *             self.c_handler = NULL
  *         if self.d != NULL:
  *             for i in range(2):             # <<<<<<<<<<<<<<
@@ -29067,7 +29408,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
     for (__pyx_t_2 = 0; __pyx_t_2 < 2; __pyx_t_2+=1) {
       __pyx_v_i = __pyx_t_2;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":700
+      /* "fast_flow/core/electrostaticforcehandler.pyx":724
  *         if self.d != NULL:
  *             for i in range(2):
  *                 if self.d[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29079,7 +29420,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":701
+        /* "fast_flow/core/electrostaticforcehandler.pyx":725
  *             for i in range(2):
  *                 if self.d[i] != NULL:
  *                     free(self.d[i])             # <<<<<<<<<<<<<<
@@ -29088,7 +29429,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
         free((__pyx_v_self->d[__pyx_v_i]));
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":700
+        /* "fast_flow/core/electrostaticforcehandler.pyx":724
  *         if self.d != NULL:
  *             for i in range(2):
  *                 if self.d[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29098,7 +29439,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       }
     }
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":702
+    /* "fast_flow/core/electrostaticforcehandler.pyx":726
  *                 if self.d[i] != NULL:
  *                     free(self.d[i])
  *             free(self.d)             # <<<<<<<<<<<<<<
@@ -29107,7 +29448,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->d);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":703
+    /* "fast_flow/core/electrostaticforcehandler.pyx":727
  *                     free(self.d[i])
  *             free(self.d)
  *             self.d = NULL             # <<<<<<<<<<<<<<
@@ -29116,7 +29457,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->d = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":698
+    /* "fast_flow/core/electrostaticforcehandler.pyx":722
  *             handler_c_destroy(<handler_c_t*>self.c_handler)
  *             self.c_handler = NULL
  *         if self.d != NULL:             # <<<<<<<<<<<<<<
@@ -29125,7 +29466,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":704
+  /* "fast_flow/core/electrostaticforcehandler.pyx":728
  *             free(self.d)
  *             self.d = NULL
  *         if self.p != NULL:             # <<<<<<<<<<<<<<
@@ -29137,7 +29478,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":705
+    /* "fast_flow/core/electrostaticforcehandler.pyx":729
  *             self.d = NULL
  *         if self.p != NULL:
  *             for i in range(2):             # <<<<<<<<<<<<<<
@@ -29147,7 +29488,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
     for (__pyx_t_2 = 0; __pyx_t_2 < 2; __pyx_t_2+=1) {
       __pyx_v_i = __pyx_t_2;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":706
+      /* "fast_flow/core/electrostaticforcehandler.pyx":730
  *         if self.p != NULL:
  *             for i in range(2):
  *                 if self.p[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29159,7 +29500,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":707
+        /* "fast_flow/core/electrostaticforcehandler.pyx":731
  *             for i in range(2):
  *                 if self.p[i] != NULL:
  *                     free(self.p[i])             # <<<<<<<<<<<<<<
@@ -29168,7 +29509,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
         free((__pyx_v_self->p[__pyx_v_i]));
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":706
+        /* "fast_flow/core/electrostaticforcehandler.pyx":730
  *         if self.p != NULL:
  *             for i in range(2):
  *                 if self.p[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29178,7 +29519,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       }
     }
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":708
+    /* "fast_flow/core/electrostaticforcehandler.pyx":732
  *                 if self.p[i] != NULL:
  *                     free(self.p[i])
  *             free(self.p)             # <<<<<<<<<<<<<<
@@ -29187,7 +29528,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->p);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":709
+    /* "fast_flow/core/electrostaticforcehandler.pyx":733
  *                     free(self.p[i])
  *             free(self.p)
  *             self.p = NULL             # <<<<<<<<<<<<<<
@@ -29196,7 +29537,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->p = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":704
+    /* "fast_flow/core/electrostaticforcehandler.pyx":728
  *             free(self.d)
  *             self.d = NULL
  *         if self.p != NULL:             # <<<<<<<<<<<<<<
@@ -29205,7 +29546,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":710
+  /* "fast_flow/core/electrostaticforcehandler.pyx":734
  *             free(self.p)
  *             self.p = NULL
  *         if self.u != NULL:             # <<<<<<<<<<<<<<
@@ -29217,7 +29558,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":711
+    /* "fast_flow/core/electrostaticforcehandler.pyx":735
  *             self.p = NULL
  *         if self.u != NULL:
  *             for i in range(2):             # <<<<<<<<<<<<<<
@@ -29227,7 +29568,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
     for (__pyx_t_2 = 0; __pyx_t_2 < 2; __pyx_t_2+=1) {
       __pyx_v_i = __pyx_t_2;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":712
+      /* "fast_flow/core/electrostaticforcehandler.pyx":736
  *         if self.u != NULL:
  *             for i in range(2):
  *                 if self.u[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29239,7 +29580,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":713
+        /* "fast_flow/core/electrostaticforcehandler.pyx":737
  *             for i in range(2):
  *                 if self.u[i] != NULL:
  *                     free(self.u[i])             # <<<<<<<<<<<<<<
@@ -29248,7 +29589,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
         free((__pyx_v_self->u[__pyx_v_i]));
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":712
+        /* "fast_flow/core/electrostaticforcehandler.pyx":736
  *         if self.u != NULL:
  *             for i in range(2):
  *                 if self.u[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29258,7 +29599,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       }
     }
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":714
+    /* "fast_flow/core/electrostaticforcehandler.pyx":738
  *                 if self.u[i] != NULL:
  *                     free(self.u[i])
  *             free(self.u)             # <<<<<<<<<<<<<<
@@ -29267,7 +29608,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->u);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":715
+    /* "fast_flow/core/electrostaticforcehandler.pyx":739
  *                     free(self.u[i])
  *             free(self.u)
  *             self.u = NULL             # <<<<<<<<<<<<<<
@@ -29276,7 +29617,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->u = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":710
+    /* "fast_flow/core/electrostaticforcehandler.pyx":734
  *             free(self.p)
  *             self.p = NULL
  *         if self.u != NULL:             # <<<<<<<<<<<<<<
@@ -29285,7 +29626,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":716
+  /* "fast_flow/core/electrostaticforcehandler.pyx":740
  *             free(self.u)
  *             self.u = NULL
  *         if self.v != NULL:             # <<<<<<<<<<<<<<
@@ -29297,7 +29638,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":717
+    /* "fast_flow/core/electrostaticforcehandler.pyx":741
  *             self.u = NULL
  *         if self.v != NULL:
  *             for i in range(2):             # <<<<<<<<<<<<<<
@@ -29307,7 +29648,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
     for (__pyx_t_2 = 0; __pyx_t_2 < 2; __pyx_t_2+=1) {
       __pyx_v_i = __pyx_t_2;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":718
+      /* "fast_flow/core/electrostaticforcehandler.pyx":742
  *         if self.v != NULL:
  *             for i in range(2):
  *                 if self.v[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29319,7 +29660,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":719
+        /* "fast_flow/core/electrostaticforcehandler.pyx":743
  *             for i in range(2):
  *                 if self.v[i] != NULL:
  *                     free(self.v[i])             # <<<<<<<<<<<<<<
@@ -29328,7 +29669,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
         free((__pyx_v_self->v[__pyx_v_i]));
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":718
+        /* "fast_flow/core/electrostaticforcehandler.pyx":742
  *         if self.v != NULL:
  *             for i in range(2):
  *                 if self.v[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29338,7 +29679,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       }
     }
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":720
+    /* "fast_flow/core/electrostaticforcehandler.pyx":744
  *                 if self.v[i] != NULL:
  *                     free(self.v[i])
  *             free(self.v)             # <<<<<<<<<<<<<<
@@ -29347,7 +29688,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->v);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":721
+    /* "fast_flow/core/electrostaticforcehandler.pyx":745
  *                     free(self.v[i])
  *             free(self.v)
  *             self.v = NULL             # <<<<<<<<<<<<<<
@@ -29356,7 +29697,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->v = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":716
+    /* "fast_flow/core/electrostaticforcehandler.pyx":740
  *             free(self.u)
  *             self.u = NULL
  *         if self.v != NULL:             # <<<<<<<<<<<<<<
@@ -29365,7 +29706,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":722
+  /* "fast_flow/core/electrostaticforcehandler.pyx":746
  *             free(self.v)
  *             self.v = NULL
  *         if self.ion_zone != NULL:             # <<<<<<<<<<<<<<
@@ -29377,7 +29718,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":723
+    /* "fast_flow/core/electrostaticforcehandler.pyx":747
  *             self.v = NULL
  *         if self.ion_zone != NULL:
  *             free(self.ion_zone)             # <<<<<<<<<<<<<<
@@ -29386,7 +29727,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->ion_zone);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":724
+    /* "fast_flow/core/electrostaticforcehandler.pyx":748
  *         if self.ion_zone != NULL:
  *             free(self.ion_zone)
  *             self.ion_zone = NULL             # <<<<<<<<<<<<<<
@@ -29395,7 +29736,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->ion_zone = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":722
+    /* "fast_flow/core/electrostaticforcehandler.pyx":746
  *             free(self.v)
  *             self.v = NULL
  *         if self.ion_zone != NULL:             # <<<<<<<<<<<<<<
@@ -29404,7 +29745,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":725
+  /* "fast_flow/core/electrostaticforcehandler.pyx":749
  *             free(self.ion_zone)
  *             self.ion_zone = NULL
  *         if self.dn != NULL:             # <<<<<<<<<<<<<<
@@ -29416,7 +29757,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":726
+    /* "fast_flow/core/electrostaticforcehandler.pyx":750
  *             self.ion_zone = NULL
  *         if self.dn != NULL:
  *             for i in range(2):             # <<<<<<<<<<<<<<
@@ -29426,7 +29767,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
     for (__pyx_t_2 = 0; __pyx_t_2 < 2; __pyx_t_2+=1) {
       __pyx_v_i = __pyx_t_2;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":727
+      /* "fast_flow/core/electrostaticforcehandler.pyx":751
  *         if self.dn != NULL:
  *             for i in range(2):
  *                 if self.dn[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29438,7 +29779,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":728
+        /* "fast_flow/core/electrostaticforcehandler.pyx":752
  *             for i in range(2):
  *                 if self.dn[i] != NULL:
  *                     free(self.dn[i])             # <<<<<<<<<<<<<<
@@ -29447,7 +29788,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
         free((__pyx_v_self->dn[__pyx_v_i]));
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":727
+        /* "fast_flow/core/electrostaticforcehandler.pyx":751
  *         if self.dn != NULL:
  *             for i in range(2):
  *                 if self.dn[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29457,7 +29798,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       }
     }
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":729
+    /* "fast_flow/core/electrostaticforcehandler.pyx":753
  *                 if self.dn[i] != NULL:
  *                     free(self.dn[i])
  *             free(self.dn)             # <<<<<<<<<<<<<<
@@ -29466,7 +29807,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->dn);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":730
+    /* "fast_flow/core/electrostaticforcehandler.pyx":754
  *                     free(self.dn[i])
  *             free(self.dn)
  *             self.dn = NULL             # <<<<<<<<<<<<<<
@@ -29475,7 +29816,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->dn = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":725
+    /* "fast_flow/core/electrostaticforcehandler.pyx":749
  *             free(self.ion_zone)
  *             self.ion_zone = NULL
  *         if self.dn != NULL:             # <<<<<<<<<<<<<<
@@ -29484,7 +29825,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":731
+  /* "fast_flow/core/electrostaticforcehandler.pyx":755
  *             free(self.dn)
  *             self.dn = NULL
  *         if self.un != NULL:             # <<<<<<<<<<<<<<
@@ -29496,7 +29837,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":732
+    /* "fast_flow/core/electrostaticforcehandler.pyx":756
  *             self.dn = NULL
  *         if self.un != NULL:
  *             for i in range(2):             # <<<<<<<<<<<<<<
@@ -29506,7 +29847,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
     for (__pyx_t_2 = 0; __pyx_t_2 < 2; __pyx_t_2+=1) {
       __pyx_v_i = __pyx_t_2;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":733
+      /* "fast_flow/core/electrostaticforcehandler.pyx":757
  *         if self.un != NULL:
  *             for i in range(2):
  *                 if self.un[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29518,7 +29859,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":734
+        /* "fast_flow/core/electrostaticforcehandler.pyx":758
  *             for i in range(2):
  *                 if self.un[i] != NULL:
  *                     free(self.un[i])             # <<<<<<<<<<<<<<
@@ -29527,7 +29868,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
         free((__pyx_v_self->un[__pyx_v_i]));
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":733
+        /* "fast_flow/core/electrostaticforcehandler.pyx":757
  *         if self.un != NULL:
  *             for i in range(2):
  *                 if self.un[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29537,7 +29878,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       }
     }
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":735
+    /* "fast_flow/core/electrostaticforcehandler.pyx":759
  *                 if self.un[i] != NULL:
  *                     free(self.un[i])
  *             free(self.un)             # <<<<<<<<<<<<<<
@@ -29546,7 +29887,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->un);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":736
+    /* "fast_flow/core/electrostaticforcehandler.pyx":760
  *                     free(self.un[i])
  *             free(self.un)
  *             self.un = NULL             # <<<<<<<<<<<<<<
@@ -29555,7 +29896,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->un = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":731
+    /* "fast_flow/core/electrostaticforcehandler.pyx":755
  *             free(self.dn)
  *             self.dn = NULL
  *         if self.un != NULL:             # <<<<<<<<<<<<<<
@@ -29564,7 +29905,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":737
+  /* "fast_flow/core/electrostaticforcehandler.pyx":761
  *             free(self.un)
  *             self.un = NULL
  *         if self.vn != NULL:             # <<<<<<<<<<<<<<
@@ -29576,7 +29917,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":738
+    /* "fast_flow/core/electrostaticforcehandler.pyx":762
  *             self.un = NULL
  *         if self.vn != NULL:
  *             for i in range(2):             # <<<<<<<<<<<<<<
@@ -29586,7 +29927,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
     for (__pyx_t_2 = 0; __pyx_t_2 < 2; __pyx_t_2+=1) {
       __pyx_v_i = __pyx_t_2;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":739
+      /* "fast_flow/core/electrostaticforcehandler.pyx":763
  *         if self.vn != NULL:
  *             for i in range(2):
  *                 if self.vn[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29598,7 +29939,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":740
+        /* "fast_flow/core/electrostaticforcehandler.pyx":764
  *             for i in range(2):
  *                 if self.vn[i] != NULL:
  *                     free(self.vn[i])             # <<<<<<<<<<<<<<
@@ -29607,7 +29948,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
         free((__pyx_v_self->vn[__pyx_v_i]));
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":739
+        /* "fast_flow/core/electrostaticforcehandler.pyx":763
  *         if self.vn != NULL:
  *             for i in range(2):
  *                 if self.vn[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29617,7 +29958,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       }
     }
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":741
+    /* "fast_flow/core/electrostaticforcehandler.pyx":765
  *                 if self.vn[i] != NULL:
  *                     free(self.vn[i])
  *             free(self.vn)             # <<<<<<<<<<<<<<
@@ -29626,7 +29967,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->vn);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":742
+    /* "fast_flow/core/electrostaticforcehandler.pyx":766
  *                     free(self.vn[i])
  *             free(self.vn)
  *             self.vn = NULL             # <<<<<<<<<<<<<<
@@ -29635,7 +29976,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->vn = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":737
+    /* "fast_flow/core/electrostaticforcehandler.pyx":761
  *             free(self.un)
  *             self.un = NULL
  *         if self.vn != NULL:             # <<<<<<<<<<<<<<
@@ -29644,7 +29985,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":743
+  /* "fast_flow/core/electrostaticforcehandler.pyx":767
  *             free(self.vn)
  *             self.vn = NULL
  *         if self.ion_zone_neg != NULL:             # <<<<<<<<<<<<<<
@@ -29656,7 +29997,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":744
+    /* "fast_flow/core/electrostaticforcehandler.pyx":768
  *             self.vn = NULL
  *         if self.ion_zone_neg != NULL:
  *             free(self.ion_zone_neg)             # <<<<<<<<<<<<<<
@@ -29665,7 +30006,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->ion_zone_neg);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":745
+    /* "fast_flow/core/electrostaticforcehandler.pyx":769
  *         if self.ion_zone_neg != NULL:
  *             free(self.ion_zone_neg)
  *             self.ion_zone_neg = NULL             # <<<<<<<<<<<<<<
@@ -29674,7 +30015,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->ion_zone_neg = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":743
+    /* "fast_flow/core/electrostaticforcehandler.pyx":767
  *             free(self.vn)
  *             self.vn = NULL
  *         if self.ion_zone_neg != NULL:             # <<<<<<<<<<<<<<
@@ -29683,7 +30024,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":746
+  /* "fast_flow/core/electrostaticforcehandler.pyx":770
  *             free(self.ion_zone_neg)
  *             self.ion_zone_neg = NULL
  *         if self.cu != NULL:             # <<<<<<<<<<<<<<
@@ -29695,7 +30036,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":747
+    /* "fast_flow/core/electrostaticforcehandler.pyx":771
  *             self.ion_zone_neg = NULL
  *         if self.cu != NULL:
  *             for i in range(2):             # <<<<<<<<<<<<<<
@@ -29705,7 +30046,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
     for (__pyx_t_2 = 0; __pyx_t_2 < 2; __pyx_t_2+=1) {
       __pyx_v_i = __pyx_t_2;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":748
+      /* "fast_flow/core/electrostaticforcehandler.pyx":772
  *         if self.cu != NULL:
  *             for i in range(2):
  *                 if self.cu[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29717,7 +30058,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":749
+        /* "fast_flow/core/electrostaticforcehandler.pyx":773
  *             for i in range(2):
  *                 if self.cu[i] != NULL:
  *                     free(self.cu[i])             # <<<<<<<<<<<<<<
@@ -29726,7 +30067,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
         free((__pyx_v_self->cu[__pyx_v_i]));
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":748
+        /* "fast_flow/core/electrostaticforcehandler.pyx":772
  *         if self.cu != NULL:
  *             for i in range(2):
  *                 if self.cu[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29736,7 +30077,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       }
     }
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":750
+    /* "fast_flow/core/electrostaticforcehandler.pyx":774
  *                 if self.cu[i] != NULL:
  *                     free(self.cu[i])
  *             free(self.cu)             # <<<<<<<<<<<<<<
@@ -29745,7 +30086,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->cu);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":751
+    /* "fast_flow/core/electrostaticforcehandler.pyx":775
  *                     free(self.cu[i])
  *             free(self.cu)
  *             self.cu = NULL             # <<<<<<<<<<<<<<
@@ -29754,7 +30095,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->cu = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":746
+    /* "fast_flow/core/electrostaticforcehandler.pyx":770
  *             free(self.ion_zone_neg)
  *             self.ion_zone_neg = NULL
  *         if self.cu != NULL:             # <<<<<<<<<<<<<<
@@ -29763,7 +30104,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":752
+  /* "fast_flow/core/electrostaticforcehandler.pyx":776
  *             free(self.cu)
  *             self.cu = NULL
  *         if self.e_pos_u != NULL:             # <<<<<<<<<<<<<<
@@ -29775,7 +30116,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":753
+    /* "fast_flow/core/electrostaticforcehandler.pyx":777
  *             self.cu = NULL
  *         if self.e_pos_u != NULL:
  *             free(self.e_pos_u)             # <<<<<<<<<<<<<<
@@ -29784,7 +30125,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->e_pos_u);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":754
+    /* "fast_flow/core/electrostaticforcehandler.pyx":778
  *         if self.e_pos_u != NULL:
  *             free(self.e_pos_u)
  *             self.e_pos_u = NULL             # <<<<<<<<<<<<<<
@@ -29793,7 +30134,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->e_pos_u = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":752
+    /* "fast_flow/core/electrostaticforcehandler.pyx":776
  *             free(self.cu)
  *             self.cu = NULL
  *         if self.e_pos_u != NULL:             # <<<<<<<<<<<<<<
@@ -29802,7 +30143,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":755
+  /* "fast_flow/core/electrostaticforcehandler.pyx":779
  *             free(self.e_pos_u)
  *             self.e_pos_u = NULL
  *         if self.e_pos_v != NULL:             # <<<<<<<<<<<<<<
@@ -29814,7 +30155,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":756
+    /* "fast_flow/core/electrostaticforcehandler.pyx":780
  *             self.e_pos_u = NULL
  *         if self.e_pos_v != NULL:
  *             free(self.e_pos_v)             # <<<<<<<<<<<<<<
@@ -29823,7 +30164,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->e_pos_v);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":757
+    /* "fast_flow/core/electrostaticforcehandler.pyx":781
  *         if self.e_pos_v != NULL:
  *             free(self.e_pos_v)
  *             self.e_pos_v = NULL             # <<<<<<<<<<<<<<
@@ -29832,7 +30173,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->e_pos_v = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":755
+    /* "fast_flow/core/electrostaticforcehandler.pyx":779
  *             free(self.e_pos_u)
  *             self.e_pos_u = NULL
  *         if self.e_pos_v != NULL:             # <<<<<<<<<<<<<<
@@ -29841,7 +30182,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":758
+  /* "fast_flow/core/electrostaticforcehandler.pyx":782
  *             free(self.e_pos_v)
  *             self.e_pos_v = NULL
  *         if self.e_neg_u != NULL:             # <<<<<<<<<<<<<<
@@ -29853,7 +30194,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":759
+    /* "fast_flow/core/electrostaticforcehandler.pyx":783
  *             self.e_pos_v = NULL
  *         if self.e_neg_u != NULL:
  *             free(self.e_neg_u)             # <<<<<<<<<<<<<<
@@ -29862,7 +30203,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->e_neg_u);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":760
+    /* "fast_flow/core/electrostaticforcehandler.pyx":784
  *         if self.e_neg_u != NULL:
  *             free(self.e_neg_u)
  *             self.e_neg_u = NULL             # <<<<<<<<<<<<<<
@@ -29871,7 +30212,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->e_neg_u = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":758
+    /* "fast_flow/core/electrostaticforcehandler.pyx":782
  *             free(self.e_pos_v)
  *             self.e_pos_v = NULL
  *         if self.e_neg_u != NULL:             # <<<<<<<<<<<<<<
@@ -29880,7 +30221,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":761
+  /* "fast_flow/core/electrostaticforcehandler.pyx":785
  *             free(self.e_neg_u)
  *             self.e_neg_u = NULL
  *         if self.e_neg_v != NULL:             # <<<<<<<<<<<<<<
@@ -29892,7 +30233,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":762
+    /* "fast_flow/core/electrostaticforcehandler.pyx":786
  *             self.e_neg_u = NULL
  *         if self.e_neg_v != NULL:
  *             free(self.e_neg_v)             # <<<<<<<<<<<<<<
@@ -29901,7 +30242,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->e_neg_v);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":763
+    /* "fast_flow/core/electrostaticforcehandler.pyx":787
  *         if self.e_neg_v != NULL:
  *             free(self.e_neg_v)
  *             self.e_neg_v = NULL             # <<<<<<<<<<<<<<
@@ -29910,7 +30251,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->e_neg_v = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":764
+    /* "fast_flow/core/electrostaticforcehandler.pyx":788
  *             free(self.e_neg_v)
  *             self.e_neg_v = NULL
  *             for i in range(2):             # <<<<<<<<<<<<<<
@@ -29920,7 +30261,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
     for (__pyx_t_2 = 0; __pyx_t_2 < 2; __pyx_t_2+=1) {
       __pyx_v_i = __pyx_t_2;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":765
+      /* "fast_flow/core/electrostaticforcehandler.pyx":789
  *             self.e_neg_v = NULL
  *             for i in range(2):
  *                 if self.cu[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29932,7 +30273,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":766
+        /* "fast_flow/core/electrostaticforcehandler.pyx":790
  *             for i in range(2):
  *                 if self.cu[i] != NULL:
  *                     free(self.cu[i])             # <<<<<<<<<<<<<<
@@ -29941,7 +30282,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
         free((__pyx_v_self->cu[__pyx_v_i]));
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":765
+        /* "fast_flow/core/electrostaticforcehandler.pyx":789
  *             self.e_neg_v = NULL
  *             for i in range(2):
  *                 if self.cu[i] != NULL:             # <<<<<<<<<<<<<<
@@ -29951,7 +30292,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       }
     }
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":767
+    /* "fast_flow/core/electrostaticforcehandler.pyx":791
  *                 if self.cu[i] != NULL:
  *                     free(self.cu[i])
  *             free(self.cu)             # <<<<<<<<<<<<<<
@@ -29960,7 +30301,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->cu);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":768
+    /* "fast_flow/core/electrostaticforcehandler.pyx":792
  *                     free(self.cu[i])
  *             free(self.cu)
  *             self.cu = NULL             # <<<<<<<<<<<<<<
@@ -29969,7 +30310,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->cu = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":761
+    /* "fast_flow/core/electrostaticforcehandler.pyx":785
  *             free(self.e_neg_u)
  *             self.e_neg_u = NULL
  *         if self.e_neg_v != NULL:             # <<<<<<<<<<<<<<
@@ -29978,7 +30319,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":769
+  /* "fast_flow/core/electrostaticforcehandler.pyx":793
  *             free(self.cu)
  *             self.cu = NULL
  *         if self.cv != NULL:             # <<<<<<<<<<<<<<
@@ -29990,7 +30331,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":770
+    /* "fast_flow/core/electrostaticforcehandler.pyx":794
  *             self.cu = NULL
  *         if self.cv != NULL:
  *             for i in range(2):             # <<<<<<<<<<<<<<
@@ -30000,7 +30341,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
     for (__pyx_t_2 = 0; __pyx_t_2 < 2; __pyx_t_2+=1) {
       __pyx_v_i = __pyx_t_2;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":771
+      /* "fast_flow/core/electrostaticforcehandler.pyx":795
  *         if self.cv != NULL:
  *             for i in range(2):
  *                 if self.cv[i] != NULL:             # <<<<<<<<<<<<<<
@@ -30012,7 +30353,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":772
+        /* "fast_flow/core/electrostaticforcehandler.pyx":796
  *             for i in range(2):
  *                 if self.cv[i] != NULL:
  *                     free(self.cv[i])             # <<<<<<<<<<<<<<
@@ -30021,7 +30362,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
         free((__pyx_v_self->cv[__pyx_v_i]));
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":771
+        /* "fast_flow/core/electrostaticforcehandler.pyx":795
  *         if self.cv != NULL:
  *             for i in range(2):
  *                 if self.cv[i] != NULL:             # <<<<<<<<<<<<<<
@@ -30031,7 +30372,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       }
     }
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":773
+    /* "fast_flow/core/electrostaticforcehandler.pyx":797
  *                 if self.cv[i] != NULL:
  *                     free(self.cv[i])
  *             free(self.cv)             # <<<<<<<<<<<<<<
@@ -30040,7 +30381,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->cv);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":774
+    /* "fast_flow/core/electrostaticforcehandler.pyx":798
  *                     free(self.cv[i])
  *             free(self.cv)
  *             self.cv = NULL             # <<<<<<<<<<<<<<
@@ -30049,7 +30390,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->cv = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":769
+    /* "fast_flow/core/electrostaticforcehandler.pyx":793
  *             free(self.cu)
  *             self.cu = NULL
  *         if self.cv != NULL:             # <<<<<<<<<<<<<<
@@ -30058,7 +30399,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":775
+  /* "fast_flow/core/electrostaticforcehandler.pyx":799
  *             free(self.cv)
  *             self.cv = NULL
  *         if self.solids != NULL:             # <<<<<<<<<<<<<<
@@ -30070,7 +30411,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":776
+    /* "fast_flow/core/electrostaticforcehandler.pyx":800
  *             self.cv = NULL
  *         if self.solids != NULL:
  *             free(self.solids)             # <<<<<<<<<<<<<<
@@ -30079,7 +30420,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->solids);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":777
+    /* "fast_flow/core/electrostaticforcehandler.pyx":801
  *         if self.solids != NULL:
  *             free(self.solids)
  *             self.solids = NULL             # <<<<<<<<<<<<<<
@@ -30088,7 +30429,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->solids = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":775
+    /* "fast_flow/core/electrostaticforcehandler.pyx":799
  *             free(self.cv)
  *             self.cv = NULL
  *         if self.solids != NULL:             # <<<<<<<<<<<<<<
@@ -30097,7 +30438,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":778
+  /* "fast_flow/core/electrostaticforcehandler.pyx":802
  *             free(self.solids)
  *             self.solids = NULL
  *         if self.shapes != NULL:             # <<<<<<<<<<<<<<
@@ -30109,7 +30450,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":779
+    /* "fast_flow/core/electrostaticforcehandler.pyx":803
  *             self.solids = NULL
  *         if self.shapes != NULL:
  *             for i in range(self.n_shapes):             # <<<<<<<<<<<<<<
@@ -30123,7 +30464,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
     for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
       __pyx_v_i = __pyx_t_4;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":780
+      /* "fast_flow/core/electrostaticforcehandler.pyx":804
  *         if self.shapes != NULL:
  *             for i in range(self.n_shapes):
  *                 if self.shapes[i].edges != NULL:             # <<<<<<<<<<<<<<
@@ -30135,7 +30476,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":781
+        /* "fast_flow/core/electrostaticforcehandler.pyx":805
  *             for i in range(self.n_shapes):
  *                 if self.shapes[i].edges != NULL:
  *                     free(self.shapes[i].edges)             # <<<<<<<<<<<<<<
@@ -30144,7 +30485,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
         free((__pyx_v_self->shapes[__pyx_v_i]).edges);
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":780
+        /* "fast_flow/core/electrostaticforcehandler.pyx":804
  *         if self.shapes != NULL:
  *             for i in range(self.n_shapes):
  *                 if self.shapes[i].edges != NULL:             # <<<<<<<<<<<<<<
@@ -30155,7 +30496,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
     }
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":782
+    /* "fast_flow/core/electrostaticforcehandler.pyx":806
  *                 if self.shapes[i].edges != NULL:
  *                     free(self.shapes[i].edges)
  *             free(self.shapes)             # <<<<<<<<<<<<<<
@@ -30164,7 +30505,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     free(__pyx_v_self->shapes);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":783
+    /* "fast_flow/core/electrostaticforcehandler.pyx":807
  *                     free(self.shapes[i].edges)
  *             free(self.shapes)
  *             self.shapes = NULL             # <<<<<<<<<<<<<<
@@ -30173,7 +30514,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
     __pyx_v_self->shapes = NULL;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":778
+    /* "fast_flow/core/electrostaticforcehandler.pyx":802
  *             free(self.solids)
  *             self.solids = NULL
  *         if self.shapes != NULL:             # <<<<<<<<<<<<<<
@@ -30182,7 +30523,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":694
+  /* "fast_flow/core/electrostaticforcehandler.pyx":718
  *         self.ee_fy = fy
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -30195,7 +30536,7 @@ static void __pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electrostati
 
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":785
+/* "fast_flow/core/electrostaticforcehandler.pyx":809
  *             self.shapes = NULL
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -30235,7 +30576,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":790
+  /* "fast_flow/core/electrostaticforcehandler.pyx":814
  *         generated from the image at construction; 1 where a
  *         cell is solid."""
  *         if self.solids == NULL:             # <<<<<<<<<<<<<<
@@ -30247,7 +30588,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":791
+    /* "fast_flow/core/electrostaticforcehandler.pyx":815
  *         cell is solid."""
  *         if self.solids == NULL:
  *             arr = np.zeros((self.solids_ny, self.solids_nx),             # <<<<<<<<<<<<<<
@@ -30255,34 +30596,34 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
  *             arr.flags.writeable = False
 */
     __pyx_t_3 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 791, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 815, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 791, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_zeros); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 815, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyLong_FromSsize_t(__pyx_v_self->solids_ny); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 791, __pyx_L1_error)
+    __pyx_t_4 = PyLong_FromSsize_t(__pyx_v_self->solids_ny); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 815, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_6 = PyLong_FromSsize_t(__pyx_v_self->solids_nx); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 791, __pyx_L1_error)
+    __pyx_t_6 = PyLong_FromSsize_t(__pyx_v_self->solids_nx); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 815, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 791, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 815, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_GIVEREF(__pyx_t_4);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_4) != (0)) __PYX_ERR(0, 791, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_4) != (0)) __PYX_ERR(0, 815, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_6);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_6) != (0)) __PYX_ERR(0, 791, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_6) != (0)) __PYX_ERR(0, 815, __pyx_L1_error);
     __pyx_t_4 = 0;
     __pyx_t_6 = 0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":792
+    /* "fast_flow/core/electrostaticforcehandler.pyx":816
  *         if self.solids == NULL:
  *             arr = np.zeros((self.solids_ny, self.solids_nx),
  *                            dtype=np.uint8)             # <<<<<<<<<<<<<<
  *             arr.flags.writeable = False
  *             return arr
 */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 792, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 816, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_uint8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 792, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_uint8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 816, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_t_8 = 1;
@@ -30301,13 +30642,13 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
       PyObject *__pyx_callargs[3] = {__pyx_t_3, __pyx_t_7, __pyx_t_4};
       #if CYTHON_VECTORCALL
       __pyx_t_6 = __pyx_mstate_global->__pyx_tuple[3];
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 791, __pyx_L1_error)
+      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 815, __pyx_L1_error)
       __Pyx_INCREF(__pyx_t_6);
       #else
       {
         PyObject *__pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
         __pyx_t_6 = __Pyx_MakeKwargDict(__pyx_temp, __pyx_callargs+2, 1);
-        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 791, __pyx_L1_error)
+        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 815, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
       }
       #endif
@@ -30317,25 +30658,25 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 791, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 815, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
     }
     __pyx_v_arr = __pyx_t_2;
     __pyx_t_2 = 0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":793
+    /* "fast_flow/core/electrostaticforcehandler.pyx":817
  *             arr = np.zeros((self.solids_ny, self.solids_nx),
  *                            dtype=np.uint8)
  *             arr.flags.writeable = False             # <<<<<<<<<<<<<<
  *             return arr
  *         return to_numpy(self.solids, self.solids_ny, self.solids_nx, True)
 */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_arr, __pyx_mstate_global->__pyx_n_u_flags); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 793, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_arr, __pyx_mstate_global->__pyx_n_u_flags); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 817, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_writeable, Py_False) < (0)) __PYX_ERR(0, 793, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_writeable, Py_False) < (0)) __PYX_ERR(0, 817, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":794
+    /* "fast_flow/core/electrostaticforcehandler.pyx":818
  *                            dtype=np.uint8)
  *             arr.flags.writeable = False
  *             return arr             # <<<<<<<<<<<<<<
@@ -30353,7 +30694,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
     }
     goto __pyx_L0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":790
+    /* "fast_flow/core/electrostaticforcehandler.pyx":814
  *         generated from the image at construction; 1 where a
  *         cell is solid."""
  *         if self.solids == NULL:             # <<<<<<<<<<<<<<
@@ -30362,14 +30703,14 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":795
+  /* "fast_flow/core/electrostaticforcehandler.pyx":819
  *             arr.flags.writeable = False
  *             return arr
  *         return to_numpy(self.solids, self.solids_ny, self.solids_nx, True)             # <<<<<<<<<<<<<<
  * 
  *     cpdef Py_ssize_t num_shapes(self):
 */
-  __pyx_t_2 = ((PyObject *)__pyx_fuse_0__pyx_f_9fast_flow_4core_6common_to_numpy(__pyx_v_self->solids, __pyx_v_self->solids_ny, __pyx_v_self->solids_nx, 1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 795, __pyx_L1_error)
+  __pyx_t_2 = ((PyObject *)__pyx_fuse_0__pyx_f_9fast_flow_4core_6common_to_numpy(__pyx_v_self->solids, __pyx_v_self->solids_ny, __pyx_v_self->solids_nx, 1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 819, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   {
     PyObject *__pyx_temp;
@@ -30382,7 +30723,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":785
+  /* "fast_flow/core/electrostaticforcehandler.pyx":809
  *             self.shapes = NULL
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -30407,7 +30748,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   return __pyx_r;
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":797
+/* "fast_flow/core/electrostaticforcehandler.pyx":821
  *         return to_numpy(self.solids, self.solids_ny, self.solids_nx, True)
  * 
  *     cpdef Py_ssize_t num_shapes(self):             # <<<<<<<<<<<<<<
@@ -30451,7 +30792,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_num_shapes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 797, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_num_shapes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 821, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!__Pyx_IsSameCFunction(__pyx_t_1, (void(*)(void)) __pyx_pw_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_5num_shapes)) {
         __pyx_t_3 = NULL;
@@ -30474,10 +30815,10 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
           __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_5, (1-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 797, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 821, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
         }
-        __pyx_t_6 = __Pyx_PyIndex_AsSsize_t(__pyx_t_2); if (unlikely((__pyx_t_6 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 797, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyIndex_AsSsize_t(__pyx_t_2); if (unlikely((__pyx_t_6 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 821, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         {
           __pyx_r = __pyx_t_6;
@@ -30498,7 +30839,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
     #endif
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":799
+  /* "fast_flow/core/electrostaticforcehandler.pyx":823
  *     cpdef Py_ssize_t num_shapes(self):
  *         """Number of sign-group structs (0, 1, or 2)."""
  *         return self.n_shapes             # <<<<<<<<<<<<<<
@@ -30511,7 +30852,7 @@ static Py_ssize_t __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electro
   }
   goto __pyx_L0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":797
+  /* "fast_flow/core/electrostaticforcehandler.pyx":821
  *         return to_numpy(self.solids, self.solids_ny, self.solids_nx, True)
  * 
  *     cpdef Py_ssize_t num_shapes(self):             # <<<<<<<<<<<<<<
@@ -30585,8 +30926,8 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("num_shapes", 0);
-  __pyx_t_1 = __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_num_shapes(__pyx_v_self, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 797, __pyx_L1_error)
-  __pyx_t_2 = PyLong_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 797, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_num_shapes(__pyx_v_self, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 821, __pyx_L1_error)
+  __pyx_t_2 = PyLong_FromSsize_t(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 821, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
   {
@@ -30611,7 +30952,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   return __pyx_r;
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":801
+/* "fast_flow/core/electrostaticforcehandler.pyx":825
  *         return self.n_shapes
  * 
  *     cpdef DTYPE_f shape_charge(self, Py_ssize_t i):             # <<<<<<<<<<<<<<
@@ -30658,13 +30999,13 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_shape_charge); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 801, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_shape_charge); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 825, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!__Pyx_IsSameCFunction(__pyx_t_1, (void(*)(void)) __pyx_pw_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_7shape_charge)) {
         __pyx_t_3 = NULL;
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_4 = __pyx_t_1; 
-        __pyx_t_5 = PyLong_FromSsize_t(__pyx_v_i); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 801, __pyx_L1_error)
+        __pyx_t_5 = PyLong_FromSsize_t(__pyx_v_i); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 825, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __pyx_t_6 = 1;
         #if CYTHON_UNPACK_METHODS
@@ -30684,10 +31025,10 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
           __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 801, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 825, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
         }
-        __pyx_t_7 = __Pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_7 == ((npy_float64)-1)) && PyErr_Occurred())) __PYX_ERR(0, 801, __pyx_L1_error)
+        __pyx_t_7 = __Pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_7 == ((npy_float64)-1)) && PyErr_Occurred())) __PYX_ERR(0, 825, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         {
           __pyx_r = __pyx_t_7;
@@ -30708,7 +31049,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
     #endif
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":803
+  /* "fast_flow/core/electrostaticforcehandler.pyx":827
  *     cpdef DTYPE_f shape_charge(self, Py_ssize_t i):
  *         """The `charge` (voltage) stored in struct i's extradata."""
  *         if i < 0 or i >= self.n_shapes:             # <<<<<<<<<<<<<<
@@ -30734,7 +31075,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   if (unlikely(__pyx_t_8)) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":804
+    /* "fast_flow/core/electrostaticforcehandler.pyx":828
  *         """The `charge` (voltage) stored in struct i's extradata."""
  *         if i < 0 or i >= self.n_shapes:
  *             raise IndexError("shape index out of range")             # <<<<<<<<<<<<<<
@@ -30747,14 +31088,14 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
       PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_mstate_global->__pyx_kp_u_shape_index_out_of_range};
       __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_IndexError)), __pyx_callargs+__pyx_t_6, (2-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 804, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 828, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
     }
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 804, __pyx_L1_error)
+    __PYX_ERR(0, 828, __pyx_L1_error)
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":803
+    /* "fast_flow/core/electrostaticforcehandler.pyx":827
  *     cpdef DTYPE_f shape_charge(self, Py_ssize_t i):
  *         """The `charge` (voltage) stored in struct i's extradata."""
  *         if i < 0 or i >= self.n_shapes:             # <<<<<<<<<<<<<<
@@ -30763,7 +31104,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":805
+  /* "fast_flow/core/electrostaticforcehandler.pyx":829
  *         if i < 0 or i >= self.n_shapes:
  *             raise IndexError("shape index out of range")
  *         return self.shapes[i].extradata.charge             # <<<<<<<<<<<<<<
@@ -30776,7 +31117,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   }
   goto __pyx_L0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":801
+  /* "fast_flow/core/electrostaticforcehandler.pyx":825
  *         return self.n_shapes
  * 
  *     cpdef DTYPE_f shape_charge(self, Py_ssize_t i):             # <<<<<<<<<<<<<<
@@ -30839,32 +31180,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_i,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 801, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 825, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 801, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 825, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "shape_charge", 0) < (0)) __PYX_ERR(0, 801, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "shape_charge", 0) < (0)) __PYX_ERR(0, 825, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("shape_charge", 1, 1, 1, i); __PYX_ERR(0, 801, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("shape_charge", 1, 1, 1, i); __PYX_ERR(0, 825, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 801, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 825, __pyx_L3_error)
     }
-    __pyx_v_i = __Pyx_PyIndex_AsSsize_t(values[0]); if (unlikely((__pyx_v_i == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 801, __pyx_L3_error)
+    __pyx_v_i = __Pyx_PyIndex_AsSsize_t(values[0]); if (unlikely((__pyx_v_i == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 825, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("shape_charge", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 801, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("shape_charge", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 825, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -30895,8 +31236,8 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("shape_charge", 0);
-  __pyx_t_1 = __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_shape_charge(__pyx_v_self, __pyx_v_i, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 801, __pyx_L1_error)
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 801, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_shape_charge(__pyx_v_self, __pyx_v_i, 1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 825, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 825, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
   {
@@ -30921,7 +31262,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   return __pyx_r;
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":807
+/* "fast_flow/core/electrostaticforcehandler.pyx":831
  *         return self.shapes[i].extradata.charge
  * 
  *     cpdef list shape_edges(self, Py_ssize_t i):             # <<<<<<<<<<<<<<
@@ -30971,13 +31312,13 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_shape_edges); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 807, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_shape_edges); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 831, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!__Pyx_IsSameCFunction(__pyx_t_1, (void(*)(void)) __pyx_pw_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_9shape_edges)) {
         __pyx_t_3 = NULL;
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_4 = __pyx_t_1; 
-        __pyx_t_5 = PyLong_FromSsize_t(__pyx_v_i); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 807, __pyx_L1_error)
+        __pyx_t_5 = PyLong_FromSsize_t(__pyx_v_i); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 831, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __pyx_t_6 = 1;
         #if CYTHON_UNPACK_METHODS
@@ -30997,10 +31338,10 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
           __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 807, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 831, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
         }
-        if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_2))) __PYX_ERR(0, 807, __pyx_L1_error)
+        if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("list", __pyx_t_2))) __PYX_ERR(0, 831, __pyx_L1_error)
         {
           PyObject *__pyx_temp;
           {
@@ -31026,7 +31367,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
     #endif
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":812
+  /* "fast_flow/core/electrostaticforcehandler.pyx":836
  *         DTYPE_f* buffer."""
  *         cdef Py_ssize_t k
  *         if i < 0 or i >= self.n_shapes:             # <<<<<<<<<<<<<<
@@ -31052,7 +31393,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
   if (unlikely(__pyx_t_7)) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":813
+    /* "fast_flow/core/electrostaticforcehandler.pyx":837
  *         cdef Py_ssize_t k
  *         if i < 0 or i >= self.n_shapes:
  *             raise IndexError("shape index out of range")             # <<<<<<<<<<<<<<
@@ -31065,14 +31406,14 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
       PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_mstate_global->__pyx_kp_u_shape_index_out_of_range};
       __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)(((PyTypeObject*)PyExc_IndexError)), __pyx_callargs+__pyx_t_6, (2-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 813, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 837, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
     }
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 813, __pyx_L1_error)
+    __PYX_ERR(0, 837, __pyx_L1_error)
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":812
+    /* "fast_flow/core/electrostaticforcehandler.pyx":836
  *         DTYPE_f* buffer."""
  *         cdef Py_ssize_t k
  *         if i < 0 or i >= self.n_shapes:             # <<<<<<<<<<<<<<
@@ -31081,7 +31422,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":814
+  /* "fast_flow/core/electrostaticforcehandler.pyx":838
  *         if i < 0 or i >= self.n_shapes:
  *             raise IndexError("shape index out of range")
  *         return [(self.shapes[i].edges[2 * k],             # <<<<<<<<<<<<<<
@@ -31089,10 +31430,10 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
  *                 for k in range(self.shapes[i].n_edges)]
 */
   { /* enter inner scope */
-    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 814, __pyx_L1_error)
+    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 838, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":816
+    /* "fast_flow/core/electrostaticforcehandler.pyx":840
  *         return [(self.shapes[i].edges[2 * k],
  *                  self.shapes[i].edges[2 * k + 1])
  *                 for k in range(self.shapes[i].n_edges)]             # <<<<<<<<<<<<<<
@@ -31106,43 +31447,43 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
     for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
       __pyx_7genexpr__pyx_v_k = __pyx_t_11;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":814
+      /* "fast_flow/core/electrostaticforcehandler.pyx":838
  *         if i < 0 or i >= self.n_shapes:
  *             raise IndexError("shape index out of range")
  *         return [(self.shapes[i].edges[2 * k],             # <<<<<<<<<<<<<<
  *                  self.shapes[i].edges[2 * k + 1])
  *                 for k in range(self.shapes[i].n_edges)]
 */
-      __pyx_t_2 = PyFloat_FromDouble(((__pyx_v_self->shapes[__pyx_v_i]).edges[(2 * __pyx_7genexpr__pyx_v_k)])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 814, __pyx_L1_error)
+      __pyx_t_2 = PyFloat_FromDouble(((__pyx_v_self->shapes[__pyx_v_i]).edges[(2 * __pyx_7genexpr__pyx_v_k)])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 838, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":815
+      /* "fast_flow/core/electrostaticforcehandler.pyx":839
  *             raise IndexError("shape index out of range")
  *         return [(self.shapes[i].edges[2 * k],
  *                  self.shapes[i].edges[2 * k + 1])             # <<<<<<<<<<<<<<
  *                 for k in range(self.shapes[i].n_edges)]
  * 
 */
-      __pyx_t_4 = PyFloat_FromDouble(((__pyx_v_self->shapes[__pyx_v_i]).edges[((2 * __pyx_7genexpr__pyx_v_k) + 1)])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 815, __pyx_L1_error)
+      __pyx_t_4 = PyFloat_FromDouble(((__pyx_v_self->shapes[__pyx_v_i]).edges[((2 * __pyx_7genexpr__pyx_v_k) + 1)])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 839, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":814
+      /* "fast_flow/core/electrostaticforcehandler.pyx":838
  *         if i < 0 or i >= self.n_shapes:
  *             raise IndexError("shape index out of range")
  *         return [(self.shapes[i].edges[2 * k],             # <<<<<<<<<<<<<<
  *                  self.shapes[i].edges[2 * k + 1])
  *                 for k in range(self.shapes[i].n_edges)]
 */
-      __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 814, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 838, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GIVEREF(__pyx_t_2);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2) != (0)) __PYX_ERR(0, 814, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2) != (0)) __PYX_ERR(0, 838, __pyx_L1_error);
       __Pyx_GIVEREF(__pyx_t_4);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4) != (0)) __PYX_ERR(0, 814, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4) != (0)) __PYX_ERR(0, 838, __pyx_L1_error);
       __pyx_t_2 = 0;
       __pyx_t_4 = 0;
       __Pyx_GIVEREF(__pyx_t_5);
-      if (unlikely(__Pyx_ListComp_AppendAndDecref(__pyx_t_1, __pyx_t_5))) __PYX_ERR(0, 814, __pyx_L1_error)
+      if (unlikely(__Pyx_ListComp_AppendAndDecref(__pyx_t_1, __pyx_t_5))) __PYX_ERR(0, 838, __pyx_L1_error)
       __pyx_t_5 = 0;
     }
 
@@ -31158,7 +31499,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":807
+  /* "fast_flow/core/electrostaticforcehandler.pyx":831
  *         return self.shapes[i].extradata.charge
  * 
  *     cpdef list shape_edges(self, Py_ssize_t i):             # <<<<<<<<<<<<<<
@@ -31222,32 +31563,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_i,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 807, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 831, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 807, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 831, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "shape_edges", 0) < (0)) __PYX_ERR(0, 807, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "shape_edges", 0) < (0)) __PYX_ERR(0, 831, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("shape_edges", 1, 1, 1, i); __PYX_ERR(0, 807, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("shape_edges", 1, 1, 1, i); __PYX_ERR(0, 831, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 807, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 831, __pyx_L3_error)
     }
-    __pyx_v_i = __Pyx_PyIndex_AsSsize_t(values[0]); if (unlikely((__pyx_v_i == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 807, __pyx_L3_error)
+    __pyx_v_i = __Pyx_PyIndex_AsSsize_t(values[0]); if (unlikely((__pyx_v_i == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 831, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("shape_edges", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 807, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("shape_edges", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 831, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -31277,7 +31618,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("shape_edges", 0);
-  __pyx_t_1 = __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_shape_edges(__pyx_v_self, __pyx_v_i, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 807, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_shape_edges(__pyx_v_self, __pyx_v_i, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 831, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   {
     PyObject *__pyx_temp;
@@ -31301,7 +31642,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   return __pyx_r;
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":818
+/* "fast_flow/core/electrostaticforcehandler.pyx":842
  *                 for k in range(self.shapes[i].n_edges)]
  * 
  *     cdef void init_field(self):             # <<<<<<<<<<<<<<
@@ -31348,7 +31689,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   Py_ssize_t __pyx_t_16;
   Py_ssize_t __pyx_t_17;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":839
+  /* "fast_flow/core/electrostaticforcehandler.pyx":863
  *         cdef Py_ssize_t x, y, s, e, idx
  *         cdef DTYPE_f xc, yc, rx, ry, r2, inv_r3, q
  *         cdef DTYPE_f* cu = self.cu[self.ck]             # <<<<<<<<<<<<<<
@@ -31357,7 +31698,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_cu = (__pyx_v_self->cu[__pyx_v_self->ck]);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":840
+  /* "fast_flow/core/electrostaticforcehandler.pyx":864
  *         cdef DTYPE_f xc, yc, rx, ry, r2, inv_r3, q
  *         cdef DTYPE_f* cu = self.cu[self.ck]
  *         cdef DTYPE_f* cv = self.cv[self.ck]             # <<<<<<<<<<<<<<
@@ -31366,7 +31707,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_cv = (__pyx_v_self->cv[__pyx_v_self->ck]);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":841
+  /* "fast_flow/core/electrostaticforcehandler.pyx":865
  *         cdef DTYPE_f* cu = self.cu[self.ck]
  *         cdef DTYPE_f* cv = self.cv[self.ck]
  *         cdef DTYPE_f* epu = self.e_pos_u             # <<<<<<<<<<<<<<
@@ -31377,7 +31718,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
   __pyx_v_epu = __pyx_t_1;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":842
+  /* "fast_flow/core/electrostaticforcehandler.pyx":866
  *         cdef DTYPE_f* cv = self.cv[self.ck]
  *         cdef DTYPE_f* epu = self.e_pos_u
  *         cdef DTYPE_f* epv = self.e_pos_v             # <<<<<<<<<<<<<<
@@ -31388,7 +31729,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
   __pyx_v_epv = __pyx_t_1;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":843
+  /* "fast_flow/core/electrostaticforcehandler.pyx":867
  *         cdef DTYPE_f* epu = self.e_pos_u
  *         cdef DTYPE_f* epv = self.e_pos_v
  *         cdef DTYPE_f* enu = self.e_neg_u             # <<<<<<<<<<<<<<
@@ -31399,7 +31740,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
   __pyx_v_enu = __pyx_t_1;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":844
+  /* "fast_flow/core/electrostaticforcehandler.pyx":868
  *         cdef DTYPE_f* epv = self.e_pos_v
  *         cdef DTYPE_f* enu = self.e_neg_u
  *         cdef DTYPE_f* env = self.e_neg_v             # <<<<<<<<<<<<<<
@@ -31410,7 +31751,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
   __pyx_v_env = __pyx_t_1;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":845
+  /* "fast_flow/core/electrostaticforcehandler.pyx":869
  *         cdef DTYPE_f* enu = self.e_neg_u
  *         cdef DTYPE_f* env = self.e_neg_v
  *         cdef Py_ssize_t nx = self.solver.nx             # <<<<<<<<<<<<<<
@@ -31421,7 +31762,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
   __pyx_v_nx = __pyx_t_2;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":846
+  /* "fast_flow/core/electrostaticforcehandler.pyx":870
  *         cdef DTYPE_f* env = self.e_neg_v
  *         cdef Py_ssize_t nx = self.solver.nx
  *         cdef Py_ssize_t ny = self.solver.ny             # <<<<<<<<<<<<<<
@@ -31432,7 +31773,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
   __pyx_v_ny = __pyx_t_2;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":848
+  /* "fast_flow/core/electrostaticforcehandler.pyx":872
  *         cdef Py_ssize_t ny = self.solver.ny
  * 
  *         for idx in range(self.solver.N):             # <<<<<<<<<<<<<<
@@ -31446,7 +31787,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_idx = __pyx_t_4;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":849
+    /* "fast_flow/core/electrostaticforcehandler.pyx":873
  * 
  *         for idx in range(self.solver.N):
  *             cu[idx] = 0.0             # <<<<<<<<<<<<<<
@@ -31455,7 +31796,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
     (__pyx_v_cu[__pyx_v_idx]) = 0.0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":850
+    /* "fast_flow/core/electrostaticforcehandler.pyx":874
  *         for idx in range(self.solver.N):
  *             cu[idx] = 0.0
  *             cv[idx] = 0.0             # <<<<<<<<<<<<<<
@@ -31464,7 +31805,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
     (__pyx_v_cv[__pyx_v_idx]) = 0.0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":851
+    /* "fast_flow/core/electrostaticforcehandler.pyx":875
  *             cu[idx] = 0.0
  *             cv[idx] = 0.0
  *             epu[idx] = 0.0             # <<<<<<<<<<<<<<
@@ -31473,7 +31814,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
     (__pyx_v_epu[__pyx_v_idx]) = 0.0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":852
+    /* "fast_flow/core/electrostaticforcehandler.pyx":876
  *             cv[idx] = 0.0
  *             epu[idx] = 0.0
  *             epv[idx] = 0.0             # <<<<<<<<<<<<<<
@@ -31482,7 +31823,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
     (__pyx_v_epv[__pyx_v_idx]) = 0.0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":853
+    /* "fast_flow/core/electrostaticforcehandler.pyx":877
  *             epu[idx] = 0.0
  *             epv[idx] = 0.0
  *             enu[idx] = 0.0             # <<<<<<<<<<<<<<
@@ -31491,7 +31832,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
     (__pyx_v_enu[__pyx_v_idx]) = 0.0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":854
+    /* "fast_flow/core/electrostaticforcehandler.pyx":878
  *             epv[idx] = 0.0
  *             enu[idx] = 0.0
  *             env[idx] = 0.0             # <<<<<<<<<<<<<<
@@ -31502,7 +31843,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   }
 
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":856
+  /* "fast_flow/core/electrostaticforcehandler.pyx":880
  *             env[idx] = 0.0
  * 
  *         for s in range(self.n_shapes):             # <<<<<<<<<<<<<<
@@ -31516,7 +31857,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
     __pyx_v_s = __pyx_t_6;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":857
+    /* "fast_flow/core/electrostaticforcehandler.pyx":881
  * 
  *         for s in range(self.n_shapes):
  *             if self.shapes[s].n_edges == 0:             # <<<<<<<<<<<<<<
@@ -31528,7 +31869,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
     if (__pyx_t_7) {
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":858
+      /* "fast_flow/core/electrostaticforcehandler.pyx":882
  *         for s in range(self.n_shapes):
  *             if self.shapes[s].n_edges == 0:
  *                 continue             # <<<<<<<<<<<<<<
@@ -31537,7 +31878,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       goto __pyx_L5_continue;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":857
+      /* "fast_flow/core/electrostaticforcehandler.pyx":881
  * 
  *         for s in range(self.n_shapes):
  *             if self.shapes[s].n_edges == 0:             # <<<<<<<<<<<<<<
@@ -31546,7 +31887,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
     }
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":859
+    /* "fast_flow/core/electrostaticforcehandler.pyx":883
  *             if self.shapes[s].n_edges == 0:
  *                 continue
  *             q = self.shapes[s].extradata.charge / self.shapes[s].n_edges             # <<<<<<<<<<<<<<
@@ -31555,7 +31896,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
     __pyx_v_q = ((__pyx_v_self->shapes[__pyx_v_s]).extradata.charge / ((__pyx_t_9fast_flow_4core_6common_DTYPE_f)(__pyx_v_self->shapes[__pyx_v_s]).n_edges));
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":860
+    /* "fast_flow/core/electrostaticforcehandler.pyx":884
  *                 continue
  *             q = self.shapes[s].extradata.charge / self.shapes[s].n_edges
  *             for y in range(ny):             # <<<<<<<<<<<<<<
@@ -31569,7 +31910,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
     for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
       __pyx_v_y = __pyx_t_10;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":861
+      /* "fast_flow/core/electrostaticforcehandler.pyx":885
  *             q = self.shapes[s].extradata.charge / self.shapes[s].n_edges
  *             for y in range(ny):
  *                 yc = (y + 0.5) * self.solver.dy             # <<<<<<<<<<<<<<
@@ -31578,7 +31919,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       __pyx_v_yc = ((__pyx_v_y + 0.5) * __pyx_v_self->__pyx_base.solver->dy);
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":862
+      /* "fast_flow/core/electrostaticforcehandler.pyx":886
  *             for y in range(ny):
  *                 yc = (y + 0.5) * self.solver.dy
  *                 for x in range(nx):             # <<<<<<<<<<<<<<
@@ -31592,7 +31933,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       for (__pyx_t_13 = 0; __pyx_t_13 < __pyx_t_12; __pyx_t_13+=1) {
         __pyx_v_x = __pyx_t_13;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":863
+        /* "fast_flow/core/electrostaticforcehandler.pyx":887
  *                 yc = (y + 0.5) * self.solver.dy
  *                 for x in range(nx):
  *                     xc = (x + 0.5) * self.solver.dx             # <<<<<<<<<<<<<<
@@ -31601,7 +31942,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
         __pyx_v_xc = ((__pyx_v_x + 0.5) * __pyx_v_self->__pyx_base.solver->dx);
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":864
+        /* "fast_flow/core/electrostaticforcehandler.pyx":888
  *                 for x in range(nx):
  *                     xc = (x + 0.5) * self.solver.dx
  *                     idx = y * nx + x             # <<<<<<<<<<<<<<
@@ -31610,7 +31951,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
         __pyx_v_idx = ((__pyx_v_y * __pyx_v_nx) + __pyx_v_x);
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":865
+        /* "fast_flow/core/electrostaticforcehandler.pyx":889
  *                     xc = (x + 0.5) * self.solver.dx
  *                     idx = y * nx + x
  *                     for e in range(self.shapes[s].n_edges):             # <<<<<<<<<<<<<<
@@ -31624,7 +31965,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
         for (__pyx_t_16 = 0; __pyx_t_16 < __pyx_t_15; __pyx_t_16+=1) {
           __pyx_v_e = __pyx_t_16;
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":866
+          /* "fast_flow/core/electrostaticforcehandler.pyx":890
  *                     idx = y * nx + x
  *                     for e in range(self.shapes[s].n_edges):
  *                         rx = xc - self.shapes[s].edges[2 * e]             # <<<<<<<<<<<<<<
@@ -31633,7 +31974,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
           __pyx_v_rx = (__pyx_v_xc - ((__pyx_v_self->shapes[__pyx_v_s]).edges[(2 * __pyx_v_e)]));
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":867
+          /* "fast_flow/core/electrostaticforcehandler.pyx":891
  *                     for e in range(self.shapes[s].n_edges):
  *                         rx = xc - self.shapes[s].edges[2 * e]
  *                         ry = yc - self.shapes[s].edges[2 * e + 1]             # <<<<<<<<<<<<<<
@@ -31642,7 +31983,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
           __pyx_v_ry = (__pyx_v_yc - ((__pyx_v_self->shapes[__pyx_v_s]).edges[((2 * __pyx_v_e) + 1)]));
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":868
+          /* "fast_flow/core/electrostaticforcehandler.pyx":892
  *                         rx = xc - self.shapes[s].edges[2 * e]
  *                         ry = yc - self.shapes[s].edges[2 * e + 1]
  *                         r2 = rx * rx + ry * ry             # <<<<<<<<<<<<<<
@@ -31651,7 +31992,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
           __pyx_v_r2 = ((__pyx_v_rx * __pyx_v_rx) + (__pyx_v_ry * __pyx_v_ry));
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":869
+          /* "fast_flow/core/electrostaticforcehandler.pyx":893
  *                         ry = yc - self.shapes[s].edges[2 * e + 1]
  *                         r2 = rx * rx + ry * ry
  *                         if r2 == 0.0:             # <<<<<<<<<<<<<<
@@ -31663,7 +32004,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
           if (__pyx_t_7) {
 
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":870
+            /* "fast_flow/core/electrostaticforcehandler.pyx":894
  *                         r2 = rx * rx + ry * ry
  *                         if r2 == 0.0:
  *                             continue             # <<<<<<<<<<<<<<
@@ -31672,7 +32013,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
             goto __pyx_L12_continue;
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":869
+            /* "fast_flow/core/electrostaticforcehandler.pyx":893
  *                         ry = yc - self.shapes[s].edges[2 * e + 1]
  *                         r2 = rx * rx + ry * ry
  *                         if r2 == 0.0:             # <<<<<<<<<<<<<<
@@ -31681,7 +32022,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
           }
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":871
+          /* "fast_flow/core/electrostaticforcehandler.pyx":895
  *                         if r2 == 0.0:
  *                             continue
  *                         inv_r3 = 1.0 / (r2 * sqrt(r2))             # <<<<<<<<<<<<<<
@@ -31690,7 +32031,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
           __pyx_v_inv_r3 = (((__pyx_t_9fast_flow_4core_6common_DTYPE_f)1.0) / (__pyx_v_r2 * sqrt(__pyx_v_r2)));
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":872
+          /* "fast_flow/core/electrostaticforcehandler.pyx":896
  *                             continue
  *                         inv_r3 = 1.0 / (r2 * sqrt(r2))
  *                         cu[idx] += q * rx * inv_r3             # <<<<<<<<<<<<<<
@@ -31701,7 +32042,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
           __pyx_t_17 = __pyx_v_idx;
           (__pyx_v_cu[__pyx_t_17]) = ((__pyx_v_cu[__pyx_t_17]) + ((__pyx_v_q * __pyx_v_rx) * __pyx_v_inv_r3));
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":873
+          /* "fast_flow/core/electrostaticforcehandler.pyx":897
  *                         inv_r3 = 1.0 / (r2 * sqrt(r2))
  *                         cu[idx] += q * rx * inv_r3
  *                         cv[idx] += q * ry * inv_r3             # <<<<<<<<<<<<<<
@@ -31712,7 +32053,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
           __pyx_t_17 = __pyx_v_idx;
           (__pyx_v_cv[__pyx_t_17]) = ((__pyx_v_cv[__pyx_t_17]) + ((__pyx_v_q * __pyx_v_ry) * __pyx_v_inv_r3));
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":878
+          /* "fast_flow/core/electrostaticforcehandler.pyx":902
  *                         # on each electrode from the ion
  *                         # cloud can be split by electrode.
  *                         if self.shapes[s].extradata.charge > 0.0:             # <<<<<<<<<<<<<<
@@ -31724,7 +32065,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
           if (__pyx_t_7) {
 
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":879
+            /* "fast_flow/core/electrostaticforcehandler.pyx":903
  *                         # cloud can be split by electrode.
  *                         if self.shapes[s].extradata.charge > 0.0:
  *                             epu[idx] += q * rx * inv_r3             # <<<<<<<<<<<<<<
@@ -31735,7 +32076,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
             __pyx_t_17 = __pyx_v_idx;
             (__pyx_v_epu[__pyx_t_17]) = ((__pyx_v_epu[__pyx_t_17]) + ((__pyx_v_q * __pyx_v_rx) * __pyx_v_inv_r3));
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":880
+            /* "fast_flow/core/electrostaticforcehandler.pyx":904
  *                         if self.shapes[s].extradata.charge > 0.0:
  *                             epu[idx] += q * rx * inv_r3
  *                             epv[idx] += q * ry * inv_r3             # <<<<<<<<<<<<<<
@@ -31746,7 +32087,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
             __pyx_t_17 = __pyx_v_idx;
             (__pyx_v_epv[__pyx_t_17]) = ((__pyx_v_epv[__pyx_t_17]) + ((__pyx_v_q * __pyx_v_ry) * __pyx_v_inv_r3));
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":878
+            /* "fast_flow/core/electrostaticforcehandler.pyx":902
  *                         # on each electrode from the ion
  *                         # cloud can be split by electrode.
  *                         if self.shapes[s].extradata.charge > 0.0:             # <<<<<<<<<<<<<<
@@ -31756,7 +32097,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
             goto __pyx_L15;
           }
 
-          /* "fast_flow/core/electrostaticforcehandler.pyx":881
+          /* "fast_flow/core/electrostaticforcehandler.pyx":905
  *                             epu[idx] += q * rx * inv_r3
  *                             epv[idx] += q * ry * inv_r3
  *                         elif self.shapes[s].extradata.charge < 0.0:             # <<<<<<<<<<<<<<
@@ -31768,7 +32109,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
           if (__pyx_t_7) {
 
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":882
+            /* "fast_flow/core/electrostaticforcehandler.pyx":906
  *                             epv[idx] += q * ry * inv_r3
  *                         elif self.shapes[s].extradata.charge < 0.0:
  *                             enu[idx] += q * rx * inv_r3             # <<<<<<<<<<<<<<
@@ -31779,7 +32120,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
             __pyx_t_17 = __pyx_v_idx;
             (__pyx_v_enu[__pyx_t_17]) = ((__pyx_v_enu[__pyx_t_17]) + ((__pyx_v_q * __pyx_v_rx) * __pyx_v_inv_r3));
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":883
+            /* "fast_flow/core/electrostaticforcehandler.pyx":907
  *                         elif self.shapes[s].extradata.charge < 0.0:
  *                             enu[idx] += q * rx * inv_r3
  *                             env[idx] += q * ry * inv_r3             # <<<<<<<<<<<<<<
@@ -31790,7 +32131,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
             __pyx_t_17 = __pyx_v_idx;
             (__pyx_v_env[__pyx_t_17]) = ((__pyx_v_env[__pyx_t_17]) + ((__pyx_v_q * __pyx_v_ry) * __pyx_v_inv_r3));
 
-            /* "fast_flow/core/electrostaticforcehandler.pyx":881
+            /* "fast_flow/core/electrostaticforcehandler.pyx":905
  *                             epu[idx] += q * rx * inv_r3
  *                             epv[idx] += q * ry * inv_r3
  *                         elif self.shapes[s].extradata.charge < 0.0:             # <<<<<<<<<<<<<<
@@ -31810,7 +32151,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   }
 
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":818
+  /* "fast_flow/core/electrostaticforcehandler.pyx":842
  *                 for k in range(self.shapes[i].n_edges)]
  * 
  *     cdef void init_field(self):             # <<<<<<<<<<<<<<
@@ -31842,7 +32183,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":885
+/* "fast_flow/core/electrostaticforcehandler.pyx":909
  *                             env[idx] += q * ry * inv_r3
  * 
  *     cpdef tuple coulomb_field(self):             # <<<<<<<<<<<<<<
@@ -31885,7 +32226,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_coulomb_field); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 885, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_coulomb_field); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 909, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!__Pyx_IsSameCFunction(__pyx_t_1, (void(*)(void)) __pyx_pw_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_11coulomb_field)) {
         __pyx_t_3 = NULL;
@@ -31908,10 +32249,10 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
           __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_5, (1-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 885, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 909, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
         }
-        if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_t_2))) __PYX_ERR(0, 885, __pyx_L1_error)
+        if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_t_2))) __PYX_ERR(0, 909, __pyx_L1_error)
         {
           PyObject *__pyx_temp;
           {
@@ -31937,39 +32278,39 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
     #endif
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":889
+  /* "fast_flow/core/electrostaticforcehandler.pyx":913
  *         cell centres, as (u, v) read-only (ny, nx) arrays, as
  *         computed by init_field() at construction."""
  *         return (to_numpy(self.cu[self.ck], self.solver.ny, self.solver.nx, True),             # <<<<<<<<<<<<<<
  *                 to_numpy(self.cv[self.ck], self.solver.ny, self.solver.nx, True))
  * 
 */
-  __pyx_t_1 = ((PyObject *)__pyx_fuse_1__pyx_f_9fast_flow_4core_6common_to_numpy((__pyx_v_self->cu[__pyx_v_self->ck]), __pyx_v_self->__pyx_base.solver->ny, __pyx_v_self->__pyx_base.solver->nx, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 889, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_fuse_1__pyx_f_9fast_flow_4core_6common_to_numpy((__pyx_v_self->cu[__pyx_v_self->ck]), __pyx_v_self->__pyx_base.solver->ny, __pyx_v_self->__pyx_base.solver->nx, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 913, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":890
+  /* "fast_flow/core/electrostaticforcehandler.pyx":914
  *         computed by init_field() at construction."""
  *         return (to_numpy(self.cu[self.ck], self.solver.ny, self.solver.nx, True),
  *                 to_numpy(self.cv[self.ck], self.solver.ny, self.solver.nx, True))             # <<<<<<<<<<<<<<
  * 
  *     cpdef cnp.ndarray ion_density(self):
 */
-  __pyx_t_2 = ((PyObject *)__pyx_fuse_1__pyx_f_9fast_flow_4core_6common_to_numpy((__pyx_v_self->cv[__pyx_v_self->ck]), __pyx_v_self->__pyx_base.solver->ny, __pyx_v_self->__pyx_base.solver->nx, 1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 890, __pyx_L1_error)
+  __pyx_t_2 = ((PyObject *)__pyx_fuse_1__pyx_f_9fast_flow_4core_6common_to_numpy((__pyx_v_self->cv[__pyx_v_self->ck]), __pyx_v_self->__pyx_base.solver->ny, __pyx_v_self->__pyx_base.solver->nx, 1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 914, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":889
+  /* "fast_flow/core/electrostaticforcehandler.pyx":913
  *         cell centres, as (u, v) read-only (ny, nx) arrays, as
  *         computed by init_field() at construction."""
  *         return (to_numpy(self.cu[self.ck], self.solver.ny, self.solver.nx, True),             # <<<<<<<<<<<<<<
  *                 to_numpy(self.cv[self.ck], self.solver.ny, self.solver.nx, True))
  * 
 */
-  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 889, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 913, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1) != (0)) __PYX_ERR(0, 889, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1) != (0)) __PYX_ERR(0, 913, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_2) != (0)) __PYX_ERR(0, 889, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_2) != (0)) __PYX_ERR(0, 913, __pyx_L1_error);
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
   {
@@ -31983,7 +32324,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":885
+  /* "fast_flow/core/electrostaticforcehandler.pyx":909
  *                             env[idx] += q * ry * inv_r3
  * 
  *     cpdef tuple coulomb_field(self):             # <<<<<<<<<<<<<<
@@ -32056,7 +32397,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("coulomb_field", 0);
-  __pyx_t_1 = __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_coulomb_field(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 885, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_coulomb_field(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 909, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   {
     PyObject *__pyx_temp;
@@ -32080,7 +32421,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   return __pyx_r;
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":892
+/* "fast_flow/core/electrostaticforcehandler.pyx":916
  *                 to_numpy(self.cv[self.ck], self.solver.ny, self.solver.nx, True))
  * 
  *     cpdef cnp.ndarray ion_density(self):             # <<<<<<<<<<<<<<
@@ -32123,7 +32464,7 @@ static PyArrayObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Ele
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_ion_density); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 892, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_ion_density); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 916, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!__Pyx_IsSameCFunction(__pyx_t_1, (void(*)(void)) __pyx_pw_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_13ion_density)) {
         __pyx_t_3 = NULL;
@@ -32146,10 +32487,10 @@ static PyArrayObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Ele
           __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_5, (1-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 892, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 916, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
         }
-        if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 892, __pyx_L1_error)
+        if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 916, __pyx_L1_error)
         {
           PyArrayObject *__pyx_temp;
           {
@@ -32175,14 +32516,14 @@ static PyArrayObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Ele
     #endif
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":896
+  /* "fast_flow/core/electrostaticforcehandler.pyx":920
  *         cells, as a read-only (ny, nx) array.  All zeros
  *         until the solver's first step advances the ions."""
  *         return to_numpy(self.d[self.dk], self.solver.ny,             # <<<<<<<<<<<<<<
  *                         self.solver.nx, True)
  * 
 */
-  __pyx_t_1 = ((PyObject *)__pyx_fuse_1__pyx_f_9fast_flow_4core_6common_to_numpy((__pyx_v_self->d[__pyx_v_self->dk]), __pyx_v_self->__pyx_base.solver->ny, __pyx_v_self->__pyx_base.solver->nx, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 896, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_fuse_1__pyx_f_9fast_flow_4core_6common_to_numpy((__pyx_v_self->d[__pyx_v_self->dk]), __pyx_v_self->__pyx_base.solver->ny, __pyx_v_self->__pyx_base.solver->nx, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 920, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   {
     PyArrayObject *__pyx_temp;
@@ -32195,7 +32536,7 @@ static PyArrayObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Ele
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":892
+  /* "fast_flow/core/electrostaticforcehandler.pyx":916
  *                 to_numpy(self.cv[self.ck], self.solver.ny, self.solver.nx, True))
  * 
  *     cpdef cnp.ndarray ion_density(self):             # <<<<<<<<<<<<<<
@@ -32268,7 +32609,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("ion_density", 0);
-  __pyx_t_1 = ((PyObject *)__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_ion_density(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 892, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_ion_density(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 916, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   {
     PyObject *__pyx_temp;
@@ -32292,7 +32633,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   return __pyx_r;
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":899
+/* "fast_flow/core/electrostaticforcehandler.pyx":923
  *                         self.solver.nx, True)
  * 
  *     cpdef tuple ion_velocity(self):             # <<<<<<<<<<<<<<
@@ -32335,7 +32676,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_ion_velocity); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 899, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_ion_velocity); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 923, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!__Pyx_IsSameCFunction(__pyx_t_1, (void(*)(void)) __pyx_pw_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_15ion_velocity)) {
         __pyx_t_3 = NULL;
@@ -32358,10 +32699,10 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
           __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_5, (1-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 899, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 923, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
         }
-        if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_t_2))) __PYX_ERR(0, 899, __pyx_L1_error)
+        if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_t_2))) __PYX_ERR(0, 923, __pyx_L1_error)
         {
           PyObject *__pyx_temp;
           {
@@ -32387,39 +32728,39 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
     #endif
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":903
+  /* "fast_flow/core/electrostaticforcehandler.pyx":927
  *         velocity) at the solver grid's cells, as (u, v)
  *         read-only (ny, nx) arrays."""
  *         return (to_numpy(self.u[self.uvk], self.solver.ny, self.solver.nx, True),             # <<<<<<<<<<<<<<
  *                 to_numpy(self.v[self.uvk], self.solver.ny, self.solver.nx, True))
  * 
 */
-  __pyx_t_1 = ((PyObject *)__pyx_fuse_1__pyx_f_9fast_flow_4core_6common_to_numpy((__pyx_v_self->u[__pyx_v_self->uvk]), __pyx_v_self->__pyx_base.solver->ny, __pyx_v_self->__pyx_base.solver->nx, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 903, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_fuse_1__pyx_f_9fast_flow_4core_6common_to_numpy((__pyx_v_self->u[__pyx_v_self->uvk]), __pyx_v_self->__pyx_base.solver->ny, __pyx_v_self->__pyx_base.solver->nx, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 927, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":904
+  /* "fast_flow/core/electrostaticforcehandler.pyx":928
  *         read-only (ny, nx) arrays."""
  *         return (to_numpy(self.u[self.uvk], self.solver.ny, self.solver.nx, True),
  *                 to_numpy(self.v[self.uvk], self.solver.ny, self.solver.nx, True))             # <<<<<<<<<<<<<<
  * 
  *     cpdef cnp.ndarray o2_density(self):
 */
-  __pyx_t_2 = ((PyObject *)__pyx_fuse_1__pyx_f_9fast_flow_4core_6common_to_numpy((__pyx_v_self->v[__pyx_v_self->uvk]), __pyx_v_self->__pyx_base.solver->ny, __pyx_v_self->__pyx_base.solver->nx, 1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 904, __pyx_L1_error)
+  __pyx_t_2 = ((PyObject *)__pyx_fuse_1__pyx_f_9fast_flow_4core_6common_to_numpy((__pyx_v_self->v[__pyx_v_self->uvk]), __pyx_v_self->__pyx_base.solver->ny, __pyx_v_self->__pyx_base.solver->nx, 1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 928, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":903
+  /* "fast_flow/core/electrostaticforcehandler.pyx":927
  *         velocity) at the solver grid's cells, as (u, v)
  *         read-only (ny, nx) arrays."""
  *         return (to_numpy(self.u[self.uvk], self.solver.ny, self.solver.nx, True),             # <<<<<<<<<<<<<<
  *                 to_numpy(self.v[self.uvk], self.solver.ny, self.solver.nx, True))
  * 
 */
-  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 903, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 927, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1) != (0)) __PYX_ERR(0, 903, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1) != (0)) __PYX_ERR(0, 927, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_2) != (0)) __PYX_ERR(0, 903, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_2) != (0)) __PYX_ERR(0, 927, __pyx_L1_error);
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
   {
@@ -32433,7 +32774,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":899
+  /* "fast_flow/core/electrostaticforcehandler.pyx":923
  *                         self.solver.nx, True)
  * 
  *     cpdef tuple ion_velocity(self):             # <<<<<<<<<<<<<<
@@ -32506,7 +32847,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("ion_velocity", 0);
-  __pyx_t_1 = __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_ion_velocity(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 899, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_ion_velocity(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 923, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   {
     PyObject *__pyx_temp;
@@ -32530,7 +32871,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   return __pyx_r;
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":906
+/* "fast_flow/core/electrostaticforcehandler.pyx":930
  *                 to_numpy(self.v[self.uvk], self.solver.ny, self.solver.nx, True))
  * 
  *     cpdef cnp.ndarray o2_density(self):             # <<<<<<<<<<<<<<
@@ -32573,7 +32914,7 @@ static PyArrayObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Ele
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_o2_density); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 906, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_o2_density); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 930, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!__Pyx_IsSameCFunction(__pyx_t_1, (void(*)(void)) __pyx_pw_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_17o2_density)) {
         __pyx_t_3 = NULL;
@@ -32596,10 +32937,10 @@ static PyArrayObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Ele
           __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_5, (1-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 906, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 930, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
         }
-        if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 906, __pyx_L1_error)
+        if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_mstate_global->__pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 930, __pyx_L1_error)
         {
           PyArrayObject *__pyx_temp;
           {
@@ -32625,14 +32966,14 @@ static PyArrayObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Ele
     #endif
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":912
+  /* "fast_flow/core/electrostaticforcehandler.pyx":936
  *         advances the ions, and all zeros if no negative
  *         electrode is in corona (see neg_corona_active)."""
  *         return to_numpy(self.dn[self.dnk], self.solver.ny,             # <<<<<<<<<<<<<<
  *                         self.solver.nx, True)
  * 
 */
-  __pyx_t_1 = ((PyObject *)__pyx_fuse_1__pyx_f_9fast_flow_4core_6common_to_numpy((__pyx_v_self->dn[__pyx_v_self->dnk]), __pyx_v_self->__pyx_base.solver->ny, __pyx_v_self->__pyx_base.solver->nx, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 912, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_fuse_1__pyx_f_9fast_flow_4core_6common_to_numpy((__pyx_v_self->dn[__pyx_v_self->dnk]), __pyx_v_self->__pyx_base.solver->ny, __pyx_v_self->__pyx_base.solver->nx, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 936, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   {
     PyArrayObject *__pyx_temp;
@@ -32645,7 +32986,7 @@ static PyArrayObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Ele
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":906
+  /* "fast_flow/core/electrostaticforcehandler.pyx":930
  *                 to_numpy(self.v[self.uvk], self.solver.ny, self.solver.nx, True))
  * 
  *     cpdef cnp.ndarray o2_density(self):             # <<<<<<<<<<<<<<
@@ -32718,7 +33059,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("o2_density", 0);
-  __pyx_t_1 = ((PyObject *)__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_o2_density(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 906, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_o2_density(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 930, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   {
     PyObject *__pyx_temp;
@@ -32742,7 +33083,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   return __pyx_r;
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":915
+/* "fast_flow/core/electrostaticforcehandler.pyx":939
  *                         self.solver.nx, True)
  * 
  *     cpdef tuple o2_velocity(self):             # <<<<<<<<<<<<<<
@@ -32785,7 +33126,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_o2_velocity); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 915, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_o2_velocity); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 939, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!__Pyx_IsSameCFunction(__pyx_t_1, (void(*)(void)) __pyx_pw_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_19o2_velocity)) {
         __pyx_t_3 = NULL;
@@ -32808,10 +33149,10 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
           __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_5, (1-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 915, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 939, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
         }
-        if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_t_2))) __PYX_ERR(0, 915, __pyx_L1_error)
+        if (!(likely(PyTuple_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_t_2))) __PYX_ERR(0, 939, __pyx_L1_error)
         {
           PyObject *__pyx_temp;
           {
@@ -32837,39 +33178,39 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
     #endif
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":920
+  /* "fast_flow/core/electrostaticforcehandler.pyx":944
  *         grid's cells, as (u, v) read-only (ny, nx)
  *         arrays."""
  *         return (to_numpy(self.un[self.uvk], self.solver.ny, self.solver.nx, True),             # <<<<<<<<<<<<<<
  *                 to_numpy(self.vn[self.uvk], self.solver.ny, self.solver.nx, True))
  * 
 */
-  __pyx_t_1 = ((PyObject *)__pyx_fuse_1__pyx_f_9fast_flow_4core_6common_to_numpy((__pyx_v_self->un[__pyx_v_self->uvk]), __pyx_v_self->__pyx_base.solver->ny, __pyx_v_self->__pyx_base.solver->nx, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 920, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_fuse_1__pyx_f_9fast_flow_4core_6common_to_numpy((__pyx_v_self->un[__pyx_v_self->uvk]), __pyx_v_self->__pyx_base.solver->ny, __pyx_v_self->__pyx_base.solver->nx, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 944, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":921
+  /* "fast_flow/core/electrostaticforcehandler.pyx":945
  *         arrays."""
  *         return (to_numpy(self.un[self.uvk], self.solver.ny, self.solver.nx, True),
  *                 to_numpy(self.vn[self.uvk], self.solver.ny, self.solver.nx, True))             # <<<<<<<<<<<<<<
  * 
  *     cpdef dict solid_forces(self):
 */
-  __pyx_t_2 = ((PyObject *)__pyx_fuse_1__pyx_f_9fast_flow_4core_6common_to_numpy((__pyx_v_self->vn[__pyx_v_self->uvk]), __pyx_v_self->__pyx_base.solver->ny, __pyx_v_self->__pyx_base.solver->nx, 1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 921, __pyx_L1_error)
+  __pyx_t_2 = ((PyObject *)__pyx_fuse_1__pyx_f_9fast_flow_4core_6common_to_numpy((__pyx_v_self->vn[__pyx_v_self->uvk]), __pyx_v_self->__pyx_base.solver->ny, __pyx_v_self->__pyx_base.solver->nx, 1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 945, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":920
+  /* "fast_flow/core/electrostaticforcehandler.pyx":944
  *         grid's cells, as (u, v) read-only (ny, nx)
  *         arrays."""
  *         return (to_numpy(self.un[self.uvk], self.solver.ny, self.solver.nx, True),             # <<<<<<<<<<<<<<
  *                 to_numpy(self.vn[self.uvk], self.solver.ny, self.solver.nx, True))
  * 
 */
-  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 920, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 944, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1) != (0)) __PYX_ERR(0, 920, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1) != (0)) __PYX_ERR(0, 944, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_2) != (0)) __PYX_ERR(0, 920, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_2) != (0)) __PYX_ERR(0, 944, __pyx_L1_error);
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
   {
@@ -32883,7 +33224,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":915
+  /* "fast_flow/core/electrostaticforcehandler.pyx":939
  *                         self.solver.nx, True)
  * 
  *     cpdef tuple o2_velocity(self):             # <<<<<<<<<<<<<<
@@ -32956,7 +33297,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("o2_velocity", 0);
-  __pyx_t_1 = __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_o2_velocity(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 915, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_o2_velocity(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 939, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   {
     PyObject *__pyx_temp;
@@ -32980,7 +33321,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   return __pyx_r;
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":923
+/* "fast_flow/core/electrostaticforcehandler.pyx":947
  *                 to_numpy(self.vn[self.uvk], self.solver.ny, self.solver.nx, True))
  * 
  *     cpdef dict solid_forces(self):             # <<<<<<<<<<<<<<
@@ -33039,7 +33380,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_solid_forces); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 923, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_mstate_global->__pyx_n_u_solid_forces); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 947, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!__Pyx_IsSameCFunction(__pyx_t_1, (void(*)(void)) __pyx_pw_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_21solid_forces)) {
         __pyx_t_3 = NULL;
@@ -33062,10 +33403,10 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
           __pyx_t_2 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_5, (1-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
           __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 923, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 947, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
         }
-        if (!(likely(PyDict_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_2))) __PYX_ERR(0, 923, __pyx_L1_error)
+        if (!(likely(PyDict_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_t_2))) __PYX_ERR(0, 947, __pyx_L1_error)
         {
           PyObject *__pyx_temp;
           {
@@ -33091,7 +33432,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
     #endif
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":963
+  /* "fast_flow/core/electrostaticforcehandler.pyx":987
  *         """
  *         cdef Py_ssize_t idx
  *         cdef DTYPE_f dx = self.solver.dx             # <<<<<<<<<<<<<<
@@ -33102,7 +33443,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 
   __pyx_v_dx = __pyx_t_6;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":964
+  /* "fast_flow/core/electrostaticforcehandler.pyx":988
  *         cdef Py_ssize_t idx
  *         cdef DTYPE_f dx = self.solver.dx
  *         cdef DTYPE_f dy = self.solver.dy             # <<<<<<<<<<<<<<
@@ -33113,7 +33454,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 
   __pyx_v_dy = __pyx_t_6;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":965
+  /* "fast_flow/core/electrostaticforcehandler.pyx":989
  *         cdef DTYPE_f dx = self.solver.dx
  *         cdef DTYPE_f dy = self.solver.dy
  *         cdef DTYPE_f dA = dx * dy             # <<<<<<<<<<<<<<
@@ -33122,7 +33463,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
   __pyx_v_dA = (__pyx_v_dx * __pyx_v_dy);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":966
+  /* "fast_flow/core/electrostaticforcehandler.pyx":990
  *         cdef DTYPE_f dy = self.solver.dy
  *         cdef DTYPE_f dA = dx * dy
  *         cdef DTYPE_f* d = self.d[self.dk]             # <<<<<<<<<<<<<<
@@ -33131,7 +33472,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
   __pyx_v_d = (__pyx_v_self->d[__pyx_v_self->dk]);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":967
+  /* "fast_flow/core/electrostaticforcehandler.pyx":991
  *         cdef DTYPE_f dA = dx * dy
  *         cdef DTYPE_f* d = self.d[self.dk]
  *         cdef DTYPE_f* dn = self.dn[self.dnk]             # <<<<<<<<<<<<<<
@@ -33140,7 +33481,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
   __pyx_v_dn = (__pyx_v_self->dn[__pyx_v_self->dnk]);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":969
+  /* "fast_flow/core/electrostaticforcehandler.pyx":993
  *         cdef DTYPE_f* dn = self.dn[self.dnk]
  *         cdef DTYPE_f q
  *         cdef DTYPE_f f_pos_fx = 0.0             # <<<<<<<<<<<<<<
@@ -33149,7 +33490,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
   __pyx_v_f_pos_fx = 0.0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":970
+  /* "fast_flow/core/electrostaticforcehandler.pyx":994
  *         cdef DTYPE_f q
  *         cdef DTYPE_f f_pos_fx = 0.0
  *         cdef DTYPE_f f_pos_fy = 0.0             # <<<<<<<<<<<<<<
@@ -33158,7 +33499,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
   __pyx_v_f_pos_fy = 0.0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":971
+  /* "fast_flow/core/electrostaticforcehandler.pyx":995
  *         cdef DTYPE_f f_pos_fx = 0.0
  *         cdef DTYPE_f f_pos_fy = 0.0
  *         cdef DTYPE_f f_neg_fx = 0.0             # <<<<<<<<<<<<<<
@@ -33167,7 +33508,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
   __pyx_v_f_neg_fx = 0.0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":972
+  /* "fast_flow/core/electrostaticforcehandler.pyx":996
  *         cdef DTYPE_f f_pos_fy = 0.0
  *         cdef DTYPE_f f_neg_fx = 0.0
  *         cdef DTYPE_f f_neg_fy = 0.0             # <<<<<<<<<<<<<<
@@ -33176,7 +33517,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
   __pyx_v_f_neg_fy = 0.0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":973
+  /* "fast_flow/core/electrostaticforcehandler.pyx":997
  *         cdef DTYPE_f f_neg_fx = 0.0
  *         cdef DTYPE_f f_neg_fy = 0.0
  *         for idx in range(self.solver.N):             # <<<<<<<<<<<<<<
@@ -33190,7 +33531,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
   for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
     __pyx_v_idx = __pyx_t_9;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":974
+    /* "fast_flow/core/electrostaticforcehandler.pyx":998
  *         cdef DTYPE_f f_neg_fy = 0.0
  *         for idx in range(self.solver.N):
  *             q = d[idx] - dn[idx]             # <<<<<<<<<<<<<<
@@ -33199,7 +33540,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
     __pyx_v_q = ((__pyx_v_d[__pyx_v_idx]) - (__pyx_v_dn[__pyx_v_idx]));
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":975
+    /* "fast_flow/core/electrostaticforcehandler.pyx":999
  *         for idx in range(self.solver.N):
  *             q = d[idx] - dn[idx]
  *             if q != 0.0:             # <<<<<<<<<<<<<<
@@ -33211,7 +33552,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
     if (__pyx_t_10) {
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":976
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1000
  *             q = d[idx] - dn[idx]
  *             if q != 0.0:
  *                 f_pos_fx -= q * self.e_pos_u[idx] * dA             # <<<<<<<<<<<<<<
@@ -33220,7 +33561,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
       __pyx_v_f_pos_fx = (__pyx_v_f_pos_fx - ((__pyx_v_q * (__pyx_v_self->e_pos_u[__pyx_v_idx])) * __pyx_v_dA));
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":977
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1001
  *             if q != 0.0:
  *                 f_pos_fx -= q * self.e_pos_u[idx] * dA
  *                 f_pos_fy -= q * self.e_pos_v[idx] * dA             # <<<<<<<<<<<<<<
@@ -33229,7 +33570,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
       __pyx_v_f_pos_fy = (__pyx_v_f_pos_fy - ((__pyx_v_q * (__pyx_v_self->e_pos_v[__pyx_v_idx])) * __pyx_v_dA));
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":978
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1002
  *                 f_pos_fx -= q * self.e_pos_u[idx] * dA
  *                 f_pos_fy -= q * self.e_pos_v[idx] * dA
  *                 f_neg_fx -= q * self.e_neg_u[idx] * dA             # <<<<<<<<<<<<<<
@@ -33238,7 +33579,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
       __pyx_v_f_neg_fx = (__pyx_v_f_neg_fx - ((__pyx_v_q * (__pyx_v_self->e_neg_u[__pyx_v_idx])) * __pyx_v_dA));
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":979
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1003
  *                 f_pos_fy -= q * self.e_pos_v[idx] * dA
  *                 f_neg_fx -= q * self.e_neg_u[idx] * dA
  *                 f_neg_fy -= q * self.e_neg_v[idx] * dA             # <<<<<<<<<<<<<<
@@ -33247,7 +33588,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
 */
       __pyx_v_f_neg_fy = (__pyx_v_f_neg_fy - ((__pyx_v_q * (__pyx_v_self->e_neg_v[__pyx_v_idx])) * __pyx_v_dA));
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":975
+      /* "fast_flow/core/electrostaticforcehandler.pyx":999
  *         for idx in range(self.solver.N):
  *             q = d[idx] - dn[idx]
  *             if q != 0.0:             # <<<<<<<<<<<<<<
@@ -33258,103 +33599,103 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
   }
 
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":981
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1005
  *                 f_neg_fy -= q * self.e_neg_v[idx] * dA
  *         return {
  *             'positive': (f_pos_fx, f_pos_fy),             # <<<<<<<<<<<<<<
  *             'negative': (f_neg_fx, f_neg_fy),
  *             'neutral': (0.0, 0.0),
 */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 981, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1005, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_f_pos_fx); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 981, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_f_pos_fx); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1005, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_f_pos_fy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 981, __pyx_L1_error)
+  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_f_pos_fy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1005, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 981, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1005, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2) != (0)) __PYX_ERR(0, 981, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2) != (0)) __PYX_ERR(0, 1005, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_4);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_4) != (0)) __PYX_ERR(0, 981, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_4) != (0)) __PYX_ERR(0, 1005, __pyx_L1_error);
   __pyx_t_2 = 0;
   __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_positive, __pyx_t_3) < (0)) __PYX_ERR(0, 981, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_positive, __pyx_t_3) < (0)) __PYX_ERR(0, 1005, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":982
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1006
  *         return {
  *             'positive': (f_pos_fx, f_pos_fy),
  *             'negative': (f_neg_fx, f_neg_fy),             # <<<<<<<<<<<<<<
  *             'neutral': (0.0, 0.0),
  *             'net': (f_pos_fx + f_neg_fx, f_pos_fy + f_neg_fy),
 */
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_f_neg_fx); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 982, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_f_neg_fx); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1006, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_f_neg_fy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 982, __pyx_L1_error)
+  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_f_neg_fy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1006, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 982, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1006, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_3);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 982, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 1006, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_4);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_4) != (0)) __PYX_ERR(0, 982, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_4) != (0)) __PYX_ERR(0, 1006, __pyx_L1_error);
   __pyx_t_3 = 0;
   __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_negative, __pyx_t_2) < (0)) __PYX_ERR(0, 981, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_negative, __pyx_t_2) < (0)) __PYX_ERR(0, 1005, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":983
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1007
  *             'positive': (f_pos_fx, f_pos_fy),
  *             'negative': (f_neg_fx, f_neg_fy),
  *             'neutral': (0.0, 0.0),             # <<<<<<<<<<<<<<
  *             'net': (f_pos_fx + f_neg_fx, f_pos_fy + f_neg_fy),
  *             'electrode_electrode': (self.ee_fx, self.ee_fy),
 */
-  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_neutral, __pyx_mstate_global->__pyx_tuple[4]) < (0)) __PYX_ERR(0, 981, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_neutral, __pyx_mstate_global->__pyx_tuple[4]) < (0)) __PYX_ERR(0, 1005, __pyx_L1_error)
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":984
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1008
  *             'negative': (f_neg_fx, f_neg_fy),
  *             'neutral': (0.0, 0.0),
  *             'net': (f_pos_fx + f_neg_fx, f_pos_fy + f_neg_fy),             # <<<<<<<<<<<<<<
  *             'electrode_electrode': (self.ee_fx, self.ee_fy),
  *         }
 */
-  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_f_pos_fx + __pyx_v_f_neg_fx)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 984, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_f_pos_fx + __pyx_v_f_neg_fx)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1008, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyFloat_FromDouble((__pyx_v_f_pos_fy + __pyx_v_f_neg_fy)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 984, __pyx_L1_error)
+  __pyx_t_4 = PyFloat_FromDouble((__pyx_v_f_pos_fy + __pyx_v_f_neg_fy)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1008, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 984, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1008, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2) != (0)) __PYX_ERR(0, 984, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2) != (0)) __PYX_ERR(0, 1008, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_4);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_4) != (0)) __PYX_ERR(0, 984, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_4) != (0)) __PYX_ERR(0, 1008, __pyx_L1_error);
   __pyx_t_2 = 0;
   __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_net, __pyx_t_3) < (0)) __PYX_ERR(0, 981, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_net, __pyx_t_3) < (0)) __PYX_ERR(0, 1005, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":985
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1009
  *             'neutral': (0.0, 0.0),
  *             'net': (f_pos_fx + f_neg_fx, f_pos_fy + f_neg_fy),
  *             'electrode_electrode': (self.ee_fx, self.ee_fy),             # <<<<<<<<<<<<<<
  *         }
  * 
 */
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->ee_fx); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 985, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->ee_fx); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1009, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_self->ee_fy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 985, __pyx_L1_error)
+  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_self->ee_fy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1009, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 985, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1009, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_3);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 985, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3) != (0)) __PYX_ERR(0, 1009, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_4);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_4) != (0)) __PYX_ERR(0, 985, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_4) != (0)) __PYX_ERR(0, 1009, __pyx_L1_error);
   __pyx_t_3 = 0;
   __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_electrode_electrode, __pyx_t_2) < (0)) __PYX_ERR(0, 981, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_electrode_electrode, __pyx_t_2) < (0)) __PYX_ERR(0, 1005, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   {
     PyObject *__pyx_temp;
@@ -33367,7 +33708,7 @@ static PyObject *__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electros
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":923
+  /* "fast_flow/core/electrostaticforcehandler.pyx":947
  *                 to_numpy(self.vn[self.uvk], self.solver.ny, self.solver.nx, True))
  * 
  *     cpdef dict solid_forces(self):             # <<<<<<<<<<<<<<
@@ -33451,7 +33792,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("solid_forces", 0);
-  __pyx_t_1 = __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_solid_forces(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 923, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_solid_forces(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 947, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   {
     PyObject *__pyx_temp;
@@ -33475,7 +33816,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   return __pyx_r;
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":988
+/* "fast_flow/core/electrostaticforcehandler.pyx":1012
  *         }
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -33508,7 +33849,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   Py_ssize_t __pyx_t_4;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":994
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1018
  *         O2- generation zone is non-empty and O2- is
  *         being generated."""
  *         if self.ion_zone_neg == NULL:             # <<<<<<<<<<<<<<
@@ -33520,7 +33861,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":995
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1019
  *         being generated."""
  *         if self.ion_zone_neg == NULL:
  *             return False             # <<<<<<<<<<<<<<
@@ -33538,7 +33879,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
     }
     goto __pyx_L0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":994
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1018
  *         O2- generation zone is non-empty and O2- is
  *         being generated."""
  *         if self.ion_zone_neg == NULL:             # <<<<<<<<<<<<<<
@@ -33547,7 +33888,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":997
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1021
  *             return False
  *         cdef Py_ssize_t i
  *         for i in range(self.solver.N):             # <<<<<<<<<<<<<<
@@ -33561,7 +33902,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":998
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1022
  *         cdef Py_ssize_t i
  *         for i in range(self.solver.N):
  *             if self.ion_zone_neg[i]:             # <<<<<<<<<<<<<<
@@ -33573,7 +33914,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
     if (__pyx_t_1) {
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":999
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1023
  *         for i in range(self.solver.N):
  *             if self.ion_zone_neg[i]:
  *                 return True             # <<<<<<<<<<<<<<
@@ -33591,7 +33932,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
       }
       goto __pyx_L0;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":998
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1022
  *         cdef Py_ssize_t i
  *         for i in range(self.solver.N):
  *             if self.ion_zone_neg[i]:             # <<<<<<<<<<<<<<
@@ -33602,7 +33943,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   }
 
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1000
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1024
  *             if self.ion_zone_neg[i]:
  *                 return True
  *         return False             # <<<<<<<<<<<<<<
@@ -33620,7 +33961,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   }
   goto __pyx_L0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":988
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1012
  *         }
  * 
  *     @property             # <<<<<<<<<<<<<<
@@ -33636,7 +33977,7 @@ static PyObject *__pyx_pf_9fast_flow_4core_25electrostaticforcehandler_25Electro
   return __pyx_r;
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":1002
+/* "fast_flow/core/electrostaticforcehandler.pyx":1026
  *         return False
  * 
  *     cdef bint _solid_at(self, Py_ssize_t idx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -33649,7 +33990,7 @@ static int __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticF
   int __pyx_t_1;
   int __pyx_t_2;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1006
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1030
  *         when the image and solver grids match -- one of
  *         the handler's own electrode cells."""
  *         if self.solver.solid[idx]:             # <<<<<<<<<<<<<<
@@ -33661,7 +34002,7 @@ static int __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticF
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1007
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1031
  *         the handler's own electrode cells."""
  *         if self.solver.solid[idx]:
  *             return True             # <<<<<<<<<<<<<<
@@ -33674,7 +34015,7 @@ static int __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticF
     }
     goto __pyx_L0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1006
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1030
  *         when the image and solver grids match -- one of
  *         the handler's own electrode cells."""
  *         if self.solver.solid[idx]:             # <<<<<<<<<<<<<<
@@ -33683,7 +34024,7 @@ static int __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticF
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1008
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1032
  *         if self.solver.solid[idx]:
  *             return True
  *         if self.solids_nx == self.solver.nx and \             # <<<<<<<<<<<<<<
@@ -33701,7 +34042,7 @@ static int __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticF
     goto __pyx_L5_bool_binop_done;
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1009
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1033
  *             return True
  *         if self.solids_nx == self.solver.nx and \
  *                 self.solids_ny == self.solver.ny:             # <<<<<<<<<<<<<<
@@ -33715,7 +34056,7 @@ static int __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticF
 
   __pyx_L5_bool_binop_done:;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1008
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1032
  *         if self.solver.solid[idx]:
  *             return True
  *         if self.solids_nx == self.solver.nx and \             # <<<<<<<<<<<<<<
@@ -33725,7 +34066,7 @@ static int __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticF
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1010
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1034
  *         if self.solids_nx == self.solver.nx and \
  *                 self.solids_ny == self.solver.ny:
  *             return self.solids[idx] != 0             # <<<<<<<<<<<<<<
@@ -33738,7 +34079,7 @@ static int __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticF
     }
     goto __pyx_L0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1008
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1032
  *         if self.solver.solid[idx]:
  *             return True
  *         if self.solids_nx == self.solver.nx and \             # <<<<<<<<<<<<<<
@@ -33747,7 +34088,7 @@ static int __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticF
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1011
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1035
  *                 self.solids_ny == self.solver.ny:
  *             return self.solids[idx] != 0
  *         return False             # <<<<<<<<<<<<<<
@@ -33760,7 +34101,7 @@ static int __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticF
   }
   goto __pyx_L0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1002
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1026
  *         return False
  * 
  *     cdef bint _solid_at(self, Py_ssize_t idx) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -33773,7 +34114,7 @@ static int __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticF
   return __pyx_r;
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":1013
+/* "fast_flow/core/electrostaticforcehandler.pyx":1037
  *         return False
  * 
  *     cdef DTYPE_f _drag(self, Py_ssize_t idx, DTYPE_f ion_v,             # <<<<<<<<<<<<<<
@@ -33790,7 +34131,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   int __pyx_t_1;
   __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_t_2;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1023
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1047
  *         frac capped at 1, so a step never overshoots the
  *         ion velocity."""
  *         cdef DTYPE_f density = self.d[self.dk][idx]             # <<<<<<<<<<<<<<
@@ -33799,7 +34140,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
 */
   __pyx_v_density = ((__pyx_v_self->d[__pyx_v_self->dk])[__pyx_v_idx]);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1025
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1049
  *         cdef DTYPE_f density = self.d[self.dk][idx]
  *         cdef DTYPE_f resistance, frac, dt
  *         if density <= 0.0:             # <<<<<<<<<<<<<<
@@ -33811,7 +34152,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1026
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1050
  *         cdef DTYPE_f resistance, frac, dt
  *         if density <= 0.0:
  *             return 0.0             # <<<<<<<<<<<<<<
@@ -33824,7 +34165,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
     }
     goto __pyx_L0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1025
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1049
  *         cdef DTYPE_f density = self.d[self.dk][idx]
  *         cdef DTYPE_f resistance, frac, dt
  *         if density <= 0.0:             # <<<<<<<<<<<<<<
@@ -33833,7 +34174,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1028
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1052
  *             return 0.0
  *         resistance = (ION_AMBIENT_PRESSURE +
  *                       self.solver.p[self.solver.pk][idx]) / \             # <<<<<<<<<<<<<<
@@ -33842,7 +34183,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
 */
   __pyx_v_resistance = ((__pyx_v_9fast_flow_4core_25electrostaticforcehandler_ION_AMBIENT_PRESSURE + ((__pyx_v_self->__pyx_base.solver->p[__pyx_v_self->__pyx_base.solver->pk])[__pyx_v_idx])) / ((__pyx_t_9fast_flow_4core_6common_DTYPE_f)__pyx_v_9fast_flow_4core_25electrostaticforcehandler_ION_AMBIENT_PRESSURE));
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1030
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1054
  *                       self.solver.p[self.solver.pk][idx]) / \
  *             ION_AMBIENT_PRESSURE
  *         if resistance < 0.1:             # <<<<<<<<<<<<<<
@@ -33854,7 +34195,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1031
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1055
  *             ION_AMBIENT_PRESSURE
  *         if resistance < 0.1:
  *             resistance = 0.1             # <<<<<<<<<<<<<<
@@ -33863,7 +34204,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
 */
     __pyx_v_resistance = 0.1;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1030
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1054
  *                       self.solver.p[self.solver.pk][idx]) / \
  *             ION_AMBIENT_PRESSURE
  *         if resistance < 0.1:             # <<<<<<<<<<<<<<
@@ -33872,7 +34213,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1032
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1056
  *         if resistance < 0.1:
  *             resistance = 0.1
  *         if resistance > ION_RESISTANCE_MAX:             # <<<<<<<<<<<<<<
@@ -33884,7 +34225,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1033
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1057
  *             resistance = 0.1
  *         if resistance > ION_RESISTANCE_MAX:
  *             resistance = ION_RESISTANCE_MAX             # <<<<<<<<<<<<<<
@@ -33893,7 +34234,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
 */
     __pyx_v_resistance = __pyx_v_9fast_flow_4core_25electrostaticforcehandler_ION_RESISTANCE_MAX;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1032
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1056
  *         if resistance < 0.1:
  *             resistance = 0.1
  *         if resistance > ION_RESISTANCE_MAX:             # <<<<<<<<<<<<<<
@@ -33902,7 +34243,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1034
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1058
  *         if resistance > ION_RESISTANCE_MAX:
  *             resistance = ION_RESISTANCE_MAX
  *         dt = self.solver.dt             # <<<<<<<<<<<<<<
@@ -33913,7 +34254,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
 
   __pyx_v_dt = __pyx_t_2;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1035
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1059
  *             resistance = ION_RESISTANCE_MAX
  *         dt = self.solver.dt
  *         if dt <= 0.0:             # <<<<<<<<<<<<<<
@@ -33925,7 +34266,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1036
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1060
  *         dt = self.solver.dt
  *         if dt <= 0.0:
  *             dt = self.solver.dt_base             # <<<<<<<<<<<<<<
@@ -33936,7 +34277,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
 
     __pyx_v_dt = __pyx_t_2;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1035
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1059
  *             resistance = ION_RESISTANCE_MAX
  *         dt = self.solver.dt
  *         if dt <= 0.0:             # <<<<<<<<<<<<<<
@@ -33945,7 +34286,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1037
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1061
  *         if dt <= 0.0:
  *             dt = self.solver.dt_base
  *         frac = dt * density * ION_AIR_COUPLING * resistance / \             # <<<<<<<<<<<<<<
@@ -33954,7 +34295,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
 */
   __pyx_v_frac = ((((__pyx_v_dt * __pyx_v_density) * __pyx_v_9fast_flow_4core_25electrostaticforcehandler_ION_AIR_COUPLING) * __pyx_v_resistance) / __pyx_v_self->__pyx_base.solver->rho);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1039
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1063
  *         frac = dt * density * ION_AIR_COUPLING * resistance / \
  *             self.solver.rho
  *         if frac > 1.0:             # <<<<<<<<<<<<<<
@@ -33966,7 +34307,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1040
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1064
  *             self.solver.rho
  *         if frac > 1.0:
  *             frac = 1.0             # <<<<<<<<<<<<<<
@@ -33975,7 +34316,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
 */
     __pyx_v_frac = 1.0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1039
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1063
  *         frac = dt * density * ION_AIR_COUPLING * resistance / \
  *             self.solver.rho
  *         if frac > 1.0:             # <<<<<<<<<<<<<<
@@ -33984,7 +34325,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1041
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1065
  *         if frac > 1.0:
  *             frac = 1.0
  *         return frac * (ion_v - air_v)             # <<<<<<<<<<<<<<
@@ -33997,7 +34338,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   }
   goto __pyx_L0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1013
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1037
  *         return False
  * 
  *     cdef DTYPE_f _drag(self, Py_ssize_t idx, DTYPE_f ion_v,             # <<<<<<<<<<<<<<
@@ -34014,7 +34355,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   return __pyx_r;
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":1043
+/* "fast_flow/core/electrostaticforcehandler.pyx":1067
  *         return frac * (ion_v - air_v)
  * 
  *     cdef DTYPE_f get_u(self, Py_ssize_t y, Py_ssize_t x,             # <<<<<<<<<<<<<<
@@ -34026,7 +34367,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_r;
   int __pyx_t_1;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1045
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1069
  *     cdef DTYPE_f get_u(self, Py_ssize_t y, Py_ssize_t x,
  *                        Py_ssize_t idx) noexcept nogil:
  *         if self._solid_at(idx):             # <<<<<<<<<<<<<<
@@ -34038,7 +34379,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1046
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1070
  *                        Py_ssize_t idx) noexcept nogil:
  *         if self._solid_at(idx):
  *             return 0.0             # <<<<<<<<<<<<<<
@@ -34051,7 +34392,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
     }
     goto __pyx_L0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1045
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1069
  *     cdef DTYPE_f get_u(self, Py_ssize_t y, Py_ssize_t x,
  *                        Py_ssize_t idx) noexcept nogil:
  *         if self._solid_at(idx):             # <<<<<<<<<<<<<<
@@ -34060,7 +34401,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1047
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1071
  *         if self._solid_at(idx):
  *             return 0.0
  *         return self._drag(idx, self.u[self.uvk][idx],             # <<<<<<<<<<<<<<
@@ -34073,7 +34414,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   }
   goto __pyx_L0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1043
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1067
  *         return frac * (ion_v - air_v)
  * 
  *     cdef DTYPE_f get_u(self, Py_ssize_t y, Py_ssize_t x,             # <<<<<<<<<<<<<<
@@ -34086,7 +34427,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   return __pyx_r;
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":1050
+/* "fast_flow/core/electrostaticforcehandler.pyx":1074
  *                           self.solver.u[self.solver.uvk][idx])
  * 
  *     cdef DTYPE_f get_v(self, Py_ssize_t y, Py_ssize_t x,             # <<<<<<<<<<<<<<
@@ -34098,7 +34439,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_r;
   int __pyx_t_1;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1052
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1076
  *     cdef DTYPE_f get_v(self, Py_ssize_t y, Py_ssize_t x,
  *                        Py_ssize_t idx) noexcept nogil:
  *         if self._solid_at(idx):             # <<<<<<<<<<<<<<
@@ -34110,7 +34451,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1053
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1077
  *                        Py_ssize_t idx) noexcept nogil:
  *         if self._solid_at(idx):
  *             return 0.0             # <<<<<<<<<<<<<<
@@ -34123,7 +34464,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
     }
     goto __pyx_L0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1052
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1076
  *     cdef DTYPE_f get_v(self, Py_ssize_t y, Py_ssize_t x,
  *                        Py_ssize_t idx) noexcept nogil:
  *         if self._solid_at(idx):             # <<<<<<<<<<<<<<
@@ -34132,7 +34473,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1054
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1078
  *         if self._solid_at(idx):
  *             return 0.0
  *         return self._drag(idx, self.v[self.uvk][idx],             # <<<<<<<<<<<<<<
@@ -34145,7 +34486,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   }
   goto __pyx_L0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1050
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1074
  *                           self.solver.u[self.solver.uvk][idx])
  * 
  *     cdef DTYPE_f get_v(self, Py_ssize_t y, Py_ssize_t x,             # <<<<<<<<<<<<<<
@@ -34158,7 +34499,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   return __pyx_r;
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":1057
+/* "fast_flow/core/electrostaticforcehandler.pyx":1081
  *                           self.solver.v[self.solver.uvk][idx])
  * 
  *     cdef void accumulate(self, Py_ssize_t y, Py_ssize_t x,             # <<<<<<<<<<<<<<
@@ -34175,7 +34516,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_t_2;
   Py_ssize_t __pyx_t_3;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1062
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1086
  *         """Compute the shared drag fraction once for both components."""
  *         cdef DTYPE_f density, resistance, dt, frac
  *         if not self._solid_at(idx):             # <<<<<<<<<<<<<<
@@ -34187,7 +34528,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1063
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1087
  *         cdef DTYPE_f density, resistance, dt, frac
  *         if not self._solid_at(idx):
  *             density = self.d[self.dk][idx]             # <<<<<<<<<<<<<<
@@ -34196,7 +34537,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
     __pyx_v_density = ((__pyx_v_self->d[__pyx_v_self->dk])[__pyx_v_idx]);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1064
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1088
  *         if not self._solid_at(idx):
  *             density = self.d[self.dk][idx]
  *             if density > 0.0:             # <<<<<<<<<<<<<<
@@ -34208,7 +34549,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
     if (__pyx_t_1) {
 
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":1066
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1090
  *             if density > 0.0:
  *                 resistance = (ION_AMBIENT_PRESSURE +
  *                               self.solver.p[self.solver.pk][idx]) / ION_AMBIENT_PRESSURE             # <<<<<<<<<<<<<<
@@ -34217,7 +34558,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       __pyx_v_resistance = ((__pyx_v_9fast_flow_4core_25electrostaticforcehandler_ION_AMBIENT_PRESSURE + ((__pyx_v_self->__pyx_base.solver->p[__pyx_v_self->__pyx_base.solver->pk])[__pyx_v_idx])) / ((__pyx_t_9fast_flow_4core_6common_DTYPE_f)__pyx_v_9fast_flow_4core_25electrostaticforcehandler_ION_AMBIENT_PRESSURE));
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":1067
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1091
  *                 resistance = (ION_AMBIENT_PRESSURE +
  *                               self.solver.p[self.solver.pk][idx]) / ION_AMBIENT_PRESSURE
  *                 if resistance < 0.1:             # <<<<<<<<<<<<<<
@@ -34229,7 +34570,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":1068
+        /* "fast_flow/core/electrostaticforcehandler.pyx":1092
  *                               self.solver.p[self.solver.pk][idx]) / ION_AMBIENT_PRESSURE
  *                 if resistance < 0.1:
  *                     resistance = 0.1             # <<<<<<<<<<<<<<
@@ -34238,7 +34579,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
         __pyx_v_resistance = 0.1;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":1067
+        /* "fast_flow/core/electrostaticforcehandler.pyx":1091
  *                 resistance = (ION_AMBIENT_PRESSURE +
  *                               self.solver.p[self.solver.pk][idx]) / ION_AMBIENT_PRESSURE
  *                 if resistance < 0.1:             # <<<<<<<<<<<<<<
@@ -34247,7 +34588,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       }
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":1069
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1093
  *                 if resistance < 0.1:
  *                     resistance = 0.1
  *                 if resistance > ION_RESISTANCE_MAX:             # <<<<<<<<<<<<<<
@@ -34259,7 +34600,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":1070
+        /* "fast_flow/core/electrostaticforcehandler.pyx":1094
  *                     resistance = 0.1
  *                 if resistance > ION_RESISTANCE_MAX:
  *                     resistance = ION_RESISTANCE_MAX             # <<<<<<<<<<<<<<
@@ -34268,7 +34609,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
         __pyx_v_resistance = __pyx_v_9fast_flow_4core_25electrostaticforcehandler_ION_RESISTANCE_MAX;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":1069
+        /* "fast_flow/core/electrostaticforcehandler.pyx":1093
  *                 if resistance < 0.1:
  *                     resistance = 0.1
  *                 if resistance > ION_RESISTANCE_MAX:             # <<<<<<<<<<<<<<
@@ -34277,7 +34618,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       }
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":1071
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1095
  *                 if resistance > ION_RESISTANCE_MAX:
  *                     resistance = ION_RESISTANCE_MAX
  *                 dt = self.solver.dt             # <<<<<<<<<<<<<<
@@ -34288,7 +34629,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
       __pyx_v_dt = __pyx_t_2;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":1072
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1096
  *                     resistance = ION_RESISTANCE_MAX
  *                 dt = self.solver.dt
  *                 if dt <= 0.0:             # <<<<<<<<<<<<<<
@@ -34300,7 +34641,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":1073
+        /* "fast_flow/core/electrostaticforcehandler.pyx":1097
  *                 dt = self.solver.dt
  *                 if dt <= 0.0:
  *                     dt = self.solver.dt_base             # <<<<<<<<<<<<<<
@@ -34311,7 +34652,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
         __pyx_v_dt = __pyx_t_2;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":1072
+        /* "fast_flow/core/electrostaticforcehandler.pyx":1096
  *                     resistance = ION_RESISTANCE_MAX
  *                 dt = self.solver.dt
  *                 if dt <= 0.0:             # <<<<<<<<<<<<<<
@@ -34320,7 +34661,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       }
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":1074
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1098
  *                 if dt <= 0.0:
  *                     dt = self.solver.dt_base
  *                 frac = dt * density * ION_AIR_COUPLING * resistance / self.solver.rho             # <<<<<<<<<<<<<<
@@ -34329,7 +34670,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       __pyx_v_frac = ((((__pyx_v_dt * __pyx_v_density) * __pyx_v_9fast_flow_4core_25electrostaticforcehandler_ION_AIR_COUPLING) * __pyx_v_resistance) / __pyx_v_self->__pyx_base.solver->rho);
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":1075
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1099
  *                     dt = self.solver.dt_base
  *                 frac = dt * density * ION_AIR_COUPLING * resistance / self.solver.rho
  *                 if frac > 1.0:             # <<<<<<<<<<<<<<
@@ -34341,7 +34682,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
       if (__pyx_t_1) {
 
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":1076
+        /* "fast_flow/core/electrostaticforcehandler.pyx":1100
  *                 frac = dt * density * ION_AIR_COUPLING * resistance / self.solver.rho
  *                 if frac > 1.0:
  *                     frac = 1.0             # <<<<<<<<<<<<<<
@@ -34350,7 +34691,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
         __pyx_v_frac = 1.0;
 
-        /* "fast_flow/core/electrostaticforcehandler.pyx":1075
+        /* "fast_flow/core/electrostaticforcehandler.pyx":1099
  *                     dt = self.solver.dt_base
  *                 frac = dt * density * ION_AIR_COUPLING * resistance / self.solver.rho
  *                 if frac > 1.0:             # <<<<<<<<<<<<<<
@@ -34359,7 +34700,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       }
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":1077
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1101
  *                 if frac > 1.0:
  *                     frac = 1.0
  *                 u_dest[idx] += frac * (self.u[self.uvk][idx] -             # <<<<<<<<<<<<<<
@@ -34369,7 +34710,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
       __pyx_t_3 = __pyx_v_idx;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":1078
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1102
  *                     frac = 1.0
  *                 u_dest[idx] += frac * (self.u[self.uvk][idx] -
  *                                        self.solver.u[self.solver.uvk][idx])             # <<<<<<<<<<<<<<
@@ -34378,7 +34719,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       (__pyx_v_u_dest[__pyx_t_3]) = ((__pyx_v_u_dest[__pyx_t_3]) + (__pyx_v_frac * (((__pyx_v_self->u[__pyx_v_self->uvk])[__pyx_v_idx]) - ((__pyx_v_self->__pyx_base.solver->u[__pyx_v_self->__pyx_base.solver->uvk])[__pyx_v_idx]))));
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":1079
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1103
  *                 u_dest[idx] += frac * (self.u[self.uvk][idx] -
  *                                        self.solver.u[self.solver.uvk][idx])
  *                 v_dest[idx] += frac * (self.v[self.uvk][idx] -             # <<<<<<<<<<<<<<
@@ -34388,7 +34729,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
       __pyx_t_3 = __pyx_v_idx;
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":1080
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1104
  *                                        self.solver.u[self.solver.uvk][idx])
  *                 v_dest[idx] += frac * (self.v[self.uvk][idx] -
  *                                        self.solver.v[self.solver.uvk][idx])             # <<<<<<<<<<<<<<
@@ -34397,7 +34738,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
       (__pyx_v_v_dest[__pyx_t_3]) = ((__pyx_v_v_dest[__pyx_t_3]) + (__pyx_v_frac * (((__pyx_v_self->v[__pyx_v_self->uvk])[__pyx_v_idx]) - ((__pyx_v_self->__pyx_base.solver->v[__pyx_v_self->__pyx_base.solver->uvk])[__pyx_v_idx]))));
 
-      /* "fast_flow/core/electrostaticforcehandler.pyx":1064
+      /* "fast_flow/core/electrostaticforcehandler.pyx":1088
  *         if not self._solid_at(idx):
  *             density = self.d[self.dk][idx]
  *             if density > 0.0:             # <<<<<<<<<<<<<<
@@ -34406,7 +34747,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
     }
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1062
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1086
  *         """Compute the shared drag fraction once for both components."""
  *         cdef DTYPE_f density, resistance, dt, frac
  *         if not self._solid_at(idx):             # <<<<<<<<<<<<<<
@@ -34415,7 +34756,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1081
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1105
  *                 v_dest[idx] += frac * (self.v[self.uvk][idx] -
  *                                        self.solver.v[self.solver.uvk][idx])
  *         if self.next_handler is not None:             # <<<<<<<<<<<<<<
@@ -34426,7 +34767,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1082
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1106
  *                                        self.solver.v[self.solver.uvk][idx])
  *         if self.next_handler is not None:
  *             self.next_handler.accumulate(y, x, idx, u_dest, v_dest)             # <<<<<<<<<<<<<<
@@ -34435,7 +34776,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
     ((struct __pyx_vtabstruct_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore *)__pyx_v_self->__pyx_base.next_handler->__pyx_vtab)->accumulate(__pyx_v_self->__pyx_base.next_handler, __pyx_v_y, __pyx_v_x, __pyx_v_idx, __pyx_v_u_dest, __pyx_v_v_dest);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1081
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1105
  *                 v_dest[idx] += frac * (self.v[self.uvk][idx] -
  *                                        self.solver.v[self.solver.uvk][idx])
  *         if self.next_handler is not None:             # <<<<<<<<<<<<<<
@@ -34444,7 +34785,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1057
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1081
  *                           self.solver.v[self.solver.uvk][idx])
  * 
  *     cdef void accumulate(self, Py_ssize_t y, Py_ssize_t x,             # <<<<<<<<<<<<<<
@@ -34459,7 +34800,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":1084
+/* "fast_flow/core/electrostaticforcehandler.pyx":1108
  *             self.next_handler.accumulate(y, x, idx, u_dest, v_dest)
  * 
  *     cdef void prepare_pressure(self) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -34470,7 +34811,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_prepare_pressure(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *__pyx_v_self) {
   int __pyx_t_1;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1085
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1109
  * 
  *     cdef void prepare_pressure(self) noexcept nogil:
  *         handler_c_advance(<handler_c_t*>self.c_handler,             # <<<<<<<<<<<<<<
@@ -34479,7 +34820,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   handler_c_advance(((handler_c_t *)__pyx_v_self->c_handler), (__pyx_v_self->__pyx_base.solver->u[__pyx_v_self->__pyx_base.solver->uvk]), (__pyx_v_self->__pyx_base.solver->v[__pyx_v_self->__pyx_base.solver->uvk]), __pyx_v_self->__pyx_base.solver->solid, __pyx_v_self->__pyx_base.solver->dt, __pyx_v_self->__pyx_base.solver->dt_base);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1090
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1114
  *                           self.solver.solid,
  *                           self.solver.dt, self.solver.dt_base)
  *         self.dk = handler_c_dk(<handler_c_t*>self.c_handler)             # <<<<<<<<<<<<<<
@@ -34488,7 +34829,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_self->dk = handler_c_dk(((handler_c_t *)__pyx_v_self->c_handler));
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1091
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1115
  *                           self.solver.dt, self.solver.dt_base)
  *         self.dk = handler_c_dk(<handler_c_t*>self.c_handler)
  *         self.dnk = handler_c_dnk(<handler_c_t*>self.c_handler)             # <<<<<<<<<<<<<<
@@ -34497,7 +34838,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_self->dnk = handler_c_dnk(((handler_c_t *)__pyx_v_self->c_handler));
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1092
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1116
  *         self.dk = handler_c_dk(<handler_c_t*>self.c_handler)
  *         self.dnk = handler_c_dnk(<handler_c_t*>self.c_handler)
  *         if self.next_handler is not None:             # <<<<<<<<<<<<<<
@@ -34508,7 +34849,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1093
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1117
  *         self.dnk = handler_c_dnk(<handler_c_t*>self.c_handler)
  *         if self.next_handler is not None:
  *             self.next_handler.prepare_pressure()             # <<<<<<<<<<<<<<
@@ -34517,7 +34858,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
     ((struct __pyx_vtabstruct_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore *)__pyx_v_self->__pyx_base.next_handler->__pyx_vtab)->prepare_pressure(__pyx_v_self->__pyx_base.next_handler);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1092
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1116
  *         self.dk = handler_c_dk(<handler_c_t*>self.c_handler)
  *         self.dnk = handler_c_dnk(<handler_c_t*>self.c_handler)
  *         if self.next_handler is not None:             # <<<<<<<<<<<<<<
@@ -34526,7 +34867,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1084
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1108
  *             self.next_handler.accumulate(y, x, idx, u_dest, v_dest)
  * 
  *     cdef void prepare_pressure(self) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -34537,7 +34878,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   /* function exit code */
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":1095
+/* "fast_flow/core/electrostaticforcehandler.pyx":1119
  *             self.next_handler.prepare_pressure()
  * 
  *     cdef void finish_pressure(self) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -34548,7 +34889,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_finish_pressure(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *__pyx_v_self) {
   int __pyx_t_1;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1096
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1120
  * 
  *     cdef void finish_pressure(self) noexcept nogil:
  *         self.pk = 1 - self.pk             # <<<<<<<<<<<<<<
@@ -34557,7 +34898,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   __pyx_v_self->pk = (1 - __pyx_v_self->pk);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1097
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1121
  *     cdef void finish_pressure(self) noexcept nogil:
  *         self.pk = 1 - self.pk
  *         handler_c_set_pk(<handler_c_t*>self.c_handler, self.pk)             # <<<<<<<<<<<<<<
@@ -34566,7 +34907,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   handler_c_set_pk(((handler_c_t *)__pyx_v_self->c_handler), __pyx_v_self->pk);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1098
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1122
  *         self.pk = 1 - self.pk
  *         handler_c_set_pk(<handler_c_t*>self.c_handler, self.pk)
  *         if self.next_handler is not None:             # <<<<<<<<<<<<<<
@@ -34577,7 +34918,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1099
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1123
  *         handler_c_set_pk(<handler_c_t*>self.c_handler, self.pk)
  *         if self.next_handler is not None:
  *             self.next_handler.finish_pressure()             # <<<<<<<<<<<<<<
@@ -34586,7 +34927,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
     ((struct __pyx_vtabstruct_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore *)__pyx_v_self->__pyx_base.next_handler->__pyx_vtab)->finish_pressure(__pyx_v_self->__pyx_base.next_handler);
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1098
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1122
  *         self.pk = 1 - self.pk
  *         handler_c_set_pk(<handler_c_t*>self.c_handler, self.pk)
  *         if self.next_handler is not None:             # <<<<<<<<<<<<<<
@@ -34595,7 +34936,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1095
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1119
  *             self.next_handler.prepare_pressure()
  * 
  *     cdef void finish_pressure(self) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -34606,7 +34947,7 @@ static void __pyx_f_9fast_flow_4core_25electrostaticforcehandler_25Electrostatic
   /* function exit code */
 }
 
-/* "fast_flow/core/electrostaticforcehandler.pyx":1101
+/* "fast_flow/core/electrostaticforcehandler.pyx":1125
  *             self.next_handler.finish_pressure()
  * 
  *     cdef DTYPE_f get_p(self, Py_ssize_t y, Py_ssize_t x,             # <<<<<<<<<<<<<<
@@ -34618,7 +34959,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_r;
   int __pyx_t_1;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1103
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1127
  *     cdef DTYPE_f get_p(self, Py_ssize_t y, Py_ssize_t x,
  *                        Py_ssize_t idx) noexcept nogil:
  *         if self._solid_at(idx):             # <<<<<<<<<<<<<<
@@ -34630,11 +34971,12 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   if (__pyx_t_1) {
 
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1104
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1128
  *                        Py_ssize_t idx) noexcept nogil:
  *         if self._solid_at(idx):
  *             return 0.0             # <<<<<<<<<<<<<<
  *         return self.p[1 - self.pk][idx] - self.p[self.pk][idx]
+ * 
 */
     {
 
@@ -34642,7 +34984,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
     }
     goto __pyx_L0;
 
-    /* "fast_flow/core/electrostaticforcehandler.pyx":1103
+    /* "fast_flow/core/electrostaticforcehandler.pyx":1127
  *     cdef DTYPE_f get_p(self, Py_ssize_t y, Py_ssize_t x,
  *                        Py_ssize_t idx) noexcept nogil:
  *         if self._solid_at(idx):             # <<<<<<<<<<<<<<
@@ -34651,10 +34993,12 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
 */
   }
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1105
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1129
  *         if self._solid_at(idx):
  *             return 0.0
  *         return self.p[1 - self.pk][idx] - self.p[self.pk][idx]             # <<<<<<<<<<<<<<
+ * 
+ * 
 */
   {
 
@@ -34662,7 +35006,7 @@ static __pyx_t_9fast_flow_4core_6common_DTYPE_f __pyx_f_9fast_flow_4core_25elect
   }
   goto __pyx_L0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":1101
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1125
  *             self.next_handler.finish_pressure()
  * 
  *     cdef DTYPE_f get_p(self, Py_ssize_t y, Py_ssize_t x,             # <<<<<<<<<<<<<<
@@ -36249,6 +36593,9 @@ static int __Pyx_modinit_Exttype___pyx_obj_9fast_flow_4core_25electrostaticforce
   __pyx_vtable_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler.__pyx_base.accumulate = (void (*)(struct __pyx_obj_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore *, Py_ssize_t, Py_ssize_t, Py_ssize_t, __pyx_t_9fast_flow_4core_6common_DTYPE_f *, __pyx_t_9fast_flow_4core_6common_DTYPE_f *))__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_accumulate;
   __pyx_vtable_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler.__pyx_base.prepare_pressure = (void (*)(struct __pyx_obj_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore *))__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_prepare_pressure;
   __pyx_vtable_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler.__pyx_base.finish_pressure = (void (*)(struct __pyx_obj_9fast_flow_4core_8handlers_12forcehandler_ForceHandlerCore *))__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_finish_pressure;
+  __pyx_vtable_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler.coulomb_field_binding = (struct __pyx_t_9fast_flow_4core_6common_VectorBinding (*)(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *))__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_coulomb_field_binding;
+  __pyx_vtable_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler.ion_density_binding = (struct __pyx_t_9fast_flow_4core_6common_ScalarBinding (*)(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *))__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_ion_density_binding;
+  __pyx_vtable_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler.o2_density_binding = (struct __pyx_t_9fast_flow_4core_6common_ScalarBinding (*)(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *))__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_o2_density_binding;
   __pyx_vtable_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler._new_shape_slot = (Py_ssize_t (*)(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *, Py_ssize_t, __pyx_t_9fast_flow_4core_6common_DTYPE_f))__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler__new_shape_slot;
   __pyx_vtable_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler._build_edges = (PyObject *(*)(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *, PyArrayObject *, PyObject *))__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler__build_edges;
   __pyx_vtable_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler._build_ion_zone = (void (*)(struct __pyx_obj_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler *, PyArrayObject *, PyObject *))__pyx_f_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler__build_ion_zone;
@@ -36653,20 +37000,7 @@ static int __Pyx_modinit_Type_import_code(__pyx_mstatetype *__pyx_mstate) {
   #endif
   __Pyx_ImportType_CheckSize_Ignore_3_3_0); if (!__pyx_mstate->__pyx_ptype_5numpy_ufunc) __PYX_ERR(2, 955, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyImport_ImportModule("fast_flow.core.handlers.forcehandler"); if (unlikely(!__pyx_t_1)) __PYX_ERR(5, 40, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_mstate->__pyx_ptype_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore = __Pyx_ImportType_3_3_0(__pyx_t_1, "fast_flow.core.handlers.forcehandler", "ConstantVelocityForceHandlerCore",
-  #if defined(PYPY_VERSION_NUM) && PYPY_VERSION_NUM < 0x050B0000
-  sizeof(struct __pyx_obj_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore), __PYX_GET_STRUCT_ALIGNMENT_3_3_0(struct __pyx_obj_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore),
-  #elif CYTHON_COMPILING_IN_LIMITED_API
-  sizeof(struct __pyx_obj_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore), __PYX_GET_STRUCT_ALIGNMENT_3_3_0(struct __pyx_obj_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore),
-  #else
-  sizeof(struct __pyx_obj_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore), __PYX_GET_STRUCT_ALIGNMENT_3_3_0(struct __pyx_obj_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore),
-  #endif
-  __Pyx_ImportType_CheckSize_Warn_3_3_0); if (!__pyx_mstate->__pyx_ptype_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore) __PYX_ERR(5, 40, __pyx_L1_error)
-  if (unlikely(__Pyx_GetVtable(__pyx_mstate->__pyx_ptype_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore, (void**)&__pyx_vtabptr_9fast_flow_4core_8handlers_12forcehandler_ConstantVelocityForceHandlerCore) != 1)) __PYX_ERR(5, 40, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyImport_ImportModule("fast_flow.core.renderer"); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 10, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule("fast_flow.core.renderer"); if (unlikely(!__pyx_t_1)) __PYX_ERR(5, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_mstate->__pyx_ptype_9fast_flow_4core_8renderer_Renderer = __Pyx_ImportType_3_3_0(__pyx_t_1, "fast_flow.core.renderer", "Renderer",
   #if defined(PYPY_VERSION_NUM) && PYPY_VERSION_NUM < 0x050B0000
@@ -36676,10 +37010,10 @@ static int __Pyx_modinit_Type_import_code(__pyx_mstatetype *__pyx_mstate) {
   #else
   sizeof(struct __pyx_obj_9fast_flow_4core_8renderer_Renderer), __PYX_GET_STRUCT_ALIGNMENT_3_3_0(struct __pyx_obj_9fast_flow_4core_8renderer_Renderer),
   #endif
-  __Pyx_ImportType_CheckSize_Warn_3_3_0); if (!__pyx_mstate->__pyx_ptype_9fast_flow_4core_8renderer_Renderer) __PYX_ERR(6, 10, __pyx_L1_error)
-  if (unlikely(__Pyx_GetVtable(__pyx_mstate->__pyx_ptype_9fast_flow_4core_8renderer_Renderer, (void**)&__pyx_vtabptr_9fast_flow_4core_8renderer_Renderer) != 1)) __PYX_ERR(6, 10, __pyx_L1_error)
+  __Pyx_ImportType_CheckSize_Warn_3_3_0); if (!__pyx_mstate->__pyx_ptype_9fast_flow_4core_8renderer_Renderer) __PYX_ERR(5, 10, __pyx_L1_error)
+  if (unlikely(__Pyx_GetVtable(__pyx_mstate->__pyx_ptype_9fast_flow_4core_8renderer_Renderer, (void**)&__pyx_vtabptr_9fast_flow_4core_8renderer_Renderer) != 1)) __PYX_ERR(5, 10, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyImport_ImportModule("fast_flow.core.flow"); if (unlikely(!__pyx_t_1)) __PYX_ERR(7, 21, __pyx_L1_error)
+  __pyx_t_1 = PyImport_ImportModule("fast_flow.core.flow"); if (unlikely(!__pyx_t_1)) __PYX_ERR(6, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_mstate->__pyx_ptype_9fast_flow_4core_4flow_FlowSolverCore = __Pyx_ImportType_3_3_0(__pyx_t_1, "fast_flow.core.flow", "FlowSolverCore",
   #if defined(PYPY_VERSION_NUM) && PYPY_VERSION_NUM < 0x050B0000
@@ -36689,8 +37023,8 @@ static int __Pyx_modinit_Type_import_code(__pyx_mstatetype *__pyx_mstate) {
   #else
   sizeof(struct __pyx_obj_9fast_flow_4core_4flow_FlowSolverCore), __PYX_GET_STRUCT_ALIGNMENT_3_3_0(struct __pyx_obj_9fast_flow_4core_4flow_FlowSolverCore),
   #endif
-  __Pyx_ImportType_CheckSize_Warn_3_3_0); if (!__pyx_mstate->__pyx_ptype_9fast_flow_4core_4flow_FlowSolverCore) __PYX_ERR(7, 21, __pyx_L1_error)
-  if (unlikely(__Pyx_GetVtable(__pyx_mstate->__pyx_ptype_9fast_flow_4core_4flow_FlowSolverCore, (void**)&__pyx_vtabptr_9fast_flow_4core_4flow_FlowSolverCore) != 1)) __PYX_ERR(7, 21, __pyx_L1_error)
+  __Pyx_ImportType_CheckSize_Warn_3_3_0); if (!__pyx_mstate->__pyx_ptype_9fast_flow_4core_4flow_FlowSolverCore) __PYX_ERR(6, 21, __pyx_L1_error)
+  if (unlikely(__Pyx_GetVtable(__pyx_mstate->__pyx_ptype_9fast_flow_4core_4flow_FlowSolverCore, (void**)&__pyx_vtabptr_9fast_flow_4core_4flow_FlowSolverCore) != 1)) __PYX_ERR(6, 21, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -37519,139 +37853,139 @@ __Pyx_RefNannySetupContext("PyInit_electrostaticforcehandler", 0);
   if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_np, __pyx_t_2) < (0)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":797
+  /* "fast_flow/core/electrostaticforcehandler.pyx":821
  *         return to_numpy(self.solids, self.solids_ny, self.solids_nx, True)
  * 
  *     cpdef Py_ssize_t num_shapes(self):             # <<<<<<<<<<<<<<
  *         """Number of sign-group structs (0, 1, or 2)."""
  *         return self.n_shapes
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_5num_shapes, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_num_sh, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 797, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_5num_shapes, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_num_sh, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 821, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_num_shapes, __pyx_t_2) < (0)) __PYX_ERR(0, 797, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_num_shapes, __pyx_t_2) < (0)) __PYX_ERR(0, 821, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":801
+  /* "fast_flow/core/electrostaticforcehandler.pyx":825
  *         return self.n_shapes
  * 
  *     cpdef DTYPE_f shape_charge(self, Py_ssize_t i):             # <<<<<<<<<<<<<<
  *         """The `charge` (voltage) stored in struct i's extradata."""
  *         if i < 0 or i >= self.n_shapes:
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_7shape_charge, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_shape, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 801, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_7shape_charge, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_shape, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 825, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_shape_charge, __pyx_t_2) < (0)) __PYX_ERR(0, 801, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_shape_charge, __pyx_t_2) < (0)) __PYX_ERR(0, 825, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":807
+  /* "fast_flow/core/electrostaticforcehandler.pyx":831
  *         return self.shapes[i].extradata.charge
  * 
  *     cpdef list shape_edges(self, Py_ssize_t i):             # <<<<<<<<<<<<<<
  *         """Struct i's edge cells as a list of (x, y) physical
  *         coordinates, read back from the struct's interleaved
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_9shape_edges, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_shape_2, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[2])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 807, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_9shape_edges, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_shape_2, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[2])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 831, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_shape_edges, __pyx_t_2) < (0)) __PYX_ERR(0, 807, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_shape_edges, __pyx_t_2) < (0)) __PYX_ERR(0, 831, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":885
+  /* "fast_flow/core/electrostaticforcehandler.pyx":909
  *                             env[idx] += q * ry * inv_r3
  * 
  *     cpdef tuple coulomb_field(self):             # <<<<<<<<<<<<<<
  *         """The Coulomb force components at the solver grid's
  *         cell centres, as (u, v) read-only (ny, nx) arrays, as
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_11coulomb_field, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_coulom, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[3])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 885, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_11coulomb_field, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_coulom, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[3])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 909, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_coulomb_field, __pyx_t_2) < (0)) __PYX_ERR(0, 885, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_coulomb_field, __pyx_t_2) < (0)) __PYX_ERR(0, 909, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":892
+  /* "fast_flow/core/electrostaticforcehandler.pyx":916
  *                 to_numpy(self.cv[self.ck], self.solver.ny, self.solver.nx, True))
  * 
  *     cpdef cnp.ndarray ion_density(self):             # <<<<<<<<<<<<<<
  *         """The current +ion density at the solver grid's
  *         cells, as a read-only (ny, nx) array.  All zeros
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_13ion_density, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_ion_de, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[4])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 892, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_13ion_density, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_ion_de, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[4])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 916, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_ion_density, __pyx_t_2) < (0)) __PYX_ERR(0, 892, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_ion_density, __pyx_t_2) < (0)) __PYX_ERR(0, 916, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":899
+  /* "fast_flow/core/electrostaticforcehandler.pyx":923
  *                         self.solver.nx, True)
  * 
  *     cpdef tuple ion_velocity(self):             # <<<<<<<<<<<<<<
  *         """The current ion velocity (field drift + air
  *         velocity) at the solver grid's cells, as (u, v)
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_15ion_velocity, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_ion_ve, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[5])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 899, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_15ion_velocity, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_ion_ve, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[5])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 923, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_ion_velocity, __pyx_t_2) < (0)) __PYX_ERR(0, 899, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_ion_velocity, __pyx_t_2) < (0)) __PYX_ERR(0, 923, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":906
+  /* "fast_flow/core/electrostaticforcehandler.pyx":930
  *                 to_numpy(self.v[self.uvk], self.solver.ny, self.solver.nx, True))
  * 
  *     cpdef cnp.ndarray o2_density(self):             # <<<<<<<<<<<<<<
  *         """The current O2- (negative corona) density at
  *         the solver grid's cells, as a read-only (ny, nx)
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_17o2_density, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_o2_den, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[6])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 906, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_17o2_density, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_o2_den, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[6])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 930, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_o2_density, __pyx_t_2) < (0)) __PYX_ERR(0, 906, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_o2_density, __pyx_t_2) < (0)) __PYX_ERR(0, 930, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":915
+  /* "fast_flow/core/electrostaticforcehandler.pyx":939
  *                         self.solver.nx, True)
  * 
  *     cpdef tuple o2_velocity(self):             # <<<<<<<<<<<<<<
  *         """The current O2- velocity (field drift opposite
  *         to the +ions, + air velocity) at the solver
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_19o2_velocity, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_o2_vel, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[7])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 915, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_19o2_velocity, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_o2_vel, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[7])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 939, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_o2_velocity, __pyx_t_2) < (0)) __PYX_ERR(0, 915, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_o2_velocity, __pyx_t_2) < (0)) __PYX_ERR(0, 939, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":923
+  /* "fast_flow/core/electrostaticforcehandler.pyx":947
  *                 to_numpy(self.vn[self.uvk], self.solver.ny, self.solver.nx, True))
  * 
  *     cpdef dict solid_forces(self):             # <<<<<<<<<<<<<<
  *         """Electrostatic force on the solids from the ion
  *         cloud (the thrust), split by electrode.  All
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_21solid_forces, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_solid, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[8])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 923, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_9fast_flow_4core_25electrostaticforcehandler_25ElectrostaticForceHandler_21solid_forces, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_ElectrostaticForceHandler_solid, NULL, __pyx_mstate_global->__pyx_n_u_fast_flow_core_electrostaticforc, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[8])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 947, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_solid_forces, __pyx_t_2) < (0)) __PYX_ERR(0, 923, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_9fast_flow_4core_25electrostaticforcehandler_ElectrostaticForceHandler, __pyx_mstate_global->__pyx_n_u_solid_forces, __pyx_t_2) < (0)) __PYX_ERR(0, 947, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "(tree fragment)":1
@@ -37796,7 +38130,7 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
   if (__Pyx_PyTuple_SET_ITEM(__pyx_mstate_global->__pyx_tuple[1], 0, __pyx_mstate_global->__pyx_slice[0]) != (0)) __PYX_ERR(1, 763, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[1]);
 
-  /* "fast_flow/core/common.pxd":78
+  /* "fast_flow/core/common.pxd":94
  *     cdef ArrayType[:] view = <ArrayType[:nx * ny]> a
  * 
  *     cdef cnp.ndarray arr = np.array(view, copy=True)             # <<<<<<<<<<<<<<
@@ -37805,12 +38139,12 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 */
   {
     PyObject* __pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_copy};
-    __pyx_mstate_global->__pyx_tuple[2] = __Pyx_PyTuple_FromArray(__pyx_temp, 1); if (unlikely(!__pyx_mstate_global->__pyx_tuple[2])) __PYX_ERR(3, 78, __pyx_L1_error)
+    __pyx_mstate_global->__pyx_tuple[2] = __Pyx_PyTuple_FromArray(__pyx_temp, 1); if (unlikely(!__pyx_mstate_global->__pyx_tuple[2])) __PYX_ERR(3, 94, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[2]);
   }
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[2]);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":791
+  /* "fast_flow/core/electrostaticforcehandler.pyx":815
  *         cell is solid."""
  *         if self.solids == NULL:
  *             arr = np.zeros((self.solids_ny, self.solids_nx),             # <<<<<<<<<<<<<<
@@ -37819,12 +38153,12 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 */
   {
     PyObject* __pyx_temp[1] = {__pyx_mstate_global->__pyx_n_u_dtype};
-    __pyx_mstate_global->__pyx_tuple[3] = __Pyx_PyTuple_FromArray(__pyx_temp, 1); if (unlikely(!__pyx_mstate_global->__pyx_tuple[3])) __PYX_ERR(0, 791, __pyx_L1_error)
+    __pyx_mstate_global->__pyx_tuple[3] = __Pyx_PyTuple_FromArray(__pyx_temp, 1); if (unlikely(!__pyx_mstate_global->__pyx_tuple[3])) __PYX_ERR(0, 815, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[3]);
   }
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[3]);
 
-  /* "fast_flow/core/electrostaticforcehandler.pyx":983
+  /* "fast_flow/core/electrostaticforcehandler.pyx":1007
  *             'positive': (f_pos_fx, f_pos_fy),
  *             'negative': (f_neg_fx, f_neg_fy),
  *             'neutral': (0.0, 0.0),             # <<<<<<<<<<<<<<
@@ -37833,7 +38167,7 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 */
   {
     PyObject* __pyx_temp[2] = {__pyx_mstate_global->__pyx_float_0_0, __pyx_mstate_global->__pyx_float_0_0};
-    __pyx_mstate_global->__pyx_tuple[4] = __Pyx_PyTuple_FromArray(__pyx_temp, 2); if (unlikely(!__pyx_mstate_global->__pyx_tuple[4])) __PYX_ERR(0, 983, __pyx_L1_error)
+    __pyx_mstate_global->__pyx_tuple[4] = __Pyx_PyTuple_FromArray(__pyx_temp, 2); if (unlikely(!__pyx_mstate_global->__pyx_tuple[4])) __PYX_ERR(0, 1007, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[4]);
   }
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[4]);
@@ -37897,38 +38231,38 @@ static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   int __pyx_clineno = 0;
   CYTHON_UNUSED_VAR(__pyx_mstate);
   {
-    const struct { const unsigned int length: 8; } str_length_index[] = {{6},{13},{8},{1},{15},{1},{1},{1},{2},{15},{23},{25},{32},{20},{22},{1},{1},{37},{45},{22},{179},{8},{31},{39},{44},{45},{44},{15},{32},{28},{27},{31},{37},{35},{34},{28},{27},{35},{30},{33},{26},{7},{6},{2},{9},{63},{76},{50},{39},{34},{198},{24},{48},{30},{37},{5},{25},{43},{45},{39},{37},{38},{36},{36},{37},{38},{37},{38},{8},{8},{15},{20},{12},{9},{17},{8},{8},{12},{10},{8},{8},{10},{8},{7},{14},{11},{10},{19},{14},{12},{10},{17},{13},{12},{12},{19},{8},{13},{3},{15},{5},{18},{4},{1},{18},{4},{13},{5},{5},{15},{19},{6},{9},{5},{40},{5},{6},{7},{1},{2},{5},{5},{11},{12},{5},{8},{4},{4},{8},{7},{4},{4},{7},{4},{8},{3},{7},{2},{10},{5},{10},{11},{3},{4},{3},{8},{8},{7},{4},{10},{5},{12},{11},{4},{12},{6},{5},{4},{4},{6},{5},{6},{6},{6},{9},{1},{5}};
+    const struct { const unsigned int length: 8; } str_length_index[] = {{6},{13},{8},{1},{15},{1},{1},{1},{2},{15},{23},{25},{32},{20},{22},{1},{1},{37},{45},{22},{179},{8},{31},{39},{44},{45},{44},{15},{32},{28},{27},{31},{37},{35},{34},{28},{27},{35},{30},{33},{26},{7},{6},{2},{9},{63},{76},{50},{39},{34},{198},{24},{48},{30},{37},{5},{25},{43},{45},{39},{37},{38},{36},{36},{37},{38},{37},{38},{8},{8},{15},{20},{12},{9},{17},{8},{8},{12},{10},{8},{8},{10},{8},{7},{14},{11},{10},{19},{14},{12},{10},{17},{13},{12},{12},{19},{8},{13},{3},{15},{5},{18},{4},{1},{18},{4},{13},{5},{5},{15},{19},{6},{9},{5},{40},{5},{6},{7},{1},{2},{5},{5},{11},{12},{5},{8},{4},{4},{8},{7},{4},{4},{7},{4},{8},{3},{7},{2},{10},{5},{2},{2},{10},{11},{3},{4},{3},{8},{8},{7},{4},{10},{5},{12},{11},{4},{12},{6},{5},{4},{4},{6},{5},{6},{6},{6},{9},{1},{5}};
     const struct { const unsigned int length: 8; } bytes_length_index[] = {{0},{1},{1},{2},{1},{1},{9},{45},{9},{36},{64},{64},{97},{64},{36},{245}};
     #ifndef CYTHON_COMPRESS_STRINGS
       #define CYTHON_COMPRESS_STRINGS 90
     #endif
-    #if (CYTHON_COMPRESS_STRINGS) == 1 /* compression: zlib (1614 bytes) */
-static const char cstring[] = "x\332\245V\315o\023G\024\047U*\002\215D\240A\342\3530\241T\201\226\030\222\206\202\020P\231$@$\032\222P@\352\241\243\361\356\2633\260;\263\231\017\307\246\252\3041\307=\356q\217{\314\221#G\376\004\037\371\023\372\047\364\315\254\3558`\047\225\260\344\235\217\367f\336\367\357\ra\206\334l\221\2325\244!\ry\003\355\373D\326^C`\036\\\275j\024\000\251+\326\210A\230k\327\256W\356\222{\277C,U\373%\207\035\"\353\344^ \205\341\r+\255&L\204$\344\312\035\375|\233\213\036A\033\305C\010\007\230\211T\207\322\017\356\3659\037\374\266\304\204@\225\231\326\274!\210\221D\001\013\347\244\210\332$\366J6Q\311U\321d\021\017I,C\270N\240\225\340Y\274j6\230urg\353R\031\305\304\354uo}\217Yo\261\004P\024a-\256\311\2324@\314\026:j\251m\266\244 \270\027B\304k\240\230\001\224\346\364\303[\225c\022d}e}n\361\316\242\327V\201\363\244&\332\326\202\010\025\005\355\234V\263<2x\273i\047\240+d\265N\332\322\022\001\250\027Z\221 \337\340\001\263\005\202h0nBf\275\315\314p)(\036\347\2421\333u\023o\202;\375\210E\032*,\014)\362\201\223\024R-\321(Mc\246\337\334E\315\265q\026\254\275x\372t\010Y\253\200\304\026Yj@\026\226\235\217~Y>\202\215\2215\033\257\267\tS\212\265\217\3425$\002\206\363\371\233\255\371\233\2071o14(t.\"\226\013s\047\220Q\344\314\224BWX-\010\244\215B\342\343\037E2\300@\220%\334\222q\215\3249D\341\020\372\263\2059\014\025\316F\320\336J1\214\024`P\005D\304\351w\004\231\360\2305\206\335\001Nu\205)X*\247\207\260\324#f\014\010\314\201Q\227\240\351#\365w\264\021\372\013\346rcn\t=*\302\010\324\020\2262\337!l\3000\315\312\370\220\0327\007]\320Pr\247{\324\207>\344\232\325\"\000\341\276\215\200\353r\026F\254\r*f\211\003\027]\006WA\035\024\210\300%\017Vm\324\367\242\253\212-\047\322*$zO|\345qr\325\017\025\304\215\370\276\220\230\377uf#C(U\020\332\000(%\241\365\245#\244\230\303Jnr\274\220\322\200\013n(\0256N\332\025\032H\005\225\030\317qo*\2513\036\225\345\312\343\0041d\220\315\306\314l}\301\241!\252W\002\332\r\302\365ri\273c\263\034\303\356 \312\021\250\200\006\265\203\213fo\221H\275Oq\213.%)\007\037\026]""\316\273l\266{k\227\261)HP\002(\226%\302u\023\224)\365ed\275\304\271\262\017\020\304H\222\360\340M\204h\323C\306\020ZDb\317@4C\370\304\274Q\301\215:\3265\255Gr\347\206s\303\215n\316\273\214\345\001\336\021@\327\366J\322nY\237\032^Z/\315J\307\206\314\260\312\020j7\317\020S\313n\240+\325\347K\253\253+\203B\0369!OJ!#\t\225~\340\003o%\245\207\261\"\356\372\222\373\037\314A\t?\324W\370h6\207\334!\010\315M\373p\246&\240\351\207ra\322\3212\320\243y\344\302\321\322\220\347ha^\020\305BS\r8\212\313#\311!L\016P\250O\t\344\212x\242\271~\016\333\326U\264{XT\366\337\030\224\256\267[\370_\306\006K\327\240e6\241Ni\267\tb\355b\235\2726\271?i\200\341\006b\267\021\2723\370\253[\021\270\261\321\213%\376\312\232\3643_\346\024\333\017\027~\224\241\215<\217`q9:5(\305\254E\363!x\243\321\355~\325\275\315M]\237*gV\370Z\001\272\"z|M\343\322\331\335\261mY\324\273\266\007?_\344c\177\003Zn\201)\330WE\017\230\360EjRj\260\267;\223\264\003\",O.\000[e\257\206h\315\326\0217}\2351\335\026\001\227\225>\237\2561\rA\2005\016\350\022\212\217\242\000j,@\270O\332\0072\033\027\302\370\276\354?NX\211\023\375\036G\3733\014\250\377\332\330?\225@)\251\372(Q\361`9\022%\260\03764n \230v\037i\234\207\036\312=\372\014\224\321`\261\270\330\353\362\363\026^K.\\\323\350u\020|\025\272\047\241{\n:\207\212\320\273\3025\006\204V\337%\005\030\001\026\205E\"\331\257.\017\356\373\2054P.hy\202NJd\202\020\314\335\r\n\032\\\343[PAy\026\241\026\003\325m:\345\326@!\r\224\213Sx\2600p\216\267\241_\260u\030H\264\221\370W60\3765\204Y\206rm\202p\t\370f\265\240w\024\232\355\362\254\365\026\320\237w\237\375\361\367_\377\274\033\353\214\237\334\3759\335xW\3754\361\335\356\302\356\346\256J\277O\037\246A6\235mt&\317\244?eU\234L\234\3325\351\355l&[\310\376\314\267\035\263\333\230\177W\375w\342\330\211\251\335V\272\235\215g\0173\226\231\374\327b\272x\265W\355\234\273\224=\316o\025c%\317\351t\"\033\303;7\263\355|<\177\\,\026;{\360~\361\375\316\007\3708\337\231:7\232x\360\374\363|,\237\316_\016\077\077\224\210\347O\036;1y\250m*\235N_\341b3k""\346\033y\255\370\246\230\351\234>\373\331\326\345\342a\301:S\323\351Jv\326[z\273\230)\026\212\215R\300A\005_\025\313{\307\367\354\373\345\017\307?\330\217\325\203\n~F\304\363\223\373N\\\032\360\001\033t\342\372\330\261\023\027\263+Y#G\225/\354O~pn+wj\376z\334\275\230-f:\237\311\027\363\355O\023$\037\353|\376\231\334}\234\336\362*\275\312\253\235\311\251t,=\235\376\230\252\354L6\237\341\306)\357*\324\373\022F\265\206\n=)\252\305\213\275\313{_\2615q\2423y>\273\220\317\367\207s\331\267.\020\323\351*\332\360\2668\357\331&\257\344\313\305\304\336\370^\365?\256\266\237\213";
-    PyObject *data = __Pyx_DecompressString(cstring, 1614, 1);
+    #if (CYTHON_COMPRESS_STRINGS) == 1 /* compression: zlib (1617 bytes) */
+static const char cstring[] = "x\332\245V\315o\023G\024\047U*\002\215D\240A\342\3530\241T\201\226\030\222\206\202\020P\231$@$\032\222P@\352\241\243\361\356\2633\260;\263\231\017\307\246\252\3041\307=\356q\217{\314\221#G\376\004\037\371\023\372\047\364\315\254\3558`\047\225\260\344\235\217\367f\336\367\357\ra\206\334l\221\2325\244!\ry\003\355\373D\326^C`\036\\\275j\024\000\251+\326\210A\230k\327\256W\356\222{\277C,U\373%\207\035\"\353\344^ \205\341\r+\255&L\204$\344\312\035\375|\233\213\036A\033\305C\010\007\230\211T\207\322\017\356\3659\037\374\266\304\204@\225\231\326\274!\210\221D\001\013\347\244\210\332$\366J6Q\311U\321d\021\017I,C\270N\240\225\340Y\274j6\230urg\353R\031\305\304\354uo}\217Yo\261\004P\024a-\256\311\2324@\314\026:j\251m\266\244 \270\027B\304k\240\230\001\224\346\364\303[\225c\022d}e}n\361\316\242\327V\201\363\244&\332\326\202\010\025\005\355\234V\263<2x\273i\047\240+d\265N\332\322\022\001\250\027Z\221 \337\340\001\263\005\202h0nBf\275\315\314p)(\036\347\2421\333u\023o\202;\375\210E\032*,\014)\362\201\223\024R-\321(Mc\246\337\334E\315\265q\026\254\275x\372t\010Y\253\200\304\026Yj@\026\226\235\217~Y>\202\215\2215\033\257\267\tS\212\265\217\3425$\002\206\363\371\233\255\371\233\2071o14(t.\"\226\013s\047\220Q\344\314\224BWX-\010\244\215B\342\343\037E2\300@\220%\334\222q\215\3249D\341\020\372\263\2059\014\025\316F\320\336J1\214\024`P\005D\304\351w\004\231\360\2305\206\335\001Nu\205)X*\247\207\260\324#f\014\010\314\201Q\227\240\351#\365w\264\021\372\013\346rcn\t=*\302\010\324\020\2262\337!l\3000\315\312\370\220\0327\007]\320Pr\247{\324\207>\344\232\325\"\000\341\276\215\200\353r\026F\254\r*f\211\003\027]\006WA\035\024\210\300%\017Vm\324\367\242\253\212-\047\322*$zO|\345qr\325\017\025\304\215\370\276\220\230\377uf#C(U\020\332\000(%\241\365\245#\244\230\303Jnr\274\220\322\200\013n(\0256N\332\025\032H\005\225\030\317qo*\2513\036\225\345\312\343\0041d\220\315\306\314l}\301\241!\252W\002\332\r\302\365ri\273c\263\034\303\356 \312\021\250\200\006\265\203\213fo\221H\275Oq\213.%)\007\037\026]""\316\273l\266{k\227\261)HP\002(\226%\302u\023\224)\365ed\275\304\271\262\017\020\304H\222\360\340M\204h\323C\306\020ZDb\317@4C\370\304\274Q\301\215:\3265\255Gr\347\206s\303\215n\316\273\214\345\001\336\021@\327\366J\322nY\237\032^Z/\315J\307\206\314\260\312\020j7\317\020S\313n\240+\325\347K\253\253+\203B\0369!OJ!#\t\225~\340\003o%\245\207\261\"\356\372\222\373\037\314A\t?\324W\370h6\207\334!\010\315M\373p\246&\240\351\207ra\322\3212\320\243y\344\302\321\322\220\347ha^\020\305BS\r8\212\313#\311!L\016P\250O\t\344\212x\242\271~\016\333\326U\264{XT\366\337\030\224\256\267[\370_\306\006K\327\240e6\241Ni\267\tb\355b\235\2726\271?i\200\341\006b\267\021\2723\370\253[\021\270\261\321\213%\376\312\232\3643_\346\024\333\017\027~\224\241\215<\217`q9:5(\305\254E\363!x\243\321\355~\325\275\315M]\237*gV\370Z\001\272\"z|M\343\322\331\335\261mY\324\273\266\007?_\344c\177\003Zn\201)\330WE\017\230\360EjRj\260\267;\223\264\003\",O.\000[e\257\206h\315\326\0217}\2351\335\026\001\227\225>\237\2561\rA\2005\016\350\022\212\217\242\000j,@\270O\332\0072\033\027\302\370\276\354?NX\211\023\375\036G\3733\014\250\377\332\330?\225@)\251\372(Q\361`9\022%\260\03764n \230v\037i\234\207\036\312=\372\014\224\321`\261\270\330\353\362\363\026^K.\\\323\350u\020|\025\272\047\241{\n:\207\212\320\273\3025\006\204V\337%\005\030\001\026\205E\"\331\257.\017\356\242%\332\373\3054P2h}\202\216Jd\2020\314\335-\n\032\\\343{PAy\036\341\026\203\325m<\345\326@1\r\224\214Sz\2608p\216\267\241o\260}\030H\264\221\370W60\376E\204\231\206rm\202\220\t\370n\265\240w\024\232\356r\255\365\026\320\247w\237\375\361\367_\377\274\033\353\214\237\334\3759\335xW\3754\361\335\356\302\356\346\256J\277O\037\246A6\235mt&\317\244?eU\234L\234\3325\351\355l&[\310\376\314\267\035\263\333\230\177W\375w\342\330\211\251\335V\272\235\215g\0173\226\231\374\327b\272x\265W\355\234\273\224=\316o\025c%\317\351t\"\033\303;7\263\355|<\177\\,\026;{\360~\361\375\316\007\3708\337\231:7\232x\360\374\363|,\237\316_\016\077\077\224\210\347O\036;1y\250m*\235N_""\341b3k\346\033y\255\370\246\230\351\234>\373\331\326\345\342a\301:S\323\351Jv\326[z\273\230)\026\212\215R\300A\005_\025\313{\307\367\354\373\345\017\307?\330\217\325\203\n~F\304\363\223\373N\\\032\360\001\033t\342\372\330\261\023\027\263+Y#G\225/\354O~pn+wj\376z\334\275\230-f:\237\311\027\363\355O\023$\037\353|\376\231\334}\234\336\362*\275\312\253\235\311\251t,=\235\376\230\252\354L6\237\341\306)\357*\324\373\022F\265\206\n=)\252\305\213\275\313{_\2615q\2423y>\273\220\317\367\207s\331\267.\020\323\351*\332\360\2668\357\331&\257\344\313\305\304\336\370^\365?\315\232\241X";
+    PyObject *data = __Pyx_DecompressString(cstring, 1617, 1);
     #define __Pyx_DecompressString_LZSS_UNUSED
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) > 0 && (CYTHON_COMPRESS_STRINGS) <= 90 /* compression: lzss (2154 bytes) */
-static const char cstring[] = "\377 at 0x b\377ut got k\377ey= obje\377ct>((tre\377e fragme\377nt)),.: \377<MemoryV\377iew of <\377contiguo\377us and d\263ir7\001\007\rin\021\005s\277trided\"\010 7or \004\031><(\tA\006\277>?Cann\260\000a\377ssign to\377 read-on\257ly m\240\002v\242\000I\377nvalid m\377ode, exp\334\327\000|\000\047c\047t\001\047f\377ortran\047,|\371\002%\005shape\222\000\377 axis No\337te th\246 Cy\337thon \021\000de\377liberate\274k\000\320\001cter!\001n\377 PEP-484\366\212\"re\306!s su\267bcl\246\000es\261!b\337uilti\260\000yp\377es. If y\237ou ne\224 \303\000p\374\316\000%\tthen s\273et\200\000e \047\357\002a\377tion_typoing\047\355$iv\242\000\377o False.\257add_\231 ef\001d\367_so\377\000s_ma\377sk: dest\336\276\001NULL\014\020sr\357c mu \000be \3332D\230A3D\010\034a \377NumPy ar\367ray\014\035t le}a\177\00010x10d\031\353ha\316\000d\341\000e u\377int8coll\373ec\365\001s.abc\277could \373Bl\267loc\206@ C\020\000o\377mb field~\r\020O2- st\260@\336\005\024zoneD\020ch\316\345`el \273!\000\034 i\327mag0\021e\267\001ro\353de\227\003s\253\020fla?ttened,\026\361@\350\247\026\030\001\251\024n\253`ve-{C \305\000dler\2470\236\352\204\003edge\206\021\271c \367bit\365\013grow\371 \245\205\003\366Bdisab\357leen\002\001gci\375s\004\003dlayer\327map\331\207\001s\327cre\377ference \315a\262\206\001l \335%\222\205\001he\037 sour\032\000\312\"\000<\373 (\220B.ndim\377=no defa\377ult __re\377duce__ d\375u\266\205\002non-tr\337ivial\033\000ci\377nit__num\377py._core\353.m5\000i\341\204\002 fa\373il\251\206\003impor}t\033\tumath\021\016\177self.c_\376$U,\t\003u\001\004v\n\003d\000\004\375n\031\003e_neg_\371u\001\t\"\004e_posH\020\007\t\001<\004pT\003\275\210\002s`\003\362^\004uO\004e\004vn c\376\273\211\003be convwert\373\207\003a P\342\210\003\376\202\213\003 for pi\277ckling\222\211\005d\277ex out\377\212\001r\373an\265`rc/fa\377st_flow/\362\252!/\355\204\004\356\205\001icfo|\315@\372d.pyxu\240b\362\261\212\001a\267\206\005\323#data\271.\013\020\341dnd \274\213\003s\177.ASCIIE\323\205\003:_\003Fa""\001Han\342\204\001\000\026\265.\360Fc\311\212\002__\017\031s\253et\256\207\002_\013\037c\371\207\003_\370\372\207\002e\027\266\212\001densi\373ty\007\033veloc\236\t\032num_\343C\324\027o\3032_M\036!\000K\037\217\215\002_c\037harge\3037 \003\305\207\002\364\n\030\214\214\001_\216bsEll\377ipsisSeq\351u\215\207\001\325\217\001.\332\217\007__P\373yx\001\000Dict_\377NextRef_}_\376\214\004e____\323\215\002\376\000\006_getite\345m\026\001d0\001 \000fun\005c&\001g\304E4\000\260\206\003<\001\341\206\003\277__mainL\001m\357odulU\002nam\326\002\003ewe\001p\206\000ch/ecks\364 _\n\001\224c\264\006\002\244\214\001_\020\002un\247\205\002e7_En \005vt\224\211\001\251\001\017qualO\005\367\207\005\377n\221\210\006{ex\335\001set_\203\005\371s\270\010\212\204\016__tes\365t\331\001s\254\210\001outi\337neabc\332\205\005_b\337uffer\242\216\002as\377yncio.co\375r\"\003sbasec\353cl0\000_\206 tra\377cebackco\373py\315\204\ncount<\223\216\002\230\216\002_is_\252\223\003\333\214\006\375_\345\214\006encode\357enum\246\221\002err\263or\235\207\006x\001e.\215\207\026f\377lagsform\273at\236\222\004iid\333\215\002i\017ndex\274\205\010\210\221\001\245\205\005\370A\375s\000\002izejoi\337nkeys\371\213\005me1m\217\223\001\207\223\001\330And\255\220\002\225\213\001\367neg\241\215\002netn/eutr\243@p\324\205\007\377\212\002\274\277\205\007\244\205\010objp\242 p\377oppositi\377veregist\372\347\000e\375\211\003elfseAt\356\213\004\220\212\003\331\223\001\302\205\004\244\205\010s\256\000\375s\216\205\010solver\337startM\000ps{to\001\000ruct\211\221\002\374\343`\232@update\377valueswr\373it\353@lexze\377ros:OT{^\377}\200\001\330\004\n\210+\377\220Q\200A\340\010\013\210\3772\210R\210r\220\023\220\377B\220c\230\024\230Q\330\277\014\022\220*\230A\006\000\010\377\017\210t\2207\230!\230\2372\230Z\240q)\001\r\0011\377\200A\360\010\000\t\020\210\377x\220q\230\004\230B\230\377a\230t\2406\250\024\250\377W\260A\330\030\034\230G\357\2405\250\001\036\003\021\220\010\373\230\001Q\000R\230q\240\004\377\240G\2504\250w\260e""\377\2704\270w\300e\3101\347\330\020\030\003\0272\013S\240\001\217\240\024\240V*\023\010\022\241\000\n\367\000\t\014\277\032r\220\024\220\375W\346\000R\230v\240Q\240\377b\250\002\250!\330\021\025\376\004\014\"\250B\250a\330\020\337\024\220E\230\025\345\0027\250\037!\2502\250Q[\003\331\005\233\003\377W\250D\260\007\260u\270\177D\300\007\300u\310A\331\005T\010\022\302 \014\273\047C\226(a\271)\377P\001\000\t\033\230$\230\277g\240Q\330\010\032\000\006\230\223#\230\321 \014\003b\230\"\034\000\033\377\2304\230s\240!\2404\377\240q\340\010 \240\001\330\374\000\002\000\007\010\014\210G\2205\376\214BW\240A\330\014\020\220\377\001\220\021\220%\220r\230/\022\2301\230\016\000\017\202b\265\000\365\034\323@b\257@H\250A\250\317U\260\"\260\000\020\000#A\330\377\010\t\330\014\031\230\032\240}1\000\004\330\014\030\230\005\341aw\024\220I\301\000z\250\031[\002\377\014$\240D\250\010\260\004\003\260A";
-    PyObject *data = __Pyx_DecompressString_LZSS(cstring, 2154, 3707);
+    #elif (CYTHON_COMPRESS_STRINGS) > 0 && (CYTHON_COMPRESS_STRINGS) <= 90 /* compression: lzss (2158 bytes) */
+static const char cstring[] = "\377 at 0x b\377ut got k\377ey= obje\377ct>((tre\377e fragme\377nt)),.: \377<MemoryV\377iew of <\377contiguo\377us and d\263ir7\001\007\rin\021\005s\277trided\"\010 7or \004\031><(\tA\006\277>?Cann\260\000a\377ssign to\377 read-on\257ly m\240\002v\242\000I\377nvalid m\377ode, exp\334\327\000|\000\047c\047t\001\047f\377ortran\047,|\371\002%\005shape\222\000\377 axis No\337te th\246 Cy\337thon \021\000de\377liberate\274k\000\320\001cter!\001n\377 PEP-484\366\212\"re\306!s su\267bcl\246\000es\261!b\337uilti\260\000yp\377es. If y\237ou ne\224 \303\000p\374\316\000%\tthen s\273et\200\000e \047\357\002a\377tion_typoing\047\355$iv\242\000\377o False.\257add_\231 ef\001d\367_so\377\000s_ma\377sk: dest\336\276\001NULL\014\020sr\357c mu \000be \3332D\230A3D\010\034a \377NumPy ar\367ray\014\035t le}a\177\00010x10d\031\353ha\316\000d\341\000e u\377int8coll\373ec\365\001s.abc\277could \373Bl\267loc\206@ C\020\000o\377mb field~\r\020O2- st\260@\336\005\024zoneD\020ch\316\345`el \273!\000\034 i\327mag0\021e\267\001ro\353de\227\003s\253\020fla?ttened,\026\361@\350\247\026\030\001\251\024n\253`ve-{C \305\000dler\2470\236\352\204\003edge\206\021\271c \367bit\365\013grow\371 \245\205\003\366Bdisab\357leen\002\001gci\375s\004\003dlayer\327map\331\207\001s\327cre\377ference \315a\262\206\001l \335%\222\205\001he\037 sour\032\000\312\"\000<\373 (\220B.ndim\377=no defa\377ult __re\377duce__ d\375u\266\205\002non-tr\337ivial\033\000ci\377nit__num\377py._core\353.m5\000i\341\204\002 fa\373il\251\206\003impor}t\033\tumath\021\016\177self.c_\376$U,\t\003u\001\004v\n\003d\000\004\375n\031\003e_neg_\371u\001\t\"\004e_posH\020\007\t\001<\004pT\003\275\210\002s`\003\362^\004uO\004e\004vn c\376\273\211\003be convwert\373\207\003a P\342\210\003\376\202\213\003 for pi\277ckling\222\211\005d\277ex out\377\212\001r\373an\265`rc/fa\377st_flow/\362\252!/\355\204\004\356\205\001icfo|\315@\372d.pyxu\240b\362\261\212\001a\267\206\005\323#data\271.\013\020\341dnd \274\213\003s\177.ASCIIE\323\205\003:_\003Fa""\001Han\342\204\001\000\026\265.\360Fc\311\212\002__\017\031s\253et\256\207\002_\013\037c\371\207\003_\370\372\207\002e\027\266\212\001densi\373ty\007\033veloc\236\t\032num_\343C\324\027o\3032_M\036!\000K\037\217\215\002_c\037harge\3037 \003\305\207\002\364\n\030\214\214\001_\216bsEll\377ipsisSeq\351u\215\207\001\325\217\001.\332\217\007__P\373yx\001\000Dict_\377NextRef_}_\376\214\004e____\323\215\002\376\000\006_getite\345m\026\001d0\001 \000fun\005c&\001g\304E4\000\260\206\003<\001\341\206\003\277__mainL\001m\357odulU\002nam\326\002\003ewe\001p\206\000ch/ecks\364 _\n\001\224c\264\006\002\244\214\001_\020\002un\247\205\002e7_En \005vt\224\211\001\251\001\017qualO\005\367\207\005\377n\221\210\006{ex\335\001set_\203\005\371s\270\010\212\204\016__tes\365t\331\001s\254\210\001outi\337neabc\332\205\005_b\337uffer\242\216\002as\377yncio.co\375r\"\003sbasec\353cl0\000_\206 tra\377cebackco\373py\315\204\ncount<\223\216\002\230\216\002_is_\252\223\003\333\214\006\375_\345\214\006encode\357enum\246\221\002err\263or\235\207\006x\001e.\215\207\026f\377lagsform\273at\236\222\004iid\333\215\002i\017ndex\274\205\010\210\221\001\245\205\005\370A\375s\000\002izejoi\337nkeys\371\213\005me1m\217\223\001\207\223\001\330And\255\220\002\225\213\001\367neg\241\215\002netn/eutr\243@p\324\205\007\377\212\002\317nxny\303\205\007\250\205\010ob\373jp\246 poppo\377sitivere\257gist\353\000e\201\212\003e\037lfset\362\213\004\224\212\003\335\223\001\324\306\205\004\250\205\010s\262\000s\222\205\010so\377lverstar\275tM\000psto\001\000r\307uct\215\221\002\347`\236@up\377datevalu\277eswrit\357@l\377exzeros:\377OT{^}\200\001\330\377\004\n\210+\220Q\200A\377\340\010\013\2102\210R\210\377r\220\023\220B\220c\230\377\024\230Q\330\014\022\220*\373\230A\006\000\010\017\210t\220\3777\230!\2302\230Z\240\371q)\001\r\0011\200A\360\010\377\000\t\020\210x\220q\230\377\004\230B\230a\230t\240\3776\250\024\250W\260A\330\377\030\034\230G\2405\250\001\276\036\003\021\220\010\230\001Q\000R\377\230q\240\004\240G\2504""\377\250w\260e\2704\270w\177\300e\3101\330\020\030\003\027\3762\013S\240\001\240\024\240Vx*\023\010\022\241\000\n\000\t\014\277\032\337r\220\024\220W\346\000R\230\377v\240Q\240b\250\002\250\357!\330\021\025\004\014\"\250B\377\250a\330\020\024\220E\230\375\025\345\0027\250!\2502\250\361Q[\003\331\005\233\003W\250D\260\377\007\260u\270D\300\007\300Gu\310A\331\005\010\022\302 \014\273\047\365C\226(a\271)P\001\000\t\377\033\230$\230g\240Q\330;\010\032\000\006\230#\230\321 \014\003\371b\230\"\034\000\033\2304\230s\377\240!\2404\240q\340\010\317 \240\001\330\000\002\000\007\010\014\357\210G\2205\214BW\240A\377\330\014\020\220\001\220\021\220\377%\220r\230\022\2301\230R\016\000\017\202b\265\000\034\323@b\257@\377H\250A\250U\260\"\260\374\000\020\000#A\330\010\t\330\014\337\031\230\032\2401\000\004\330\014w\030\230\005\341a\024\220I\301\000\367z\250\031[\002\014$\240D?\250\010\260\004\260A";
+    PyObject *data = __Pyx_DecompressString_LZSS(cstring, 2158, 3711);
     #define __Pyx_DecompressString_UNUSED
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #else /* compression: none (3707 bytes) */
-static const char bytes[] = " at 0x but got key= object>((tree fragment)),.: <MemoryView of <contiguous and direct><contiguous and indirect><strided and direct or indirect><strided and direct><strided and indirect>>?Cannot assign to read-only memoryviewInvalid mode, expected \047c\047 or \047fortran\047, got Invalid shape in axis Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the \047annotation_typing\047 directive to False.add_notebuild_solids_mask: dest is NULLbuild_solids_mask: src must be 2D or 3Dbuild_solids_mask: src must be a NumPy arraybuild_solids_mask: src must be at least 10x10build_solids_mask: src must have dtype uint8collections.abccould not allocate Coulomb fieldcould not allocate O2- statecould not allocate O2- zonecould not allocate channel maskcould not allocate channel mask imagecould not allocate electrode fieldscould not allocate flattened imagecould not allocate ion statecould not allocate ion zonecould not allocate native-C handlercould not allocate shape edgescould not allocate solids bitmaskcould not grow shape arraydisableenablegcisenabledlayermap keys must reference a real channel in the source imagelayermap keys must reference a real channel in the source image (image.ndim=no default __reduce__ due to non-trivial __cinit__numpy._core.multiarray failed to importnumpy._core.umath failed to importself.c_handler,self.cu,self.cv,self.d,self.dn,self.e_neg_u,self.e_neg_v,self.e_pos_u,self.e_pos_v,self.p,self.shapes,self.u,self.un,self.v,self.vn cannot be converted to a Python object for picklingshape index out of rangesrc/fast_flow/core/electrostaticforcehandler.pyxunable to allocate array data.unable to allocate shape and strides.ASCIIElectrostaticForceHandlerElectrostaticForceHandler.__reduce_cython__ElectrostaticForceHandler.__setstate_cython__ElectrostaticForceHandler.coulomb_fieldElectrostaticForceHandler.ion_densityElectrostaticForceHandler.ion_velocityElectrostaticForceHandler.nu""m_shapesElectrostaticForceHandler.o2_densityElectrostaticForceHandler.o2_velocityElectrostaticForceHandler.shape_chargeElectrostaticForceHandler.shape_edgesElectrostaticForceHandler.solid_forcesEllipsisSequenceView.MemoryView__Pyx_PyDict_NextRef__annotate____class____class_getitem____dict____func____getstate____import____init____main____module____name____new____pyx_checksum__pyx_state__pyx_type__pyx_unpickle_Enum__pyx_vtable____qualname____reduce____reduce_cython____reduce_ex____set_name____setstate____setstate_cython____test___is_coroutineabcallocate_bufferarrayasyncio.coroutinesbaseccline_in_tracebackcopycoulomb_fieldcountdtypedtype_is_objectelectrode_electrodeencodeenumerateerrorfast_flow.core.electrostaticforcehandlerflagsformatfortraniidimageindexion_densityion_velocityitemsitemsizejoinkeyslayermapmemviewmodenamendarrayndimnegativenetneutralnpnum_shapesnumpyo2_densityo2_velocityobjpackpoppositiveregisterreshapeselfsetdefaultshapeshape_chargeshape_edgessizesolid_forcessolverstartstepstopstructuint8unpackupdatevalueswriteablexzeros:OT{^}\200\001\330\004\n\210+\220Q\200A\340\010\013\2102\210R\210r\220\023\220B\220c\230\024\230Q\330\014\022\220*\230A\230Q\330\010\017\210t\2207\230!\2302\230Z\240q\200A\340\010\017\210t\2201\200A\360\010\000\t\020\210x\220q\230\004\230B\230a\230t\2406\250\024\250W\260A\330\030\034\230G\2405\250\001\200A\360\010\000\t\021\220\010\230\001\230\024\230R\230q\240\004\240G\2504\250w\260e\2704\270w\300e\3101\330\020\030\230\001\230\024\230R\230q\240\004\240G\2504\250w\260e\2704\270w\300e\3101\200A\360\010\000\t\021\220\010\230\001\230\024\230S\240\001\240\024\240V\2504\250w\260e\2704\270w\300e\3101\330\020\030\230\001\230\024\230S\240\001\240\024\240V\2504\250w\260e\2704\270w\300e\3101\200A\360\n\000\t\014\2102\210R\210r\220\023\220B\220c\230\024\230Q\330\014\022\220*\230A\230Q\330\010\017\210r\220\024\220W\230A\230R\230v\240Q\240b\250\002\250!\330\021\025\220W\230A\230R\230v\240Q\240b\250\002\250\"\250B\250a\330\020\024\220E\230\025\230a""\230t\2407\250!\2502\250Q\200A\360\n\000\t\021\220\010\230\001\230\024\230S\240\001\240\024\240W\250D\260\007\260u\270D\300\007\300u\310A\330\020\030\230\001\230\024\230S\240\001\240\024\240W\250D\260\007\260u\270D\300\007\300u\310A\200A\360\014\000\t\020\210x\220q\230\004\230C\230q\240\004\240G\2504\250w\260a\330\030\034\230G\2405\250\001\200A\360P\001\000\t\033\230$\230g\240Q\330\010\032\230$\230g\240Q\330\010\032\230#\230R\230q\330\010\032\230$\230b\240\001\240\024\240Q\330\010\033\2304\230s\240!\2404\240q\340\010 \240\001\330\010 \240\001\330\010 \240\001\330\010 \240\001\330\010\014\210G\2205\230\001\230\024\230W\240A\330\014\020\220\001\220\021\220%\220r\230\022\2301\230A\330\014\017\210r\220\023\220A\330\020\034\230B\230b\240\004\240H\250A\250U\260\"\260A\330\020\034\230B\230b\240\004\240H\250A\250U\260\"\260A\330\020\034\230B\230b\240\004\240H\250A\250U\260\"\260A\330\020\034\230B\230b\240\004\240H\250A\250U\260\"\260A\330\010\t\330\014\031\230\032\2401\330\014\031\230\032\2401\330\014\030\230\005\230Q\330\014\024\220I\230R\230z\250\031\260\"\260A\330\014$\240D\250\010\260\004\260A";
+    #else /* compression: none (3711 bytes) */
+static const char bytes[] = " at 0x but got key= object>((tree fragment)),.: <MemoryView of <contiguous and direct><contiguous and indirect><strided and direct or indirect><strided and direct><strided and indirect>>?Cannot assign to read-only memoryviewInvalid mode, expected \047c\047 or \047fortran\047, got Invalid shape in axis Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the \047annotation_typing\047 directive to False.add_notebuild_solids_mask: dest is NULLbuild_solids_mask: src must be 2D or 3Dbuild_solids_mask: src must be a NumPy arraybuild_solids_mask: src must be at least 10x10build_solids_mask: src must have dtype uint8collections.abccould not allocate Coulomb fieldcould not allocate O2- statecould not allocate O2- zonecould not allocate channel maskcould not allocate channel mask imagecould not allocate electrode fieldscould not allocate flattened imagecould not allocate ion statecould not allocate ion zonecould not allocate native-C handlercould not allocate shape edgescould not allocate solids bitmaskcould not grow shape arraydisableenablegcisenabledlayermap keys must reference a real channel in the source imagelayermap keys must reference a real channel in the source image (image.ndim=no default __reduce__ due to non-trivial __cinit__numpy._core.multiarray failed to importnumpy._core.umath failed to importself.c_handler,self.cu,self.cv,self.d,self.dn,self.e_neg_u,self.e_neg_v,self.e_pos_u,self.e_pos_v,self.p,self.shapes,self.u,self.un,self.v,self.vn cannot be converted to a Python object for picklingshape index out of rangesrc/fast_flow/core/electrostaticforcehandler.pyxunable to allocate array data.unable to allocate shape and strides.ASCIIElectrostaticForceHandlerElectrostaticForceHandler.__reduce_cython__ElectrostaticForceHandler.__setstate_cython__ElectrostaticForceHandler.coulomb_fieldElectrostaticForceHandler.ion_densityElectrostaticForceHandler.ion_velocityElectrostaticForceHandler.nu""m_shapesElectrostaticForceHandler.o2_densityElectrostaticForceHandler.o2_velocityElectrostaticForceHandler.shape_chargeElectrostaticForceHandler.shape_edgesElectrostaticForceHandler.solid_forcesEllipsisSequenceView.MemoryView__Pyx_PyDict_NextRef__annotate____class____class_getitem____dict____func____getstate____import____init____main____module____name____new____pyx_checksum__pyx_state__pyx_type__pyx_unpickle_Enum__pyx_vtable____qualname____reduce____reduce_cython____reduce_ex____set_name____setstate____setstate_cython____test___is_coroutineabcallocate_bufferarrayasyncio.coroutinesbaseccline_in_tracebackcopycoulomb_fieldcountdtypedtype_is_objectelectrode_electrodeencodeenumerateerrorfast_flow.core.electrostaticforcehandlerflagsformatfortraniidimageindexion_densityion_velocityitemsitemsizejoinkeyslayermapmemviewmodenamendarrayndimnegativenetneutralnpnum_shapesnumpynxnyo2_densityo2_velocityobjpackpoppositiveregisterreshapeselfsetdefaultshapeshape_chargeshape_edgessizesolid_forcessolverstartstepstopstructuint8unpackupdatevalueswriteablexzeros:OT{^}\200\001\330\004\n\210+\220Q\200A\340\010\013\2102\210R\210r\220\023\220B\220c\230\024\230Q\330\014\022\220*\230A\230Q\330\010\017\210t\2207\230!\2302\230Z\240q\200A\340\010\017\210t\2201\200A\360\010\000\t\020\210x\220q\230\004\230B\230a\230t\2406\250\024\250W\260A\330\030\034\230G\2405\250\001\200A\360\010\000\t\021\220\010\230\001\230\024\230R\230q\240\004\240G\2504\250w\260e\2704\270w\300e\3101\330\020\030\230\001\230\024\230R\230q\240\004\240G\2504\250w\260e\2704\270w\300e\3101\200A\360\010\000\t\021\220\010\230\001\230\024\230S\240\001\240\024\240V\2504\250w\260e\2704\270w\300e\3101\330\020\030\230\001\230\024\230S\240\001\240\024\240V\2504\250w\260e\2704\270w\300e\3101\200A\360\n\000\t\014\2102\210R\210r\220\023\220B\220c\230\024\230Q\330\014\022\220*\230A\230Q\330\010\017\210r\220\024\220W\230A\230R\230v\240Q\240b\250\002\250!\330\021\025\220W\230A\230R\230v\240Q\240b\250\002\250\"\250B\250a\330\020\024\220E\230\025""\230a\230t\2407\250!\2502\250Q\200A\360\n\000\t\021\220\010\230\001\230\024\230S\240\001\240\024\240W\250D\260\007\260u\270D\300\007\300u\310A\330\020\030\230\001\230\024\230S\240\001\240\024\240W\250D\260\007\260u\270D\300\007\300u\310A\200A\360\014\000\t\020\210x\220q\230\004\230C\230q\240\004\240G\2504\250w\260a\330\030\034\230G\2405\250\001\200A\360P\001\000\t\033\230$\230g\240Q\330\010\032\230$\230g\240Q\330\010\032\230#\230R\230q\330\010\032\230$\230b\240\001\240\024\240Q\330\010\033\2304\230s\240!\2404\240q\340\010 \240\001\330\010 \240\001\330\010 \240\001\330\010 \240\001\330\010\014\210G\2205\230\001\230\024\230W\240A\330\014\020\220\001\220\021\220%\220r\230\022\2301\230A\330\014\017\210r\220\023\220A\330\020\034\230B\230b\240\004\240H\250A\250U\260\"\260A\330\020\034\230B\230b\240\004\240H\250A\250U\260\"\260A\330\020\034\230B\230b\240\004\240H\250A\250U\260\"\260A\330\020\034\230B\230b\240\004\240H\250A\250U\260\"\260A\330\010\t\330\014\031\230\032\2401\330\014\031\230\032\2401\330\014\030\230\005\230Q\330\014\024\220I\230R\230z\250\031\260\"\260A\330\014$\240D\250\010\260\004\260A";
     PyObject *data = NULL;
     #define __Pyx_DecompressString_UNUSED
     #define __Pyx_DecompressString_LZSS_UNUSED
     #endif
     PyObject **stringtab = __pyx_mstate->__pyx_string_tab;
     Py_ssize_t pos = 0;
-    for (int i = 0; i < 167; i++) {
+    for (int i = 0; i < 169; i++) {
       Py_ssize_t bytes_length = str_length_index[i].length;
       PyObject *string = PyUnicode_DecodeUTF8(bytes + pos, bytes_length, NULL);
       if (likely(string) && i >= 55) PyUnicode_InternInPlace(&string);
@@ -37939,8 +38273,8 @@ static const char bytes[] = " at 0x but got key= object>((tree fragment)),.: <Me
       stringtab[i] = string;
       pos += bytes_length;
     }
-    for (int i = 167; i < 183; i++) {
-      Py_ssize_t bytes_length = bytes_length_index[i-167].length;
+    for (int i = 169; i < 185; i++) {
+      Py_ssize_t bytes_length = bytes_length_index[i-169].length;
       PyObject *string = PyBytes_FromStringAndSize(bytes + pos, bytes_length);
       stringtab[i] = string;
       pos += bytes_length;
@@ -37950,14 +38284,14 @@ static const char bytes[] = " at 0x but got key= object>((tree fragment)),.: <Me
       }
     }
     Py_XDECREF(data);
-    for (Py_ssize_t i = 0; i < 183; i++) {
+    for (Py_ssize_t i = 0; i < 185; i++) {
       if (unlikely(PyObject_Hash(stringtab[i]) == -1)) {
         __PYX_ERR(0, 1, __pyx_L1_error)
       }
     }
     #if CYTHON_IMMORTAL_CONSTANTS
     {
-      PyObject **table = stringtab + 167;
+      PyObject **table = stringtab + 169;
       for (Py_ssize_t i=0; i<16; ++i) {
         #if PY_VERSION_HEX >= 0x030F0000
         PyUnstable_SetImmortal(table[i]);
@@ -38053,47 +38387,47 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   PyObject* tuple_dedup_map = PyDict_New();
   if (unlikely(!tuple_dedup_map)) return -1;
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 797};
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 821};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self};
     __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_fast_flow_core_electrostatic, __pyx_mstate->__pyx_n_u_num_shapes, __pyx_mstate->__pyx_kp_b_iso88591_A_t1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 801};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 825};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_i};
     __pyx_mstate_global->__pyx_codeobj_tab[1] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_fast_flow_core_electrostatic, __pyx_mstate->__pyx_n_u_shape_charge, __pyx_mstate->__pyx_kp_b_iso88591_A_2Rr_Bc_Q_AQ_t7_2Zq, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[1])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 807};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 831};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_i};
     __pyx_mstate_global->__pyx_codeobj_tab[2] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_fast_flow_core_electrostatic, __pyx_mstate->__pyx_n_u_shape_edges, __pyx_mstate->__pyx_kp_b_iso88591_A_2Rr_Bc_Q_AQ_r_WARvQb_WARvQb_Ba, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[2])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 885};
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 909};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self};
     __pyx_mstate_global->__pyx_codeobj_tab[3] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_fast_flow_core_electrostatic, __pyx_mstate->__pyx_n_u_coulomb_field, __pyx_mstate->__pyx_kp_b_iso88591_A_S_V4we4we1_S_V4we4we1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[3])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 892};
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 916};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self};
     __pyx_mstate_global->__pyx_codeobj_tab[4] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_fast_flow_core_electrostatic, __pyx_mstate->__pyx_n_u_ion_density, __pyx_mstate->__pyx_kp_b_iso88591_A_xq_Bat6_WA_G5, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[4])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 899};
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 923};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self};
     __pyx_mstate_global->__pyx_codeobj_tab[5] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_fast_flow_core_electrostatic, __pyx_mstate->__pyx_n_u_ion_velocity, __pyx_mstate->__pyx_kp_b_iso88591_A_Rq_G4we4we1_Rq_G4we4we1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[5])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 906};
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 930};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self};
     __pyx_mstate_global->__pyx_codeobj_tab[6] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_fast_flow_core_electrostatic, __pyx_mstate->__pyx_n_u_o2_density, __pyx_mstate->__pyx_kp_b_iso88591_A_xq_Cq_G4wa_G5, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[6])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 915};
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 939};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self};
     __pyx_mstate_global->__pyx_codeobj_tab[7] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_fast_flow_core_electrostatic, __pyx_mstate->__pyx_n_u_o2_velocity, __pyx_mstate->__pyx_kp_b_iso88591_A_S_WD_uD_uA_S_WD_uD_uA, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[7])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 923};
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 1, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 947};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self};
     __pyx_mstate_global->__pyx_codeobj_tab[8] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_src_fast_flow_core_electrostatic, __pyx_mstate->__pyx_n_u_solid_forces, __pyx_mstate->__pyx_kp_b_iso88591_AP_gQ_gQ_Rq_b_Q_4s_4q_G5_WA_r_1A, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[8])) goto bad;
   }

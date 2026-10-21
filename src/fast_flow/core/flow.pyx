@@ -498,4 +498,17 @@ cdef class FlowSolverCore:
                 self.p[0][i] = 0.0
                 self.p[1][i] = 0.0
 
+    cdef VectorBinding velocity_binding(self) noexcept:
+        cdef VectorBinding field = VectorBinding()
+        field.ny = self.ny
+        field.nx = self.nx
+        field.v_buffers = self.v
+        field.u_buffers = self.u
+        field.active = &self.uvk
 
+    cdef ScalarBinding density_binding(self) noexcept:
+        cdef ScalarBinding field = ScalarBinding()
+        field.ny = self.ny
+        field.nx = self.nx
+        field.buffers = self.p
+        field.active = &self.pk

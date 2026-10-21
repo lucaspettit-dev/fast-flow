@@ -97,34 +97,3 @@ cdef class ForceHandlerCore:
         if self.next_handler is not None:
             self.next_handler.accumulate_p(y, x, idx, p_dest)
 
-
-cdef class ConstantVelocityForceHandlerCore(ForceHandlerCore):
-
-    def __init__(self, FlowSolverCore solver, Py_ssize_t direction, DTYPE_f velocity):
-        ForceHandlerCore.__init__(self, solver)
-        self.velocity = velocity
-        self.direction = direction
-
-    cdef DTYPE_f get_u(self, Py_ssize_t y, Py_ssize_t x, Py_ssize_t idx) noexcept nogil:
-        if self.direction == 0:
-            # LEFT: flow moves in -x, entering at the right edge
-            if x == self.solver.nx - 1:
-                return -self.velocity
-        elif self.direction == 1:
-            # RIGHT: flow moves in +x, entering at the left edge
-            if x == 0:
-                return self.velocity
-        return 0.0
-
-    cdef DTYPE_f get_v(self, Py_ssize_t y, Py_ssize_t x, Py_ssize_t idx) noexcept nogil:
-        if self.direction == 2:
-            # UP: flow moves in +y, entering at the bottom edge
-            if y == 0:
-                return self.velocity
-        elif self.direction == 3:
-            # DOWN: flow moves in -y, entering at the top edge
-            if y == self.solver.ny - 1:
-                return -self.velocity
-        return 0.0
-
-

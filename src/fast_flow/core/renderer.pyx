@@ -39,6 +39,7 @@ from libc.math cimport floor, sqrt
 from libc.stdlib cimport malloc, free
 from fast_flow.core.common cimport DTYPE_f, vector_to_rgb, to_numpy_3d, fast_hypot
 
+
 """
 Since I cannot do enums, this is the render-style mapping:
 

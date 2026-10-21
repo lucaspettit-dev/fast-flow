@@ -7,15 +7,33 @@ import numpy as np
 from fast_flow import ElectrostaticForceHandler, FlowSolver, Boundry
 from fast_flow.core.renderer import Renderer
 
-JET_ID = 11
+JET_ID = 1
 TOTAL_TIME = 1
-P_CHARGE = 40000
-N_ChARGE_MULTIPLIER = -1
+P_CHARGE = 400000
+N_ChARGE_MULTIPLIER = -1.0
+
+
+def mirror_stack_pad(img: np.ndarray) -> np.ndarray:
+    # Flip vertically and stack top to bottom
+    flipped = np.flip(img, axis=0)
+    stacked = np.concatenate((img, flipped), axis=0)
+
+    # Add padding equal to 50% of the stacked dimensions on each side
+    h, w = stacked.shape[:2]
+    pad_y = h // 2
+    pad_x = w // 2
+
+    # Preserve additional dimensions (e.g., RGB/RGBA channels)
+    padding = [(pad_y, pad_y), (pad_x, pad_x)]
+    padding += [(0, 0)] * (stacked.ndim - 2)
+
+    return np.pad(stacked, padding, mode="constant", constant_values=0)
+
 
 if __name__ == '__main__':
 
     img = cv2.imread(f'./res/jet{JET_ID}.png')
-    img = cv2.flip(img, 0)
+    img = mirror_stack_pad(img)
     ny, nx = img.shape[0], img.shape[1]
     print(f'Loaded image: dims=({ny}, {nx})')
 
@@ -23,7 +41,8 @@ if __name__ == '__main__':
     # rooster -> -charge
     handler = ElectrostaticForceHandler(
         img, layermap={0: P_CHARGE, 2: P_CHARGE * N_ChARGE_MULTIPLIER})
-    renderer = Renderer("jet", 120*2, ny, nx, record=True)
+
+    renderer = Renderer("jet", 120*2, ny, nx, record=True, legend=True)
     solver = FlowSolver(img=img, nit=50, rho=1.0, nu=0.05,
                         boundary=Boundry.NONE,
                         lx=8.0, ly=5.0,
