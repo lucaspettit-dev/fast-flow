@@ -9,7 +9,7 @@ Handlers are chained (each holds the next) and contribute
 per-cell u/v increments through get_u/get_v; the chain is
 walked nogil via accumulate().  Implementations of concrete
 handlers live in their own modules (see
-core/electrostaticforcehandler.pyx).
+core/handlers/electrostaticforcehandler.pyx).
 """
 
 from fast_flow.core.common cimport DTYPE_f

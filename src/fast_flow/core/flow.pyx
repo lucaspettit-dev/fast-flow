@@ -5,8 +5,7 @@
 """FlowSolverCore: the compiled 2D Navier-Stokes solver core.
 
 Split out of the old single-file _core.pyx: this module holds
-only the solver; force handlers live in core/handlers/ and
-core/electrostaticforcehandler.pyx.
+only the solver; force handlers live in core/handlers/.
 """
 
 import numpy as np
