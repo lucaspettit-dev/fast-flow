@@ -1,6 +1,6 @@
-/* solver_c.c — native-C solver core + thread pool.
+/* solver.c — native-C solver core + thread pool.
  *
- * See ../solver_c.h for the design. The solver functions are
+ * See solver.h for the design. The solver functions are
  * a faithful port of FlowSolverCore (flow.pyx): same formulas,
  * same loop order, same buffer flips, so results match the
  * Cython solver to floating-point tolerance. Two deliberate
@@ -15,7 +15,7 @@
  * form as the .pyx source, so the FP results match.
  */
 
-#include "solver_c.h"
+#include "solver.h"
 
 #include <stdlib.h>
 #include <string.h>

@@ -18,12 +18,12 @@ from libc.math cimport sqrt, atan2, fabs, floor
 from fast_flow.core.common cimport DTYPE_f, build_solids_mask, to_numpy
 from fast_flow.core.handlers.forcehandler cimport ForceHandlerCore
 
-# Native-C solver (solver_c.c). The C struct is opaque here
+# Native-C solver (c/solver.c). The C struct is opaque here
 # (void* c_solver on the class); these are its constructors /
 # accessors. The C code references the Cython-owned buffers
 # (same memory the Python accessors view) and owns the
 # thread pool.
-cdef extern from "solver_c.h":
+cdef extern from "c/solver.h":
     ctypedef void solver_c_t
     solver_c_t* solver_c_create(long nx, long ny,
                                 double dx, double dy,

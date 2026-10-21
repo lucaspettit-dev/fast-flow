@@ -1,4 +1,4 @@
-/* handler_c.h — native-C electrostatic handler (ion advance).
+/* handler.h — native-C electrostatic handler (ion advance).
  *
  * perf/native-c-handler: the ElectrostaticForceHandler's
  * _advance_ion_state in plain C, on the solver's thread
@@ -18,7 +18,7 @@
 #ifndef FAST_FLOW_HANDLER_C_H
 #define FAST_FLOW_HANDLER_C_H
 
-#include "solver_c.h"
+#include "solver.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -1,4 +1,4 @@
-/* solver_c.h — native-C solver core + thread pool.
+/* solver.h — native-C solver core + thread pool.
  *
  * perf/native-c-threadpool: the FlowSolverCore computation
  * (pressure Poisson, momentum, boundary conditions, enforce)

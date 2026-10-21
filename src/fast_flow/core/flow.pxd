@@ -6,7 +6,7 @@
 #
 # perf/native-c-threadpool: the solver's computation
 # (Poisson, momentum, BCs, enforce) lives in native C
-# (solver_c.c) behind the opaque c_solver pointer; the
+# (c/solver.c) behind the opaque c_solver pointer; the
 # Cython side owns the buffers (same memory the Python
 # accessors view) and the dt selection. The old Cython
 # compute methods are gone (replaced by the C step).

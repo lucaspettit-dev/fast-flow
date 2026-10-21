@@ -1,4 +1,4 @@
-/* handler_c.c — native-C electrostatic handler (ion advance).
+/* handler.c — native-C electrostatic handler (ion advance).
  *
  * Faithful port of ElectrostaticForceHandler._advance_ion_state
  * (electrostaticforcehandler.pyx): same formulas, same loop
@@ -20,7 +20,7 @@
  * in the same form as the .pyx source.
  */
 
-#include "handler_c.h"
+#include "handler.h"
 
 #include <stdlib.h>
 #include <math.h>

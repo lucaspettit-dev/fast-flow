@@ -8,7 +8,7 @@ from Cython.Build import cythonize
 import numpy as np
 
 # Optimization + pthreads (perf/native-c-threadpool): the
-# solver's computation is native C (solver_c.c) on a
+# solver's computation is native C (c/solver.c) on a
 # persistent pthread pool sized to the online CPUs.
 # -pthread for the pool (both gcc and clang accept it).
 if platform.system() == "Darwin":
@@ -41,13 +41,13 @@ def _extension(name, source, extra_sources=None):
 extensions = [
     _extension("fast_flow.core.flow",
                "src/fast_flow/core/flow.pyx",
-               extra_sources=["src/fast_flow/core/native/solver_c.c"]),
+               extra_sources=["src/fast_flow/core/c/solver.c"]),
     _extension("fast_flow.core.handlers.forcehandler",
                "src/fast_flow/core/handlers/forcehandler.pyx"),
     _extension("fast_flow.core.electrostaticforcehandler",
                "src/fast_flow/core/electrostaticforcehandler.pyx",
-               extra_sources=["src/fast_flow/core/native/solver_c.c",
-                              "src/fast_flow/core/native/handler_c.c"]),
+               extra_sources=["src/fast_flow/core/c/solver.c",
+                              "src/fast_flow/core/c/handler.c"]),
     _extension("fast_flow.core.renderer",
                "src/fast_flow/core/renderer.pyx"),
 ]
