@@ -107,6 +107,15 @@ cdef class FlowSolverCore:
         self.dx = lx / (self.nx - 1)
         self.dy = ly / (self.ny - 1)
 
+        # Real-world size of one grid cell in the x
+        # direction: metres per pixel when lx/ly carry a
+        # physical size (the public API derives lx/ly
+        # from a pixel_size argument when one is given,
+        # which makes dx == dy == pixel_size).  Force
+        # handlers read this at bind time so their
+        # equations can work in physical units.
+        self.pixel_size = self.dx
+
         # init data structures
         self.u = <DTYPE_f**> malloc(2 * sizeof(DTYPE_f*))
         self.u[0] = <DTYPE_f*> malloc(self.N * sizeof(DTYPE_f))
@@ -395,7 +404,8 @@ cdef class FlowSolverCore:
                     v[y * self.nx + self.nx - 1] += (<ForceHandlerCore>self.forces[i]).get_v(y, self.nx - 1, y * self.nx + self.nx - 1)
 
         # Handler pressure pass (serial, exactly-once: a
-        # handler's get_p may advance per-cell state).
+        # handler's prepare_pressure may advance per-cell
+        # state, and its get_p contributes to the pressure).
         if self.nforces > 0:
             for i in range(self.nforces):
                 (<ForceHandlerCore>self.forces[i]).prepare_pressure()

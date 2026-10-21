@@ -30,6 +30,7 @@ cdef class FlowSolverCore:
     cdef readonly DTYPE_f sum_dt
     cdef readonly DTYPE_f lx
     cdef readonly DTYPE_f ly
+    cdef readonly DTYPE_f pixel_size
     cdef DTYPE_f dx
     cdef DTYPE_f dy
     cdef int nit

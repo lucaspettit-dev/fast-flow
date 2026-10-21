@@ -59,8 +59,9 @@ if __name__ == '__main__':
     img = cv2.imread(f'./res/jet{JET_ID}.png')
     img = mirror_stack_pad(img)
     ny, nx = img.shape[0], img.shape[1]
-    ly = ny // 100
-    lx = nx // 100
+    # Real-world scale: one pixel is 0.25 mm (the
+    # 400-px-wide source image represents 10 cm).
+    pixel_size = 0.00025
     print(f'Loaded image: dims=({ny}, {nx})')
 
     # channel 2 (red) = cow -> +charge; channel 0 (blue) =
@@ -71,9 +72,10 @@ if __name__ == '__main__':
     renderer = Renderer("jet", 120*2, ny, nx, record=True, legend=True)
     solver = FlowSolver(img=img, nit=50, rho=1.0, nu=0.05,
                         boundary=Boundry.NONE,
-                        lx=lx, ly=ly,
+                        pixel_size=pixel_size,
                         force_handlers=[handler],
                         renderer=renderer)
+    lx, ly = solver.lx, solver.ly
 
     renderer.run()
     t0 = time.perf_counter()
@@ -85,14 +87,12 @@ if __name__ == '__main__':
     speed = np.sqrt(np.square(u) + np.square(v))
     solid = solver.solid.astype(bool)
     density = handler.ion_density()
-    force = handler.solid_forces()
     print('----------- RESULTS ------------')
     print(f"steps taken: {steps}\n\tsimulated time: {solver.time:.6f}s")
     print(f"wall-clock runtime: {wall:.2f}s\n\t"
           f"iterations per second: {steps / wall:.1f}")
     print(f"ion density: total {density.sum():.1f}, "
           f"max {density.max():.3f}")
-    print(f"Net forces (x,y) = {force['net']}")
 
     out_dir = os.path.join(
         os.path.dirname(os.path.abspath(__file__)), 'out/jet')

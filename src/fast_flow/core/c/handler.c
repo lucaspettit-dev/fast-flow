@@ -12,7 +12,7 @@
  *    in FP, so the parallel reduction is bitwise-exact);
  *  - transport: each subcycle is a parallel-for (the
  *    subcycles stay sequential -- each depends on the last);
- *  - generation / diffusion / pressure: parallel-for.
+ *  - generation / diffusion: parallel-for.
  * The pinning-style serial passes are none here; every
  * pass is independent per cell.
  *
@@ -29,28 +29,26 @@
 #define ION_ZONE_TARGET 1.0
 #define ION_PRODUCTION_TAU 0.01
 #define ION_DIFFUSION 0.01
-#define ION_PRESSURE_COUPLING 1.0e-5
-#define ION_PRESSURE_MAX 100.0
 #define ION_SHIELD_DENSITY 3.0
 #define ION_SPEED_MAX 1000.0
 
 struct handler_c {
     long nx, ny, N;
     double dx, dy;
-    double *d[2], *p[2];
+    double *d[2];
     double *u[2], *v[2];
     double *cu[2], *cv[2];
     unsigned char *ion_zone;
     unsigned char *solids;
     long solids_nx, solids_ny;
-    long dk, pk, uvk, ck;
+    long dk, uvk, ck;
     /* O2- (negative corona): density, velocity, buffer
      * index, and generation mask -- the mirror of the
      * +ion state.  O2- drifts opposite to the field
      * (toward the positive electrode) and is collected
      * (neutralized) there, like +ions at the negative
-     * electrode.  It carries no pressure and does not
-     * drag the air (tracked only). */
+     * electrode.  It drags the air through the same
+     * Cython-side _drag as the +ions (get_u/get_v). */
     double *dn[2];
     double *un[2], *vn[2];
     unsigned char *ion_zone_neg;
@@ -71,7 +69,6 @@ static inline int h_solid_at(const handler_c_t *h,
 handler_c_t *handler_c_create(long nx, long ny,
                               double dx, double dy,
                               double *d0, double *d1,
-                              double *p0, double *p1,
                               double *u0, double *u1,
                               double *v0, double *v1,
                               double *cu0, double *cu1,
@@ -94,8 +91,6 @@ handler_c_t *handler_c_create(long nx, long ny,
     h->dy = dy;
     h->d[0] = d0;
     h->d[1] = d1;
-    h->p[0] = p0;
-    h->p[1] = p1;
     h->u[0] = u0;
     h->u[1] = u1;
     h->v[0] = v0;
@@ -117,7 +112,6 @@ handler_c_t *handler_c_create(long nx, long ny,
     h->ion_zone_neg = ion_zone_neg;
     h->dk = 0;
     h->dnk = 0;
-    h->pk = 0;
     h->uvk = 0;
     h->ck = 0;
     if (pool) {
@@ -148,11 +142,6 @@ long handler_c_dk(const handler_c_t *h) {
 
 long handler_c_dnk(const handler_c_t *h) {
     return h ? h->dnk : 0;
-}
-
-void handler_c_set_pk(handler_c_t *h, long pk) {
-    if (h)
-        h->pk = pk;
 }
 
 /* ------------------------------------------------------------------ */
@@ -420,36 +409,6 @@ static void diffusion_rows(void *vctx, long y0, long y1, int id) {
     }
 }
 
-/* Pressure ctx (flat index range). */
-typedef struct {
-    handler_c_t *h;
-    const unsigned char *solid;
-    double *sbuf, *pp;
-} pressure_ctx_t;
-
-static void pressure_range(void *vctx, long i0, long i1, int id) {
-    pressure_ctx_t *ctx = (pressure_ctx_t *)vctx;
-    handler_c_t *h = ctx->h;
-    const unsigned char *solid = ctx->solid;
-    double *sbuf = ctx->sbuf, *pp = ctx->pp;
-    double *cu = h->cu[h->ck];
-    double *cv = h->cv[h->ck];
-    long idx;
-    double e2, val;
-    (void)id;
-    for (idx = i0; idx < i1; idx++) {
-        if (h_solid_at(h, solid, idx)) {
-            pp[idx] = 0.0;
-            continue;
-        }
-        e2 = cu[idx] * cu[idx] + cv[idx] * cv[idx];
-        if (e2 > ION_SPEED_MAX * ION_SPEED_MAX)
-            e2 = ION_SPEED_MAX * ION_SPEED_MAX;
-        val = ION_PRESSURE_COUPLING * sbuf[idx] * e2;
-        pp[idx] = val < ION_PRESSURE_MAX ? val : ION_PRESSURE_MAX;
-    }
-}
-
 /* ------------------------------------------------------------------ */
 /* Advance                                                             */
 /* ------------------------------------------------------------------ */
@@ -462,13 +421,12 @@ void handler_c_advance(handler_c_t *h,
     double rate = 0.0;
     double tau, gen;
     long nsub, k, cur, cur_n, i;
-    double *sbuf, *dbuf, *tbuf, *sbuf_final;
+    double *sbuf, *dbuf, *tbuf;
     double *sbuf_n, *dbuf_n, *tbuf_n, *sbuf_final_n;
     velocity_ctx_t vctx;
     transport_ctx_t tctx;
     generation_ctx_t gctx;
     diffusion_ctx_t dctx;
-    pressure_ctx_t pctx;
     double *partial_max;
     int nthreads;
 
@@ -560,22 +518,10 @@ void handler_c_advance(handler_c_t *h,
     dctx.dbuf = dbuf;
     ff_pool_for(h->pool, ny, diffusion_rows, &dctx);
     h->dk = 1 - cur;
-    sbuf_final = h->d[h->dk];
     dctx.sbuf = sbuf_n;
     dctx.dbuf = dbuf_n;
     ff_pool_for(h->pool, ny, diffusion_rows, &dctx);
     h->dnk = 1 - cur_n;
     sbuf_final_n = h->dn[h->dnk];
     (void)sbuf_final_n;
-
-    /* 5. electrostatic pressure of the ion cloud.
-     * pp = p[1 - pk]; pk is passed by the caller via the
-     * Cython side (get_p) -- here we use h->pk, which the
-     * Cython side keeps in sync (it only flips in get_p,
-     * never in the advance). */
-    pctx.h = h;
-    pctx.solid = solid;
-    pctx.sbuf = sbuf_final;
-    pctx.pp = h->p[1 - h->pk];
-    ff_pool_for(h->pool, h->N, pressure_range, &pctx);
 }

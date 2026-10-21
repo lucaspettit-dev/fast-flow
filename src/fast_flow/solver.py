@@ -135,6 +135,18 @@ class ElectrostaticForceHandler(ForceHandler):
         return self._handler.o2_velocity()
 
     @property
+    def pixel_size(self):
+        """Real-world size of one grid cell in metres
+        (metres per pixel), propagated from the solver
+        this handler is bound to.  The handler's field
+        solve, drift, transport and diffusion work on
+        the solver's dx/dy, which this sizing defines
+        when the solver is built from a pixel size."""
+        if getattr(self, "_handler", None) is None:
+            raise RuntimeError("handler is not bound to a solver yet")
+        return self._handler.pixel_size
+
+    @property
     def neg_corona_active(self):
         """True if any negative electrode is in corona
         (its surface field exceeds breakdown), i.e. O2-
@@ -142,19 +154,6 @@ class ElectrostaticForceHandler(ForceHandler):
         if getattr(self, "_handler", None) is None:
             return False
         return self._handler.neg_corona_active
-
-    def solid_forces(self):
-        """Electrostatic force on the solids from the
-        ion cloud (the thrust), split by electrode.
-        All solids assumed connected -- one rigid body.
-        Returns a dict with 'positive' / 'negative' /
-        'neutral' / 'net' as (Fx, Fy) tuples in code
-        units, plus 'electrode_electrode' (the internal
-        mutual attraction, on the positive electrode).
-        The net is the thrust on the assembly."""
-        if getattr(self, "_handler", None) is None:
-            raise RuntimeError("handler is not bound to a solver yet")
-        return self._handler.solid_forces()
 
 
 class FlowSolver:
@@ -188,16 +187,41 @@ class FlowSolver:
                  dt: float = 0.02,
                  boundary: Boundry = Boundry.CAVITY,
                  inflow_velocity: float = 1.0,
-                 lx: float = 2.0,
-                 ly: float = 2.0,
+                 lx: float = None,
+                 ly: float = None,
+                 pixel_size: float = None,
                  force_handlers: [ForceHandler] = None,
                  renderer: Renderer = None):
         if dt <= 0:
             raise ValueError("dt must be > 0")
+        # Physical scale: either `pixel_size` (the real-world
+        # size of one grid cell, in metres per pixel, the
+        # same in x and y) or the domain size `lx`/`ly`.
+        # pixel_size defines lx/ly from the grid shape
+        # (lx = pixel_size * (nx - 1), so the core's
+        # dx = lx / (nx - 1) is exactly pixel_size); the
+        # sizing is stored on the core, where bound force
+        # handlers read it for their equations.  With
+        # neither, the historical 2.0 x 2.0 domain is used.
+        ny, nx = img.shape[0], img.shape[1]
+        if pixel_size is not None:
+            if lx is not None or ly is not None:
+                raise ValueError(
+                    "pass either pixel_size or lx/ly, not both")
+            if pixel_size <= 0:
+                raise ValueError("pixel_size must be > 0")
+            lx = float(pixel_size) * (nx - 1)
+            ly = float(pixel_size) * (ny - 1)
+        elif lx is None and ly is None:
+            lx = 2.0
+            ly = 2.0
+        elif lx is None or ly is None:
+            raise ValueError("lx and ly must be given together")
         self.boundary = boundary
         self.inflow_velocity = inflow_velocity
         self.lx = float(lx)
         self.ly = float(ly)
+        self.pixel_size = self.lx / (nx - 1) if nx > 1 else 0.0
         self.obstacles: list = []
         if force_handlers is None:
             force_handlers = []
