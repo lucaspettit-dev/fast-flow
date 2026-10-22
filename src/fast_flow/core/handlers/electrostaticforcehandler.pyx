@@ -146,13 +146,27 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
     # collected (neutralized) at the positive electrode,
     # like +ions at the negative electrode.  It drags
     # the air exactly like the +ions do, through the
-    # same _drag in get_u/get_v, with its own density
+    # same drag law in get_u/get_v, with its own density
     # and velocity.
     cdef DTYPE_f** dn
     cdef Py_ssize_t dnk
     cdef DTYPE_f** un
     cdef DTYPE_f** vn
     cdef unsigned char* ion_zone_neg
+
+    # Per-cell drag relaxation fractions, one per species
+    # (frac_d for +ions, frac_n for O2-), filled once per
+    # step by _fill_drag_fracs(): a fraction depends only
+    # on the cell's density and the solver pressure, which
+    # do not change between one ion advance and the next,
+    # so get_u/get_v read these instead of recomputing the
+    # resistance (a division) and the fraction up to four
+    # times per cell (two species x two components).
+    # _drag_fracs_ok is cleared in prepare_pressure, where
+    # the advance mutates the densities.
+    cdef DTYPE_f* frac_d
+    cdef DTYPE_f* frac_n
+    cdef bint _drag_fracs_ok
 
     # One Shape struct per sign group present in the image: the
     # positive group's struct first, then the negative group's.
@@ -315,6 +329,14 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                 self.vn[i][j] = 0
         self.dnk = 0
         self.ion_zone_neg = NULL
+
+        self.frac_d = <DTYPE_f*> malloc(
+            self.solver.N * sizeof(DTYPE_f))
+        self.frac_n = <DTYPE_f*> malloc(
+            self.solver.N * sizeof(DTYPE_f))
+        if self.frac_d == NULL or self.frac_n == NULL:
+            raise MemoryError("could not allocate drag fractions")
+        self._drag_fracs_ok = 0
 
         self.init_field()
         self._build_ion_zone_neg(image, layermap)
@@ -662,6 +684,12 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
         if self.ion_zone_neg != NULL:
             free(self.ion_zone_neg)
             self.ion_zone_neg = NULL
+        if self.frac_d != NULL:
+            free(self.frac_d)
+            self.frac_d = NULL
+        if self.frac_n != NULL:
+            free(self.frac_n)
+            self.frac_n = NULL
         if self.cu != NULL:
             for i in range(2):
                 if self.cu[i] != NULL:
@@ -829,61 +857,99 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
             return self.solids[idx] != 0
         return False
 
-    cdef DTYPE_f _drag(self, Py_ssize_t idx, DTYPE_f density,
-                       DTYPE_f ion_v, DTYPE_f air_v) noexcept nogil:
-        """The change in air velocity one ion species in
-        this cell causes (the get_u/get_v contract): the
-        ions drag the air toward the ion velocity.  The
-        drag rate grows with the species' density and
-        with a resistance read from the cell's solver
-        pressure; the increment is the relaxation
-        fraction frac * (ion_v - air_v) with frac capped
-        at 1, so a step never overshoots the ion
-        velocity.  get_u/get_v call this once per
-        species (+ions with d and u/v, O2- with dn and
-        un/vn) and sum the two increments."""
+    cdef void _fill_drag_fracs(self) noexcept nogil:
+        """Compute both species' drag relaxation fractions
+        for every cell, once per step.  The drag law (the
+        get_u/get_v contract): the ions in a cell drag the
+        air toward the ion velocity; the increment is
+        frac * (ion_v - air_v) with the fraction growing
+        with the species' density and a resistance read
+        from the cell's solver pressure, capped at 1 so a
+        step never overshoots the ion velocity.  The
+        fractions depend only on the densities and the
+        solver pressure, which are constant between ion
+        advances, so one fill serves every get_u/get_v
+        call of the step (interior and boundary passes,
+        both components, both species).  The per-species
+        arithmetic is the same expression the old per-call
+        _drag used, so the values are identical -- only
+        the shared resistance is computed once."""
+        cdef Py_ssize_t idx
         cdef DTYPE_f resistance, frac, dt
-        if density <= 0.0:
-            return 0.0
-        resistance = (ION_AMBIENT_PRESSURE +
-                      self.solver.p[self.solver.pk][idx]) / \
-            ION_AMBIENT_PRESSURE
-        if resistance < 0.1:
-            resistance = 0.1
-        if resistance > ION_RESISTANCE_MAX:
-            resistance = ION_RESISTANCE_MAX
+        cdef DTYPE_f* pp = self.solver.p[self.solver.pk]
+        cdef DTYPE_f* dd = self.d[self.dk]
+        cdef DTYPE_f* dn = self.dn[self.dnk]
         dt = self.solver.dt
         if dt <= 0.0:
             dt = self.solver.dt_base
-        frac = dt * density * ION_AIR_COUPLING * resistance / \
-            self.solver.rho
-        if frac > 1.0:
-            frac = 1.0
-        return frac * (ion_v - air_v)
+        for idx in range(self.solver.N):
+            if dd[idx] <= 0.0 and dn[idx] <= 0.0:
+                self.frac_d[idx] = 0.0
+                self.frac_n[idx] = 0.0
+                continue
+            resistance = (ION_AMBIENT_PRESSURE + pp[idx]) / \
+                ION_AMBIENT_PRESSURE
+            if resistance < 0.1:
+                resistance = 0.1
+            if resistance > ION_RESISTANCE_MAX:
+                resistance = ION_RESISTANCE_MAX
+            if dd[idx] <= 0.0:
+                self.frac_d[idx] = 0.0
+            else:
+                frac = dt * dd[idx] * ION_AIR_COUPLING * \
+                    resistance / self.solver.rho
+                if frac > 1.0:
+                    frac = 1.0
+                self.frac_d[idx] = frac
+            if dn[idx] <= 0.0:
+                self.frac_n[idx] = 0.0
+            else:
+                frac = dt * dn[idx] * ION_AIR_COUPLING * \
+                    resistance / self.solver.rho
+                if frac > 1.0:
+                    frac = 1.0
+                self.frac_n[idx] = frac
+        self._drag_fracs_ok = 1
 
     cdef DTYPE_f get_u(self, Py_ssize_t y, Py_ssize_t x,
                        Py_ssize_t idx) noexcept nogil:
+        # volatile: the two products must round to double
+        # before the sum.  As plain locals the compiler
+        # fuses the second product into an FMA with the
+        # add, which rounds differently in the last bit
+        # than the old per-call _drag returns did (the
+        # call boundary kept them separate).
+        cdef volatile DTYPE_f inc_d, inc_n
         if self._solid_at(idx):
             return 0.0
-        return self._drag(idx, self.d[self.dk][idx],
-                          self.u[self.uvk][idx],
-                          self.solver.u[self.solver.uvk][idx]) + \
-            self._drag(idx, self.dn[self.dnk][idx],
-                       self.un[self.uvk][idx],
-                       self.solver.u[self.solver.uvk][idx])
+        if not self._drag_fracs_ok:
+            self._fill_drag_fracs()
+        # The two products stay separate statements (as
+        # they were when each came from its own _drag
+        # call): written as one expression the compiler
+        # fuses the second product into an FMA, which
+        # rounds differently in the last bit.
+        inc_d = self.frac_d[idx] * (self.u[self.uvk][idx] -
+                                    self.solver.u[self.solver.uvk][idx])
+        inc_n = self.frac_n[idx] * (self.un[self.uvk][idx] -
+                                    self.solver.u[self.solver.uvk][idx])
+        return inc_d + inc_n
 
     cdef DTYPE_f get_v(self, Py_ssize_t y, Py_ssize_t x,
                        Py_ssize_t idx) noexcept nogil:
+        cdef volatile DTYPE_f inc_d, inc_n
         if self._solid_at(idx):
             return 0.0
-        return self._drag(idx, self.d[self.dk][idx],
-                          self.v[self.uvk][idx],
-                          self.solver.v[self.solver.uvk][idx]) + \
-            self._drag(idx, self.dn[self.dnk][idx],
-                       self.vn[self.uvk][idx],
-                       self.solver.v[self.solver.uvk][idx])
+        if not self._drag_fracs_ok:
+            self._fill_drag_fracs()
+        inc_d = self.frac_d[idx] * (self.v[self.uvk][idx] -
+                                    self.solver.v[self.solver.uvk][idx])
+        inc_n = self.frac_n[idx] * (self.vn[self.uvk][idx] -
+                                    self.solver.v[self.solver.uvk][idx])
+        return inc_d + inc_n
 
     cdef void prepare_pressure(self) noexcept nogil:
+        self._drag_fracs_ok = 0
         handler_c_advance(<handler_c_t*>self.c_handler,
                           self.solver.u[self.solver.uvk],
                           self.solver.v[self.solver.uvk],
