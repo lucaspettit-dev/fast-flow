@@ -314,16 +314,20 @@ cdef class FlowSolverCore:
         return self._stable_dt_limit()
 
     cdef DTYPE_f _choose_dt(self, DTYPE_f limit) noexcept nogil:
-        """Largest power-of-two scaling of the nominal dt that is
-        still <= the stability limit: halve while too big, double
-        while the doubled value would still be stable."""
+        """Largest quarter-power-of-two scaling of the nominal
+        dt that is still <= the stability limit: the
+        power-of-two ladder leaves the chosen dt at 50-100% of
+        the limit (~71% on average); quarter rungs leave it at
+        84-100% (~92%), so fewer steps cover the same simulated
+        time at the same stability bound."""
         cdef DTYPE_f chosen = self.dt_base
+        cdef DTYPE_f q = 1.1892071150027210665  # 2**(1/4)
         if chosen <= 0.0:
             return limit
         while chosen > limit:
-            chosen *= 0.5
-        while chosen * 2.0 <= limit:
-            chosen *= 2.0
+            chosen /= q
+        while chosen * q <= limit:
+            chosen *= q
         return chosen
 
     cdef void _full_step(self) noexcept nogil:
