@@ -24,6 +24,39 @@ class Boundry(Enum):
     NONE = 2
 
 
+def geometric_widths(n: int, h_min: float, growth: float,
+                     h_max: float, core_fraction: float = 0.25):
+    """Cell widths for a symmetric geometrically-stretched axis.
+
+    The central ``core_fraction`` of the cells sit at
+    ``h_min``; outside the core each cell grows by at most
+    ``growth`` over its neighbour toward the core (the
+    per-cell ratio never exceeds ``growth``, the usual CFD
+    grading limit), capped at ``h_max``.  Returns
+    ``(widths, span)`` where span is the centre-to-centre
+    extent of the axis -- the solver's lx convention, ready
+    to pass back as ``lx``/``ly`` alongside the widths.
+    """
+    if n < 3:
+        raise ValueError("n must be >= 3")
+    if h_min <= 0 or growth < 1.0 or h_max < h_min:
+        raise ValueError("need h_min > 0, growth >= 1, h_max >= h_min")
+    if not 0.0 < core_fraction <= 1.0:
+        raise ValueError("core_fraction must be in (0, 1]")
+    core = max(1, int(round(n * core_fraction)))
+    center = 0.5 * (n - 1)
+    half_core = 0.5 * core
+    w = np.empty(n, dtype=np.float64)
+    for i in range(n):
+        d = abs(i - center) - half_core + 1.0
+        if d <= 0.0:
+            w[i] = h_min
+        else:
+            w[i] = min(h_max, h_min * growth ** d)
+    span = float(w.sum() - 0.5 * (w[0] + w[-1]))
+    return w, span
+
+
 class ForceHandler:
 
     def __init__(self, constructor: Callable[..., ForceHandler]):
@@ -190,6 +223,8 @@ class FlowSolver:
                  lx: float = None,
                  ly: float = None,
                  pixel_size: float = None,
+                 x_widths: np.ndarray = None,
+                 y_widths: np.ndarray = None,
                  force_handlers: [ForceHandler] = None,
                  renderer: Renderer = None):
         if dt <= 0:
@@ -204,7 +239,40 @@ class FlowSolver:
         # handlers read it for their equations.  With
         # neither, the historical 2.0 x 2.0 domain is used.
         ny, nx = img.shape[0], img.shape[1]
-        if pixel_size is not None:
+        # Grid stretching (feature/grid-stretching): per-axis
+        # cell widths (see geometric_widths).  Mutually
+        # exclusive with pixel_size; lx / ly are derived from
+        # the widths (the centre-to-centre span) unless given,
+        # in which case they must agree with the span.
+        wxa = None
+        wya = None
+        if x_widths is not None or y_widths is not None:
+            if pixel_size is not None:
+                raise ValueError(
+                    "pass either pixel_size or widths, not both")
+            if x_widths is not None:
+                wxa = np.ascontiguousarray(x_widths, dtype=np.float64)
+                if wxa.ndim != 1 or wxa.shape[0] != nx:
+                    raise ValueError("x_widths must have length nx")
+                span = float(wxa.sum() - 0.5 * (wxa[0] + wxa[-1]))
+                if lx is not None and \
+                        abs(lx - span) > 1e-9 * max(1.0, span):
+                    raise ValueError("lx disagrees with the x_widths span")
+                lx = span
+            if y_widths is not None:
+                wya = np.ascontiguousarray(y_widths, dtype=np.float64)
+                if wya.ndim != 1 or wya.shape[0] != ny:
+                    raise ValueError("y_widths must have length ny")
+                span = float(wya.sum() - 0.5 * (wya[0] + wya[-1]))
+                if ly is not None and \
+                        abs(ly - span) > 1e-9 * max(1.0, span):
+                    raise ValueError("ly disagrees with the y_widths span")
+                ly = span
+            if lx is None:
+                lx = 2.0
+            if ly is None:
+                ly = 2.0
+        elif pixel_size is not None:
             if lx is not None or ly is not None:
                 raise ValueError(
                     "pass either pixel_size or lx/ly, not both")
@@ -226,10 +294,13 @@ class FlowSolver:
         if force_handlers is None:
             force_handlers = []
 
+        self.x_widths = wxa
+        self.y_widths = wya
         self._cy = FlowSolverCore(
             img=img, nit=nit, rho=rho, nu=nu, dt=dt,
             flow_mode=boundary.value,
             inflow_u=inflow_velocity, lx=lx, ly=ly,
+            x_widths=wxa, y_widths=wya,
             n_force_handlers=len(force_handlers))
 
         for handler in force_handlers:

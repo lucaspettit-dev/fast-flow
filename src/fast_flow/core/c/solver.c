@@ -256,6 +256,8 @@ struct solver_c {
     long nit, flow_mode;
     double *u[2], *v[2], *p[2];
     double *b;
+    /* Cell widths per axis (borrowed); NULL = uniform. */
+    const double *wx, *wy;
     unsigned char *solid;
     long pk, uvk;
     double sum_dt, last_dt;
@@ -340,6 +342,14 @@ void solver_c_set_pk(solver_c_t *s, long pk) {
         s->pk = pk;
 }
 
+void solver_c_set_spacing(solver_c_t *s,
+                          const double *wx, const double *wy) {
+    if (s) {
+        s->wx = wx;
+        s->wy = wy;
+    }
+}
+
 long solver_c_pk(const solver_c_t *s) {
     return s ? s->pk : 0;
 }
@@ -390,6 +400,63 @@ static inline void c_poisson_step(solver_c_t *s, long y, long x,
     vert = (pn + ps) * dx_squared;
     d = 2 * (dx_squared + dy_squared);
     p_dest[idx] = (hor + vert) / d - (dx_squared * dy_squared / d) * s->b[idx];
+}
+
+/* Variable-spacing twins of the two kernels above
+ * (feature/grid-stretching).  Cell i has width wx[i] (height
+ * wy[j]); the distance between the centres of cells i and
+ * i+1 is (wx[i] + wx[i+1]) / 2.  The build-up replaces the
+ * 2*dx / 2*dy central-difference denominators with the full
+ * centre-to-centre distances across the cell.  The Poisson
+ * step is the flux-form Jacobi update
+ *   p = [pe/(w De) + pw/(w Dw) + pn/(h Dn) + ps/(h Ds) - b]
+ *       / [(1/w)(1/De + 1/Dw) + (1/h)(1/Dn + 1/Ds)],
+ * which reduces to c_poisson_step's update when all widths
+ * are equal. */
+static inline void c_build_up_s(solver_c_t *s, long y, long x,
+                                double inv_dt) {
+    long idx = c_idx(s, y + 1, x + 1);
+    long i = x + 1, j = y + 1;
+    double *u, *v, hor, vert, c, a, b, d;
+    double ax, ay;
+    if (s->solid[idx])
+        return;
+    u = s->u[s->uvk];
+    v = s->v[s->uvk];
+    ax = 0.5 * (s->wx[i - 1] + 2.0 * s->wx[i] + s->wx[i + 1]);
+    ay = 0.5 * (s->wy[j - 1] + 2.0 * s->wy[j] + s->wy[j + 1]);
+    hor = (u[c_idx(s, j, i + 1)] - u[c_idx(s, j, i - 1)]) / ax;
+    vert = (v[c_idx(s, j + 1, i)] - v[c_idx(s, j - 1, i)]) / ay;
+    c = 2 * ((u[c_idx(s, j + 1, i)] - u[c_idx(s, j - 1, i)]) / ay *
+             (v[c_idx(s, j, i + 1)] - v[c_idx(s, j, i - 1)]) / ax);
+    a = hor + vert;
+    b = hor * hor;
+    d = vert * vert;
+    s->b[idx] = s->rho * (inv_dt * a - b - c - d);
+}
+
+static inline void c_poisson_step_s(solver_c_t *s, long y, long x,
+                                    double *p_dest, double *p_src) {
+    long idx = c_idx(s, y + 1, x + 1);
+    long i = x + 1, j = y + 1;
+    double pc, pe, pw, pn, ps;
+    double wi, hj, ae, aw, an, as_, diag;
+    if (s->solid[idx])
+        return;
+    pc = p_src[idx];
+    pe = s->solid[c_idx(s, j, i + 1)] ? pc : p_src[c_idx(s, j, i + 1)];
+    pw = s->solid[c_idx(s, j, i - 1)] ? pc : p_src[c_idx(s, j, i - 1)];
+    pn = s->solid[c_idx(s, j + 1, i)] ? pc : p_src[c_idx(s, j + 1, i)];
+    ps = s->solid[idx - s->nx] ? pc : p_src[c_idx(s, j - 1, i)];
+    wi = s->wx[i];
+    hj = s->wy[j];
+    ae = 1.0 / (wi * 0.5 * (wi + s->wx[i + 1]));
+    aw = 1.0 / (wi * 0.5 * (s->wx[i - 1] + wi));
+    an = 1.0 / (hj * 0.5 * (hj + s->wy[j + 1]));
+    as_ = 1.0 / (hj * 0.5 * (s->wy[j - 1] + hj));
+    diag = ae + aw + an + as_;
+    p_dest[idx] = (ae * pe + aw * pw + an * pn + as_ * ps
+                   - s->b[idx]) / diag;
 }
 
 /* Forward: pinning subtract pass (defined below c_pressure_poisson). */
@@ -497,6 +564,7 @@ typedef struct {
     double dy_squared, dx_squared;
     double dy2, dx2, inv_dt;
     int with_build_up;
+    int stretched;
 } poisson_ctx_t;
 
 static void poisson_rows(void *vctx, long y0, long y1, int id) {
@@ -507,10 +575,17 @@ static void poisson_rows(void *vctx, long y0, long y1, int id) {
     /* y here is the sweep row (0..ny-3); the kernels add +1. */
     for (y = y0; y < y1; y++) {
         for (x = 0; x < s->nx - 2; x++) {
-            if (ctx->with_build_up)
-                c_build_up(s, y, x, ctx->dy2, ctx->dx2, ctx->inv_dt);
-            c_poisson_step(s, y, x, ctx->p_dest, ctx->p_src,
-                           ctx->dy_squared, ctx->dx_squared);
+            if (ctx->stretched) {
+                if (ctx->with_build_up)
+                    c_build_up_s(s, y, x, ctx->inv_dt);
+                c_poisson_step_s(s, y, x, ctx->p_dest, ctx->p_src);
+            } else {
+                if (ctx->with_build_up)
+                    c_build_up(s, y, x, ctx->dy2, ctx->dx2,
+                               ctx->inv_dt);
+                c_poisson_step(s, y, x, ctx->p_dest, ctx->p_src,
+                               ctx->dy_squared, ctx->dx_squared);
+            }
         }
     }
 }
@@ -542,6 +617,7 @@ static void c_pressure_poisson(solver_c_t *s) {
     ctx.dx2 = dx2;
     ctx.inv_dt = inv_dt;
     ctx.with_build_up = 1;
+    ctx.stretched = s->wx != NULL;
     ff_pool_for(s->pool, s->ny - 2, poisson_rows, &ctx);
     if (s->flow_mode == 2)
         c_extrapolate_pressure_edges(s, p_dest);
@@ -705,6 +781,95 @@ static void momentum_rows(void *vctx, long y0, long y1, int id) {
     }
 }
 
+/* Variable-spacing twin of momentum_rows
+ * (feature/grid-stretching): one-sided advection differences
+ * divide by the centre distance in their direction, the
+ * pressure gradient by the full centre distance across the
+ * cell, and diffusion is the flux form
+ * (1/w) * [(u_e - u)/De - (u - u_w)/Dw] per axis.  Reduces
+ * to momentum_rows' arithmetic when all widths are equal. */
+static void momentum_rows_s(void *vctx, long y0, long y1, int id) {
+    momentum_ctx_t *ctx = (momentum_ctx_t *)vctx;
+    (void)id;
+    solver_c_t *s = ctx->s;
+    double *u_src = ctx->u_src, *v_src = ctx->v_src;
+    double *u_dest = ctx->u_dest, *v_dest = ctx->v_dest;
+    double *p = ctx->p;
+    double dt = ctx->dt;
+    double rho = ctx->rho, nu = ctx->nu;
+    const double *wx = s->wx, *wy = s->wy;
+    long nx = s->nx;
+    long y, x, idx;
+    double p_c, p_e, p_w, p_n, p_s;
+    double uc, vc, dudx, dudy, dvdx, dvdy;
+    double wi, hj, de, dw, dn, ds;
+
+    for (y = y0 + ctx->y_off; y < y1 + ctx->y_off; y++) {
+        hj = wy[y];
+        dn = 0.5 * (hj + wy[y + 1]);
+        ds = 0.5 * (wy[y - 1] + hj);
+        for (x = 1; x < nx - 1; x++) {
+            idx = c_idx(s, y, x);
+            if (s->solid[idx]) {
+                u_dest[idx] = 0.0;
+                v_dest[idx] = 0.0;
+                continue;
+            }
+            wi = wx[x];
+            de = 0.5 * (wi + wx[x + 1]);
+            dw = 0.5 * (wx[x - 1] + wi);
+
+            p_c = p[idx];
+            p_e = s->solid[idx + 1] ? p_c : p[idx + 1];
+            p_w = s->solid[idx - 1] ? p_c : p[idx - 1];
+            p_n = s->solid[idx + nx] ? p_c : p[idx + nx];
+            p_s = s->solid[idx - nx] ? p_c : p[idx - nx];
+
+            uc = u_src[idx];
+            vc = v_src[idx];
+            if (uc >= 0.0) {
+                dudx = (u_src[idx] - u_src[idx - 1]) / dw;
+                dvdx = (v_src[idx] - v_src[idx - 1]) / dw;
+            } else {
+                dudx = (u_src[idx + 1] - u_src[idx]) / de;
+                dvdx = (v_src[idx + 1] - v_src[idx]) / de;
+            }
+            if (vc >= 0.0) {
+                dudy = (u_src[idx] - u_src[idx - nx]) / ds;
+                dvdy = (v_src[idx] - v_src[idx - nx]) / ds;
+            } else {
+                dudy = (u_src[idx + nx] - u_src[idx]) / dn;
+                dvdy = (v_src[idx + nx] - v_src[idx]) / dn;
+            }
+
+            u_dest[idx] = (
+                u_src[idx]
+                - dt * (uc * dudx + vc * dudy)
+                - dt / (rho * (dw + de)) * (p_e - p_w)
+                + nu * dt * (
+                    ((u_src[idx + 1] - u_src[idx]) / de
+                     - (u_src[idx] - u_src[idx - 1]) / dw) / wi
+                    +
+                    ((u_src[idx + nx] - u_src[idx]) / dn
+                     - (u_src[idx] - u_src[idx - nx]) / ds) / hj
+                )
+            );
+            v_dest[idx] = (
+                v_src[idx]
+                - dt * (uc * dvdx + vc * dvdy)
+                - dt / (rho * (ds + dn)) * (p_n - p_s)
+                + nu * dt * (
+                    ((v_src[idx + 1] - v_src[idx]) / de
+                     - (v_src[idx] - v_src[idx - 1]) / dw) / wi
+                    +
+                    ((v_src[idx + nx] - v_src[idx]) / dn
+                     - (v_src[idx] - v_src[idx - nx]) / ds) / hj
+                )
+            );
+        }
+    }
+}
+
 static void c_update_momentum(solver_c_t *s) {
     long src = s->uvk;
     long dest = src ^ 1;
@@ -721,7 +886,8 @@ static void c_update_momentum(solver_c_t *s) {
     ctx.rho = s->rho;
     ctx.nu = s->nu;
     ctx.y_off = 1;             /* rows 1..ny-2 */
-    ff_pool_for(s->pool, s->ny - 2, momentum_rows, &ctx);
+    ff_pool_for(s->pool, s->ny - 2,
+                s->wx ? momentum_rows_s : momentum_rows, &ctx);
     /* no uvk flip here: the Cython wrapper flips it after
      * the handler interior pass (so the handler still reads
      * the source buffer) */

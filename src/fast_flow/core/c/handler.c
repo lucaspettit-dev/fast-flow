@@ -35,6 +35,11 @@
 struct handler_c {
     long nx, ny, N;
     double dx, dy;
+    /* Cell widths per axis (borrowed); NULL = uniform
+     * (feature/grid-stretching).  Only the transport CFL
+     * rate and the flux divergence consume spacing; the
+     * ion diffusion is index-space by design. */
+    const double *wx, *wy;
     double *d[2];
     double *u[2], *v[2];
     double *cu[2], *cv[2];
@@ -136,6 +141,14 @@ void handler_c_destroy(handler_c_t *h) {
     free(h);
 }
 
+void handler_c_set_spacing(handler_c_t *h,
+                           const double *wx, const double *wy) {
+    if (h) {
+        h->wx = wx;
+        h->wy = wy;
+    }
+}
+
 long handler_c_dk(const handler_c_t *h) {
     return h ? h->dk : 0;
 }
@@ -171,6 +184,7 @@ static void velocity_rows(void *vctx, long y0, long y1, int id) {
     double *dn = h->dn[h->dnk];
     long nx = h->nx;
     double dx = h->dx, dy = h->dy;
+    const double *wx = h->wx, *wy = h->wy;
     double local_rate = 0.0;
     long y, x, idx;
     double vx, vy, sp2, scale, shield, cell_rate;
@@ -215,7 +229,8 @@ static void velocity_rows(void *vctx, long y0, long y1, int id) {
             }
             iu[idx] = vx;
             iv[idx] = vy;
-            cell_rate = fabs(vx) / dx + fabs(vy) / dy;
+            cell_rate = fabs(vx) / (wx ? wx[x] : dx)
+                + fabs(vy) / (wy ? wy[y] : dy);
             if (cell_rate > local_rate)
                 local_rate = cell_rate;
             spn2 = wnx * wnx + wny * wny;
@@ -226,7 +241,8 @@ static void velocity_rows(void *vctx, long y0, long y1, int id) {
             }
             inu[idx] = wnx;
             inv[idx] = wny;
-            cell_raten = fabs(wnx) / dx + fabs(wny) / dy;
+            cell_raten = fabs(wnx) / (wx ? wx[x] : dx)
+                + fabs(wny) / (wy ? wy[y] : dy);
             if (cell_raten > local_rate)
                 local_rate = cell_raten;
         }
@@ -256,6 +272,7 @@ static void transport_rows(void *vctx, long y0, long y1, int id) {
     const double *iv = ctx->iv;
     long nx = h->nx, ny = h->ny;
     double dx = h->dx, dy = h->dy;
+    const double *wx = h->wx, *wy = h->wy;
     long y, x, idx;
     double ue, uw, vn, vs, fx_e, fx_w, fy_n, fy_s;
     double src_e, src_w, src_n, src_s, val, shield;
@@ -338,7 +355,8 @@ static void transport_rows(void *vctx, long y0, long y1, int id) {
                 fy_s *= shield > 0.0 ? shield : 0.0;
             }
             val = sbuf[idx] - tau * (
-                (fx_e - fx_w) / dx + (fy_n - fy_s) / dy);
+                (fx_e - fx_w) / (wx ? wx[x] : dx)
+                + (fy_n - fy_s) / (wy ? wy[y] : dy));
             dbuf[idx] = val > 0.0 ? val : 0.0;
         }
     }

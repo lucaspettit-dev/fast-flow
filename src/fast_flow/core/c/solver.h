@@ -90,6 +90,16 @@ void solver_c_set_pk(solver_c_t *s, long pk);
  * stencil and the handler forces). Solids are still
  * enforced (they are obstacles, not boundaries). */
 void solver_c_set_no_boundaries(solver_c_t *s, int no_boundaries);
+/* Separable grid stretching (feature/grid-stretching): wx/wy
+ * are the per-axis cell widths (lengths nx / ny), borrowed --
+ * the caller keeps them alive. NULL (the default) keeps the
+ * uniform-spacing kernels, which are used verbatim; non-NULL
+ * switches the Poisson, build-up and momentum kernels to
+ * their variable-spacing forms. The stability dt is NOT
+ * affected here (the Cython side limits it with the minimum
+ * width, exactly as the uniform limit uses dx/dy). */
+void solver_c_set_spacing(solver_c_t *s,
+                          const double *wx, const double *wy);
 /* Buffer indices (the Cython side syncs its pk/uvk from these). */
 long solver_c_pk(const solver_c_t *s);
 long solver_c_uvk(const solver_c_t *s);

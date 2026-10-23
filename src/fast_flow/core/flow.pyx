@@ -40,6 +40,8 @@ cdef extern from "c/solver.h":
     void solver_c_set_dt(solver_c_t* s, double dt) noexcept nogil
     void solver_c_set_uvk(solver_c_t* s, long uvk) noexcept nogil
     void solver_c_set_pk(solver_c_t* s, long pk) noexcept nogil
+    void solver_c_set_spacing(solver_c_t* s,
+                              double* wx, double* wy) noexcept nogil
     # void solver_c_set_no_boundaries(solver_c_t* s, int no_boundaries) noexcept nogil
     long solver_c_pk(const solver_c_t* s) noexcept nogil
     long solver_c_uvk(const solver_c_t* s) noexcept nogil
@@ -84,6 +86,8 @@ cdef class FlowSolverCore:
             DTYPE_f inflow_u=1.0,
             DTYPE_f lx=2.0,
             DTYPE_f ly=2.0,
+            object x_widths=None,
+            object y_widths=None,
             Py_ssize_t n_force_handlers=0):
 
         self.nx = img.shape[1]
@@ -115,6 +119,25 @@ cdef class FlowSolverCore:
         # handlers read this at bind time so their
         # equations can work in physical units.
         self.pixel_size = self.dx
+
+        # Separable grid stretching (feature/grid-stretching):
+        # per-axis cell widths.  With neither axis given (the
+        # default) the grid is uniform, the pointers stay NULL
+        # and every kernel runs the original uniform
+        # computation; the limiter's dx_min / dy_min then equal
+        # dx / dy exactly.
+        self.stretched = False
+        self.dx_min = self.dx
+        self.dy_min = self.dy
+        self.wx_ptr = NULL
+        self.wy_ptr = NULL
+        self.x_nodes_ptr = NULL
+        self.y_nodes_ptr = NULL
+        self.x_centers_ptr = NULL
+        self.y_centers_ptr = NULL
+        self._geom_keepers = []
+        if x_widths is not None or y_widths is not None:
+            self._init_stretching(x_widths, y_widths)
 
         # init data structures
         self.u = <DTYPE_f**> malloc(2 * sizeof(DTYPE_f*))
@@ -166,6 +189,59 @@ cdef class FlowSolverCore:
             self.b, self.solid)
         if self.c_solver == NULL:
             raise MemoryError("could not allocate native-C solver")
+        if self.stretched:
+            solver_c_set_spacing(<solver_c_t*>self.c_solver,
+                                 self.wx_ptr, self.wy_ptr)
+
+    def _init_stretching(self, x_widths, y_widths):
+        """Validate and install per-axis cell widths.
+
+        Widths are cell widths in physical units; node i of
+        an axis sits at the prefix sum of the widths before
+        it and centre i at node + width/2 -- the stretched
+        analogue of the uniform (x + 0.5) * dx convention.
+        An axis left as None is filled with the uniform width
+        so the C kernels always see both axes when stretched.
+        The wrapper derives lx / ly from the same widths, so
+        the centre span matches by construction."""
+        cdef cnp.ndarray[DTYPE_f, ndim=1] wa
+        cdef cnp.ndarray[DTYPE_f, ndim=1] nodes
+        cdef cnp.ndarray[DTYPE_f, ndim=1] centers
+        cdef Py_ssize_t i, n
+        for axis in (0, 1):
+            given = x_widths if axis == 0 else y_widths
+            n = self.nx if axis == 0 else self.ny
+            if given is None:
+                wa = np.full(n, self.dx if axis == 0 else self.dy,
+                             dtype=np.float64)
+            else:
+                wa = np.ascontiguousarray(given, dtype=np.float64)
+                if wa.ndim != 1 or wa.shape[0] != n:
+                    raise ValueError(
+                        "widths must be a 1-D array of length "
+                        "nx (x) or ny (y)")
+                if not np.all(np.isfinite(wa)) or np.any(wa <= 0.0):
+                    raise ValueError(
+                        "widths must be positive and finite")
+            nodes = np.empty(n, dtype=np.float64)
+            centers = np.empty(n, dtype=np.float64)
+            nodes[0] = 0.0
+            for i in range(1, n):
+                nodes[i] = nodes[i - 1] + wa[i - 1]
+            for i in range(n):
+                centers[i] = nodes[i] + 0.5 * wa[i]
+            self._geom_keepers += [wa, nodes, centers]
+            if axis == 0:
+                self.wx_ptr = <DTYPE_f*> cnp.PyArray_DATA(wa)
+                self.x_nodes_ptr = <DTYPE_f*> cnp.PyArray_DATA(nodes)
+                self.x_centers_ptr = <DTYPE_f*> cnp.PyArray_DATA(centers)
+                self.dx_min = float(np.min(wa))
+            else:
+                self.wy_ptr = <DTYPE_f*> cnp.PyArray_DATA(wa)
+                self.y_nodes_ptr = <DTYPE_f*> cnp.PyArray_DATA(nodes)
+                self.y_centers_ptr = <DTYPE_f*> cnp.PyArray_DATA(centers)
+                self.dy_min = float(np.min(wa))
+        self.stretched = True
 
     def __dealloc__(self):
         if self.c_solver != NULL:
@@ -292,13 +368,13 @@ cdef class FlowSolverCore:
         cdef DTYPE_f denom = 0.0
         cdef DTYPE_f umax
         if self.nu > 0.0:
-            denom += 2.0 * self.nu * (1.0 / (self.dx * self.dx)
-                                      + 1.0 / (self.dy * self.dy))
+            denom += 2.0 * self.nu * (1.0 / (self.dx_min * self.dx_min)
+                                      + 1.0 / (self.dy_min * self.dy_min))
         umax = self._max_speed()
         if self.flow_mode == 1 and self.inflow_u > umax:
             umax = self.inflow_u
         if umax > 0.0:
-            denom += umax * (1.0 / self.dx + 1.0 / self.dy)
+            denom += umax * (1.0 / self.dx_min + 1.0 / self.dy_min)
             if self.nu > 0.0:
                 # FTCS centred-advection condition C^2 <= 2r, i.e.
                 # dt <= 2*nu/umax^2 -- independent of grid spacing;

@@ -44,6 +44,8 @@ cdef extern from "c/handler.h":
                                   unsigned char* ion_zone_neg,
                                   ff_pool_t* pool) noexcept nogil
     void handler_c_destroy(handler_c_t* h) noexcept nogil
+    void handler_c_set_spacing(handler_c_t* h,
+                               double* wx, double* wy) noexcept nogil
     long handler_c_dk(const handler_c_t* h) noexcept nogil
     long handler_c_dnk(const handler_c_t* h) noexcept nogil
     void handler_c_advance(handler_c_t* h,
@@ -364,6 +366,10 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
             pool)
         if self.c_handler == NULL:
             raise MemoryError("could not allocate native-C handler")
+        if self.solver.stretched:
+            handler_c_set_spacing(<handler_c_t*>self.c_handler,
+                                  self.solver.wx_ptr,
+                                  self.solver.wy_ptr)
 
     cdef VectorBinding coulomb_field_binding(self) noexcept:
         cdef VectorBinding field = VectorBinding()
@@ -498,8 +504,15 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                                 (x + 1 < nx and channel[i+1] == 0) or \
                                 (y > 0 and channel[i-nx] == 0) or \
                                 (y + 1 < ny and channel[i+nx] == 0):
-                            self.shapes[slot].edges[2 * e] = x * sx
-                            self.shapes[slot].edges[2 * e + 1] = y * sy
+                            if self.solver.stretched:
+                                self.shapes[slot].edges[2 * e] = \
+                                    self.solver.x_nodes_ptr[x]
+                                self.shapes[slot].edges[2 * e + 1] = \
+                                    self.solver.y_nodes_ptr[y]
+                            else:
+                                self.shapes[slot].edges[2 * e] = x * sx
+                                self.shapes[slot].edges[2 * e + 1] = \
+                                    y * sy
                             e += 1
                         i += 1
         finally:
@@ -780,9 +793,15 @@ cdef class ElectrostaticForceHandler(ForceHandlerCore):
                 continue
             q = self.shapes[s].extradata.charge / self.shapes[s].n_edges
             for y in range(ny):
-                yc = (y + 0.5) * self.solver.dy
+                if self.solver.stretched:
+                    yc = self.solver.y_centers_ptr[y]
+                else:
+                    yc = (y + 0.5) * self.solver.dy
                 for x in range(nx):
-                    xc = (x + 0.5) * self.solver.dx
+                    if self.solver.stretched:
+                        xc = self.solver.x_centers_ptr[x]
+                    else:
+                        xc = (x + 0.5) * self.solver.dx
                     idx = y * nx + x
                     for e in range(self.shapes[s].n_edges):
                         rx = xc - self.shapes[s].edges[2 * e]

@@ -57,6 +57,13 @@ handler_c_t *handler_c_create(long nx, long ny,
                               ff_pool_t *pool);
 void handler_c_destroy(handler_c_t *h);
 
+/* Separable grid stretching (feature/grid-stretching):
+ * per-axis cell widths (borrowed; NULL = uniform).  Only
+ * the transport CFL rate and the flux divergence use them;
+ * with NULL the advance is the uniform computation. */
+void handler_c_set_spacing(handler_c_t *h,
+                           const double *wx, const double *wy);
+
 /* The density buffer index after the last advance (the
  * Cython side syncs its dk from this). */
 long handler_c_dk(const handler_c_t *h);

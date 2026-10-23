@@ -33,6 +33,25 @@ cdef class FlowSolverCore:
     cdef readonly DTYPE_f pixel_size
     cdef DTYPE_f dx
     cdef DTYPE_f dy
+    # Separable grid stretching (feature/grid-stretching):
+    # per-axis cell widths.  On a uniform grid stretched is
+    # False and every pointer is NULL, and all kernels run
+    # the original uniform computation.  dx_min / dy_min are
+    # the minimum widths and feed the stability limiter
+    # (they equal dx / dy exactly when uniform).  The node /
+    # centre coordinate pointers are what force handlers
+    # read for their geometry; _geom_keepers owns the numpy
+    # arrays behind all six pointers.
+    cdef readonly bint stretched
+    cdef DTYPE_f dx_min
+    cdef DTYPE_f dy_min
+    cdef DTYPE_f* wx_ptr
+    cdef DTYPE_f* wy_ptr
+    cdef DTYPE_f* x_nodes_ptr
+    cdef DTYPE_f* y_nodes_ptr
+    cdef DTYPE_f* x_centers_ptr
+    cdef DTYPE_f* y_centers_ptr
+    cdef object _geom_keepers
     cdef int nit
     cdef int N
     cdef int flow_mode
